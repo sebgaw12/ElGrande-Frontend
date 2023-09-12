@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
 import Footer from "../footer/Footer";
-import logo from "../FoodSpotWhite.jpg"
+import logo from "../../public/FoodSpotWhite.jpg"
 
 const LandingPage = () => (
     <div>
-        <img alt="logo" src={logo}/><br/><br/>
+        <img alt="logo" src={logo}/><br/>
         <button>Log In</button>
         <button>Sign In</button>
         <Link to="/main-page">
