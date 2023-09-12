@@ -6,8 +6,10 @@ const Routing = () => (
     <div>
         <Router>
             <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/main-page" element={<MainPage />} />
+                <Route path="/" element={ <LandingPage /> } />
+                <Route path="/main-page" element={ <MainPage /> } />
+                <Route path="/register" element={ <RegisterForm /> } />
+                <Route path="/login" element={ <LoginForm /> } />
             </Routes>
         </Router>
     </div>
