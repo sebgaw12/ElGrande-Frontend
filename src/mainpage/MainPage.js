@@ -9,16 +9,17 @@ const MainPage = () => (
         </div>
 
         <main className="flex h-5/6">
-            <div className="w-1/3 overflow-y-auto bg-gray-200">
+            <div className="w-1/2 overflow-y-auto bg-gray-200">
                 <Restaurants/>
             </div>
 
-            <div className="w-2/3 bg-gray-300 text-5xl font-black">
+            <div className="w-1/2 bg-gray-300 text-5xl font-black">
                 Tu będzie mapa
             </div>
         </main>
-
-        <Footer/>
+        <div className="p-2">
+            <Footer/>
+        </div>
     </div>
 )
 
