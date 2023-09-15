@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
+import { Link } from "react-router-dom";
 
 class LoginForm extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -83,9 +81,11 @@ class LoginForm extends Component {
       
                 <p className="mt-10 text-center text-sm text-gray-500">
                   Not a member?{' '}
-                  <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
-                    Register new account
-                  </a>
+                  <Link to="/register">
+                    <span className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                      Register new account
+                    </span>
+                  </Link>
                 </p>
               </div>
             </div>
