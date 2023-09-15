@@ -1,15 +1,27 @@
 import FiltersNavbar from "../filtersheader/FiltersNavbar";
 import FilterBadge from "../filtersheader/FilterBadge";
 import Footer from "../footer/Footer";
+import Restaurants from "../restaurants/Restaurants";
 
 const MainPage = () => (
-    <div>
-        <p>Main Page</p>
-        <FiltersNavbar>
-            <FilterBadge></FilterBadge>
-        </FiltersNavbar>
-        {/*<FetchApi />*/}
-        <Footer/>
+    <div className="h-screen">
+
+        <div className="bg-blue-500 py-4">
+            <p>Header</p>
+        </div>
+
+        <main className="flex h-5/6">
+            <div className="w-1/2 overflow-y-auto bg-gray-200">
+                <Restaurants/>
+            </div>
+
+            <div className="w-1/2 bg-gray-300 text-5xl font-black">
+                Tu będzie mapa
+            </div>
+        </main>
+        <div className="p-2">
+            <Footer/>
+        </div>
     </div>
 )
 
