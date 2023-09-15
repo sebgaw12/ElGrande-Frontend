@@ -11,7 +11,7 @@ const LandingPage = () => (
                 <button className="bg-white border-2 border-black p-2 m-2">Log In</button>
               </Link>
               <Link to="/register">
-                <button className="bg-white border-2 border-black p-2 m-2>Register</button>
+                <button className="bg-white border-2 border-black p-2 m-2">Register</button>
               </Link>
                 <Link to="/main-page">
                     <button className="bg-white border-2 border-black p-2 m-2">View Page</button>
