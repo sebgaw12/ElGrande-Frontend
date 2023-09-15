@@ -8,10 +8,13 @@ const Restaurants = props => {
     useEffect(() => {
         async function fetchData () {
             const response = await fetch("http://localhost:8080/api/v1/restaurants")
+            if (!response.ok){
+                throw new Error('HTTP error: ' + response.status)
+            }
             const data = await response.json()
             setData(data)
         }
-        fetchData()
+        fetchData().catch((error) => console.log("błąd podczas pobierania danych: " + error))
     }, [])
     console.log(data);
 
