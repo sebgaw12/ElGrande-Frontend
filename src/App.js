@@ -3,7 +3,7 @@ import Routing from "./routing/Routing";
 
 function App() {
     return (
-        <div className="App">
+        <div className="App bg-yellow-500">
             <Routing />
         </div>
     );
