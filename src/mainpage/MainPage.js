@@ -1,5 +1,3 @@
-import FiltersNavbar from "../filtersheader/FiltersNavbar";
-import FilterBadge from "../filtersheader/FilterBadge";
 import Footer from "../footer/Footer";
 import Restaurants from "../restaurants/Restaurants";
 
