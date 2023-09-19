@@ -1,4 +1,3 @@
-import photo from "../static/mock-photo.jpg"
 import {useState} from "react";
 import RestaurantDetails from "../restaurantdetails/RestaurantDetails";
 
@@ -21,17 +20,12 @@ const Restaurant = (props) => {
     const hideRestaurantDetails = () => {
         return (
             <div className="flex flex-row">
-                <div className="p-2">
-                    <img alt="sushi" src={photo} className="w-fit h-fit"/>
-                </div>
-                <div className="grid place-content-center">
-                    <div className="p-2">{props.restaurant != null ? props.restaurant.name : null}</div>
-                    <div className="p-2">tu będzie ocena</div>
-                </div>
+                <div className="p-2">{props.restaurant != null ? props.restaurant.name : null}</div>
+                <div className="p-2">tu będzie ocena</div>
             </div>
         )
     }
-
+// todo add new restaurant on button (header with login and register buttons)
     const clickHandler = () => {
         if (!isClicked) {
             setShadowClass(shadowInside)
@@ -43,9 +37,9 @@ const Restaurant = (props) => {
     }
 
     return (
-        <div className={`flex flex-row p-2 rounded-xl m-4 bg-gray-300 ${shadowClass} justify-items-center`}
-             onClick={clickHandler}>
+        <div className={`flex flex-row p-2 rounded-xl m-4 bg-gray-300 ${shadowClass} justify-items-center`}>
             {isClicked ? displayRestaurantDetails() : hideRestaurantDetails()}
+            <button onClick={clickHandler} className="m-2 p-2 border-black border-2">{isClicked ? "Ukryj" : "Pokaż szczegóły"}</button>
         </div>
     )
 }
