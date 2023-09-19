@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import Address from "./Address";
-import Menu from "./Menu";
+import Menus from "./Menu/Menus";
 import OpeningHours from "./OpeningHours";
 import Reviews from "./Reviews";
 import Details from "./Details";
@@ -36,7 +36,7 @@ const RestaurantDetails = (props) => {
             case ADDRESS:
                 return <Address id={restaurantDetails.id}/>
             case MENU:
-                return <Menu id={restaurantDetails.id}/>
+                return <Menus id={restaurantDetails.id}/>
             case REVIEWS:
                 return <Reviews id={restaurantDetails.id}/>
             case OPENING_HOURS:
@@ -63,7 +63,5 @@ const RestaurantDetails = (props) => {
 }
 export default RestaurantDetails
 
-// todo display menu on button
 // todo display open hours
-// todo display address
 // todo display review
