@@ -17,7 +17,6 @@ const Address = (props) => {
         getAddressByRestaurantId().catch((err) => console.log("Wystąpił błąd: " + err.message))
     }, [props.id]);
 
-    console.log(addressDetails);
     return (
         <div>
             <div>Adres</div>

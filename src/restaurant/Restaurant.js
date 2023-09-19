@@ -11,9 +11,9 @@ const Restaurant = (props) => {
 
     const displayRestaurantDetails = () => {
         return (
-            <div>
+            <>
                 <RestaurantDetails id={props.restaurant.id}/>
-            </div>
+            </>
         )
     }
 

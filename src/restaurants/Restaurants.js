@@ -20,9 +20,9 @@ const Restaurants = props => {
     console.log(data);
 
     return (
-        <div>
+        <>
             {data.map((profile, index) => <Restaurant key={index} restaurant={profile}/>)}
-        </div>
+        </>
     )
 }
 
