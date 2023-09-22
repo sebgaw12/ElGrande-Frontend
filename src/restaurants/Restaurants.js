@@ -16,7 +16,6 @@ const Restaurants = props => {
         }
         fetchData().catch((error) => console.log("błąd podczas pobierania danych: " + error))
     }, [])
-    console.log(data);
 
     return (
         <div>
