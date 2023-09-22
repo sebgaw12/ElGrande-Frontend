@@ -4,6 +4,7 @@ import MainPage from "../mainpage/MainPage";
 import LoginForm from "../loginform/LoginForm";
 import RegisterForm from "../registerform/RegisterForm";
 import Error from "../error/ErrorPage";
+import RestaurantRegisterForm from "../restaurantregister/RestaurantRegister";
 
 const Routing = () => (
     <div>

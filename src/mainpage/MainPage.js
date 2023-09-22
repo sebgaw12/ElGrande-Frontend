@@ -1,6 +1,7 @@
 import Footer from "../footer/Footer";
 import Restaurants from "../restaurants/Restaurants";
 import Header from "../header/Header";
+import FiltersNavbar from "../filtersheader/FiltersNavbar";
 
 const MainPage = () => (
     <div className="h-screen">

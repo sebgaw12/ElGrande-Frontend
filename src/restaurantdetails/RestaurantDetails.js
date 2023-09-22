@@ -62,5 +62,3 @@ const RestaurantDetails = (props) => {
     )
 }
 export default RestaurantDetails
-
-// todo display review
