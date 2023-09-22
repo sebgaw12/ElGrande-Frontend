@@ -18,8 +18,6 @@ const Restaurants = () => {
 
         getAllRestaurants().catch((error) => console.log("błąd podczas pobierania danych: " + error))
     }, [])
-
-    console.log(data);
     const handleRestaurantClick = (restaurantId) => {
         setOpenRestaurantId((prevId) => (prevId === restaurantId ? null : restaurantId))
     }
@@ -36,5 +34,5 @@ const Restaurants = () => {
         </>
     )
 }
-// useContext
+
 export default Restaurants;
