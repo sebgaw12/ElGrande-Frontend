@@ -19,6 +19,7 @@ const Menus = (props) => {
 
         getDishes().catch((err) => console.log('Wystąpił błąd: ' + err.message))
     }, [props.id]);
+
     return (
         <>
             {menu.length === 0 ? (
