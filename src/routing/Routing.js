@@ -3,18 +3,21 @@ import LandingPage from "../landingpage/LandingPage";
 import MainPage from "../mainpage/MainPage";
 import LoginForm from "../loginform/LoginForm";
 import RegisterForm from "../registerform/RegisterForm";
-import RestaurantRegisterForm from "../restaurantregister/RestaurantRegister";
+import Error from "../error/ErrorPage";
 
 const Routing = () => (
-  <Router>
-    <Routes>
-      <Route path="/" element={<LandingPage />} />
-      <Route path="/main-page" element={<MainPage />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/login" element={<LoginForm />} />
-      <Route path="/restaurant" element={<RestaurantRegisterForm />} />
-    </Routes>
-  </Router>
-);
+    <div>
+        <Router>
+            <Routes>
+                <Route path="/" element={ <LandingPage /> } />
+                <Route path="*" element={<Error />} />
+                <Route path="/main-page" element={ <MainPage /> } />
+                <Route path="/register" element={ <RegisterForm /> } />
+                <Route path="/login" element={ <LoginForm /> } />
+                <Route path="/restaurant" element={<RestaurantRegisterForm />} />
+            </Routes>
+        </Router>
+    </div>
+)
 
 export default Routing;
