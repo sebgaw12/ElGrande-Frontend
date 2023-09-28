@@ -1,23 +1,15 @@
 import {useEffect, useState} from "react";
 import Menu from "./Menu";
+import {Api} from "../../api/Api";
 
 const Menus = (props) => {
 
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        async function getDishes() {
-            const response = await fetch(`http://localhost:8080/api/v1/dishes?restaurantId=${props.id}`)
 
-            if (!response.ok) {
-                throw new Error('HTTP error: ' + response.status)
-            }
+        Api.getDishes(props.id, setMenu).catch((err) => console.log('Wystąpił błąd: ' + err.message))
 
-            const data = response.json()
-            setMenu(await data)
-        }
-
-        getDishes().catch((err) => console.log('Wystąpił błąd: ' + err.message))
     }, [props.id]);
 
     return (

@@ -1,20 +1,13 @@
 import {useEffect, useState} from "react";
+import {Api} from "../../../api/Api";
 
 const OpeningHours = (props) => {
 
     const [availableHours, setAvailableHours] = useState([])
 
     useEffect(() => {
-        async function getOpeningHours() {
-            const resp = await fetch(`http://localhost:8080/api/v1/business-hours?restaurantId=${props.id}`)
-            if (!resp.ok) {
-                throw new Error('HTTP error: ' + resp.status)
-            }
-            const data = resp.json()
-            setAvailableHours(await data)
-        }
 
-        getOpeningHours().catch((err) => console.log('Wystąpił błąd: ' + err.message))
+        Api.getOpeningHours(props.id, setAvailableHours).catch((err) => console.log('Wystąpił błąd: ' + err.message))
     }, [props.id]);
 
     const formatTime = (time) => {

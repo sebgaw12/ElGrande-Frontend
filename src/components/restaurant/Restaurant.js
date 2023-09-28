@@ -1,4 +1,4 @@
-import RestaurantDetails from "../restaurantdetails/RestaurantDetails";
+import RestaurantDetails from "./restaurantdetails/RestaurantDetails";
 
 const Restaurant = (props) => {
 
@@ -24,7 +24,6 @@ const Restaurant = (props) => {
             </div>
         )
     }
-// todo add new restaurant on button (header with login and register buttons)
 
     return (
         <div className={`flex flex-row p-2 rounded-xl m-4 bg-gray-300 ${isOpen ? shadowInside : shadowOutside} justify-items-center`}>

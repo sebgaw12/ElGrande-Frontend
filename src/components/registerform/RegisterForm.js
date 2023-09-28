@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bcrypt from 'bcryptjs';
+import {Api} from "../../api/Api";
 
 const inputStyle = "w-full px-3 py-2 m-2 border-b-2 border-gray-400 focus:outline-none placeholder:text-gray-300";
+
+
 
 const RegisterForm = () => {
   const [formData, setFormData] = useState({
@@ -37,38 +40,7 @@ const RegisterForm = () => {
       passwordHash: hashedPassword,
     };
 
-    try {
-      const response = await fetch('http://127.0.0.1:8080/api/v1/customers',
-      {
-        method: 'POST',
-        headers:
-        {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok)
-      {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      setFormData(
-      {
-        name: '',
-        surname: '',
-        email: '',
-        password: '',
-        passwordRepeat: '',
-      });
-
-      navigate('/login');
-
-    } catch (error)
-    {
-      console.error(error);
-      alert('Error creating user');
-    }
+    await Api.registerCustomer(userData, setFormData, navigate);
   };
 
   const handleChange = (e) =>

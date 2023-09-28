@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import Review from "./Review";
+import {Api} from "../../api/Api";
 
 const Reviews = (props) => {
 
@@ -7,17 +8,7 @@ const Reviews = (props) => {
 
     useEffect(() => {
 
-        async function getReviews() {
-            const response = await fetch(`http://localhost:8080/api/v1/reviews?restaurantId=${props.id}`)
-
-            if (!response.ok){
-                throw new Error('HTTP error: ' + response.status)
-            }
-
-            const data= response.json()
-            setReviews(await data)
-        }
-        getReviews().catch((err) => console.log('Wystąpił błąd: ' + err.message))
+        Api.getReviews(props.id, setReviews).catch((err) => console.log('Wystąpił błąd: ' + err.message))
     }, [props.id]);
 
     console.log(reviews);

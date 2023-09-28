@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import {Api} from "../../../api/Api";
 
 const inputStyle =
   "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6";
@@ -17,36 +18,7 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const loginUrl = 'http://127.0.0.1:8080/api/v1/customers';
-
-    try {
-      setLoading(true); // Set loading state
-
-      const response = await fetch(loginUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Authentication failed. Please check your credentials.`);
-      }
-
-      const data = await response.json();
-      setUserName(`${data.name} ${data.surname}`);
-
-      console.log("User logged in successfully");
-      navigate('/main-page');
-
-    } catch (error) {
-      console.error(error);
-      alert(error.message); // Display a user-friendly error message
-    } finally {
-      setLoading(false); // Reset loading state
-    }
+    await Api.logIn(setLoading, formData, setUserName, navigate);
   };
 
   const handleChange = (e) => {

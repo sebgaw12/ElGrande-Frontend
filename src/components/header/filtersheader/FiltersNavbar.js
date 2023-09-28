@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FilterBadge from './FilterBadge';
+import {Api} from "../../../api/Api";
 
 class FiltersNavbar extends Component {
   constructor(props) {
@@ -11,14 +12,7 @@ class FiltersNavbar extends Component {
   }
 
   componentDidMount() {
-    fetch('http://127.0.0.1:8080/api/v1/ingredients')
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ filterData: data });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    Api.getIngredients(this.state)
   }
 
   render() {

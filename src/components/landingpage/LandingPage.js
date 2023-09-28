@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Footer from "../footer/Footer";
-import logo from "../static/FoodSpotWhite.png"
+import logo from "../../static/FoodSpotWhite.png"
 
 const LandingPage = () => {
     const buttonStyle = "bg-white border-2 border-black p-2 m-2"

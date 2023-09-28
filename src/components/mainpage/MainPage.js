@@ -1,7 +1,7 @@
 import Footer from "../footer/Footer";
-import Restaurants from "../restaurants/Restaurants";
+import AllRestaurants from "../restaurant/AllRestaurants";
 import Header from "../header/Header";
-import FiltersNavbar from "../filtersheader/FiltersNavbar";
+import FiltersNavbar from "../header/filtersheader/FiltersNavbar";
 
 const MainPage = () => (
     <div className="h-screen">
@@ -12,8 +12,8 @@ const MainPage = () => (
         <FiltersNavbar></FiltersNavbar>
 
         <main className="flex h-5/6">
-            <div className="w-1/2 overflow-y-auto bg-gray-200">
-                <Restaurants/>
+            <div className="w-1/2">
+                <AllRestaurants/>
             </div>
 
             <div className="w-1/2 bg-gray-300 text-5xl font-black">

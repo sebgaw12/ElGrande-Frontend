@@ -1,4 +1,4 @@
-import mockPhoto1 from "../mockphoto/mock-photo1.jpg";
+import mockPhoto1 from "../../../mockdata/mock-photo1.jpg";
 
 const Details = (props) => {
     const padding2px = "p-2"

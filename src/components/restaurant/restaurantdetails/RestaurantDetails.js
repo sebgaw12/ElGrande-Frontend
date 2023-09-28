@@ -1,9 +1,10 @@
 import {useEffect, useState} from "react";
 import Address from "./Address";
-import Menus from "./Menu/Menus";
+import Menus from "../../Menu/Menus";
 import OpeningHours from "./OpeningHours";
-import Reviews from "./reviews/Reviews";
+import Reviews from "../../reviews/Reviews";
 import Details from "./Details";
+import {Api} from "../../../api/Api";
 
 const RestaurantDetails = (props) => {
 
@@ -17,16 +18,7 @@ const RestaurantDetails = (props) => {
     const [activeComponent, setActiveComponent] = useState(DETAILS)
 
     useEffect(() => {
-        async function getRestaurantDetails() {
-            const response = await fetch(`http://localhost:8080/api/v1/restaurants/${props.id}`)
-            if (!response.ok ) {
-                throw new Error('HTTP error: ' + response.status)
-            }
-            const data = response.json()
-            setRestaurantDetails(await data)
-        }
-
-        getRestaurantDetails().catch((err) => console.log("Wystąpił błąd: " + err))
+               Api.getRestaurantDetails(props.id, setRestaurantDetails).catch((err) => console.log("Wystąpił błąd: " + err))
     }, [props.id]);
 
     const renderActiveComponent = () => {

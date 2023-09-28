@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Api} from "../../../api/Api";
 //import Timeit from "react-timeit";
 
 const inputStyle = "w-full px-3 py-2 m-2 border-b-2 border-gray-400 focus:outline-none placeholder:text-gray-300";
@@ -123,26 +124,7 @@ const RestaurantRegisterForm = () => {
   {
     e.preventDefault();
   
-    try {
-      const response = await fetch('http://127.0.0.1:8080/api/v1/form', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (response.ok)
-      {
-        console.log("Add new restaurant: SUCCESS")
-        console.log(formData)
-      } else {
-        console.log(formData)
-        console.log("Add new restaurant: ERROR")
-      }
-    } catch (error) {
-      console.error('Wystąpił błąd:', error);
-    }
+    await Api.registerRestaurant(formData);
   };
   
   
