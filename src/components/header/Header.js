@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
-import CustomerDetails from "../customer/CustomerDetails";
 import {UserContext} from "../../context/UserContextProvider";
 import {ACCESS_TOKEN} from "../../constants/constant";
 import Logout from "../login/Logout";
