@@ -1,5 +1,5 @@
 export class Api {
-    static getIngredients = async (setState)=> {
+    static getIngredients = async (setState) => {
         fetch('http://127.0.0.1:8080/api/v1/ingredients')
             .then((response) => response.json())
             .then((data) => {
@@ -10,7 +10,7 @@ export class Api {
             });
     }
 
-    static logIn = async (setLoading, formData, setUserName, navigate)=> {
+    static logIn = async (setLoading, formData, setUserName, navigate) => {
         const loginUrl = 'http://127.0.0.1:8080/api/v1/customers';
         try {
             setLoading(true); // Set loading state
@@ -52,7 +52,7 @@ export class Api {
         return setMenu(await data)
     }
 
-    static registerCustomer= async (userData, setFormData, navigate) => {
+    static registerCustomer = async (userData, setFormData, navigate) => {
         try {
             const response = await fetch('http://127.0.0.1:8080/api/v1/customers',
                 {
@@ -87,7 +87,7 @@ export class Api {
 
     static getRestaurantDetails = async (id, restaurantDetails) => {
         const response = await fetch(`http://localhost:8080/api/v1/restaurants/${id}`)
-        if (!response.ok ) {
+        if (!response.ok) {
             throw new Error('HTTP error: ' + response.status)
         }
         const data = response.json()
@@ -155,11 +155,36 @@ export class Api {
     static getReviews = async (id, setReviews) => {
         const response = await fetch(`http://localhost:8080/api/v1/reviews?restaurantId=${id}`)
 
-        if (!response.ok){
+        if (!response.ok) {
             throw new Error('HTTP error: ' + response.status)
         }
 
-        const data= response.json()
+        const data = response.json()
         setReviews(await data)
+    }
+
+    static addReview = async (restaurantId, customerId, comment, grade) => {
+        try {
+            const requestBody = {
+                restaurantId: restaurantId,
+                customerId: customerId,
+                comment: comment,
+                grade: grade
+            }
+
+            const response = await fetch('http://localhost:8080/api/v1/reviews', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(requestBody)
+            })
+
+            if (!response.ok) {
+                const errMsg = await response.text()
+                console.log(`Wystąpił błąd: ${response.status} - ${errMsg}`)
+                throw new Error(`Wystąpił błąd ${response.status}`)
+            }
+        } catch (e) {
+            console.log(`Wystąpił błąd: ${e}`);
+        }
     }
 }

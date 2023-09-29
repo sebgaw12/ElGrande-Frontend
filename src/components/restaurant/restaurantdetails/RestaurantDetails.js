@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import Address from "./Address";
 import Menus from "../../Menu/Menus";
 import OpeningHours from "./OpeningHours";
-import Reviews from "../../reviews/Reviews";
+import Reviews from "./reviews/Reviews";
 import Details from "./Details";
 import {Api} from "../../../api/Api";
 
