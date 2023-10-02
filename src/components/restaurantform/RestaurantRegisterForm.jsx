@@ -7,7 +7,7 @@ import RestaurantRegisterAddress from './subcomponents/RestaurantRegisterAddress
 import RestaurantRegisterBusinessHours from './subcomponents/RestaurantRegisterBusinessHours';
 import RestaurantRegisterImages from './subcomponents/RestaurantRegisterImages';
 
-function RestaurantRegisterForm(): JSX.Element
+function RestaurantRegisterForm()
 {
     const [currentPage, setCurrentPage] = useState(1);
 

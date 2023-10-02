@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import FilterBadge from './FilterBadge';
 import {ApiIngredient} from "../../../api/ApiIngredient";
+import FiltersSearchBar from './FiltersSearchBar';
 
 class FiltersNavbar extends Component {
     constructor(props) {
@@ -23,14 +24,18 @@ class FiltersNavbar extends Component {
         ));
 
         return (
-            <nav
-                className="relative flex w-full flex-wrap items-center justify-between bg-[#FBFBFB] py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-200 lg:py-2">
-                <div className="flex w-full flex-wrap items-center justify-between px-3">
-          <span className="ml-2 text-neutral-800 dark:text-neutral-900">
-            Filters: {filterBadges}
-          </span>
+
+            <nav className="flex w-full flex-wrap items-center justify-between px-3">
+                <div className="flex items-center">
+                    <div className="mb-3 md:w-96 mx-auto flex items-center">
+                        <FiltersSearchBar />
+                    </div>
+                    <span className="text-neutral-800 dark:text-neutral-900 mr-10">
+          Filters: {filterBadges}
+        </span>
                 </div>
             </nav>
+
         );
     }
 }

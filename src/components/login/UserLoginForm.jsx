@@ -13,7 +13,7 @@ import {ApiCustomer} from "../../api/ApiCustomer";
 import {ACCESS_TOKEN} from "../../constants/constant";
 import {toast} from "react-toastify";
 
-function UserLoginForm(): JSX.Element {
+function UserLoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [isEmailValid, setIsEmailValid] = useState(true)

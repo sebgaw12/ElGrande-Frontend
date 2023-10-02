@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Footer(): JSX.Element {
+function Footer() {
     return (
         <footer className="text-center lg:text-left">
             <div className="p-4 text-center text-neutral-700 bg-yellow-400">

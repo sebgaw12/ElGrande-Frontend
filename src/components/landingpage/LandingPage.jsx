@@ -4,7 +4,7 @@ import {StyleNormalButton} from '../../styles/styles';
 import Footer from '../footer/Footer';
 import logo from '../../static/FoodSpotWhite.png';
 
-function LandingPage(): JSX.Element
+function LandingPage()
 {
     return(
         <div className="h-screen">

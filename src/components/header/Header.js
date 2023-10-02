@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {UserContext} from "../../context/UserContextProvider";
 import {ACCESS_TOKEN} from "../../constants/constant";
 import Logout from "../login/Logout";
+import RestaurantRegisterBasics from '../restaurantform/subcomponents/RestaurantRegisterBasics';
 
 const Header = () => {
     const {userEmail} = useContext(UserContext)
