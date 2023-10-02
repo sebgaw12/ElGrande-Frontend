@@ -131,7 +131,7 @@ const RestaurantRegisterForm = () => {
   return (
     <div className="max-w-3xl mx-auto py-16">
       <div className={`step relative ${currentStep === 'step1' ? '' : 'hidden'}`} id="step1">
-        <h2 className="text-2xl font-semibold mb-4">Restaurant info</h2>
+        <h2 className="text-2xl font-semibold mb-4">ApiRestaurant info</h2>
         <form>
           <div className="mt-6">
             <input
@@ -139,7 +139,7 @@ const RestaurantRegisterForm = () => {
               name="restaurant.name"
               minLength={1}
               maxLength={100}
-              placeholder="Restaurant name"
+              placeholder="ApiRestaurant name"
               className={inputStyle}
               //value={formData.restaurant.name}
               onChange={handleChange}

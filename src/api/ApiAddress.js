@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export class Address {
+export class ApiAddress {
     static getAddressByRestaurantId = (id) => {
         return axios.get(`http://localhost:8080/api/v1/addresses?restaurantId=${id}`)
             .then(response => {

@@ -5,16 +5,11 @@ import {ACCESS_TOKEN} from "../../constants/constant";
 import Logout from "../login/Logout";
 
 const Header = () => {
-    const {isLoggedIn, loginModifier} = useContext(UserContext)
-    const token = localStorage.getItem(ACCESS_TOKEN)
+    const {userEmail} = useContext(UserContext)
 
 // todo: find better way to display authorize header
 
-    if (token){
-        loginModifier(true)
-    }
-
-    if (isLoggedIn) {
+    if (userEmail) {
         return (
             <header className="bg-blue-500 py-2 px-4 flex justify-between items-center">
                 <h1 className="text-white text-2xl font-bold">FoodSpot</h1>
@@ -33,7 +28,7 @@ const Header = () => {
                     </button>
 
                     <div>
-                        <Logout />
+                        <Logout/>
                     </div>
 
                 </div>

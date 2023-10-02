@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export class BusinessHour {
-    static getBusinessHourByRestaurantId = (id) => {
-        return axios.get(`http://localhost:8080/api/v1/business-hours?restaurantId=${id}`)
+export class ApiDish {
+    static getDishes = (id) => {
+        return axios.get(`http://localhost:8080/api/v1/dishes?restaurantId=${id}`)
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")

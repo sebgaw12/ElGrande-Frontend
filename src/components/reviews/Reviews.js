@@ -1,14 +1,13 @@
 import {useEffect, useState} from "react";
 import Review from "./Review";
-import {Api} from "../../api/Api";
+import {ApiReview} from "../../api/ApiReview";
 
 const Reviews = (props) => {
 
     const [reviews, setReviews] = useState([])
 
     useEffect(() => {
-
-        Api.getReviews(props.id, setReviews).catch((err) => console.log('Wystąpił błąd: ' + err.message))
+        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
     }, [props.id]);
 
     console.log(reviews);

@@ -1,15 +1,13 @@
 import {useEffect, useState} from "react";
 import Menu from "./Menu";
-import {Api} from "../../api/Api";
+import {ApiDish} from "../../api/ApiDish";
 
 const Menus = (props) => {
 
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-
-        Api.getDishes(props.id, setMenu).catch((err) => console.log('Wystąpił błąd: ' + err.message))
-
+        ApiDish.getDishes(props.id).then(response => setMenu(response))
     }, [props.id]);
 
     return (

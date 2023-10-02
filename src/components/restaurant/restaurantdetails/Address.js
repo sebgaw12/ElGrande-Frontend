@@ -1,13 +1,12 @@
 import {useEffect, useState} from "react";
-import {Api} from "../../../api/Api";
+import {ApiAddress} from "../../../api/ApiAddress";
 
 const Address = (props) => {
 
     const [addressDetails, setAddressDetails] = useState({})
 
     useEffect(() => {
-
-        Api.getAddressByRestaurantId(props.id, setAddressDetails).catch((err) => console.log("Wystąpił błąd: " + err.message))
+        ApiAddress.getAddressByRestaurantId(props.id).then(response => setAddressDetails(response))
     }, [props.id]);
 
     return (

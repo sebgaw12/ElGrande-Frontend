@@ -1,14 +1,4 @@
 export class Api {
-    static getIngredients = async (setState)=> {
-        fetch('http://127.0.0.1:8080/api/v1/ingredients')
-            .then((response) => response.json())
-            .then((data) => {
-                setState({filterData: data});
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
 
     static logIn = async (setLoading, formData, setUserName, navigate)=> {
         const loginUrl = 'http://127.0.0.1:8080/api/v1/customers';
@@ -39,17 +29,6 @@ export class Api {
         } finally {
             setLoading(false); // Reset loading state
         }
-    }
-
-    static getDishes = async (id, setMenu) => {
-        const response = await fetch(`http://localhost:8080/api/v1/dishes?restaurantId=${id}`)
-
-        if (!response.ok) {
-            throw new Error('HTTP error: ' + response.status)
-        }
-
-        const data = response.json()
-        return setMenu(await data)
     }
 
     static registerCustomer= async (userData, setFormData, navigate) => {
@@ -85,33 +64,6 @@ export class Api {
         }
     }
 
-    static getRestaurantDetails = async (id, restaurantDetails) => {
-        const response = await fetch(`http://localhost:8080/api/v1/restaurants/${id}`)
-        if (!response.ok ) {
-            throw new Error('HTTP error: ' + response.status)
-        }
-        const data = response.json()
-        return restaurantDetails(await data)
-    }
-
-    static getAddressByRestaurantId = async (id, addresDetails) => {
-        const response = await fetch(`http://localhost:8080/api/v1/addresses?restaurantId=${id}`)
-        if (!response.ok) {
-            throw new Error('HTTP error: ' + response.status)
-        }
-        const data = response.json()
-        addresDetails(await data)
-    }
-
-    static getOpeningHours = async (id, openingHours) => {
-        const resp = await fetch(`http://localhost:8080/api/v1/business-hours?restaurantId=${id}`)
-        if (!resp.ok) {
-            throw new Error('HTTP error: ' + resp.status)
-        }
-        const data = resp.json()
-        openingHours(await data)
-    }
-
     static registerRestaurant = async (formData) => {
         try {
             const response = await fetch('http://127.0.0.1:8080/api/v1/form', {
@@ -134,32 +86,4 @@ export class Api {
         }
     }
 
-    static getAllRestaurants = async (page, size, sort, setData, setMore) => {
-        const response = await fetch(`http://localhost:8080/api/v1/restaurants?page=${page}&size=${size}&sort=${sort}`)
-        if (!response.ok) {
-            throw new Error('HTTP error: ' + response.status)
-        }
-        const data = await response.json()
-
-        if (page === 0) {
-            setData(data)
-        } else {
-            setData((prevData) => [...prevData, ...data])
-        }
-
-        if (data.length === 0) {
-            setMore(false)
-        }
-    }
-
-    static getReviews = async (id, setReviews) => {
-        const response = await fetch(`http://localhost:8080/api/v1/reviews?restaurantId=${id}`)
-
-        if (!response.ok){
-            throw new Error('HTTP error: ' + response.status)
-        }
-
-        const data= response.json()
-        setReviews(await data)
-    }
 }

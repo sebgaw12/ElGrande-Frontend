@@ -1,9 +1,11 @@
 import {createContext, useCallback, useEffect, useState} from "react";
 import {ACCESS_TOKEN} from "../constants/constant";
+import {ApiCustomer} from "../api/ApiCustomer";
 
 const defaultUserContext = {
     currentUser: null,
-    userModifier: (user) => {},
+    userModifier: (user) => {
+    },
 };
 export const UserContext = createContext(defaultUserContext)
 export const UserContextProvider = ({children}) => {
@@ -13,29 +15,25 @@ export const UserContextProvider = ({children}) => {
     const userModifier = (user) => setCurrentUser(user)
     const loginModifier = (value) => setIsLoggedIn(value)
 
-    const fetchUser = useCallback(async () =>{
-        try{
-            const mockUser = require("../mockdata/MockCustomer")
+    const fetchUser = useCallback((id) => {
+        ApiCustomer.getCustomerById(id).then(response => {
             userModifier({
-                email: mockUser.email,
-                name: mockUser.name,
-                surname: mockUser.surname
+                email: response.email,
+                name: response.name
             })
-        } catch (err) {
-            console.error('wystąpił błąd ', err);
-        }
+        })
     }, [])
 
     useEffect(() => {
-        const token = localStorage.getItem(ACCESS_TOKEN)
+        const token = JSON.parse(localStorage.getItem(ACCESS_TOKEN))
 
         if (token && !currentUser) {
-            fetchUser()
+            fetchUser(token.id)
         }
-    }, [fetchUser, currentUser])
+    }, [currentUser])
 
     return (
-        <UserContext.Provider value={{currentUser, userModifier, isLoggedIn, loginModifier}}>
+        <UserContext.Provider value={{currentUserEmail: currentUser, userModifier, isLoggedIn, loginModifier}}>
             {children}
         </UserContext.Provider>
     )
