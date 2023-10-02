@@ -39,7 +39,10 @@ export class ApiCustomer {
 
     static signUp = (data) => {
         return axios.post("http://127.0.0.1:8080/api/v1/auths/signup", {
-            data: JSON.stringify(data)
+            name: data.name,
+            surname: data.surname,
+            email: data.email,
+            password: data.password
         }, {
             headers: {
                 'Content-Type': "application/json"

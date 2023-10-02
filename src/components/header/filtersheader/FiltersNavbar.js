@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import FilterBadge from './FilterBadge';
-import {Api} from "../../../api/Api";
 import {ApiIngredient} from "../../../api/ApiIngredient";
 
 class FiltersNavbar extends Component {

@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import Address from "./Address";
-import Menus from "../../Menu/Menus";
+import Menus from "../../menu/Menus";
 import BusinessHour from "./BusinessHour";
-import Reviews from "../../reviews/Reviews";
+import Reviews from "./reviews/Reviews";
 import Details from "./Details";
 import {ApiRestaurant} from "../../../api/ApiRestaurant";
 

@@ -1,10 +1,10 @@
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import LandingPage from "../components/landingpage/LandingPage";
 import MainPage from "../components/mainpage/MainPage";
-import RegisterForm from "../components/registerform/RegisterForm";
 import Error from "../components/error/ErrorPage";
-import RestaurantRegisterForm from "../components/restaurant/restaurantregister/RestaurantRegister";
-import Login from "../components/login/Login";
+import RestaurantRegisterForm from "../components/restaurantform/RestaurantRegisterForm";
+import UserLoginForm from "../components/login/UserLoginForm";
+import UserRegisterForm from "../components/registerform/UserRegisterForm";
 import {UnauthorizedRoute} from "../components/UnauthorizedRoute";
 import {ProtectedRoute} from "../components/ProtectedRoute";
 import CustomerDetails from "../components/customer/CustomerDetails";
@@ -13,22 +13,21 @@ const Routing = () => (
     <div>
         <Router>
             <Routes>
-                <Route path="/" element={ <LandingPage /> } />
-                <Route path="*" element={<Error />} />
-                <Route path="/main-page" element={ <MainPage /> } />
-                <Route path="/register" element={ <RegisterForm /> } />
-                {/*<Route path="/login" element={ <Login /> } />*/}
-                <Route path="/restaurant" element={<RestaurantRegisterForm />} />
+                <Route path="/" element={<LandingPage/>}/>
+                <Route path="*" element={<Error/>}/>
+                <Route path="/main-page" element={<MainPage/>}/>
+                <Route path="/register" element={<UserRegisterForm/>}/>
+                <Route path="/restaurant" element={<RestaurantRegisterForm/>}/>
                 <Route path="/login" element={
                     <UnauthorizedRoute>
-                        <Login/>
+                        <UserLoginForm/>
                     </UnauthorizedRoute>
-                } />
+                }/>
                 <Route path="/profile" element={
                     <ProtectedRoute>
-                        <CustomerDetails />
+                        <CustomerDetails/>
                     </ProtectedRoute>
-                } />
+                }/>
             </Routes>
         </Router>
     </div>

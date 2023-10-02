@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ReactModal from 'react-modal';
 import Review from "./Review";
-import {Api} from "../../../../api/Api";
+import {ApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
 import {ACCESS_TOKEN} from "../../../../constants/constant";
 import {useNavigate} from "react-router-dom";
@@ -19,7 +19,7 @@ const Reviews = (props) => {
 
 
     useEffect(() => {
-        Api.getReviews(props.id, setReviews).catch((err) => console.log('Wystąpił błąd: ' + err.message))
+        ApiReview.getReviewByRestaurantId(props.id, setReviews).then(response => setReviews(response))
     }, [props.id]);
 
     const handleLoggedInUser = () => {
@@ -44,7 +44,7 @@ const Reviews = (props) => {
             const comment = document.querySelector("#comment").value
             const grade = document.querySelector("#grade").value
 
-            await Api.addReview(restaurantId, customerId, comment, grade)
+            await ApiReview.postReview(restaurantId, customerId, comment, grade)
 
             toast.success('Ocena dodana poprawnie', {
                 position: 'top-center',
