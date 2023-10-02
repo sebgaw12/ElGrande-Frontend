@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import UserRegisterFormView from './UserRegisterFormView';
 import {ApiCustomer} from "../../api/ApiCustomer";
-import errorPage from "../error/ErrorPage";
 
 const UserRegisterForm = () => {
     const [userData, setUserData] = useState({});

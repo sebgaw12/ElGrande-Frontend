@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {TEInput, TERipple} from 'tw-elements-react';
+import {TEInput} from 'tw-elements-react';
 
 import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
 import FoodSpotLogo from '../restaurantform/elements/graphics/FoodSpotLogo';
