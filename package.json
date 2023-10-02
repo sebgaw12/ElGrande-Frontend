@@ -6,8 +6,11 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "assert": "^2.1.0",
     "axios": "^1.5.1",
     "bcryptjs": "^2.4.3",
+    "browserify-zlib": "^0.2.0",
+    "https-browserify": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0",
@@ -16,7 +19,10 @@
     "react-scripts": "^5.0.1",
     "react-timeit": "^1.2.12",
     "react-toastify": "^9.1.3",
+    "stream-http": "^3.2.0",
     "tw-elements-react": "^1.0.0-alpha1",
+    "url": "^0.11.3",
+    "util": "^0.12.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

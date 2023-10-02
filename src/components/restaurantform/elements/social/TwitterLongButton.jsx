@@ -2,7 +2,7 @@ import React from 'react';
 import {TERipple} from 'tw-elements-react';
 import {StyleTwitterLongButton} from '../../../../styles/styles';
 
-function TwitterLongButton(): JSX.Element
+function TwitterLongButton()
 {
     return(
         <TERipple rippleColor="light" className="w-full">

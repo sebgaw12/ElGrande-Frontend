@@ -1,7 +1,7 @@
 import React from 'react';
-import { TEInput, TERipple } from 'tw-elements-react';
+import {TERipple} from 'tw-elements-react';
 
-function SearchBar(): JSX.Element {
+function SearchBar() {
     return (
         <div className="mb-3 md:w-96 mx-auto ml-4 mt-2.5">
             <div className="mb-4 flex w-full flex-wrap items-stretch">
