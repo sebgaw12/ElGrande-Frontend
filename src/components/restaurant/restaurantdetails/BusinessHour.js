@@ -1,13 +1,12 @@
 import {useEffect, useState} from "react";
-import {Api} from "../../../api/Api";
+import {ApiBusinessHour} from "../../../api/ApiBusinessHour";
 
-const OpeningHours = (props) => {
+const BusinessHour = (props) => {
 
     const [availableHours, setAvailableHours] = useState([])
 
     useEffect(() => {
-
-        Api.getOpeningHours(props.id, setAvailableHours).catch((err) => console.log('Wystąpił błąd: ' + err.message))
+        ApiBusinessHour.getBusinessHourByRestaurantId(props.id).then(response => setAvailableHours(response))
     }, [props.id]);
 
     const formatTime = (time) => {
@@ -66,4 +65,4 @@ const OpeningHours = (props) => {
     )
 }
 
-export default OpeningHours
+export default BusinessHour

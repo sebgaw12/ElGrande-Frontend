@@ -1,7 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import Restaurant from "./Restaurant";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {Api} from "../../api/Api";
+import {ApiRestaurant} from "../../api/ApiRestaurant";
 
 const AllRestaurants = () => {
 
@@ -15,7 +15,16 @@ const AllRestaurants = () => {
     const prevScrollY = useRef(0)
 
     useEffect(() => {
-        Api.getAllRestaurants(page, size, sort,setData, setMore).catch((error) => console.log("błąd podczas pobierania danych: " + error))
+        ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
+            if (page === 0) {
+                setData(response)
+            } else {
+                setData((prevData) => [...prevData, ...response])
+            }
+            if (response.length === 0) {
+                setMore(false)
+            }
+        })
     }, [page, size, sort])
 
     useEffect(() => {
