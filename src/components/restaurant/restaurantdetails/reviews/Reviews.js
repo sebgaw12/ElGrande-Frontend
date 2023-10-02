@@ -19,7 +19,7 @@ const Reviews = (props) => {
 
 
     useEffect(() => {
-        ApiReview.getReviewByRestaurantId(props.id, setReviews).then(response => setReviews(response))
+        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
     }, [props.id]);
 
     const handleLoggedInUser = () => {
@@ -88,7 +88,8 @@ const Reviews = (props) => {
                     <button
                         type="submit"
                         className="border-2 border-black p-2"
-                    >Dodaj</button>
+                    >Dodaj
+                    </button>
                 </form>
             </ReactModal>
         </div>
