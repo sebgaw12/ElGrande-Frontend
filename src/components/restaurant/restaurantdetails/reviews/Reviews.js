@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import ReactModal from 'react-modal';
 import Review from "./Review";
-import {Api} from "../../../../api/Api";
 import {toast} from "react-toastify";
 import {ACCESS_TOKEN} from "../../../../constants/constant";
 import {useNavigate} from "react-router-dom";
+import {ApiReview} from "../../../../api/ApiReview";
 
 const Reviews = (props) => {
 
@@ -19,7 +19,7 @@ const Reviews = (props) => {
 
 
     useEffect(() => {
-        Api.getReviews(props.id, setReviews).catch((err) => console.log('Wystąpił błąd: ' + err.message))
+        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
     }, [props.id]);
 
     const handleLoggedInUser = () => {
@@ -88,7 +88,8 @@ const Reviews = (props) => {
                     <button
                         type="submit"
                         className="border-2 border-black p-2"
-                    >Dodaj</button>
+                    >Dodaj
+                    </button>
                 </form>
             </ReactModal>
         </div>

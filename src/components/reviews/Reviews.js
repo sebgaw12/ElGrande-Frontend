@@ -1,5 +1,4 @@
 import {useEffect, useState} from "react";
-import Review from "./Review";
 import {ApiReview} from "../../api/ApiReview";
 
 const Reviews = (props) => {
