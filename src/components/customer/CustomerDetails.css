@@ -1,0 +1,49 @@
+#profile {
+    background-color: gray;
+}
+#details {
+    text-align: left;
+    background-color: white;
+    border: solid black 0.2vh;
+    border-radius: 1vh;
+    height: 15vh;
+    width: 30vw;
+    min-width: 40vh;
+    position: absolute;
+    top: 2vh;
+}
+
+#details-header {
+    font-size: 3vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+
+#details-text {
+    font-size: 1.5vh;
+    margin-left: 1.5vw;
+}
+
+#comments {
+    border-top: solid black 0.2vh;
+    height: 80vh;
+    width: 100vw;
+    position: absolute;
+    top: 20vh;
+}
+
+
+#show-comments-button {
+    text-align: center;
+    font-size: 3vh;
+    background-color: lightgray;
+    border: solid black;
+    border-radius: 0.35vh;
+    height: 5vh;
+    width: 15vw;
+    min-width: 25vh;
+    position: absolute;
+    top: 2vh;
+    left: 2vw;
+}
+

@@ -26,9 +26,11 @@ const Restaurant = (props) => {
     }
 
     return (
-        <div className={`flex flex-row p-2 rounded-xl m-4 bg-gray-300 ${isOpen ? shadowInside : shadowOutside} justify-items-center`}>
+        <div className={`flex flex-row p-2 rounded-xl m-4 bg-gray-300 ${isOpen ? shadowInside : shadowOutside} 
+        justify-items-center min-h-[6vh]`}>
             {isOpen ? displayRestaurantDetails() : hideRestaurantDetails()}
-            <button onClick={onToggle} className="m-2 p-2 border-black border-2">{isOpen ? "Ukryj" : "Pokaż szczegóły"}</button>
+            <button onClick={onToggle} className="text-2xl m-2 p-2 border-black border-2 h-[4vh]">{isOpen ?
+                "Ukryj" : "Pokaż szczegóły"}</button>
         </div>
     )
 }

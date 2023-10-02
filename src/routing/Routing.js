@@ -10,7 +10,7 @@ import {ProtectedRoute} from "../components/ProtectedRoute";
 import CustomerDetails from "../components/customer/CustomerDetails";
 
 const Routing = () => (
-    <div>
+    <div className="max-h-screen">
         <Router>
             <Routes>
                 <Route path="/" element={<LandingPage/>}/>

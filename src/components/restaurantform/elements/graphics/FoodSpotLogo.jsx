@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../../../static/FoodSpotWhite.png';
+import logo from '../../../../images/FoodSpotTransparent.png';
 
 function FoodSpotLogo(): JSX.Element {
     return (

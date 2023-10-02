@@ -4,23 +4,23 @@ import Header from "../header/Header";
 import FiltersNavbar from "../header/filtersheader/FiltersNavbar";
 
 const MainPage = () => (
-    <div className="h-screen">
+    <div className="h-screen max-h-screen">
 
-        <div className="bg-blue-500 py-4">
+        <div className="bg-blue-500 h-[5vh]">
             <Header />
         </div>
         <FiltersNavbar></FiltersNavbar>
 
-        <main className="flex h-5/6">
+        <main className="flex">
             <div className="w-1/2">
                 <AllRestaurants/>
             </div>
 
-            <div className="w-1/2 bg-gray-300 text-5xl font-black">
-                Tu będzie mapa
+            <div className="w-1/2 bg-gray-300 text-5xl font-black h-[85vh]">
+                <h1 className="text-[5vh]">Tu będzie mapa</h1>
             </div>
         </main>
-        <div className="p-2">
+        <div className="h-[6vh]">
             <Footer/>
         </div>
     </div>

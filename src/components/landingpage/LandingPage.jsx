@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {StyleNormalButton} from '../../styles/styles';
 import Footer from '../footer/Footer';
-import logo from '../../static/FoodSpotWhite.png';
+import logo from '../../images/FoodSpotTransparent.png';
 
 function LandingPage()
 {

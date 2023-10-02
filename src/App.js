@@ -8,7 +8,7 @@ import Modal from "react-modal";
 function App() {
     Modal.setAppElement('#root')
     return (
-        <div className="App bg-yellow-500">
+        <div className="App bg-[rgb(255,245,0)] bg-custom-gradient">
             <UserContextProvider>
                 <Routing/>
                 <ToastContainer/>

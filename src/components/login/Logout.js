@@ -7,7 +7,7 @@ import {UserContext} from "../../context/UserContextProvider";
 const Logout = () => {
 
     const navigate = useNavigate()
-    const { loginModifier } = useContext(UserContext);
+    const {loginModifier} = useContext(UserContext);
 
     const handleLogout = async () => {
         try {
@@ -25,7 +25,8 @@ const Logout = () => {
     }
 
     return (
-        <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg"
+        <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg
+        h-[2.1vh] w-[4.5vw] min-w-[1vw]"
                 onClick={handleLogout}>
             Wyloguj
         </button>
