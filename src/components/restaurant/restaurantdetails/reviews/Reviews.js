@@ -4,6 +4,7 @@ import Review from "./Review";
 import {Api} from "../../../../api/Api";
 import {toast} from "react-toastify";
 import {ACCESS_TOKEN} from "../../../../constants/constant";
+import {useNavigate} from "react-router-dom";
 
 const Reviews = (props) => {
 
@@ -15,6 +16,7 @@ const Reviews = (props) => {
 
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
+
 
     useEffect(() => {
         Api.getReviews(props.id, setReviews).catch((err) => console.log('Wystąpił błąd: ' + err.message))
@@ -77,13 +79,16 @@ const Reviews = (props) => {
                 <form onSubmit={handleAddReview}>
                     <label>
                         Ocena:
-                        <input id="grade" type="number"/>
+                        <input id="grade" type="number" min="1" max="10" required/>
                     </label>
                     <label>
                         Komentarz:
-                        <textarea id="comment"/>
+                        <textarea id="comment" required/>
                     </label>
-                    <button type="submit" className="border-2 border-black p-2">Dodaj</button>
+                    <button
+                        type="submit"
+                        className="border-2 border-black p-2"
+                    >Dodaj</button>
                 </form>
             </ReactModal>
         </div>
