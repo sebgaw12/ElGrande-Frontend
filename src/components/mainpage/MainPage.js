@@ -1,7 +1,7 @@
 import Footer from "../footer/Footer";
 import AllRestaurants from "../restaurant/AllRestaurants";
 import Header from "../header/Header";
-import FiltersNavbar from "../header/filtersheader/FiltersNavbar";
+import FiltersHeader from '../header/filtersheader/FiltersHeader';
 
 const MainPage = () => (
     <div className="h-screen">
@@ -9,7 +9,7 @@ const MainPage = () => (
         <div className="bg-blue-500 py-4">
             <Header />
         </div>
-        <FiltersNavbar></FiltersNavbar>
+        <FiltersHeader></FiltersHeader>
 
         <main className="flex h-5/6">
             <div className="w-1/2">
