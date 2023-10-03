@@ -51,7 +51,7 @@ const AllRestaurants = () => {
     }
 
     return (
-        <div className="flex flex-col bg-gray-200 h-[85vh]">
+        <div className="flex flex-col bg-gray-200 h-[85vh] min-w-[50vw]">
             <div className="p-2">
                 <label for="size" className="p-2">Ile wpisów na stronie</label>
                 <select name="size" className="m-2" onChange={handleSizeChange}>

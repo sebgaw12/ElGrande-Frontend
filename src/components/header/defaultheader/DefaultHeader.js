@@ -3,26 +3,25 @@ import React from "react";
 
 const DefaultHeader = () => {
     return (
-        <header className="bg-blue-500 px-4 flex justify-between items-center h-[4vh]">
-            <h1 className="text-white text-2xl font-bold">FoodSpot</h1>
-
-            <div className="flex items-center space-x-2 w-[20vw] ">
+        <div className="container mx-auto flex justify-between items-center">
+            <Link to={"/"}>
+                <h1 className="text-white font-bold text-xl">FoodSpot</h1>
+            </Link>
+            <nav className="hidden md:flex space-x-4">
                 <Link to="/register">
-                    <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg
-                        h-[2.1vh] w-[8vw] min-w-[6.7vw]">
+                    <button
+                        className="bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-lg">
                         Zarejestruj się
                     </button>
                 </Link>
-
-                <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg
-                        h-[2.1vh] w-[8vw] min-w-[6.7vw]">
-                    <Link to="/login">
+                <Link to="/login">
+                    <button
+                        className="bg-white text-blue-500 hover:bg-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg">
                         Zaloguj się
-                    </Link>
-
-                </button>
-            </div>
-        </header>
+                    </button>
+                </Link>
+            </nav>
+        </div>
     )
 }
 

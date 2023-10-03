@@ -24,18 +24,16 @@ class FiltersNavbar extends Component {
         ));
 
         return (
-
-            <nav className="flex w-full flex-wrap items-center justify-between px-3">
-                <div className="flex items-center">
+            <nav className="flex w-full flex-wrap items-center justify-between p-1 h-[5vh]">
+                <div className="flex">
                     <div className="mb-3 md:w-96 mx-auto flex items-center">
-                        <FiltersSearchBar />
+                        <FiltersSearchBar/>
                     </div>
-                    <span className="text-neutral-800 dark:text-neutral-900 mr-10">
-          Filters: {filterBadges}
-        </span>
+                    <span className="text-neutral-800 dark:text-neutral-900 p-1">
+                      Filters: {filterBadges}
+                    </span>
                 </div>
             </nav>
-
         );
     }
 }

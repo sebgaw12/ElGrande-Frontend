@@ -1,8 +1,8 @@
 import {mockCustomer} from "../../mockdata/MockCustomer";
 import React, { useState } from 'react';
-import "./CustomerDetails.css";
+import "./UserDetails.css";
 
-const CustomerDetails = () => {
+const UserDetails = () => {
     const [areCommentsVisible, setAreCommentsVisible] = useState(false);
 
     const toggleCommentsVisibility = () => {
@@ -25,4 +25,4 @@ const CustomerDetails = () => {
     );
 }
 
-export default CustomerDetails;
+export default UserDetails;

@@ -1,10 +1,10 @@
 import {ACCESS_TOKEN} from "../constants/constant";
-import CustomerDetails from "./customer/CustomerDetails";
+import UserDetails from "../components/user/UserDetails";
 
 
 export const UnauthorizedRoute = ({children}) => {
     if (localStorage.getItem(ACCESS_TOKEN)) {
-        return <CustomerDetails />
+        return <UserDetails />
     }
     return <>{children}</>
 }

@@ -2,13 +2,11 @@ import React from 'react';
 
 function Footer() {
     return (
-        <footer className="text-center lg:text-left">
-            <div className="p-4 text-center text-neutral-700 bg-yellow-400">
+        <footer className="text-center text-neutral-700 h-[5vh]">
                 <span>© 2023 Copyright: </span>
                 <a className="text-neutral-800" href="https://www.food-spot.com">
                     FoodSpot
                 </a>
-            </div>
         </footer>
     );
 }
