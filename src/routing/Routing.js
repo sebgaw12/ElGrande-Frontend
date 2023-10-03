@@ -15,16 +15,20 @@ const Routing = () => (
             <Route path="/" element={<LandingPage/>}/>
             <Route path="*" element={<Error/>}/>
             <Route path="/main-page" element={<MainPage/>}/>
-            <Route path="/register" element={<UserRegisterForm/>}/>
-            <Route path="/restaurant" element={
-                <ProtectedRoute>
-                    <RestaurantRegisterForm/>
-                </ProtectedRoute>
+            <Route path="/signup" element={
+                <UnauthorizedRoute>
+                    <UserRegisterForm/>
+                </UnauthorizedRoute>
             }/>
             <Route path="/login" element={
                 <UnauthorizedRoute>
                     <UserLoginForm/>
                 </UnauthorizedRoute>
+            }/>
+            <Route path="/restaurant" element={
+                <ProtectedRoute>
+                    <RestaurantRegisterForm/>
+                </ProtectedRoute>
             }/>
             <Route path="/profile" element={
                 <ProtectedRoute>

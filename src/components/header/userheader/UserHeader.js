@@ -9,7 +9,7 @@ const UserHeader = () => {
                 <h1 className="text-white font-bold text-xl">FoodSpot</h1>
             </Link>
             <nav className="hidden md:flex space-x-4">
-                <Link to="/restaurant">
+                <Link to="/signup">
                     <button className="bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2
                     px-4 rounded-lg">
                         Dodaj restaurację

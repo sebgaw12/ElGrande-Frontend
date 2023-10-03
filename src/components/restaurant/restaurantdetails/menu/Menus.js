@@ -8,7 +8,7 @@ const Menus = (props) => {
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        ApiDish.getDishes(props.id).then(response => setMenu(response))
+        ApiDish.getDishesByRestaurantId(props.id).then(response => setMenu(response))
     }, [props.id]);
 
     return (

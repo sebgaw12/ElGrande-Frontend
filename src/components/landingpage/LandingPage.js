@@ -13,7 +13,7 @@ function LandingPage() {
                     <Link to="/login">
                         <button className={StyleNormalButton}>Log In</button>
                     </Link>
-                    <Link to="/register">
+                    <Link to="/signup">
                         <button className={StyleNormalButton}>Register</button>
                     </Link>
                     <Link to="/main-page">

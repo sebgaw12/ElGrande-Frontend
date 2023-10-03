@@ -1,8 +1,12 @@
 import axios from "axios";
 
 export class ApiDish {
-    static getDishes = (id) => {
-        return axios.get(`http://localhost:8080/api/v1/dishes?restaurantId=${id}`)
+    static getDishesByRestaurantId = (id) => {
+        return axios.get('http://localhost:8080/api/v1/dishes', {
+            params: {
+                restaurantId: id
+            }
+        })
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")

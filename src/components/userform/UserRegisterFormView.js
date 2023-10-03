@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {TEInput} from 'tw-elements-react';
+import {TEInput, TERipple} from 'tw-elements-react';
 
 import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
 import FoodSpotLogo from '../restaurantform/elements/graphics/FoodSpotLogo';
@@ -105,11 +105,11 @@ function UserRegisterFormView({childToParent, handleSubmit}) {
                                 <RememberMeCheckbox/>
                                 <ForgotPasswordLink/>
                             </div>
-                            {/*<TERipple rippleColor="light" className="w-full">*/}
-                            <button type="submit" className={StyleLongButton}>
-                                Sign up
-                            </button>
-                            {/*</TERipple>*/}
+                            <TERipple rippleColor="light" className="w-full">
+                                <button type="submit" className={StyleLongButton}>
+                                    Sign up
+                                </button>
+                            </TERipple>
                             {/* <!-- Divider --> */}
                             <Divider/>
                             <FacebookLongButton/>

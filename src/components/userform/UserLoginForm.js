@@ -22,10 +22,7 @@ function UserLoginForm() {
     const {userModifier, loginModifier} = useContext(UserContext)
 
     const onLoginClicked = useCallback(() => {
-        ApiCustomer.logIn(email, password).then(response => {
-            setTimeout(() => {
-                console.log({email, password})
-            }, 1000)
+        ApiCustomer.logIn({email, password}).then(response => {
             localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response))
             userModifier({...response.data})
             loginModifier(true)

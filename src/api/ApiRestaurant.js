@@ -16,7 +16,13 @@ export class ApiRestaurant {
     }
 
     static getAllRestaurants = (page, size, sort) => {
-        return axios.get(`http://localhost:8080/api/v1/restaurants?page=${page}&size=${size}&sort=${sort}`)
+        return axios.get('http://localhost:8080/api/v1/restaurants', {
+            params: {
+                page: page,
+                size: size,
+                sort: sort
+            }
+        })
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")
