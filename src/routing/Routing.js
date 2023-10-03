@@ -17,7 +17,11 @@ const Routing = () => (
                 <Route path="*" element={<Error/>}/>
                 <Route path="/main-page" element={<MainPage/>}/>
                 <Route path="/register" element={<UserRegisterForm/>}/>
-                <Route path="/restaurant" element={<RestaurantRegisterForm/>}/>
+                <Route path="/restaurant" element={
+                    <ProtectedRoute>
+                        <RestaurantRegisterForm/>
+                    </ProtectedRoute>
+                }/>
                 <Route path="/login" element={
                     <UnauthorizedRoute>
                         <UserLoginForm/>

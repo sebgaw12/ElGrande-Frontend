@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useEffect, useState} from "react";
+import React, {useCallback, useContext, useState} from "react";
 import {Link, useNavigate} from 'react-router-dom';
 import FoodSpotLogo from "../restaurantform/elements/graphics/FoodSpotLogo";
 import RememberMeCheckbox from "../restaurantform/elements/form/RememberMeCheckbox";
@@ -6,8 +6,8 @@ import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLi
 import FacebookLongButton from "../restaurantform/elements/social/FacebookLongButton";
 import TwitterLongButton from "../restaurantform/elements/social/TwitterLongButton";
 import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
-import {StyleLongButton, StyleRoundedBlueButton} from '../../styles/styles';
-import {TEInput, TERipple} from 'tw-elements-react';
+import {StyleRoundedBlueButton} from '../../styles/styles';
+import {TEInput} from 'tw-elements-react';
 import {UserContext} from "../../context/UserContextProvider";
 import {ApiCustomer} from "../../api/ApiCustomer";
 import {ACCESS_TOKEN} from "../../constants/constant";
@@ -16,12 +16,10 @@ import {toast} from "react-toastify";
 function UserLoginForm() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [isEmailValid, setIsEmailValid] = useState(true)
-    const [isPasswordValid, setIsPasswordValid] = useState(true)
 
     const navigate = useNavigate()
 
-    const {userModifier} = useContext(UserContext)
+    const {userModifier, loginModifier} = useContext(UserContext)
 
     const onLoginClicked = useCallback(() => {
         ApiCustomer.logIn(email, password).then(response => {
@@ -30,6 +28,7 @@ function UserLoginForm() {
             }, 1000)
             localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response))
             userModifier({...response.data})
+            loginModifier(true)
             toast.success('zalogowano poprawnie', {
                 position: "top-center"
             })
@@ -40,14 +39,6 @@ function UserLoginForm() {
             })
         })
     }, [email, password, navigate])
-
-    useEffect(() => {
-        setIsEmailValid(email.length > 0)
-    }, [email]);
-
-    useEffect(() => {
-        setIsPasswordValid(password.length > 0)
-    }, [password]);
 
     const onUsernameChange = (ev) => {
         setEmail(ev.target.value)

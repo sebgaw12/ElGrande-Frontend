@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Menu from "./Menu";
-import {ApiDish} from "../../api/ApiDish";
+import {ApiDish} from "../../../../api/ApiDish";
+
 
 const Menus = (props) => {
 

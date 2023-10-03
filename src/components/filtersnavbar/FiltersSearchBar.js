@@ -1,5 +1,5 @@
 import React from 'react';
-import {TEInput, TERipple} from 'tw-elements-react';
+import {TERipple} from 'tw-elements-react';
 
 function FiltersSearchBar()
 {

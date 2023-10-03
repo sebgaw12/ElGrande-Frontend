@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import FilterBadge from './FilterBadge';
-import {ApiIngredient} from "../../../api/ApiIngredient";
 import FiltersSearchBar from './FiltersSearchBar';
+import {ApiIngredient} from "../../api/ApiIngredient";
 
 class FiltersNavbar extends Component {
     constructor(props) {
