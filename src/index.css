@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@layer base {
+  html {
+    @apply text-neutral-800;
+  }
+  html.dark {
+    @apply text-neutral-50;
+    @apply bg-neutral-800;
+  }
+}
+
+
 body {
   margin: 0;
   padding: 0;
@@ -16,3 +28,4 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+

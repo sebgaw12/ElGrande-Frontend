@@ -7,7 +7,7 @@ const Header = () => {
     const {isLoggedIn} = useContext(UserContext)
 
     return (
-        <header className="bg-blue-500 flex-grow p-1 h-[5vh]">
+        <header className="bg-blue-500 flex-grow h-[5vh]">
             {isLoggedIn ? (
                 <UserHeader/>
             ) : (
