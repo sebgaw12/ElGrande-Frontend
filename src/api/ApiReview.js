@@ -50,4 +50,19 @@ export class ApiReview {
                 throw error
             })
     }
+
+    static deleteReview = (reviewId) => {
+        return axios.delete(`http://localhost:8080/api/v1/reviews/${reviewId}`)
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.data;
+            })
+            .catch(error => {
+                console.error("Error deleting data: ", error);
+                throw error;
+            });
+    }
+
 }
