@@ -4,9 +4,8 @@ import {StyleNormalButton} from '../../styles/styles';
 import Footer from '../footer/Footer';
 import logo from '../../images/FoodSpotTransparent.png';
 
-function LandingPage()
-{
-    return(
+function LandingPage() {
+    return (
         <div className="h-screen">
             <div className="flex flex-col items-center">
                 <img alt="logo" src={logo}/>
@@ -14,7 +13,7 @@ function LandingPage()
                     <Link to="/login">
                         <button className={StyleNormalButton}>Log In</button>
                     </Link>
-                    <Link to="/register">
+                    <Link to="/signup">
                         <button className={StyleNormalButton}>Register</button>
                     </Link>
                     <Link to="/main-page">
@@ -22,9 +21,7 @@ function LandingPage()
                     </Link>
                 </div>
             </div>
-            <div className="mt-5">
-                <Footer/>
-            </div>
+            <Footer/>
         </div>
     );
 }

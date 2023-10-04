@@ -4,7 +4,7 @@ import {toast} from "react-toastify";
 import React, {useContext} from "react";
 import {UserContext} from "../../context/UserContextProvider";
 
-const Logout = () => {
+const UserLogout = () => {
 
     const navigate = useNavigate()
     const {loginModifier} = useContext(UserContext);
@@ -25,12 +25,11 @@ const Logout = () => {
     }
 
     return (
-        <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg
-        h-[2.1vh] w-[4.5vw] min-w-[1vw]"
+        <button className="bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-lg"
                 onClick={handleLogout}>
             Wyloguj
         </button>
     )
 }
 
-export default Logout
+export default UserLogout

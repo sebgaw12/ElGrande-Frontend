@@ -2,7 +2,11 @@ import axios from "axios";
 
 export class ApiReview {
     static getReviewByRestaurantId = (id) => {
-        return axios.get(`http://localhost:8080/api/v1/reviews?restaurantId=${id}`)
+        return axios.get('http://localhost:8080/api/v1/reviews', {
+            params: {
+                restaurantId: id
+            }
+        })
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")
@@ -15,12 +19,12 @@ export class ApiReview {
             })
     }
 
-    static postReview = (restaurantId, customerId, comment, grade) => {
+    static postReview = (data) => {
         return axios.post("http://localhost:8080/api/v1/reviews", {
-            restaurantId: restaurantId,
-            customerId: customerId,
-            comment: comment,
-            grade: grade
+            restaurantId: data.restaurantId,
+            customerId: data.customerId,
+            comment: data.comment,
+            grade: data.grade
         }, {
             headers: {
                 "Content-Type": "application/json"

@@ -15,10 +15,10 @@ export class ApiCustomer {
             })
     }
 
-    static logIn = (email, password) => {
+    static logIn = (data) => {
         return axios.post("http://127.0.0.1:8080/api/v1/auths/login", {
-                email: email,
-                password: password
+                email: data.email,
+                password: data.password
             },
             {
                 headers: {

@@ -44,7 +44,7 @@ const Reviews = (props) => {
             const comment = document.querySelector("#comment").value
             const grade = document.querySelector("#grade").value
 
-            await ApiReview.postReview(restaurantId, customerId, comment, grade)
+            await ApiReview.postReview({restaurantId, customerId, comment, grade})
 
             toast.success('Ocena dodana poprawnie', {
                 position: 'top-center',

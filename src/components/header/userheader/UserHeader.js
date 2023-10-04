@@ -1,33 +1,30 @@
-import Logout from "../../login/Logout";
+import UserLogout from "../../userform/UserLogout";
 import {Link} from "react-router-dom";
 import React from "react";
 
 const UserHeader = () => {
     return (
-        <header className="bg-blue-500 px-4 flex justify-between items-center h-[4vh]">
-            <h1 className="text-white text-2xl font-bold">FoodSpot</h1>
-
-            <div className="flex items-center space-x-2 w-[20vw] ">
-                <Link to="/restaurant">
-                    <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg
-                        h-[2.1vh] w-[8vw] min-w-[6.7vw]">
+        <div className="container mx-auto flex justify-between items-center">
+            <Link to={"/"}>
+                <h1 className="text-white font-bold text-xl">FoodSpot</h1>
+            </Link>
+            <nav className="hidden md:flex space-x-4">
+                <Link to="/signup">
+                    <button className="bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2
+                    px-4 rounded-lg">
                         Dodaj restaurację
                     </button>
                 </Link>
 
-                <button className="bg-white text-blue-500 hover:bg-blue-100 text-sm px-3 py-1 rounded-lg
-                        h-[2.1vh] w-[8vw] min-w-[6.7vw]">
-                    <Link to="/profile">
+                <Link to="/profile">
+                    <button className="bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2
+                    px-4 rounded-lg">
                         Moje konto
-                    </Link>
-                </button>
-
-                <div>
-                    <Logout/>
-                </div>
-
-            </div>
-        </header>
+                    </button>
+                </Link>
+                <UserLogout/>
+            </nav>
+        </div>
     )
 }
 

@@ -1,19 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {UserContext} from "../../context/UserContextProvider";
 import UserHeader from "./userheader/UserHeader";
 import DefaultHeader from "./defaultheader/DefaultHeader";
+import {LOGGED_IN} from "../../constants/constant";
 
 const Header = () => {
-    const {isLoggedIn} = useContext(UserContext)
+    const isLoggedInInLocalStorage = localStorage.getItem(LOGGED_IN) === 'true'
+    const {isLoggedIn, loginModifier} = useContext(UserContext)
+
+    useEffect(() => {
+        loginModifier(isLoggedInInLocalStorage)
+    }, [isLoggedInInLocalStorage])
 
     return (
-        <>
+        <header className="bg-blue-500 flex-grow h-[5vh]">
             {isLoggedIn ? (
                 <UserHeader/>
             ) : (
                 <DefaultHeader/>
             )}
-        </>
+        </header>
     )
 };
 
