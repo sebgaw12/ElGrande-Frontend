@@ -53,7 +53,7 @@ const AllRestaurants = () => {
     return (
         <div className="flex flex-col bg-gray-200">
             <div className="p-2">
-                <label for="size" className="p-2">Ile wpisów na stronie</label>
+                <label htmlFor="size" className="p-2">Ile wpisów na stronie</label>
                 <select name="size" className="m-2" onChange={handleSizeChange}>
                     <option value={5}>5</option>
                     <option value={10}>10</option>
