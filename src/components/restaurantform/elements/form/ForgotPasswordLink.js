@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ForgotPasswordLink(): JSX.Element
+function ForgotPasswordLink()
 {
     return(
         <a

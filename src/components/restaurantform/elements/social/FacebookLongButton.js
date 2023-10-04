@@ -3,7 +3,7 @@ import {TERipple} from 'tw-elements-react';
 import {StyleFacebookLongButton} from "../../../../styles/styles";
 
 
-function FacebookLongButton(): JSX.Element
+function FacebookLongButton()
 {
     return(
         <TERipple rippleColor="light" className="w-full">

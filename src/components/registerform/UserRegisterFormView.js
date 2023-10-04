@@ -44,11 +44,9 @@ function UserRegisterFormView({childToParent, handleSubmit}) {
                 </Link>
 
                 <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-                    {/* <!-- Left column container with background--> */}
                     <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
                         <FoodSpotLogo/>
                     </div>
-                    {/* <!-- Right column container with form --> */}
                     <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
                         <form onSubmit={localHandleSubmit}>
                             <TEInput
@@ -105,12 +103,9 @@ function UserRegisterFormView({childToParent, handleSubmit}) {
                                 <RememberMeCheckbox/>
                                 <ForgotPasswordLink/>
                             </div>
-                            {/*<TERipple rippleColor="light" className="w-full">*/}
                             <button type="submit" className={StyleLongButton}>
                                 Sign up
                             </button>
-                            {/*</TERipple>*/}
-                            {/* <!-- Divider --> */}
                             <Divider/>
                             <FacebookLongButton/>
                             <TwitterLongButton/>

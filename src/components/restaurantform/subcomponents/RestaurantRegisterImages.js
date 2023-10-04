@@ -1,5 +1,4 @@
-// ImagesForm.jsx
-import React, { useState } from 'react';
+import React from 'react';
 
 function RestaurantRegisterImages({ formData, onChange })
 {

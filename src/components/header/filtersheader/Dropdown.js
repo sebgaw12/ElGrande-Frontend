@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import ReviewStar from './ReviewStar';
 import ButtonArrow from './ButtonArrow';
 import { styleReviewDropdownButton, styleReviewDropdownList } from './ReviewDropdownStyles';
-import { initTE } from 'tw-elements';
 
-initTE();
-
-function ReviewsDropdown() {
+function Dropdown({title, elements}) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     const toggleDropdown = () => {
@@ -24,7 +21,7 @@ function ReviewsDropdown() {
                     onClick={toggleDropdown}
                     data-te-ripple-color="light"
                 >
-                    <ReviewStar />
+                    {title ? title : ""}
                     <span className="ml-2 w-2">
                         <ButtonArrow />
                     </span>
@@ -34,21 +31,9 @@ function ReviewsDropdown() {
                         className={styleReviewDropdownList}
                         aria-labelledby="dropdownMenuButton"
                     >
-                        <li className="px-8 pb-2 pt-2.5">
-                            1
-                        </li>
-                        <li className="px-8 pb-2 pt-2.5">
-                            2
-                        </li>
-                        <li className="px-8 pb-2 pt-2.5">
-                            3
-                        </li>
-                        <li className="px-8 pb-2 pt-2.5">
-                            4
-                        </li>
-                        <li className="px-8 pb-2 pt-2.5">
-                            5
-                        </li>
+                        {elements.map((element) => (
+                            <li>{element}</li>
+                        ))}
                     </ul>
                 )}
             </div>
@@ -56,4 +41,4 @@ function ReviewsDropdown() {
     );
 }
 
-export default ReviewsDropdown;
+export default Dropdown;

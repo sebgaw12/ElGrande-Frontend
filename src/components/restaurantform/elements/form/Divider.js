@@ -1,11 +1,6 @@
 import React from 'react';
 
-interface DividerProps
-{
-    text?: string;
-}
-
-function Divider({text}, DividerProps): JSX.Element
+function Divider({text}, DividerProps)
 {
     const dividerText = text || 'OR';
 

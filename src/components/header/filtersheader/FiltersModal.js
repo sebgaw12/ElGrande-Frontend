@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {styleModalHeader, styleOpenModalButton, styleModalCancelButton, filterLogo} from './FiltersModalStyles';
-import { TERipple, TEModal, TEModalDialog, TEModalContent,
-    TEModalHeader, TEModalBody, TEModalFooter} from "tw-elements-react";
+import {
+    TERipple, TEModal, TEModalDialog, TEModalContent,
+    TEModalHeader, TEModalBody, TEModalFooter, TEInput, TETabs, TETabsItem, TETabsContent
+} from "tw-elements-react";
 
 import axios from 'axios';
 import {ApiIngredient} from '../../../api/ApiIngredient';
+
+import RatingStar from './RatingStar';
+import Dropdown from './Dropdown';
 
 
 export default function FiltersModal()
@@ -43,6 +48,20 @@ export default function FiltersModal()
                         </TEModalHeader>
 
                         <TEModalBody>
+                            <label htmlFor="modal-input-city">Miasto: </label>
+                            <TEInput id="modal-input-city" placeholder="Warszawa"></TEInput>
+
+                            <label htmlFor="modal-input-city">Kategoria: </label>
+                            <TEInput id="modal-input-category" placeholder="bar mleczny"></TEInput>
+
+                            <label htmlFor="modal-input-dish">Potrawa: </label>
+                            <TEInput id="modal-input-dish" placeholder="frytki i cola"></TEInput>
+
+                            <RatingStar className="mb-4 mt-4" initialValue={1} labelText="Min. rating: " />
+                            <RatingStar  initialValue={5} labelText="Max. rating: " />
+
+                            <Dropdown className="m-2" title="Sortuj" elements={["Oceny malejąco", "Oceny rosnąco"]} />
+
                             {ingredients.map((ingredient, index) => (
                                 <div key={index}>{ingredient.name}</div>
                             ))}

@@ -4,7 +4,7 @@ function SearchPanel()
 {
     return(
         <>
-            <div className="w-1/5 p-2 ml-2">
+            <div className="w-2/5 p-2 ml-2">
                 <div className="relative mb-2 flex w-full flex-wrap items-stretch">
                     <input
                         type="search"

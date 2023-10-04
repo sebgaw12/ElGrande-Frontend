@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from '../../../../static/FoodSpotWhite.png';
 
-function FoodSpotLogo(): JSX.Element {
+function FoodSpotLogo()
+{
     return (
         <img
             src={logo}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function RememberMeCheckbox(): JSX.Element
+function RememberMeCheckbox()
 {
     return(
         <div className="mb-[0.125rem] block min-h-[1.5rem] pl-[1.5rem]">
