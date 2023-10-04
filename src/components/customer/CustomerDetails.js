@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import "./CustomerDetails.css";
 import {ApiReview} from "../../api/ApiReview";
 import ReviewItem from './Review';
-//TODO: restaurants list, delete review, edit customer data, delete customer, add design
+import RestaurantItem from "./Restaurant";
+import {ApiRestaurant} from "../../api/ApiRestaurant";
+//TODO: delete review, edit customer data, delete customer, add design
 const CustomerDetails = () => {
     const [areCommentsVisible, setAreCommentsVisible] = useState(false);
+    const [areRestaurantsVisible, setAreRestaurantsVisible] = useState(false)
     const [reviews, setReviews] = useState([]);
+    const [restaurants, setRestaurants] = useState([])
     const token = localStorage.getItem("ACCESS_TOKEN")
     const jwt = JSON.parse(token)
 
@@ -15,10 +19,14 @@ const CustomerDetails = () => {
             .then(data => {
                 setReviews(data);
             })
-            .catch(error => {
-                console.error("Error fetching reviews:", error);
-            });
     };
+
+    const fetchRestaurants = () => {
+        ApiRestaurant.getRestaurantsByUserId(jwt.id)
+            .then(data => {
+                setRestaurants(data)
+            })
+    }
 
     const toggleCommentsVisibility = () => {
         if (!areCommentsVisible) {
@@ -26,6 +34,14 @@ const CustomerDetails = () => {
         }
         setAreCommentsVisible(!areCommentsVisible);
     };
+
+
+    const toggleRestaurantsVisibility = () => {
+        if (!areRestaurantsVisible) {
+            fetchRestaurants()
+        }
+        setAreRestaurantsVisible(!areRestaurantsVisible)
+    }
 
     return (
         <div id="profile">
@@ -35,20 +51,37 @@ const CustomerDetails = () => {
                 <div id="details-text">email: {jwt.email}</div>
             </div>
             <div id="comments">
-                <button id="show-comments-button" onClick={toggleCommentsVisibility}>
-                    {areCommentsVisible ? "Hide comments" : "Show comments"}
-                </button>
+                <div>
+                    <button className="show-button" onClick={toggleCommentsVisibility}>
+                        {areCommentsVisible ? "Hide comments" : "Show comments"}
+                    </button>
+                </div>
                 {areCommentsVisible && (
                     <div id="reviews-list">
                         {reviews.map((review, index) => (
-                            <ReviewItem key={index} review={review} />
+                            <ReviewItem key={index} review={review}/>
                         ))}
                     </div>
                 )}
 
             </div>
+            <div className="restaurants">
+                <div>
+                    <button className="show-button" onClick={toggleRestaurantsVisibility}>
+                        {areRestaurantsVisible ? "Hide restaurants" : "Show restaurants"}
+                    </button>
+                </div>
+                {areRestaurantsVisible && (
+                    <div className="restaurant-list">
+                        {restaurants.map((restaurant, index) => (
+                            <RestaurantItem key={index} restaurant={restaurant}/>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
-    );
+    )
+        ;
 }
 
 export default CustomerDetails;
