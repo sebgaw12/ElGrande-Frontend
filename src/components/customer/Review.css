@@ -1,12 +1,21 @@
 .review-item {
+    background-color: #a2c11c;
     border: solid black 2px;
     border-radius: 8px;
     width: 80vw;
     margin: 5px 10vw;
 }
 
-.delete-review-button {
+.delete-button {
+    margin-top: 5px;
     border: solid black 2px;
     border-radius: 4px;
-    background-color: red;
+    background-color: #d63447;
+    transition: 1s;
+}
+
+.delete-button:hover {
+    background-color: #fb7777;
+    transition: 1s;
+    box-shadow: 5px 5px 10px black;
 }

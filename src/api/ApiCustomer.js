@@ -59,4 +59,36 @@ export class ApiCustomer {
                 throw error
             })
     }
+
+    static editCustomer = (id, data) => {
+        return axios.put(`http://127.0.0.1:8080/api/v1/customers/${id}`, data, {
+            headers: {
+                'Content-Type': "application/json"
+            }
+        })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok")
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error updating data: ", error)
+                throw error
+            })
+    }
+
+    static deleteCustomer = (id) => {
+        return axios.delete(`http://127.0.0.1:8080/api/v1/customers/${id}`)
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok")
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error deleting data: ", error)
+                throw error
+            })
+    }
 }

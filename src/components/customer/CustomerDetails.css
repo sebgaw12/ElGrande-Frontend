@@ -1,14 +1,17 @@
 #profile {
-    background-color: gray;
+    background-image: linear-gradient(36deg, rgba(255,159,0,1) 0%, rgba(255,245,0,1) 35%, rgba(52,211,24,1) 66%, rgba(3,175,50,1) 100%);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
     padding-top: 5vh;
 }
 
 #details {
+    background-color: #4ef037;
     text-align: left;
-    background-color: white;
     border: solid black 0.2vh;
     border-radius: 1vh;
-    height: 15vh;
+    min-height: 15vh;
     width: 30vw;
     min-width: 40vh;
     margin-bottom: 2vh;
@@ -20,7 +23,7 @@
     margin-top: 1vh;
 }
 
-#details-text {
+.details-text {
     font-size: 1.5vh;
     margin-left: 1.5vw;
 }
@@ -31,20 +34,26 @@
 }
 
 .show-button {
+    background-color: #f07810;
     text-align: center;
     font-size: 3vh;
-    background-color: lightgray;
-    border: solid black;
+    border: solid #535a3b;
     border-radius: 0.35vh;
     height: 5vh;
     width: 15vw;
     min-width: 25vh;
     margin-top: 2vh;
     margin-bottom: 2vh;
+    transition: 1s;
+}
+
+.show-button:hover {
+    background-color: #ffe79a;
+    transition: 1s;
+    box-shadow: 5px 5px 10px black;
 }
 
 .restaurants {
     border-top: solid black 2px;
-    background-color: red;
 }
 
