@@ -39,7 +39,7 @@ const RestaurantDetails = (props) => {
     }
 
     return (
-        <div className="grid grid-rows-3 grid-flow-col gap-4">
+        <div className="flex flex-col gap-4">
             <div className="col-span-2 m-0">
                 <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(ADDRESS)}>Adres
                 </button>
