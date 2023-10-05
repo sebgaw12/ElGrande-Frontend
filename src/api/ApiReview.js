@@ -16,7 +16,9 @@ export class ApiReview {
     }
 
     static getReviewsByUserId = (id) => {
-        return axios.get(`http://localhost:8080/api/v1/reviews?customerId=${id}`)
+        return axios.get(`http://localhost:8080/api/v1/reviews`,{
+            customerId: id}
+        )
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")

@@ -6,7 +6,8 @@ import ReviewItem from './Review';
 import RestaurantItem from "./Restaurant";
 import {ApiRestaurant} from "../../api/ApiRestaurant";
 import {ApiCustomer} from "../../api/ApiCustomer";
-//TODO: delete customer, change design, read about hook to toggle
+import {useNavigate} from "react-router-dom";
+//TODO: change design, read about hook to toggle
 const CustomerDetails = () => {
     const [areCommentsVisible, setAreCommentsVisible] = useState(false);
     const [areRestaurantsVisible, setAreRestaurantsVisible] = useState(false)
@@ -17,6 +18,7 @@ const CustomerDetails = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedName, setEditedName] = useState(jwt.name);
     const [editedEmail, setEditedEmail] = useState(jwt.email);
+    const navigate = useNavigate()
 
     const fetchReviews = () => {
         ApiReview.getReviewsByUserId(jwt.id)
@@ -52,12 +54,15 @@ const CustomerDetails = () => {
         jwt.email = editedEmail;
         localStorage.setItem("ACCESS_TOKEN", JSON.stringify(jwt));
         setIsEditing(false);
+        ApiCustomer.editCustomer(jwt.id, jwt.name, jwt.email)
     }
 
     const handleDeleteProfile = () => {
         const confirmation = window.confirm("Are you sure you want to delete the profile??");
         if (confirmation) {
+            localStorage.removeItem("ACCESS_TOKEN")
             ApiCustomer.deleteCustomer(jwt.id)
+            navigate('/main-page')
         }
     }
 
@@ -67,22 +72,16 @@ const CustomerDetails = () => {
                 <h1 id="details-header">Profile</h1>
                 {isEditing ? (
                     <div>
-                        <div>
                             <label className="details-text">Customer Name:</label>
                             <input value={editedName} onChange={e => setEditedName(e.target.value)}/>
-                        </div>
-                        <div>
                             <label className="details-text">Email:</label>
                             <input value={editedEmail} onChange={e => setEditedEmail(e.target.value)}/>
-                        </div>
-                        <div>
-                            <button onClick={handleEditSave}>Save data</button>
-                        </div>
+                            <button className="edit-button" onClick={handleEditSave}>Save data</button>
                     </div>
                 ) : (
                     <div>
-                        <div className="details-text">Customer: {jwt.name}</div>
-                        <div className="details-text">email: {jwt.email}</div>
+                        <span className="details-text">Customer: {jwt.name}</span>
+                        <span className="details-text">email: {jwt.email}</span>
                         <button className="edit-button" onClick={() => setIsEditing(true)}>Edit data</button>
                         <button className="delete-button" onClick={handleDeleteProfile}>Delete profile</button>
                     </div>

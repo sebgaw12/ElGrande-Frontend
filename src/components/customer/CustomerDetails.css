@@ -1,5 +1,5 @@
 #profile {
-    background-image: linear-gradient(36deg, rgba(255,159,0,1) 0%, rgba(255,245,0,1) 35%, rgba(52,211,24,1) 66%, rgba(3,175,50,1) 100%);
+    background-color: #e0ffcd;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -7,7 +7,7 @@
 }
 
 #details {
-    background-color: #4ef037;
+    background-color: #c1c0b9;
     text-align: left;
     border: solid black 0.2vh;
     border-radius: 1vh;
@@ -28,13 +28,9 @@
     margin-left: 1.5vw;
 }
 
-#comments {
-    border-top: solid black 0.2vh;
-    width: 100vw;
-}
 
 .show-button {
-    background-color: #f07810;
+    background-color: #f0d43a;
     text-align: center;
     font-size: 3vh;
     border: solid #535a3b;
@@ -53,7 +49,18 @@
     box-shadow: 5px 5px 10px black;
 }
 
-.restaurants {
-    border-top: solid black 2px;
+
+.edit-button{
+    background-color: #a2c11c;
+    text-align: center;
+    border: solid black;
+    border-radius: 5px;
+    margin: 5px 5px 5px 5px;
+    transition: 1s;
 }
 
+.edit-button:hover {
+    background-color: #cbf078;
+    transition: 1s;
+    box-shadow: 5px 5px 10px black;
+}
