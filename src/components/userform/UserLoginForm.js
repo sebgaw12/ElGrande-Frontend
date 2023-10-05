@@ -10,7 +10,7 @@ import {StyleRoundedBlueButton} from '../../styles/styles';
 import {TEInput} from 'tw-elements-react';
 import {UserContext} from "../../context/UserContextProvider";
 import {ApiCustomer} from "../../api/ApiCustomer";
-import {ACCESS_TOKEN} from "../../constants/constant";
+import {ACCESS_TOKEN, LOGGED_IN} from "../../constants/constant";
 import {toast} from "react-toastify";
 
 function UserLoginForm() {
@@ -24,6 +24,7 @@ function UserLoginForm() {
     const onLoginClicked = useCallback(() => {
         ApiCustomer.logIn({email, password}).then(response => {
             localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response))
+            localStorage.setItem(LOGGED_IN, 'true')
             userModifier({...response.data})
             loginModifier(true)
             toast.success('zalogowano poprawnie', {
