@@ -4,7 +4,6 @@ import Review from "./Review";
 import {ApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
 import {ACCESS_TOKEN} from "../../../../constants/constant";
-import {useNavigate} from "react-router-dom";
 
 const Reviews = (props) => {
 
@@ -13,10 +12,11 @@ const Reviews = (props) => {
 
     const modal = 'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 border rounded-lg shadow-md'
     const modalOverlay = 'fixed top-0 left-0 right-0 bottom-0 bg-black opacity-50'
+    const buttonStyleClose = 'bg-white text-red-500 hover:bg-red-700 hover:text-white font-bold py-2 px-4 rounded-lg'
+    const buttonStyle = 'bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-lg'
 
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
-
 
     useEffect(() => {
         ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
@@ -35,12 +35,14 @@ const Reviews = (props) => {
         }
     }
 
+    const token = localStorage.getItem(ACCESS_TOKEN)
+
     const handleAddReview = async (event) => {
         event.preventDefault()
 
         try {
             const restaurantId = props.id
-            const customerId = 'a4a67c21-b523-4383-a463-2de333d48af5'
+            const customerId = JSON.parse(token).id
             const comment = document.querySelector("#comment").value
             const grade = document.querySelector("#grade").value
 
@@ -55,8 +57,11 @@ const Reviews = (props) => {
             })
         }
         closeModal()
-
     }
+
+    useEffect(() => {
+        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
+    }, [props.id, handleAddReview]);
 
     return (
         <div>
@@ -75,21 +80,41 @@ const Reviews = (props) => {
                 contentLabel="Dodaj ocenę"
                 className={modal}
                 overlayClassName={modalOverlay}>
-                <button className="close-button" onClick={closeModal}>Zamknij</button>
+
+                <div className="flex justify-between items-center">
+                    <h2 className="text-center text-xl">Dodaj ocenę</h2>
+                    <button className={`close-button ${buttonStyleClose}`} onClick={closeModal}>Zamknij</button>
+                </div>
+
                 <form onSubmit={handleAddReview}>
                     <label>
                         Ocena:
-                        <input id="grade" type="number" min="1" max="10" required/>
+                        <div id="radio-container" className="flex flex-row justify-center">
+                            {Array.from({length: 10}, (_, index) => (
+                                <div key={index} className="p-1 text-center">
+                                    <input
+                                        type="radio"
+                                        name="grade"
+                                        value={index + 1}
+                                        id={`radio-${index}`}
+                                        required/><br/>
+                                    <label htmlFor={`radio-${index}`}>{index + 1}</label>
+                                </div>
+                            ))}
+                        </div>
                     </label>
                     <label>
                         Komentarz:
-                        <textarea id="comment" required/>
+                        <div className="text-center">
+                            <textarea id="comment" required/>
+                        </div>
                     </label>
-                    <button
-                        type="submit"
-                        className="border-2 border-black p-2"
-                    >Dodaj
-                    </button>
+                    <div className='text-center mt-4'>
+                        <button
+                            type="submit"
+                            className={buttonStyle}>Dodaj
+                        </button>
+                    </div>
                 </form>
             </ReactModal>
         </div>
@@ -97,4 +122,3 @@ const Reviews = (props) => {
 }
 
 export default Reviews
-// todo spróbować połączyć z naszym jwt
