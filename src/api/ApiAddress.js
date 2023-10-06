@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiAddress {
     static getAddressByRestaurantId = (id) => {
-        return axios.get('http://localhost:8080/api/v1/addresses', {
+        return axios.get(SERVER_URL + 'api/v1/addresses', {
             params: {
                 restaurantId: id
             }

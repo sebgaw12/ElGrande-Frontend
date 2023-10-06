@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiReview {
     static getReviewByRestaurantId = (id) => {
-        return axios.get('http://localhost:8080/api/v1/reviews', {
+        return axios.get(SERVER_URL + 'api/v1/reviews', {
             params: {
                 restaurantId: id
             }
@@ -20,7 +21,7 @@ export class ApiReview {
     }
 
     static postReview = (data) => {
-        return axios.post("http://localhost:8080/api/v1/reviews", {
+        return axios.post(SERVER_URL + "api/v1/reviews", {
             restaurantId: data.restaurantId,
             customerId: data.customerId,
             comment: data.comment,

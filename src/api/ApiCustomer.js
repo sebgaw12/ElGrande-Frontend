@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiCustomer {
     static getCustomerById = (id) => {
-        return axios.get(`http://127.0.0.1:8080/api/v1/customers/${id}`)
+        return axios.get(SERVER_URL + `api/v1/customers/${id}`)
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")
@@ -15,8 +16,12 @@ export class ApiCustomer {
             })
     }
 
+    static getCustomerFromJwtToken = () => {
+        return axios.get("")
+    }
+
     static logIn = (data) => {
-        return axios.post("http://127.0.0.1:8080/api/v1/auths/login", {
+        return axios.post(SERVER_URL + "api/v1/auths/login", {
                 email: data.email,
                 password: data.password
             },
@@ -38,7 +43,7 @@ export class ApiCustomer {
     }
 
     static signUp = (data) => {
-        return axios.post("http://127.0.0.1:8080/api/v1/auths/signup", {
+        return axios.post(SERVER_URL + "api/v1/auths/signup", {
             name: data.name,
             surname: data.surname,
             email: data.email,

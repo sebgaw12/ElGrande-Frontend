@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiRestaurant {
     static getRestaurantDetailsById = (id) => {
-        return axios.get(`http://localhost:8080/api/v1/restaurants/${id}`)
+        return axios.get(SERVER_URL + `api/v1/restaurants/${id}`)
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")
@@ -16,7 +17,7 @@ export class ApiRestaurant {
     }
 
     static getAllRestaurants = (page, size, sort) => {
-        return axios.get('http://localhost:8080/api/v1/restaurants', {
+        return axios.get(SERVER_URL + 'api/v1/restaurants', {
             params: {
                 page: page,
                 size: size,
