@@ -1,34 +1,83 @@
-import React, {useEffect, useState} from "react";
-import {styleModalHeader, styleOpenModalButton, styleModalCancelButton, filterLogo} from './FiltersModalStyles';
-import { TERipple, TEModal, TEModalDialog, TEModalContent,
-    TEModalHeader, TEModalBody, TEModalFooter} from "tw-elements-react";
+import React, { useState } from "react";
+import RatingStar from './RatingStar';
+import Dropdown, { useSelectedElement } from './Dropdown';
+import { ApiRestaurant } from '../../../api/ApiRestaurant';
+import { styleModalHeader, styleOpenModalButton, styleModalCancelButton,
+    styleModalSaveButton, filterLogo } from './FiltersModalStyles';
+import { TERipple, TEModal, TEModalDialog, TEModalContent, TEModalHeader,
+    TEModalBody, TEModalFooter, TEInput } from "tw-elements-react";
 
-import axios from 'axios';
-import {ApiIngredient} from '../../../api/ApiIngredient';
 
+export default function FiltersModal() {
 
-export default function FiltersModal()
-{
     const [showModal, setShowModal] = useState(false);
+    const sortTypes = ["DESC", "ASC"];
+    const sortTypesAsText = ["oceny malejąco", "oceny rosnąco"];
 
-    const [ingredients, setIngredients] = useState([]);
+    const [sortType, setSortType] = useState(sortTypes[0]);
 
-    useEffect(() => {
-        ApiIngredient.getIngredients().then(response =>
-            setIngredients(response)
-    );
-    }, []);
+    const [formData, setFormData] = useState({
+        city: undefined,
+        category: [],
+        dishName: [],
+        reviewMin: undefined,
+        reviewMax: undefined,
+        reviewSort: "ASC",
+    });
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+
+
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
+        }));
+
+        if(e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category'))
+        {
+            setFormData({...formData, [name]: []});
+        }
+
+        // if(formData.dishName[0] === "" || formData.category[0] === "")
+        // {
+        //     console.log("YES")
+        //     setFormData({...formData, [name]: []})
+        // }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        console.log("SENDING DATA: ", formData);
+        ApiRestaurant.getFilteredRestaurants(formData).then((restaurants) => {
+            console.log("RESPONSE: ", restaurants);
+        });
+
+        setShowModal(false);
+    };
 
     return (
-        <div>
+        <form onSubmit={handleSubmit}>
             <TERipple rippleColor="white">
                 <button
                     type="button"
                     className={styleOpenModalButton}
                     onClick={() => setShowModal(true)}
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                        <path strokeLinecap="round" strokeLinejoin="round" d={filterLogo} />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d={filterLogo}
+                        />
                     </svg>
                 </button>
             </TERipple>
@@ -38,14 +87,47 @@ export default function FiltersModal()
                     <TEModalContent>
                         <TEModalHeader>
                             <h5 className={styleModalHeader}>
-                                Filters
+                                Filtry
                             </h5>
                         </TEModalHeader>
 
                         <TEModalBody>
-                            {ingredients.map((ingredient, index) => (
-                                <div key={index}>{ingredient.name}</div>
-                            ))}
+                            <label htmlFor="modal-input-city">Miasto: </label>
+                            <TEInput
+                                id="modal-input-city"
+                                placeholder="Warszawa"
+                                name="city"
+                                value={formData.city}
+                                onChange={handleInputChange}
+                            />
+
+                            <label htmlFor="modal-input-category">Kategoria: </label>
+                            <TEInput
+                                id="modal-input-category"
+                                placeholder="bar mleczny"
+                                name="category"
+                                value={formData.category.join(",")}
+                                onChange={handleInputChange}
+                            />
+
+                            <label htmlFor="modal-input-dish">Potrawa: </label>
+                            <TEInput
+                                id="modal-input-dish"
+                                placeholder="frytki i cola"
+                                name="dishName"
+                                value={formData.dishName.join(",")}
+                                onChange={handleInputChange}
+                            />
+
+                            <RatingStar className="mb-4 mt-4" initialValue={1} labelText="Min. rating: " />
+                            <RatingStar initialValue={5} labelText="Max. rating: " />
+
+                            <Dropdown
+                                className="m-2"
+                                title="Sortuj"
+                                elements={sortTypesAsText}
+                            />
+
                         </TEModalBody>
                         <TEModalFooter>
                             <TERipple rippleColor="light">
@@ -54,22 +136,21 @@ export default function FiltersModal()
                                     className={styleModalCancelButton}
                                     onClick={() => setShowModal(false)}
                                 >
-                                    Cancel
+                                    Anuluj
                                 </button>
                             </TERipple>
                             <TERipple rippleColor="light">
                                 <button
-                                    type="button"
-                                    className="ml-1 inline-block rounded bg-primary px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
-                                    onClick={() => setShowModal(false)}
+                                    type="submit"
+                                    className={styleModalSaveButton}
                                 >
-                                    Save changes
+                                    Zapisz zmiany
                                 </button>
                             </TERipple>
                         </TEModalFooter>
                     </TEModalContent>
                 </TEModalDialog>
             </TEModal>
-        </div>
+        </form>
     );
 }

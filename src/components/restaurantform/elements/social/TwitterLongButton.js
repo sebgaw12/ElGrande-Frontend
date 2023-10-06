@@ -12,7 +12,6 @@ function TwitterLongButton()
                 href="#"
                 role="button"
             >
-                {/* <!-- Twitter --> */}
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="mr-2 h-3.5 w-3.5"

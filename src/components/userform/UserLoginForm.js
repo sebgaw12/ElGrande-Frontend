@@ -1,4 +1,4 @@
-// import React, {useCallback, useContext, useState} from "react";
+// import React, {useCallback, useContext, useEffect, useState} from "react";
 // import {Link, useNavigate} from 'react-router-dom';
 // import FoodSpotLogo from "../restaurantform/elements/graphics/FoodSpotLogo";
 // import RememberMeCheckbox from "../restaurantform/elements/form/RememberMeCheckbox";
@@ -6,36 +6,46 @@
 // import FacebookLongButton from "../restaurantform/elements/social/FacebookLongButton";
 // import TwitterLongButton from "../restaurantform/elements/social/TwitterLongButton";
 // import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
-// import {StyleRoundedBlueButton} from '../../styles/styles';
-// import {TEInput} from 'tw-elements-react';
+// import {StyleLongButton, StyleRoundedBlueButton} from '../../styles/styles';
+// import {TEInput, TERipple} from 'tw-elements-react';
 // import {UserContext} from "../../context/UserContextProvider";
 // import {ApiCustomer} from "../../api/ApiCustomer";
-// import {JWT_TOKEN} from "../../constants/constant";
+// import {ACCESS_TOKEN} from "../../constants/constant";
 // import {toast} from "react-toastify";
 //
 // function UserLoginForm() {
 //     const [email, setEmail] = useState('')
 //     const [password, setPassword] = useState('')
+//     const [isEmailValid, setIsEmailValid] = useState(true)
+//     const [isPasswordValid, setIsPasswordValid] = useState(true)
 //
 //     const navigate = useNavigate()
 //
-//     const {userModifier, loginModifier} = useContext(UserContext)
+//     const {userModifier} = useContext(UserContext)
 //
 //     const onLoginClicked = useCallback(() => {
-//         ApiCustomer.logIn({email, password}).then(response => {
-//             localStorage.setItem(JWT_TOKEN, JSON.stringify(response))
+//         console.log("LOGIN: ", email, " PASSWORD: ", password);
+//         ApiCustomer.logIn(email, password).then(response => {
+//             localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response))
 //             userModifier({...response.data})
-//             loginModifier(true)
 //             toast.success('zalogowano poprawnie', {
 //                 position: "top-center"
 //             })
 //             navigate('/main-page')
-//         }).catch(() => {
+//         }).catch(error => {
 //             toast.error('podałeś niepoprawne dane, spróbuj ponownie', {
 //                 position: "top-center"
 //             })
 //         })
 //     }, [email, password, navigate])
+//
+//     useEffect(() => {
+//         setIsEmailValid(email.length > 0)
+//     }, [email]);
+//
+//     useEffect(() => {
+//         setIsPasswordValid(password.length > 0)
+//     }, [password]);
 //
 //     const onUsernameChange = (ev) => {
 //         setEmail(ev.target.value)
@@ -56,48 +66,51 @@
 //                 </Link>
 //
 //                 <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-//                     {/* <!-- Left column container with background--> */}
 //                     <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
 //                         <FoodSpotLogo/>
 //                     </div>
-//                     {/* <!-- Right column container with form --> */}
 //                     <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
-//                         <TEInput
-//                             type="email"
-//                             label="Email"
-//                             placeholder="john@doe.com"
-//                             className="mb-6"
-//                             size="lg"
-//                             name="email"
-//                             onChange={(e) => onUsernameChange(e)}
-//                         ></TEInput>
-//                         <TEInput
-//                             type="password"
-//                             label="Password"
-//                             placeholder="password"
-//                             className="mb-6"
-//                             size="lg"
-//                             name="password"
-//                             onChange={(e) => onPasswordChange(e)}
-//                         ></TEInput>
-//                         <div className="mb-6 flex items-center justify-between">
-//                             <RememberMeCheckbox/>
-//                             <ForgotPasswordLink/>
-//                         </div>
-//                         {/*<TERipple rippleColor="light" className="w-full">*/}
-//                             <button onClick={onLoginClicked}>
+//                         <form onSubmit={ (e) =>
+//                         {
+//                             e.preventDefault();
+//                             onLoginClicked();
+//                         }}>
+//                             <TEInput
+//                                 type="email"
+//                                 label="Email"
+//                                 placeholder="john@doe.com"
+//                                 className="mb-6"
+//                                 size="lg"
+//                                 name="email"
+//                                 onChange={(e) => onUsernameChange(e)}
+//                             ></TEInput>
+//                             <TEInput
+//                                 type="password"
+//                                 label="Password"
+//                                 placeholder="password"
+//                                 className="mb-6"
+//                                 size="lg"
+//                                 name="password"
+//                                 onChange={(e) => onPasswordChange(e)}
+//                             ></TEInput>
+//                             <div className="mb-6 flex items-center justify-between">
+//                                 <RememberMeCheckbox/>
+//                                 <ForgotPasswordLink/>
+//                             </div>
+//                             <button type="submit" className={StyleLongButton}>
 //                                 Sign in
 //                             </button>
-//                         {/*</TERipple>*/}
-//                         {/*// <!-- Divider -->*/}
-//                         <div
-//                             className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-//                             <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
-//                                 OR
-//                             </p>
-//                         </div>
-//                         <FacebookLongButton/>
-//                         <TwitterLongButton/>
+//                             <div
+//                                 className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t
+//                                 before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t
+//                                 after:border-neutral-300">
+//                                 <p className="mx-4 mb-0 text-center font-semibold dark:text-neutral-200">
+//                                     OR
+//                                 </p>
+//                             </div>
+//                             <FacebookLongButton/>
+//                             <TwitterLongButton/>
+//                         </form>
 //                     </div>
 //                 </div>
 //             </div>

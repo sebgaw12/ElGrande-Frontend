@@ -31,16 +31,17 @@ export class ApiCustomer {
                 }
             })
             .then(response => {
-                if (response.status !== 201) {
-                    throw new Error("Network response was not created")
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok");
                 }
-                return response.data
+                return response.data;
             })
             .catch(error => {
-                console.error("Error fetching data: ", error)
-                throw error
-            })
+                console.error("Error fetching data: ", error);
+                throw error;
+            });
     }
+
 
     static signUp = (data) => {
         return axios.post(SERVER_URL + "api/v1/auths/signup", {
