@@ -64,4 +64,41 @@ export class ApiCustomer {
                 throw error
             })
     }
+
+    static editCustomer = (id, name, email) => {
+        return axios.put(SERVER_URL + `api/v1/customers/${id}`, {
+            name: name,
+            surname: "asdf",
+            email: email,
+            password: "zxc"
+        }, {
+            headers: {
+                'Content-Type': "application/json"
+            }
+        })
+            .then(response => {
+                if (response.status !== 201) {
+                    throw new Error("Network response was not ok")
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error updating data: ", error)
+                throw error
+            })
+    }
+
+    static deleteCustomer = (id) => {
+        return axios.delete(SERVER_URL + `api/v1/customers/${id}`)
+            .then(response => {
+                if (response.status !== 204) {
+                    throw new Error("Network response was not no content")
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error deleting data: ", error)
+                throw error
+            })
+    }
 }
