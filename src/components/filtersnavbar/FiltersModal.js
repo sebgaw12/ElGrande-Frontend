@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import RatingStar from './RatingStar';
-import Dropdown, { useSelectedElement } from './Dropdown';
-import { ApiRestaurant } from '../../../api/ApiRestaurant';
-import { styleModalHeader, styleOpenModalButton, styleModalCancelButton,
-    styleModalSaveButton, filterLogo } from './FiltersModalStyles';
-import { TERipple, TEModal, TEModalDialog, TEModalContent, TEModalHeader,
-    TEModalBody, TEModalFooter, TEInput } from "tw-elements-react";
+import Dropdown, {useSelectedElement} from './Dropdown';
+import {
+    styleModalHeader, styleOpenModalButton, styleModalCancelButton,
+    styleModalSaveButton, filterLogo
+} from './FiltersModalStyles';
+import {
+    TERipple, TEModal, TEModalDialog, TEModalContent, TEModalHeader,
+    TEModalBody, TEModalFooter, TEInput
+} from "tw-elements-react";
+import {ApiRestaurant} from "../../api/ApiRestaurant";
 
 
 export default function FiltersModal() {
@@ -26,7 +30,7 @@ export default function FiltersModal() {
     });
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
 
 
         setFormData((prevData) => ({
@@ -34,16 +38,10 @@ export default function FiltersModal() {
             [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
         }));
 
-        if(e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category'))
-        {
+        if (e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category')) {
             setFormData({...formData, [name]: []});
         }
 
-        // if(formData.dishName[0] === "" || formData.category[0] === "")
-        // {
-        //     console.log("YES")
-        //     setFormData({...formData, [name]: []})
-        // }
     };
 
     const handleSubmit = (e) => {
@@ -119,8 +117,8 @@ export default function FiltersModal() {
                                 onChange={handleInputChange}
                             />
 
-                            <RatingStar className="mb-4 mt-4" initialValue={1} labelText="Min. rating: " />
-                            <RatingStar initialValue={5} labelText="Max. rating: " />
+                            <RatingStar className="mb-4 mt-4" initialValue={1} labelText="Min. rating: "/>
+                            <RatingStar initialValue={5} labelText="Max. rating: "/>
 
                             <Dropdown
                                 className="m-2"

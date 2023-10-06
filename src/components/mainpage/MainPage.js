@@ -12,7 +12,6 @@ const MainPage = () => {
     const {userModifier, loginModifier} = useContext(UserContext)
 
     useEffect(() => {
-        console.log("trying")
         if (localStorage.getItem(JWT_TOKEN)) {
             ApiCustomer.getCustomerFromJwtToken(localStorage.getItem(JWT_TOKEN))
                 .then(response => {

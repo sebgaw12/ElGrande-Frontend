@@ -1,9 +1,9 @@
-import { Rating, initTE } from "tw-elements";
-import { useState } from 'react';
+import {Rating, initTE} from "tw-elements";
+import {useState} from 'react';
 
-initTE({ Rating });
+initTE({Rating});
 
-function RatingStar({labelText, initialValue }) {
+function RatingStar({labelText, initialValue}) {
 
     const [rating, setRating] = useState((initialValue) ? initialValue : 3);
 
@@ -13,7 +13,7 @@ function RatingStar({labelText, initialValue }) {
 
     return (
         <ul className="flex justify-center mb-2 mt-2">
-            { labelText && <span>{labelText} </span>}
+            {labelText && <span>{labelText} </span>}
             {[1, 2, 3, 4, 5].map((index) => (
                 <li key={index}>
                     <svg
