@@ -9,7 +9,7 @@ const AllRestaurants = () => {
     const [openRestaurantId, setOpenRestaurantId] = useState(null);
     const [page, setPage] = useState(0)
     const [sort, setSort] = useState("name")
-    const [size, setSize] = useState(5)
+    const [size, setSize] = useState(10)
     const [more, setMore] = useState(true)
 
     const prevScrollY = useRef(0)
@@ -45,21 +45,9 @@ const AllRestaurants = () => {
         setOpenRestaurantId((prevId) => (prevId === restaurantId ? null : restaurantId))
     }
 
-    const handleSizeChange = (event) => {
-        const newSize = parseInt(event.target.value, 10)
-        setSize(newSize)
-    }
-
     return (
-        <div className="flex flex-col bg-gray-200 h-[85vh] min-w-[50vw]">
-            <div className="p-2">
-                <label for="size" className="p-2">Ile wpisów na stronie</label>
-                <select name="size" className="m-2" onChange={handleSizeChange}>
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
-                    <option value={15}>15</option>
-                </select>
-            </div>
+        <div className="flex flex-col bg-gray-200 h-[85vh] w-[50vw]">
+
             <div className="overflow-y-auto h-fit">
                 <InfiniteScroll next={() => setPage(page + 1)}
                                 hasMore={more}

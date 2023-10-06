@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import {ACCESS_TOKEN} from "../../constants/constant";
+import {ACCESS_TOKEN, LOGGED_IN} from "../../constants/constant";
 import {toast} from "react-toastify";
 import React, {useContext} from "react";
 import {UserContext} from "../../context/UserContextProvider";
@@ -12,6 +12,7 @@ const UserLogout = () => {
     const handleLogout = async () => {
         try {
             localStorage.removeItem(ACCESS_TOKEN)
+            localStorage.removeItem(LOGGED_IN)
             toast.success('wylogowano poprawnie', {
                 position: "top-center"
             })

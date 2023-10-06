@@ -17,9 +17,11 @@ const RestaurantDetails = (props) => {
     const [restaurantDetails, setRestaurantDetails] = useState({})
     const [activeComponent, setActiveComponent] = useState(DETAILS)
 
+    const {id} = props
+
     useEffect(() => {
         ApiRestaurant.getRestaurantDetailsById(props.id).then(response => setRestaurantDetails(response))
-    }, [props.id]);
+    }, [id]);
 
     const renderActiveComponent = () => {
         switch (activeComponent) {
@@ -39,8 +41,8 @@ const RestaurantDetails = (props) => {
     }
 
     return (
-        <div className="grid grid-rows-3 grid-flow-col gap-4">
-            <div className="col-span-2 m-0">
+        <div className="flex flex-col gap-4 justify-center w-full">
+            <navbar className="col-span-2 m-0 flex justify-center">
                 <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(ADDRESS)}>Adres
                 </button>
                 <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(MENU)}>Menu</button>
@@ -52,7 +54,7 @@ const RestaurantDetails = (props) => {
                 <button className="m-2 p-1 border-black border-2"
                         onClick={() => setActiveComponent(DETAILS)}>Szczegóły
                 </button>
-            </div>
+            </navbar>
             <div className="row-span-2 col-span-2">
                 {renderActiveComponent()}
             </div>
