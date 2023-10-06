@@ -17,25 +17,25 @@ export class ApiCustomer {
 
     static logIn = (email, password) => {
         return axios.post("http://127.0.0.1:8080/api/v1/auths/login", {
-                email: email,
-                password: password
-            },
-            {
-                headers: {
-                    'Content-Type': "application/json"
-                }
-            })
+            email: email,
+            password: password
+        }, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
             .then(response => {
-                if (response.status !== 201) {
-                    throw new Error("Network response was not created")
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok");
                 }
-                return response.data
+                return response.data;
             })
             .catch(error => {
-                console.error("Error fetching data: ", error)
-                throw error
-            })
+                console.error("Error fetching data: ", error);
+                throw error;
+            });
     }
+
 
     static signUp = (data) => {
         return axios.post("http://127.0.0.1:8080/api/v1/auths/signup", {

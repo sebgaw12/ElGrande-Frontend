@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from 'qs';
 
 export class ApiRestaurant {
     static getRestaurantDetailsById = (id) => {
@@ -39,9 +40,13 @@ export class ApiRestaurant {
                 reviewMin: data.reviewMin,
                 reviewMax: data.reviewMax,
                 reviewSort: data.reviewSort
+            },
+            paramsSerializer: params => {
+                return qs.stringify(params, { arrayFormat: "repeat"});
             }
             })
         .then(response => {
+
             if (response.status!== 200) {
                 throw new Error("Network response was not created")
             }

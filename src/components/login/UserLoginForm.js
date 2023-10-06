@@ -24,6 +24,7 @@ function UserLoginForm() {
     const {userModifier} = useContext(UserContext)
 
     const onLoginClicked = useCallback(() => {
+        console.log("LOGIN: ", email, " PASSWORD: ", password);
         ApiCustomer.logIn(email, password).then(response => {
             localStorage.setItem(ACCESS_TOKEN, JSON.stringify(response))
             userModifier({...response.data})
@@ -69,7 +70,11 @@ function UserLoginForm() {
                         <FoodSpotLogo/>
                     </div>
                     <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
-                        <form>
+                        <form onSubmit={ (e) =>
+                        {
+                            e.preventDefault();
+                            onLoginClicked();
+                        }}>
                             <TEInput
                                 type="email"
                                 label="Email"
@@ -92,7 +97,7 @@ function UserLoginForm() {
                                 <RememberMeCheckbox/>
                                 <ForgotPasswordLink/>
                             </div>
-                            <button className={StyleLongButton} onClick={onLoginClicked}>
+                            <button type="submit" className={StyleLongButton}>
                                 Sign in
                             </button>
                             <div

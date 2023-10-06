@@ -12,36 +12,48 @@ export default function FiltersModal() {
 
     const [showModal, setShowModal] = useState(false);
     const sortTypes = ["DESC", "ASC"];
-    const sortTypesAsText = ["brak", "oceny majejąco", "oceny rosnąco"]
+    const sortTypesAsText = ["oceny malejąco", "oceny rosnąco"];
 
     const [sortType, setSortType] = useState(sortTypes[0]);
 
     const [formData, setFormData] = useState({
-        city: "",
-        category: "",
-        dishName: "",
-        reviewMin: "",
-        reviewMax: "",
-        reviewSort: "",
+        city: undefined,
+        category: [],
+        dishName: [],
+        reviewMin: undefined,
+        reviewMax: undefined,
+        reviewSort: "ASC",
     });
 
     const handleInputChange = (e) => {
-        e.preventDefault();
         const { name, value } = e.target;
+
+
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value,
+            [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
         }));
+
+        if(e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category'))
+        {
+            setFormData({...formData, [name]: []});
+        }
+
+        // if(formData.dishName[0] === "" || formData.category[0] === "")
+        // {
+        //     console.log("YES")
+        //     setFormData({...formData, [name]: []})
+        // }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(formData);
-
+        console.log("SENDING DATA: ", formData);
         ApiRestaurant.getFilteredRestaurants(formData).then((restaurants) => {
-            console.log("REST: ", restaurants);
+            console.log("RESPONSE: ", restaurants);
         });
+
         setShowModal(false);
     };
 
@@ -94,7 +106,7 @@ export default function FiltersModal() {
                                 id="modal-input-category"
                                 placeholder="bar mleczny"
                                 name="category"
-                                value={formData.category}
+                                value={formData.category.join(",")}
                                 onChange={handleInputChange}
                             />
 
@@ -103,7 +115,7 @@ export default function FiltersModal() {
                                 id="modal-input-dish"
                                 placeholder="frytki i cola"
                                 name="dishName"
-                                value={formData.dishName}
+                                value={formData.dishName.join(",")}
                                 onChange={handleInputChange}
                             />
 

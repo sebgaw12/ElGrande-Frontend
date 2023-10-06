@@ -27,6 +27,8 @@ const AllRestaurants = () => {
         })
     }, [page, size, sort])
 
+
+
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY
