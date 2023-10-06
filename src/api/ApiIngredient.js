@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiIngredient {
     static getIngredients = () => {
-        return axios.get("http://127.0.0.1:8080/api/v1/ingredients")
+        return axios.get(SERVER_URL + "api/v1/ingredients")
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")

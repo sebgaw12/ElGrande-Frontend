@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Restaurant from "./Restaurant";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {ApiRestaurant} from "../../api/ApiRestaurant";
+import FiltersNavbar from "../filtersnavbar/FiltersNavbar";
 
 const AllRestaurants = () => {
 
@@ -27,6 +28,8 @@ const AllRestaurants = () => {
         })
     }, [page, size, sort])
 
+
+
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY
@@ -51,16 +54,9 @@ const AllRestaurants = () => {
     }
 
     return (
-        <div className="flex flex-col bg-gray-200 h-[85vh] min-w-[50vw]">
-            <div className="p-2">
-                <label for="size" className="p-2">Ile wpisów na stronie</label>
-                <select name="size" className="m-2" onChange={handleSizeChange}>
-                    <option value={5}>5</option>
-                    <option value={10}>10</option>
-                    <option value={15}>15</option>
-                </select>
-            </div>
-            <div className="overflow-y-auto h-fit">
+        <div className="">
+            <FiltersNavbar/>
+            <div className="overflow-y-auto flex flex-col bg-gray-200 h-[85vh] min-w-[50vw]">
                 <InfiniteScroll next={() => setPage(page + 1)}
                                 hasMore={more}
                                 loader={<div>Ładowanie...</div>}

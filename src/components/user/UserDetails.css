@@ -1,16 +1,20 @@
 #profile {
-    background-color: gray;
+    background-color: #e0ffcd;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    padding-top: 5vh;
 }
+
 #details {
+    background-color: #c1c0b9;
     text-align: left;
-    background-color: white;
     border: solid black 0.2vh;
     border-radius: 1vh;
-    height: 15vh;
+    min-height: 15vh;
     width: 30vw;
     min-width: 40vh;
-    position: absolute;
-    top: 2vh;
+    margin-bottom: 2vh;
 }
 
 #details-header {
@@ -19,31 +23,44 @@
     margin-top: 1vh;
 }
 
-#details-text {
+.details-text {
     font-size: 1.5vh;
     margin-left: 1.5vw;
 }
 
-#comments {
-    border-top: solid black 0.2vh;
-    height: 80vh;
-    width: 100vw;
-    position: absolute;
-    top: 20vh;
-}
 
-
-#show-comments-button {
+.show-button {
+    background-color: #f0d43a;
     text-align: center;
     font-size: 3vh;
-    background-color: lightgray;
-    border: solid black;
+    border: solid #535a3b;
     border-radius: 0.35vh;
     height: 5vh;
     width: 15vw;
     min-width: 25vh;
-    position: absolute;
-    top: 2vh;
-    left: 2vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    transition: 1s;
 }
 
+.show-button:hover {
+    background-color: #ffe79a;
+    transition: 1s;
+    box-shadow: 5px 5px 10px black;
+}
+
+
+.edit-button{
+    background-color: #a2c11c;
+    text-align: center;
+    border: solid black;
+    border-radius: 5px;
+    margin: 5px 5px 5px 5px;
+    transition: 1s;
+}
+
+.edit-button:hover {
+    background-color: #cbf078;
+    transition: 1s;
+    box-shadow: 5px 5px 10px black;
+}
