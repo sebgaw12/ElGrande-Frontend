@@ -10,7 +10,7 @@ const AllRestaurants = () => {
     const [openRestaurantId, setOpenRestaurantId] = useState(null);
     const [page, setPage] = useState(0)
     const [sort, setSort] = useState("name")
-    const [size, setSize] = useState(5)
+    const [size, setSize] = useState(10)
     const [more, setMore] = useState(true)
 
     const prevScrollY = useRef(0)
@@ -46,11 +46,6 @@ const AllRestaurants = () => {
 
     const handleRestaurantClick = (restaurantId) => {
         setOpenRestaurantId((prevId) => (prevId === restaurantId ? null : restaurantId))
-    }
-
-    const handleSizeChange = (event) => {
-        const newSize = parseInt(event.target.value, 10)
-        setSize(newSize)
     }
 
     return (
