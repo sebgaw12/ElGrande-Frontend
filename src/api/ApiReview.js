@@ -3,7 +3,7 @@ import {SERVER_URL} from "../constants/constant";
 
 export class ApiReview {
     static getReviewByRestaurantId = (id) => {
-        return axios.get(SERVER_URL + 'api/v1/reviews', {
+        return axios.get(SERVER_URL + 'api/v1/reviews/details', {
             params: {
                 restaurantId: id
             }
@@ -60,12 +60,11 @@ export class ApiReview {
             })
     }
 
-    static
-    deleteReview = (reviewId) => {
+    static deleteReview = (reviewId) => {
         return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`)
             .then(response => {
-                if (response.status !== 200) {
-                    throw new Error("Network response was not ok");
+                if (response.status !== 204) {
+                    throw new Error("Network response was not no content");
                 }
                 return response.data;
             })

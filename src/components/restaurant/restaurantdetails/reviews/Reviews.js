@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import Review from "./Review";
 import {ApiReview} from "../../../../api/ApiReview";
@@ -6,6 +6,7 @@ import {toast} from "react-toastify";
 import {JWT_TOKEN} from "../../../../constants/constant";
 import {useNavigate} from "react-router-dom";
 import ModalAddReview from "./ModalAddReview";
+import {UserContext} from "../../../../context/UserContextProvider";
 
 const Reviews = (props) => {
 
@@ -13,20 +14,15 @@ const Reviews = (props) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [grade, setGrade] = useState(1)
     const [comment, setComment] = useState('')
+    const {currentUser, isLoggedIn} = useContext(UserContext)
 
     const handleGradeChange = (event) => setGrade(parseInt(event.target.value, 10))
     const handleCommentChange = (event) => setComment(event.target.value)
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
 
-    useEffect(() => {
-        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
-    }, [props.id]);
-
     const handleLoggedInUser = () => {
-        const token = localStorage.getItem(JWT_TOKEN)
-
-        if (token) {
+        if (isLoggedIn) {
             openModal()
         } else {
             closeModal()
@@ -36,14 +32,12 @@ const Reviews = (props) => {
         }
     }
 
-    const token = localStorage.getItem(ACCESS_TOKEN)
-
     const handleAddReview = async (event) => {
         event.preventDefault()
 
         try {
             const restaurantId = props.id
-            const customerId = JSON.parse(token).id
+            const customerId = currentUser.customerId
 
             await ApiReview.postReview({restaurantId, customerId, comment, grade})
 
@@ -60,7 +54,7 @@ const Reviews = (props) => {
 
     useEffect(() => {
         ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
-    }, [props.id, handleAddReview]);
+    }, []);
 
     return (
         <div>

@@ -34,6 +34,20 @@ export class ApiCustomer {
             });
     }
 
+    static getCustomerFromOAuth2Token = () => {
+        return axios.get(SERVER_URL + "api/v1/auths/oauth2")
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error fetching data: ", error);
+                throw error;
+            });
+    }
+
     static logIn = (data) => {
         return axios.post(SERVER_URL + "api/v1/auths/login", {
                 email: data.email,
@@ -80,16 +94,15 @@ export class ApiCustomer {
             })
     }
 
-    static editCustomer = (id, name, email) => {
-        return axios.put(SERVER_URL + `api/v1/customers/${id}`, {
-            name: name,
-            surname: "asdf",
-            email: email,
-            password: "zxc"
+    static editCustomer = (data) => {
+        return axios.put(SERVER_URL + `api/v1/customers/${data.customerId}`, {
+            name: data.name,
+            surname: "surname"
         }, {
             headers: {
                 'Content-Type': "application/json"
-            }
+            },
+            withCredentials: true
         })
             .then(response => {
                 if (response.status !== 201) {

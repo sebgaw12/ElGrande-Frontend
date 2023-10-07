@@ -4,7 +4,7 @@ import {ApiReview} from "../../api/ApiReview";
 
 const ReviewItem = ({review}) => {
 
-    const handleDeleteReview = async () => {
+    const handleDeleteReview = () => {
         ApiReview.deleteReview(review.id);
     }
 
