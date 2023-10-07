@@ -15,7 +15,7 @@ function FiltersHeader() {
 
     return (
         <>
-            <div className="flex items-left">
+            <div className="flex items-left h-[6vh]">
                 <SearchPanel/>
                 <FiltersPanel openModal={openModal}/>
             </div>

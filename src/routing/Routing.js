@@ -3,9 +3,6 @@ import LandingPage from "../components/landingpage/LandingPage";
 import MainPage from "../components/mainpage/MainPage";
 import Error from "../components/error/ErrorPage";
 import RestaurantRegisterForm from "../components/restaurantform/RestaurantRegisterForm";
-import UserLoginForm from "../components/userform/UserLoginForm";
-import UserRegisterForm from "../components/userform/UserRegisterForm";
-import {UnauthorizedRoute} from "../authentication/UnauthorizedRoute";
 import {ProtectedRoute} from "../authentication/ProtectedRoute";
 import UserDetails from "../components/user/UserDetails";
 
@@ -15,16 +12,6 @@ const Routing = () => (
             <Route path="/" element={<LandingPage/>}/>
             <Route path="*" element={<Error/>}/>
             <Route path="/main-page" element={<MainPage/>}/>
-            {/*<Route path="/signup" element={*/}
-            {/*    <UnauthorizedRoute>*/}
-            {/*        <UserRegisterForm/>*/}
-            {/*    </UnauthorizedRoute>*/}
-            {/*}/>*/}
-            {/*<Route path="/login" element={*/}
-            {/*    <UnauthorizedRoute>*/}
-            {/*        <UserLoginForm/>*/}
-            {/*    </UnauthorizedRoute>*/}
-            {/*}/>*/}
             <Route path="/restaurant" element={
                 <ProtectedRoute>
                     <RestaurantRegisterForm/>
