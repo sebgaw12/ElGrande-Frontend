@@ -1,6 +1,6 @@
 import {createContext, useCallback, useEffect, useState} from "react";
-import {JWTTOKEN} from "../constants/constant";
 import {ApiCustomer} from "../api/ApiCustomer";
+import {JSESSIONID, JWT_TOKEN, LOGGED_IN} from "../constants/constant";
 
 const defaultUserContext = {
     currentUser: null,
@@ -15,25 +15,50 @@ export const UserContextProvider = ({children}) => {
     const userModifier = (user) => setCurrentUser(user)
     const loginModifier = (value) => setIsLoggedIn(value)
 
-    const fetchUser = useCallback((id) => {
-        ApiCustomer.getCustomerById(id).then(response => {
+    const fetchUserFromJwt = useCallback((token) => {
+        ApiCustomer.getCustomerFromJwtToken(token).then(response => {
             userModifier({
                 email: response.email,
-                name: response.name
+                name: response.name,
+                customerId: response.id
             })
+            localStorage.setItem(LOGGED_IN, 'true')
+        }).catch(error => {
+
         })
     }, [])
 
-    useEffect(() => {
-        const customerId = localStorage.getItem("c_id")
+    const fetchUserFromOAuth2 = useCallback(() => {
+        ApiCustomer.getCustomerFromOAuth2Token().then(response => {
+            userModifier({
+                email: response.email,
+                name: response.name,
+                customerId: response.id
+            })
+            localStorage.setItem(LOGGED_IN, 'true')
+        }).catch(error => {
 
-        if (customerId && !currentUser) {
-            fetchUser(customerId)
+        })
+    }, [])
+
+    const getUser = () => {
+        const cookies = document.cookie.split("; ")
+        for (const cookie of cookies) {
+            const [name, value] = cookie.split('=')
+            if (name === JWT_TOKEN) {
+                fetchUserFromJwt(value)
+            } else if (name === JSESSIONID) {
+                fetchUserFromOAuth2()
+            }
         }
-    }, [currentUser])
+    }
+
+    useEffect(() => {
+        getUser()
+    }, [])
 
     return (
-        <UserContext.Provider value={{currentUser, userModifier, isLoggedIn, loginModifier}}>
+        <UserContext.Provider value={{currentUser, userModifier, isLoggedIn, loginModifier, getUser}}>
             {children}
         </UserContext.Provider>
     )

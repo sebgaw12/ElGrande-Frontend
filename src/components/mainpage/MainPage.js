@@ -9,21 +9,10 @@ import {JWT_TOKEN, LOGGED_IN} from "../../constants/constant";
 
 
 const MainPage = () => {
-    const {userModifier, loginModifier} = useContext(UserContext)
+    const {currentUser, userModifier, loginModifier, getUser} = useContext(UserContext)
 
     useEffect(() => {
-        const cookies = document.cookie.split("; ")
-        for (const cookie of cookies) {
-            const [name, value] = cookie.split('=')
-            if (name === JWT_TOKEN) {
-                ApiCustomer.getCustomerFromJwtToken(value)
-                    .then(response => {
-                        userModifier({...response})
-                        loginModifier(true)
-                        localStorage.setItem(LOGGED_IN, 'true')
-                    })
-            }
-        }
+        getUser()
     }, []);
 
     return (

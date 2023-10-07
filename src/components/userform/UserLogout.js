@@ -11,8 +11,7 @@ const UserLogout = () => {
 
     const handleLogout = async () => {
         try {
-            localStorage.removeItem(JWT_TOKEN)
-            localStorage.removeItem(LOGGED_IN)
+            localStorage.removeItem(JWT_TOKEN, LOGGED_IN)
             toast.success('wylogowano poprawnie', {
                 position: "top-center"
             })
