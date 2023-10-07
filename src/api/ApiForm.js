@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiForm {
     static postNewRestaurant = (data) => {
-        return axios.post('http://127.0.0.1:8080/api/v1/form', {
+        return axios.post(SERVER_URL + 'api/v1/form', {
             data: JSON.stringify(data)
         }, {
             headers: {

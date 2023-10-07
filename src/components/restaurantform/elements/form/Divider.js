@@ -1,10 +1,5 @@
 import React from 'react';
 
-// interface DividerProps
-// {
-//     text
-// }
-
 function Divider({text}, DividerProps)
 {
     const dividerText = text || 'OR';

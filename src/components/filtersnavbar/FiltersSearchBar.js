@@ -1,9 +1,8 @@
 import React from 'react';
 import {TERipple} from 'tw-elements-react';
 
-function FiltersSearchBar()
-{
-    return(
+function FiltersSearchBar() {
+    return (
         <div className="mb-3 md:w-96 mx-auto flex items-center">
             <div className="relative mb-4 flex w-full flex-wrap items-stretch">
                 <input

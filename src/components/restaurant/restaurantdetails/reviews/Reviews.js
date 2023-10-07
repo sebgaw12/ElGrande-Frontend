@@ -3,7 +3,8 @@ import React, {useEffect, useState} from "react";
 import Review from "./Review";
 import {ApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
-import {ACCESS_TOKEN} from "../../../../constants/constant";
+import {JWT_TOKEN} from "../../../../constants/constant";
+import {useNavigate} from "react-router-dom";
 import ModalAddReview from "./ModalAddReview";
 
 const Reviews = (props) => {
@@ -23,7 +24,7 @@ const Reviews = (props) => {
     }, [props.id]);
 
     const handleLoggedInUser = () => {
-        const token = localStorage.getItem(ACCESS_TOKEN)
+        const token = localStorage.getItem(JWT_TOKEN)
 
         if (token) {
             openModal()

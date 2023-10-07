@@ -1,8 +1,9 @@
 import axios from "axios";
+import {SERVER_URL} from "../constants/constant";
 
 export class ApiReview {
     static getReviewByRestaurantId = (id) => {
-        return axios.get('http://localhost:8080/api/v1/reviews', {
+        return axios.get(SERVER_URL + 'api/v1/reviews', {
             params: {
                 restaurantId: id
             }
@@ -19,8 +20,25 @@ export class ApiReview {
             })
     }
 
+    static getReviewsByUserId = (id) => {
+        return axios
+            .get(SERVER_URL + 'api/v1/reviews', {
+                customerId: id
+            })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok")
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error fetching data: ", error)
+                throw error
+            })
+    }
+
     static postReview = (data) => {
-        return axios.post("http://localhost:8080/api/v1/reviews", {
+        return axios.post(SERVER_URL + "api/v1/reviews", {
             restaurantId: data.restaurantId,
             customerId: data.customerId,
             comment: data.comment,
@@ -41,4 +59,20 @@ export class ApiReview {
                 throw error
             })
     }
+
+    static
+    deleteReview = (reviewId) => {
+        return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`)
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.data;
+            })
+            .catch(error => {
+                console.error("Error deleting data: ", error);
+                throw error;
+            });
+    }
+
 }

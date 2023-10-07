@@ -1,5 +1,5 @@
 import {createContext, useCallback, useEffect, useState} from "react";
-import {ACCESS_TOKEN} from "../constants/constant";
+import {JWTTOKEN} from "../constants/constant";
 import {ApiCustomer} from "../api/ApiCustomer";
 
 const defaultUserContext = {
@@ -25,10 +25,10 @@ export const UserContextProvider = ({children}) => {
     }, [])
 
     useEffect(() => {
-        const token = JSON.parse(localStorage.getItem(ACCESS_TOKEN))
+        const customerId = localStorage.getItem("c_id")
 
-        if (token && !currentUser) {
-            fetchUser(token.id)
+        if (customerId && !currentUser) {
+            fetchUser(customerId)
         }
     }, [currentUser])
 

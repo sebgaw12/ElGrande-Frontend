@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import ReviewStar from './ReviewStar';
 import ButtonArrow from './ButtonArrow';
-import { styleReviewDropdownButton, styleReviewDropdownList } from './ReviewDropdownStyles';
-import { initTE } from 'tw-elements';
+import {styleReviewDropdownButton, styleReviewDropdownList} from './ReviewDropdownStyles';
+import {initTE} from 'tw-elements';
 
 initTE();
 
@@ -24,9 +24,9 @@ function ReviewsDropdown() {
                     onClick={toggleDropdown}
                     data-te-ripple-color="light"
                 >
-                    <ReviewStar />
+                    <ReviewStar/>
                     <span className="ml-2 w-2">
-                        <ButtonArrow />
+                        <ButtonArrow/>
                     </span>
                 </button>
                 {isDropdownOpen && (

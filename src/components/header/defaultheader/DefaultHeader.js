@@ -1,27 +1,23 @@
 import {Link} from "react-router-dom";
 import React from "react";
+import {SERVER_URL_LOGIN} from "../../../constants/constant";
 
 const DefaultHeader = () => {
     return (
-        <div className="container mx-auto flex justify-between items-center">
-            <Link to={"/"}>
-                <h1 className="text-white font-bold text-xl">FoodSpot</h1>
+        <nav className="hidden md:flex space-x-4">
+            <Link to={SERVER_URL_LOGIN}>
+                <button
+                    className="m-1 bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-lg">
+                    Zarejestruj się
+                </button>
             </Link>
-            <nav className="hidden md:flex space-x-4">
-                <Link to="/signup">
-                    <button
-                        className="bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-lg">
-                        Zarejestruj się
-                    </button>
-                </Link>
-                <Link to="/login">
-                    <button
-                        className="bg-white text-blue-500 hover:bg-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg">
-                        Zaloguj się
-                    </button>
-                </Link>
-            </nav>
-        </div>
+            <Link to={SERVER_URL_LOGIN}>
+                <button
+                    className="m-1 bg-white text-blue-500 hover:bg-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg">
+                    Zaloguj się
+                </button>
+            </Link>
+        </nav>
     )
 }
 
