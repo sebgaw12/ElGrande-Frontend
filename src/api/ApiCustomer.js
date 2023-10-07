@@ -16,8 +16,22 @@ export class ApiCustomer {
             })
     }
 
-    static getCustomerFromJwtToken = () => {
-        return axios.get("")
+    static getCustomerFromJwtToken = (token) => {
+        return axios.get(SERVER_URL + "api/v1/auths", {
+            params: {
+                jwt: token
+            }
+        })
+            .then(response => {
+                if (response.status !== 200) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.data
+            })
+            .catch(error => {
+                console.error("Error fetching data: ", error);
+                throw error;
+            });
     }
 
     static logIn = (data) => {

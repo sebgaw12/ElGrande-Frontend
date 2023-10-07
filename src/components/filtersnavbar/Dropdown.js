@@ -1,10 +1,10 @@
-import React, { useState, createContext, useContext } from 'react';
+import React, {useState, createContext, useContext} from 'react';
 import ButtonArrow from './ButtonArrow';
-import { styleReviewDropdownButton, styleReviewDropdownList } from './ReviewDropdownStyles';
+import {styleReviewDropdownButton, styleReviewDropdownList} from './ReviewDropdownStyles';
 
 const DropdownContext = createContext(null);
 
-function Dropdown({ title, elements, defaultIndex}) {
+function Dropdown({title, elements, defaultIndex}) {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     let index = defaultIndex ? elements[defaultIndex] : elements[0];
     const [selectedElement, setSelectedElement] = useState(index);
@@ -34,7 +34,7 @@ function Dropdown({ title, elements, defaultIndex}) {
                 >
                     {title ? title : ""}
                     <span className="ml-2 w-2">
-                        <ButtonArrow />
+                        <ButtonArrow/>
                     </span>
                 </button>
 

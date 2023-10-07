@@ -5,20 +5,24 @@ import mapPlaceholder from "../../images/map_placeholder.jpg"
 import {useContext, useEffect} from "react";
 import {UserContext} from "../../context/UserContextProvider";
 import {ApiCustomer} from "../../api/ApiCustomer";
-import {JWT_TOKEN} from "../../constants/constant";
+import {JWT_TOKEN, LOGGED_IN} from "../../constants/constant";
 
 
 const MainPage = () => {
     const {userModifier, loginModifier} = useContext(UserContext)
 
     useEffect(() => {
-        console.log("trying")
-        if (localStorage.getItem(JWT_TOKEN)) {
-            ApiCustomer.getCustomerFromJwtToken(localStorage.getItem(JWT_TOKEN))
-                .then(response => {
-                    userModifier({...response})
-                    loginModifier(true)
-                })
+        const cookies = document.cookie.split("; ")
+        for (const cookie of cookies) {
+            const [name, value] = cookie.split('=')
+            if (name === JWT_TOKEN) {
+                ApiCustomer.getCustomerFromJwtToken(value)
+                    .then(response => {
+                        userModifier({...response})
+                        loginModifier(true)
+                        localStorage.setItem(LOGGED_IN, 'true')
+                    })
+            }
         }
     }, []);
 

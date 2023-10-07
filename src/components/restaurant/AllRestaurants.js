@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import Restaurant from "./Restaurant";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {ApiRestaurant} from "../../api/ApiRestaurant";
-import FiltersNavbar from "../filtersnavbar/FiltersNavbar";
+import FiltersHeader from "../filtersnavbar/FiltersHeader";
 
 const AllRestaurants = () => {
 
@@ -55,8 +55,8 @@ const AllRestaurants = () => {
 
     return (
         <div className="">
-            <FiltersNavbar/>
-            <div className="overflow-y-auto flex flex-col bg-gray-200 h-[85vh] min-w-[50vw]">
+            <FiltersHeader/>
+            <div className="overflow-y-auto flex flex-col bg-gray-200 h-[84vh] min-w-[50vw]">
                 <InfiniteScroll next={() => setPage(page + 1)}
                                 hasMore={more}
                                 loader={<div>Ładowanie...</div>}
