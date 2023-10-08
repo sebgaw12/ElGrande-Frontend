@@ -42,7 +42,7 @@ const RestaurantDetails = (props) => {
 
     return (
         <div className="flex flex-col gap-4 justify-center w-full">
-            <navbar className="col-span-2 m-0 flex justify-center">
+            <div className="col-span-2 m-0 flex justify-center">
                 <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(ADDRESS)}>Adres
                 </button>
                 <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(MENU)}>Menu</button>
@@ -54,7 +54,7 @@ const RestaurantDetails = (props) => {
                 <button className="m-2 p-1 border-black border-2"
                         onClick={() => setActiveComponent(DETAILS)}>Szczegóły
                 </button>
-            </navbar>
+            </div>
             <div className="row-span-2 col-span-2">
                 {renderActiveComponent()}
             </div>
