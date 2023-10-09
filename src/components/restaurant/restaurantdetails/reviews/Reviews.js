@@ -54,10 +54,11 @@ const Reviews = (props) => {
 
     useEffect(() => {
         ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
-    }, []);
+    }, [handleAddReview]);
 
     return (
         <div>
+            <button className="border-2 border-black p-2" onClick={handleLoggedInUser}>Dodaj ocenę</button>
             <div>
                 {reviews.length === 0 ? (
                     <div>Brak ocen</div>
@@ -65,7 +66,6 @@ const Reviews = (props) => {
                     reviews.map((item, index) => <Review key={index} review={item}/>)
                 )}
             </div>
-            <button className="border-2 border-black p-2" onClick={handleLoggedInUser}>Dodaj ocenę</button>
 
             <ModalAddReview
                 onSubmit={handleAddReview}
