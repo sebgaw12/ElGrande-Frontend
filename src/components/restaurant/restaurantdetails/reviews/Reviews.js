@@ -8,15 +8,16 @@ import {useNavigate} from "react-router-dom";
 import ModalAddReview from "./ModalAddReview";
 import {UserContext} from "../../../../context/UserContextProvider";
 
-const Reviews = (props) => {
+const Reviews = ({restaurantId}) => {
 
     const [reviews, setReviews] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [grade, setGrade] = useState(1)
     const [comment, setComment] = useState('')
+
     const {currentUser, isLoggedIn} = useContext(UserContext)
 
-    const handleGradeChange = (event) => setGrade(parseInt(event.target.value, 10))
+    const handleGradeChange = (newGrade) => setGrade(newGrade)
     const handleCommentChange = (event) => setComment(event.target.value)
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
@@ -36,7 +37,6 @@ const Reviews = (props) => {
         event.preventDefault()
 
         try {
-            const restaurantId = props.id
             const customerId = currentUser.customerId
 
             await ApiReview.postReview({restaurantId, customerId, comment, grade})
@@ -53,7 +53,7 @@ const Reviews = (props) => {
     }
 
     useEffect(() => {
-        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
+        ApiReview.getReviewByRestaurantId(restaurantId).then(response => setReviews(response))
     }, [handleAddReview]);
 
     return (
