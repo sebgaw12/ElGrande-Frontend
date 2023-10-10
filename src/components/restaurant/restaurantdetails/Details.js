@@ -1,3 +1,5 @@
+import GradeStars from "../../star/GradeStars";
+
 const Details = ({data, averageGrade}) => {
     const padding2px = "p-2"
 
@@ -10,7 +12,8 @@ const Details = ({data, averageGrade}) => {
                 <div className={padding2px}>{data.contactEmail}</div>
                 <div className={padding2px}>{data.contactNumber}</div>
                 <div className={padding2px}>{data.website}</div>
-                <div className={padding2px}>{averageGrade}</div>
+                <GradeStars grade={averageGrade} />
+                <div>Średnia ocen: {averageGrade}</div>
             </div>
         </div>
     )
