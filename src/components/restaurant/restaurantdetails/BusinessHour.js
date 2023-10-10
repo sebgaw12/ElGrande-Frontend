@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
 import {ApiBusinessHour} from "../../../api/ApiBusinessHour";
 
-const BusinessHour = (props) => {
+const BusinessHour = ({restaurantId}) => {
 
     const [availableHours, setAvailableHours] = useState([])
 
     useEffect(() => {
-        ApiBusinessHour.getBusinessHourByRestaurantId(props.id).then(response => setAvailableHours(response))
-    }, [props.id]);
+        ApiBusinessHour.getBusinessHourByRestaurantId(restaurantId).then(response => setAvailableHours(response))
+    }, [restaurantId]);
 
     const formatTime = (time) => {
         const DECIMAL_SYSTEM = 10

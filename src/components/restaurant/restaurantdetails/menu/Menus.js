@@ -3,13 +3,13 @@ import Menu from "./Menu";
 import {ApiDish} from "../../../../api/ApiDish";
 
 
-const Menus = (props) => {
+const Menus = ({restaurantId}) => {
 
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        ApiDish.getDishesByRestaurantId(props.id).then(response => setMenu(response))
-    }, [props.id]);
+        ApiDish.getDishesByRestaurantId(restaurantId).then(response => setMenu(response))
+    }, [restaurantId]);
 
     return (
         <>
