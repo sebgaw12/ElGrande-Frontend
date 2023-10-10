@@ -23,7 +23,7 @@ const RestaurantDetails = ({id, onToggle, averageGrade}) => {
 
     useEffect(() => {
         ApiRestaurant.getRestaurantDetailsById(id).then(response => setRestaurantDetails(response))
-    }, [id]);
+    }, [id, onToggle]);
 
     const renderActiveComponent = () => {
         switch (activeComponent) {
