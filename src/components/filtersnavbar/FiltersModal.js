@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import RatingStar from './RatingStar';
+import RatingStar from '../star/RatingStar';
 import Dropdown, {useSelectedElement} from './Dropdown';
 import {
     styleModalHeader, styleOpenModalButton, styleModalCancelButton,

@@ -3,12 +3,15 @@ import {useState} from 'react';
 
 initTE({Rating});
 
-function RatingStar({labelText, initialValue}) {
+function RatingStar({labelText, initialValue, onRatingChange}) {
 
     const [rating, setRating] = useState((initialValue) ? initialValue : 3);
 
     const handleRatingClick = (ratingValue) => {
         setRating(ratingValue);
+        if (onRatingChange){
+            onRatingChange(ratingValue);
+        }
     };
 
     return (
