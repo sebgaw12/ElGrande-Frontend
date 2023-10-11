@@ -5,7 +5,7 @@ import Reviews from "./reviews/Reviews";
 import Details from "./Details";
 import {ApiRestaurant} from "../../../api/ApiRestaurant";
 import Menus from "./menu/Menus";
-import mockPhoto1 from "../../../images/mock-photo1.jpg";
+import ImageComponent from "./image/ImageComponent";
 
 const RestaurantDetails = ({id, onToggle, averageGrade}) => {
 
@@ -79,7 +79,7 @@ const RestaurantDetails = ({id, onToggle, averageGrade}) => {
             </div>
             <div className="flex">
                 <div className="w-1/2 h-auto">
-                    <img alt="sushi" src={mockPhoto1} className="w-auto h-auto"/>
+                    <ImageComponent />
                 </div>
                 <div className="ml-4 w-1/2">{renderActiveComponent()}</div>
             </div>
