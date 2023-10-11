@@ -9,12 +9,12 @@ const GradeStars = ({grade}) => {
     const renderStars = () => {
 
         const stars = []
-        const numberOfStars = 10
+        const numberOfStars = 5
         const fullStarCount = Math.floor(grade)
 
         for (let i = 0; i < numberOfStars; i++) {
 
-            let starClass = '"mr-1 h-5 w-5 text-warning'
+            let starClass = 'mr-1 h-5 w-5 text-warning'
 
             if (i < fullStarCount) {
                 stars.push(
