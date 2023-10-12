@@ -1,9 +1,13 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {ApiAddress} from "../../../api/ApiAddress";
+import {RestaurantContext} from "../../../context/RestaurantContextProvider";
 
-const Address = ({restaurantId}) => {
+const Address = () => {
 
     const [addressDetails, setAddressDetails] = useState({})
+
+    const {openRestaurant} = useContext(RestaurantContext)
+    const restaurantId = openRestaurant.id
 
     useEffect(() => {
         ApiAddress.getAddressByRestaurantId(restaurantId).then(response => setAddressDetails(response))

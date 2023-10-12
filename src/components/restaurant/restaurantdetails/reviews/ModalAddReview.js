@@ -5,10 +5,18 @@ import RatingStar from "../../../star/RatingStar";
 initTE({Rating})
 
 
-const ModalAddReview = ({onGradeChange, onCommentChange, onSubmit, isOpen, closeModal}) => {
+const ModalAddReview = ({
+                            onGradeChange,
+                            onCommentChange,
+                            onSubmit, isOpen,
+                            closeModal,
+                            comment
+                        }) => {
 
     const buttonStyleClose = 'bg-white text-red-500 hover:bg-red-700 hover:text-white font-bold py-2 px-4 rounded-lg'
     const buttonStyle = 'bg-white text-blue-500 hover:bg-blue-700 hover:text-white font-bold py-2 px-4 rounded-lg'
+
+    const maxCharacterCount = 250
 
     return (
         <TEModal show={isOpen} setShow={closeModal}>
@@ -16,12 +24,12 @@ const ModalAddReview = ({onGradeChange, onCommentChange, onSubmit, isOpen, close
                 <TEModalContent>
 
                     <TEModalHeader>
-                        <h3 className="flex justify-between items-center">Dodaj opinię</h3>
+                        <h3 className="flex justify-between items-center">Podziel się opinią o tym miejscu</h3>
                         <button className={`close-button ${buttonStyleClose}`} onClick={closeModal}>Zamknij</button>
                     </TEModalHeader>
 
                     <TEModalBody>
-                        <form >
+                        <form>
                             <label>
                                 Ocena:
                                 <div id="radio-container" className="flex flex-row justify-center">
@@ -29,11 +37,19 @@ const ModalAddReview = ({onGradeChange, onCommentChange, onSubmit, isOpen, close
                                 </div>
                             </label>
                             <label>
-                                Komentarz:
+                                Komentarz: (pozostało {maxCharacterCount - comment.length} znaków)
                                 <div className="text-center">
-                                    <textarea id="comment" onChange={onCommentChange} required/>
+                                    <textarea
+                                        id="comment"
+                                        onChange={onCommentChange}
+                                        value={comment}
+                                        maxLength={maxCharacterCount}
+                                        style={{resize: "none"}}
+                                        required
+                                    />
                                 </div>
                             </label>
+
                         </form>
                     </TEModalBody>
 

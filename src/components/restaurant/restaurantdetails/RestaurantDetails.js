@@ -1,45 +1,41 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Address from "./Address";
 import BusinessHour from "./BusinessHour";
 import Reviews from "./reviews/Reviews";
 import Details from "./Details";
-import {ApiRestaurant} from "../../../api/ApiRestaurant";
 import Menus from "./menu/Menus";
 import ImageComponent from "./image/ImageComponent";
+import {ADDRESS, DETAILS, MENU, OPENING_HOURS, REVIEWS} from "../../../constants/RestaurantDetailsTabs";
+import {RestaurantContext} from "../../../context/RestaurantContextProvider";
 
-const RestaurantDetails = ({id, onToggle, averageGrade}) => {
+const RestaurantDetails = ({onToggle, averageGrade}) => {
 
-    const DETAILS = 'details'
-    const ADDRESS = 'address'
-    const REVIEWS = 'reviews'
-    const MENU = 'menu'
-    const OPENING_HOURS = 'openingHours'
-
-    const [restaurantDetails, setRestaurantDetails] = useState({})
     const [activeComponent, setActiveComponent] = useState(DETAILS)
 
     const buttonStyle = `bg-white text-blue-500 hover:bg-blue-700 
                                 hover:text-white font-bold py-2 px-4 rounded-lg m-2`
 
-    useEffect(() => {
-        ApiRestaurant.getRestaurantDetailsById(id).then(response => setRestaurantDetails(response))
-    }, [id, onToggle]);
+    const {updateOpenRestaurant, openRestaurant} = useContext(RestaurantContext)
 
+    useEffect(() => {
+        updateOpenRestaurant(openRestaurant.id)
+    }, [openRestaurant.id]);
+
+// todo change request for restaurant details to response average grade
     const renderActiveComponent = () => {
         switch (activeComponent) {
             case DETAILS:
-                return <Details restaurantId={restaurantDetails.id} data={restaurantDetails}
-                                averageGrade={averageGrade}/>
+                return <Details averageGrade={averageGrade}/>
             case ADDRESS:
-                return <Address restaurantId={restaurantDetails.id}/>
+                return <Address/>
             case MENU:
-                return <Menus restaurantId={restaurantDetails.id}/>
+                return <Menus/>
             case REVIEWS:
-                return <Reviews restaurantId={restaurantDetails.id}/>
+                return <Reviews/>
             case OPENING_HOURS:
-                return <BusinessHour restaurantId={restaurantDetails.id}/>
+                return <BusinessHour/>
             default:
-                return <Details restaurantId={restaurantDetails.id} averageGrade={averageGrade}/>
+                return <Details averageGrade={averageGrade}/>
         }
     }
 
@@ -79,7 +75,7 @@ const RestaurantDetails = ({id, onToggle, averageGrade}) => {
             </div>
             <div className="flex">
                 <div className="w-1/2 h-auto">
-                    <ImageComponent />
+                    <ImageComponent/>
                 </div>
                 <div className="ml-4 w-1/2 kalam">{renderActiveComponent()}</div>
             </div>

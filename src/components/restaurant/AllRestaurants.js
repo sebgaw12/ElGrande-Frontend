@@ -16,7 +16,7 @@ const AllRestaurants = () => {
 
     const prevScrollY = useRef(0)
 
-    const {openRestaurantId, handleRestaurantClick} = useContext(RestaurantContext)
+    const {openRestaurant, handleRestaurantClick} = useContext(RestaurantContext)
 
     useEffect(() => {
         setTimeout(() => {
@@ -61,8 +61,8 @@ const AllRestaurants = () => {
                     {data.map((item, index) => <Restaurant
                         key={index}
                         restaurant={item}
-                        isOpen={openRestaurantId === item.id}
-                        onToggle={() => handleRestaurantClick(item.id)}/>
+                        isOpen={openRestaurant && openRestaurant.id === item.id}
+                        onToggle={() => handleRestaurantClick(item)}/>
                     )}
                 </InfiniteScroll>
             </div>
