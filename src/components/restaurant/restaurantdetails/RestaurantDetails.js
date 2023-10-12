@@ -81,7 +81,7 @@ const RestaurantDetails = ({id, onToggle, averageGrade}) => {
                 <div className="w-1/2 h-auto">
                     <ImageComponent />
                 </div>
-                <div className="ml-4 w-1/2">{renderActiveComponent()}</div>
+                <div className="ml-4 w-1/2 kalam">{renderActiveComponent()}</div>
             </div>
 
         </div>

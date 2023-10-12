@@ -10,7 +10,7 @@ const Address = ({restaurantId}) => {
     }, [restaurantId]);
 
     return (
-        <div>
+        <div className="text-2xl">
             <div>Adres</div>
             <div>Państwo: {addressDetails.country}</div>
             <div>Miasto: {addressDetails.city}</div>

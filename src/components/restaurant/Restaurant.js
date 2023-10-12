@@ -13,7 +13,7 @@ const Restaurant = (props) => {
                 <RestaurantDetails id={restaurant.id}
                                    onToggle={onToggle}
                                    averageGrade={restaurant.averageGrade != null
-                                       ? restaurant.averageGrade.toFixed(2) : 'Brak oceny'}/>
+                                       ? restaurant.averageGrade.toFixed(1) : 'Brak oceny'}/>
             </>
         )
     }
@@ -24,7 +24,7 @@ const Restaurant = (props) => {
                  onClick={onToggle}>
                 <div className="p-2">{restaurant != null ? restaurant.name : null}</div>
                 <div className="p-2">{restaurant != null && restaurant.averageGrade != null
-                ? restaurant.averageGrade.toFixed(2) : 'Brak oceny'}</div>
+                ? restaurant.averageGrade.toFixed(1) : 'Brak oceny'}</div>
                 <div>kategorie lokalu</div>
                 <span className="ml-2">&#9660;</span>
             </div>
