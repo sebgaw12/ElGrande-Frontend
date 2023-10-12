@@ -49,7 +49,7 @@ export class ApiCustomer {
     }
 
     static logIn = (data) => {
-        return axios.post(SERVER_URL + "api/v1/auths/login", {
+        return axios.post(SERVER_URL + "api/v1/auths/jwt/login", {
                 email: data.email,
                 password: data.password
             },
@@ -59,7 +59,7 @@ export class ApiCustomer {
                 }
             })
             .then(response => {
-                if (response.status !== 200) {
+                if (response.status !== 201) {
                     throw new Error("Network response was not ok");
                 }
                 return response.data;
