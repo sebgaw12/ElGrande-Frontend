@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import React from "react";
 import {SERVER_URL_LOGIN} from "../../../constants/constant";
+import {LOGIN} from "../../../constants/RoutePaths";
 
 const DefaultHeader = () => {
     return (
@@ -11,7 +12,7 @@ const DefaultHeader = () => {
                     Zarejestruj się
                 </button>
             </Link>
-            <Link to={SERVER_URL_LOGIN}>
+            <Link to={LOGIN}>
                 <button
                     className="m-1 bg-white text-blue-500 hover:bg-blue-700  hover:text-white font-bold py-2 px-4 rounded-lg">
                     Zaloguj się

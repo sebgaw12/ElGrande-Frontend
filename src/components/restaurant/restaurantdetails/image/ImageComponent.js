@@ -32,7 +32,7 @@ const ImageComponent = () => {
         <>
             <ReactImageGallery
                 items={images}
-                showFullscreenButton={false}
+                showFullscreenButton={true}
                 showPlayButton={false}
             />
         </>

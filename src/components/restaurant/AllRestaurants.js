@@ -19,16 +19,19 @@ const AllRestaurants = () => {
     const {openRestaurantId, handleRestaurantClick} = useContext(RestaurantContext)
 
     useEffect(() => {
-        ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
-            if (page === 0) {
-                setData(response)
-            } else {
-                setData((prevData) => [...prevData, ...response])
-            }
-            if (response.length === 0) {
-                setMore(false)
-            }
-        })
+        setTimeout(() => {
+            ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
+                if (page === 0) {
+                    setData(response)
+                } else {
+                    setData((prevData) => [...prevData, ...response])
+                }
+                if (response.length === 0) {
+                    setMore(false)
+                }
+            })
+        }, 5000)
+
     }, [page, size, sort])
 
 
