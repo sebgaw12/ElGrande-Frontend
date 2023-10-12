@@ -6,7 +6,7 @@
 // import FoodSpotLogo from '../restaurantform/elements/graphics/FoodSpotLogo';
 // import RememberMeCheckbox from '../restaurantform/elements/form/RememberMeCheckbox';
 // import ForgotPasswordLink from '../restaurantform/elements/form/ForgotPasswordLink';
-// import FacebookLongButton from '../restaurantform/elements/social/FacebookLongButton';
+// import GoogleIcon from '../restaurantform/elements/social/GoogleIcon';
 // import TwitterLongButton from '../restaurantform/elements/social/TwitterLongButton';
 // import Divider from '../restaurantform/elements/form/Divider';
 //
@@ -107,7 +107,7 @@
 //                                 Sign up
 //                             </button>
 //                             <Divider/>
-//                             <FacebookLongButton/>
+//                             <GoogleIcon/>
 //                             <TwitterLongButton/>
 //                         </form>
 //                     </div>
