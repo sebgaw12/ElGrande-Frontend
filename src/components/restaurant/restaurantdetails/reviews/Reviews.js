@@ -3,8 +3,6 @@ import React, {useContext, useEffect, useState} from "react";
 import Review from "./Review";
 import {ApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
-import {JWT_TOKEN} from "../../../../constants/constant";
-import {useNavigate} from "react-router-dom";
 import ModalAddReview from "./ModalAddReview";
 import {UserContext} from "../../../../context/UserContextProvider";
 
@@ -44,6 +42,7 @@ const Reviews = ({restaurantId}) => {
             toast.success('Ocena dodana poprawnie', {
                 position: 'top-center',
             })
+            getReviews()
         } catch (err) {
             toast.error(`Wystąpił błąd podczas dodawania oceny, ${err.message}`, {
                 position: 'top-center'
@@ -52,9 +51,13 @@ const Reviews = ({restaurantId}) => {
         closeModal()
     }
 
-    useEffect(() => {
+    const getReviews = () => {
         ApiReview.getReviewByRestaurantId(restaurantId).then(response => setReviews(response))
-    }, [handleAddReview]);
+    }
+
+    useEffect(() => {
+        getReviews()
+    }, [restaurantId]);
 
     return (
         <div>
