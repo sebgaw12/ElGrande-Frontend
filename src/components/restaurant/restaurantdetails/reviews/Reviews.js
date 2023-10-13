@@ -4,7 +4,7 @@ import Review from "./Review";
 import {ApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
 import ModalAddReview from "./ModalAddReview";
-import {UserContext} from "../../../../context/UserContextProvider";
+import {UserContext, useUserContext} from "../../../../context/UserContextProvider";
 
 const Reviews = ({restaurantId}) => {
 
@@ -13,7 +13,7 @@ const Reviews = ({restaurantId}) => {
     const [grade, setGrade] = useState(1)
     const [comment, setComment] = useState('')
 
-    const {currentUser, isLoggedIn} = useContext(UserContext)
+    const {user} = useUserContext()
 
     const handleGradeChange = (newGrade) => setGrade(newGrade)
     const handleCommentChange = (event) => setComment(event.target.value)
@@ -21,7 +21,7 @@ const Reviews = ({restaurantId}) => {
     const closeModal = () => setIsModalOpen(false)
 
     const handleLoggedInUser = () => {
-        if (isLoggedIn) {
+        if (user) {
             openModal()
         } else {
             closeModal()
@@ -35,7 +35,7 @@ const Reviews = ({restaurantId}) => {
         event.preventDefault()
 
         try {
-            const customerId = currentUser.customerId
+            const customerId = user.customerId
 
             await ApiReview.postReview({restaurantId, customerId, comment, grade})
 

@@ -3,8 +3,7 @@ import {Link} from 'react-router-dom';
 import {StyleNormalButton} from '../../styles/styles';
 import Footer from '../footer/Footer';
 import logo from '../../images/FoodSpotTransparent.png';
-import {SERVER_URL_LOGIN} from "../../constants/constant";
-import {LOGIN, MAIN_PAGE} from "../../constants/RoutePaths";
+import {LOGIN_URL, MAIN_PAGE, SIGNUP_URL} from "../../constants/RoutePaths";
 
 function LandingPage() {
     return (
@@ -12,10 +11,10 @@ function LandingPage() {
             <div className="flex flex-col items-center">
                 <img alt="logo" src={logo}/>
                 <div className="space-x-4">
-                    <Link to={LOGIN}>
+                    <Link to={LOGIN_URL}>
                         <button className={StyleNormalButton}>Log In</button>
                     </Link>
-                    <Link to={SERVER_URL_LOGIN}>
+                    <Link to={SIGNUP_URL}>
                         <button className={StyleNormalButton}>Register</button>
                     </Link>
                     <Link to={MAIN_PAGE}>

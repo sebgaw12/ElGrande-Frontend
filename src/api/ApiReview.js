@@ -1,5 +1,6 @@
 import axios from "axios";
-import {SERVER_URL} from "../constants/constant";
+import {SERVER_URL} from "../constants/RoutePaths";
+
 
 export class ApiReview {
     static getReviewByRestaurantId = (id) => {
@@ -21,10 +22,12 @@ export class ApiReview {
     }
 
     static getReviewsByUserId = (id) => {
-        return axios
-            .get(SERVER_URL + 'api/v1/reviews', {
+        return axios.get(SERVER_URL + 'api/v1/reviews', {
+            params: {
                 customerId: id
-            })
+            },
+            withCredentials: true
+        })
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")

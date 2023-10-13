@@ -1,24 +1,23 @@
 import {useNavigate} from "react-router-dom";
-import {JWT_TOKEN, LOGGED_IN} from "../../constants/constant";
+import {JWT_TOKEN, LOGGED_IN} from "../../constants/Constant";
 import {toast} from "react-toastify";
-import React, {useContext} from "react";
-import {UserContext} from "../../context/UserContextProvider";
+import React, {useCallback, useContext} from "react";
+import {UserContext, useUserContext} from "../../context/UserContextProvider";
 
 const UserLogout = () => {
 
     const navigate = useNavigate()
-    const {loginModifier} = useContext(UserContext);
+    const {logout} = useUserContext()
 
-    const handleLogout = async () => {
+    const handleLogout = () => {
         try {
-            localStorage.removeItem(JWT_TOKEN, LOGGED_IN)
-            toast.success('wylogowano poprawnie', {
+            logout()
+            navigate('/main-page')
+            toast.success('Wylogowano poprawnie', {
                 position: "top-center"
             })
-            loginModifier(false)
-            navigate('/main-page')
         } catch (error) {
-            toast.error('wystąpił błąd', {
+            toast.error('Wystąpił błąd podczas wylogowywania', {
                 position: "top-center"
             })
         }

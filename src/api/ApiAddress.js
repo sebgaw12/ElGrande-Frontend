@@ -1,5 +1,5 @@
 import axios from "axios";
-import {SERVER_URL} from "../constants/constant";
+import {SERVER_URL} from "../constants/RoutePaths";
 
 export class ApiAddress {
     static getAddressByRestaurantId = (id) => {

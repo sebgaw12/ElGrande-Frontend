@@ -1,10 +1,11 @@
 import {Navigate} from "react-router-dom";
-import {LOGGED_IN} from "../constants/constant";
-import {LOGIN} from "../constants/RoutePaths";
+import {LOGIN_URL} from "../constants/RoutePaths";
+import {useUserContext} from "../context/UserContextProvider";
 
 export const ProtectedRoute = ({children}) => {
-    if (!localStorage.getItem(LOGGED_IN)) {
-        return <Navigate to={LOGIN} replace />
+    const {user} = useUserContext()
+    if (!user) {
+        return <Navigate to={LOGIN_URL} replace/>
     }
     return (children)
 }

@@ -1,72 +1,79 @@
-import React, {useCallback, useContext, useState} from "react";
-import {Link, useNavigate} from 'react-router-dom';
-import FoodSpotLogo from "../restaurantform/elements/graphics/FoodSpotLogo";
-import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
-import {StyleRoundedBlueButton} from '../../styles/styles';
-import {UserContext} from "../../context/UserContextProvider";
-import {ApiCustomer} from "../../api/ApiCustomer";
-import {LOGGED_IN} from "../../constants/constant";
+import {TEInput} from "tw-elements-react";
+import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLink";
+import Divider from "../restaurantform/elements/form/Divider";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {useApiCustomer} from "../../api/ApiCustomer";
 import {toast} from "react-toastify";
 import {MAIN_PAGE} from "../../constants/RoutePaths";
-import LoginForm from "./LoginForm";
+import {useUserContext} from "../../context/UserContextProvider";
 
-function UserLoginForm() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
+const UserLoginForm = () => {
+    const {logIn} = useApiCustomer()
+    const [userCredentials, setUserCredentials] = useState(
+        {
+            email: "",
+            password: ""
+        }
+    )
     const navigate = useNavigate()
+    const {login} = useUserContext()
 
-    const {userModifier, loginModifier} = useContext(UserContext)
-
-    const onLoginClicked = useCallback(() => {
-        ApiCustomer.logIn({email, password}).then(response => {
-            localStorage.setItem(LOGGED_IN, 'true')
-            userModifier({...response.data})
-            loginModifier(true)
-            toast.success('zalogowano poprawnie', {
+    const onLoginClicked = () => {
+        logIn(userCredentials).then(response => {
+            login(response)
+            navigate(MAIN_PAGE)
+            toast.success('Zalogowano poprawnie!', {
                 position: "top-center"
             })
-            navigate(MAIN_PAGE)
-        }).catch(() => {
-            toast.error('podałeś niepoprawne dane, spróbuj ponownie', {
+        }).catch((error) => {
+            console.error(error)
+            toast.error('Podałeś niepoprawne dane, spróbuj ponownie', {
                 position: "top-center"
             })
         })
-    }, [email, password, navigate])
-
-    const onUsernameChange = (ev) => {
-        setEmail(ev.target.value)
     }
 
-    const onPasswordChange = (ev) => {
-        setPassword(ev.target.value)
+    const onCredentialsChange = (e) => {
+        setUserCredentials({
+            ...userCredentials,
+            [e.target.name]: e.target.value
+        })
     }
 
     return (
-        <section className="h-screen">
-
-            <div className="container h-full px-6 py-24">
-
-                <Link to={"/"}>
-                    <button className={StyleRoundedBlueButton}>
-                        <IconArrowTurnLeft/>
-                    </button>
-                </Link>
-
-                <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-
-                    {/* <!-- Left column container with background--> */}
-                    <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                        <FoodSpotLogo/>
-                    </div>
-
-                    {/* <!-- Right column container with form --> */}
-                    <LoginForm onUsernameChange={onUsernameChange} onPasswordChange={onPasswordChange} onLoginClicked={onLoginClicked}/>
-
-                </div>
+        <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
+            <TEInput
+                type="email"
+                label="Email"
+                placeholder="john@doe.com"
+                className="mb-6"
+                size="lg"
+                name="email"
+                onChange={(e) => onCredentialsChange(e)}
+            ></TEInput>
+            <TEInput
+                type="password"
+                label="Password"
+                placeholder="password"
+                className="mb-6"
+                size="lg"
+                name="password"
+                onChange={(e) => onCredentialsChange(e)}
+            ></TEInput>
+            <div className="mb-6 flex items-center justify-between">
+                <ForgotPasswordLink/>
             </div>
-        </section>
-    );
+            <button onClick={onLoginClicked}>
+                Sign in
+            </button>
+            <Divider text={'OR'}/>
+            {/* todo: dont use google login*/}
+            {/*<Link to={SERVER_URL_GOOGLE}>*/}
+            {/*    <GoogleIcon/>*/}
+            {/*</Link>*/}
+        </div>
+    )
 }
 
-export default UserLoginForm;
+export default UserLoginForm

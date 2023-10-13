@@ -19,18 +19,16 @@ const AllRestaurants = () => {
     const {openRestaurantId, handleRestaurantClick} = useContext(RestaurantContext)
 
     useEffect(() => {
-        setTimeout(() => {
-            ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
-                if (page === 0) {
-                    setData(response)
-                } else {
-                    setData((prevData) => [...prevData, ...response])
-                }
-                if (response.length === 0) {
-                    setMore(false)
-                }
-            })
-        }, 5000)
+        ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
+            if (page === 0) {
+                setData(response)
+            } else {
+                setData((prevData) => [...prevData, ...response])
+            }
+            if (response.length === 0) {
+                setMore(false)
+            }
+        })
 
     }, [page, size, sort])
 
@@ -55,7 +53,7 @@ const AllRestaurants = () => {
             <div className="overflow-y-auto flex flex-col bg-gray-200 h-[84vh] min-w-[50vw]">
                 <InfiniteScroll next={() => setPage(page + 1)}
                                 hasMore={more}
-                                loader={<Loader />}
+                                loader={<Loader/>}
                                 dataLength={data.length}
                                 scrollableTarget="scrollableDiv">
                     {data.map((item, index) => <Restaurant
