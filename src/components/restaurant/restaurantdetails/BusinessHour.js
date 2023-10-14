@@ -1,8 +1,11 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import {RestaurantContext} from "../../../context/RestaurantContextProvider";
 import {useApiBusinessHour} from "../../../api/ApiBusinessHour";
 
-const BusinessHour = ({restaurantId}) => {
+const BusinessHour = () => {
     const [availableHours, setAvailableHours] = useState([])
+    const {openRestaurant} = useContext(RestaurantContext)
+    const restaurantId = openRestaurant.id
     const {getAllBusinessHourByRestaurantId} = useApiBusinessHour()
 
     useEffect(() => {

@@ -1,12 +1,15 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Menu from "./Menu";
 import {useApiDish} from "../../../../api/ApiDish";
+import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
 
 
-const Menus = ({restaurantId}) => {
+const Menus = () => {
 
     const [menu, setMenu] = useState([])
     const {getDishByRestaurantId} = useApiDish()
+    const {openRestaurant} = useContext(RestaurantContext)
+    const restaurantId = openRestaurant.id
 
     useEffect(() => {
         getDishByRestaurantId(restaurantId).then(response => setMenu(response))

@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import Restaurant from "./Restaurant";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {ApiRestaurant, useApiRestaurant} from "../../api/ApiRestaurant";
+import {useApiRestaurant} from "../../api/ApiRestaurant";
 import FiltersHeader from "../filtersnavbar/FiltersHeader";
 import {RestaurantContext} from "../../context/RestaurantContextProvider";
 import Loader from "./Loader";
@@ -17,7 +17,7 @@ const AllRestaurants = () => {
 
     const prevScrollY = useRef(0)
 
-    const {openRestaurantId, handleRestaurantClick} = useContext(RestaurantContext)
+    const {openRestaurant, handleRestaurantClick} = useContext(RestaurantContext)
 
     useEffect(() => {
         getAllRestaurant(page, size, sort).then(response => {
@@ -60,8 +60,8 @@ const AllRestaurants = () => {
                     {data.map((item, index) => <Restaurant
                         key={index}
                         restaurant={item}
-                        isOpen={openRestaurantId === item.id}
-                        onToggle={() => handleRestaurantClick(item.id)}/>
+                        isOpen={openRestaurant && openRestaurant.id === item.id}
+                        onToggle={() => handleRestaurantClick(item)}/>
                     )}
                 </InfiniteScroll>
             </div>

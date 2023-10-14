@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
-
 import Review from "./Review";
-import {ApiReview, useApiReview} from "../../../../api/ApiReview";
+import {useApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
 import ModalAddReview from "./ModalAddReview";
-import {UserContext, useUserContext} from "../../../../context/UserContextProvider";
+import {useUserContext} from "../../../../context/UserContextProvider";
+import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
 
-const Reviews = ({restaurantId}) => {
+
+const Reviews = () => {
 
     const [reviews, setReviews] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -15,6 +16,8 @@ const Reviews = ({restaurantId}) => {
     const {getReviewByRestaurantId, postReview} = useApiReview()
 
     const {user} = useUserContext()
+    const {openRestaurant, updateOpenRestaurant} = useContext(RestaurantContext)
+    const restaurantId = openRestaurant.id
 
     const handleGradeChange = (newGrade) => setGrade(newGrade)
     const handleCommentChange = (event) => setComment(event.target.value)
@@ -42,6 +45,9 @@ const Reviews = ({restaurantId}) => {
                 position: 'top-center',
             })
             getReviews()
+            updateOpenRestaurant(restaurantId)
+
+            // ApiRestaurant.getRestaurantDetailsById(restaurantId).then(response => setRestaurantDetails(response))
         } catch (err) {
             toast.error(`Wystąpił błąd podczas dodawania oceny, ${err.message}`, {
                 position: 'top-center'
