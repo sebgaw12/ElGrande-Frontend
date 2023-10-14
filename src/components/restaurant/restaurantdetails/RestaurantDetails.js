@@ -7,6 +7,7 @@ import Menus from "./menu/Menus";
 import ImageComponent from "./image/ImageComponent";
 import {ADDRESS, DETAILS, MENU, OPENING_HOURS, REVIEWS} from "../../../constants/RestaurantDetailsTabs";
 import {RestaurantContext} from "../../../context/RestaurantContextProvider";
+import Gallery from "./image/Gallery";
 
 const RestaurantDetails = ({onToggle, averageGrade}) => {
 
@@ -14,12 +15,6 @@ const RestaurantDetails = ({onToggle, averageGrade}) => {
 
     const buttonStyle = `bg-white text-blue-500 hover:bg-blue-700 
                                 hover:text-white font-bold py-2 px-4 rounded-lg m-2`
-
-    const {updateOpenRestaurant, openRestaurant} = useContext(RestaurantContext)
-
-    useEffect(() => {
-        updateOpenRestaurant(openRestaurant.id)
-    }, [openRestaurant.id]);
 
 // todo change request for restaurant details to response average grade
     const renderActiveComponent = () => {
@@ -75,7 +70,8 @@ const RestaurantDetails = ({onToggle, averageGrade}) => {
             </div>
             <div className="flex">
                 <div className="w-1/2 h-auto">
-                    <ImageComponent/>
+                    {/*<ImageComponent/>*/}
+                    <Gallery/>
                 </div>
                 <div className="ml-4 w-1/2 kalam">{renderActiveComponent()}</div>
             </div>
