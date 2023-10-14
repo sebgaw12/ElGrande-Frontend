@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import "./UserDetails.css";
 import {useNavigate} from "react-router-dom";
-import {useApiCustomer} from "../../api/ApiCustomer";
+import {useApiUser} from "../../api/ApiCustomer";
 import {useUserContext} from "../../context/UserContextProvider";
 import RestaurantItem from "./Restaurant";
 import ReviewItem from "./Review";
 
 const UserDetails = () => {
     const {user, logout} = useUserContext();
-    const {getCustomerById, deleteCustomer, editCustomer} = useApiCustomer();
+    const {getCustomerById, deleteCustomer, editCustomer} = useApiUser();
     const [userDetails, setUserDetails] = useState({
         name: "",
         surname: "",

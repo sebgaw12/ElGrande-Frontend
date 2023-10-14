@@ -1,14 +1,15 @@
 import {useEffect, useState} from "react";
 import Menu from "./Menu";
-import {ApiDish} from "../../../../api/ApiDish";
+import {useApiDish} from "../../../../api/ApiDish";
 
 
 const Menus = ({restaurantId}) => {
 
     const [menu, setMenu] = useState([])
+    const {getDishByRestaurantId} = useApiDish()
 
     useEffect(() => {
-        ApiDish.getDishesByRestaurantId(restaurantId).then(response => setMenu(response))
+        getDishByRestaurantId(restaurantId).then(response => setMenu(response))
     }, [restaurantId]);
 
     return (

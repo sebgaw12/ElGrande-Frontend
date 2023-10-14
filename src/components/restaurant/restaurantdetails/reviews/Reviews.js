@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
 
 import Review from "./Review";
-import {ApiReview} from "../../../../api/ApiReview";
+import {ApiReview, useApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
 import ModalAddReview from "./ModalAddReview";
 import {UserContext, useUserContext} from "../../../../context/UserContextProvider";
@@ -12,6 +12,7 @@ const Reviews = ({restaurantId}) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [grade, setGrade] = useState(1)
     const [comment, setComment] = useState('')
+    const {getReviewByRestaurantId, postReview} = useApiReview()
 
     const {user} = useUserContext()
 
@@ -35,9 +36,7 @@ const Reviews = ({restaurantId}) => {
         event.preventDefault()
 
         try {
-            const customerId = user.customerId
-
-            await ApiReview.postReview({restaurantId, customerId, comment, grade})
+            await postReview({restaurantId, user, comment, grade})
 
             toast.success('Ocena dodana poprawnie', {
                 position: 'top-center',
@@ -52,7 +51,7 @@ const Reviews = ({restaurantId}) => {
     }
 
     const getReviews = () => {
-        ApiReview.getReviewByRestaurantId(restaurantId).then(response => setReviews(response))
+        getReviewByRestaurantId(restaurantId).then(response => setReviews(response))
     }
 
     useEffect(() => {

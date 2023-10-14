@@ -2,9 +2,9 @@ import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
 
 
-export class ApiForm {
-    static postNewRestaurant = (data) => {
-        return axios.post(SERVER_URL + 'api/v1/form', {
+export const useApiForm = () => {
+    const postRestaurant = (data) => {
+        return axios.post(SERVER_URL + 'api/v1/forms/restaurant', {
             data: JSON.stringify(data)
         }, {
             headers: {
@@ -22,4 +22,6 @@ export class ApiForm {
                 throw error
             })
     }
+
+    return {postRestaurant}
 }

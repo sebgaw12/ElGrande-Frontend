@@ -2,8 +2,8 @@ import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
 
 
-export class ApiReview {
-    static getReviewByRestaurantId = (id) => {
+export const useApiReview = () => {
+    const getReviewByRestaurantId = (id) => {
         return axios.get(SERVER_URL + 'api/v1/reviews/details', {
             params: {
                 restaurantId: id
@@ -21,7 +21,7 @@ export class ApiReview {
             })
     }
 
-    static getReviewsByUserId = (id) => {
+    const getReviewByUserId = (id) => {
         return axios.get(SERVER_URL + 'api/v1/reviews', {
             params: {
                 customerId: id
@@ -40,7 +40,7 @@ export class ApiReview {
             })
     }
 
-    static postReview = (data) => {
+    const postReview = (data) => {
         return axios.post(SERVER_URL + "api/v1/reviews", {
             restaurantId: data.restaurantId,
             customerId: data.customerId,
@@ -63,7 +63,7 @@ export class ApiReview {
             })
     }
 
-    static deleteReview = (reviewId) => {
+    const deleteReviewById = (reviewId) => {
         return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`)
             .then(response => {
                 if (response.status !== 204) {
@@ -76,5 +76,5 @@ export class ApiReview {
                 throw error;
             });
     }
-
+    return {deleteReviewById, postReview, getReviewByRestaurantId, getReviewByUserId}
 }

@@ -1,8 +1,8 @@
 import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
 
-export class ApiAddress {
-    static getAddressByRestaurantId = (id) => {
+export const useApiAddress = () => {
+    const getAddressByRestaurantId = (id) => {
         return axios.get(SERVER_URL + 'api/v1/addresses', {
             params: {
                 restaurantId: id
@@ -19,4 +19,6 @@ export class ApiAddress {
                 throw error
             })
     }
+
+    return {getAddressByRestaurantId}
 }

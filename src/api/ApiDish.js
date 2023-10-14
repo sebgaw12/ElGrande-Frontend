@@ -2,8 +2,8 @@ import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
 
 
-export class ApiDish {
-    static getDishesByRestaurantId = (id) => {
+export const useApiDish = () => {
+    const getDishByRestaurantId = (id) => {
         return axios.get(SERVER_URL + 'api/v1/dishes', {
             params: {
                 restaurantId: id
@@ -20,4 +20,6 @@ export class ApiDish {
                 throw error
             })
     }
+
+    return {getDishByRestaurantId}
 }

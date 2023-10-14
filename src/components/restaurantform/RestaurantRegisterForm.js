@@ -1,15 +1,17 @@
 import React, {useState} from "react";
 import {Link} from 'react-router-dom';
 import IconArrowTurnLeft from './elements/icons/IconArrowTurnLeft';
-import {StyleLongButton, StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
+import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
 import RestaurantRegisterBasics from './subcomponents/RestaurantRegisterBasics';
 import RestaurantRegisterAddress from './subcomponents/RestaurantRegisterAddress';
 import RestaurantRegisterBusinessHours from './subcomponents/RestaurantRegisterBusinessHours';
 import RestaurantRegisterImages from './subcomponents/RestaurantRegisterImages';
+import {useApiForm} from "../../api/ApiForm";
 
 function RestaurantRegisterForm()
 {
     const [currentPage, setCurrentPage] = useState(1);
+    const {postNewRestaurant} = useApiForm()
 
     const [basicData, setBasicData] = useState({
         name: '',
@@ -71,25 +73,8 @@ function RestaurantRegisterForm()
             address: addressData
         }
 
-        console.log(updatedData);
+        postNewRestaurant(updatedData)
 
-        try {
-            const response = await fetch('http://127.0.0.1:8080/api/v1/forms/restaurant', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(updatedData),
-            });
-
-            if (response.ok) {
-                console.log('Data saved successfully.');
-            } else {
-                console.error('Error during saving data.');
-            }
-        } catch (error) {
-            console.error('Error from server, code:', error);
-        }
     };
 
 

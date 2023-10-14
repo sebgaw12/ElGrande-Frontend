@@ -3,11 +3,12 @@ import Address from "./Address";
 import BusinessHour from "./BusinessHour";
 import Reviews from "./reviews/Reviews";
 import Details from "./Details";
-import {ApiRestaurant} from "../../../api/ApiRestaurant";
+import {useApiRestaurant} from "../../../api/ApiRestaurant";
 import Menus from "./menu/Menus";
 import ImageComponent from "./image/ImageComponent";
 
 const RestaurantDetails = ({id, onToggle, averageGrade}) => {
+    const {getDetailedRestaurantById} = useApiRestaurant()
 
     const DETAILS = 'details'
     const ADDRESS = 'address'
@@ -22,7 +23,7 @@ const RestaurantDetails = ({id, onToggle, averageGrade}) => {
                                 hover:text-white font-bold py-2 px-4 rounded-lg m-2`
 
     useEffect(() => {
-        ApiRestaurant.getRestaurantDetailsById(id).then(response => setRestaurantDetails(response))
+        getDetailedRestaurantById(id).then(response => setRestaurantDetails(response))
     }, [id, onToggle]);
 
     const renderActiveComponent = () => {
@@ -79,7 +80,7 @@ const RestaurantDetails = ({id, onToggle, averageGrade}) => {
             </div>
             <div className="flex">
                 <div className="w-1/2 h-auto">
-                    <ImageComponent />
+                    <ImageComponent/>
                 </div>
                 <div className="ml-4 w-1/2 kalam">{renderActiveComponent()}</div>
             </div>

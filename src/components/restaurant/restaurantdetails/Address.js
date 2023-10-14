@@ -1,12 +1,12 @@
 import {useEffect, useState} from "react";
-import {ApiAddress} from "../../../api/ApiAddress";
+import {useApiAddress} from "../../../api/ApiAddress";
 
 const Address = ({restaurantId}) => {
-
     const [addressDetails, setAddressDetails] = useState({})
+    const {getAddressByRestaurantId} = useApiAddress()
 
     useEffect(() => {
-        ApiAddress.getAddressByRestaurantId(restaurantId).then(response => setAddressDetails(response))
+        getAddressByRestaurantId(restaurantId).then(response => setAddressDetails(response))
     }, [restaurantId]);
 
     return (

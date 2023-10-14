@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useRef, useState} from "react";
 import Restaurant from "./Restaurant";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {ApiRestaurant} from "../../api/ApiRestaurant";
+import {ApiRestaurant, useApiRestaurant} from "../../api/ApiRestaurant";
 import FiltersHeader from "../filtersnavbar/FiltersHeader";
 import {RestaurantContext} from "../../context/RestaurantContextProvider";
 import Loader from "./Loader";
@@ -13,13 +13,14 @@ const AllRestaurants = () => {
     const [sort, setSort] = useState("name")
     const [size, setSize] = useState(10)
     const [more, setMore] = useState(true)
+    const {getAllRestaurant} = useApiRestaurant()
 
     const prevScrollY = useRef(0)
 
     const {openRestaurantId, handleRestaurantClick} = useContext(RestaurantContext)
 
     useEffect(() => {
-        ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
+        getAllRestaurant(page, size, sort).then(response => {
             if (page === 0) {
                 setData(response)
             } else {

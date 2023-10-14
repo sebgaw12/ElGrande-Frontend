@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {ApiCustomer, useApiCustomer} from "../../api/ApiCustomer";
+import {ApiCustomer, useApiUser} from "../../api/ApiCustomer";
 import {TEInput, TERipple} from "tw-elements-react";
 import {StyleLongButton} from "../../styles/styles";
 import Divider from "../restaurantform/elements/form/Divider";
 import GoogleIcon from "../restaurantform/elements/social/GoogleIcon";
 import {LOGIN_URL, SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
 import {toast} from "react-toastify";
+import {useApiAuth} from "../../api/ApiAuth";
 
 const UserRegisterForm = () => {
-    const {signUp} = useApiCustomer()
+    const {signupUser} = useApiAuth()
     const [userCredentials, setUserCredentials] = useState({
         name: "",
         surname: "",
@@ -30,7 +31,7 @@ const UserRegisterForm = () => {
         e.preventDefault()
 
         if (userCredentials.password === userCredentials.passwordRepeat) {
-            signUp(userCredentials)
+            signupUser(userCredentials)
                 .then(() => {
                     navigate(LOGIN_URL)
                 })

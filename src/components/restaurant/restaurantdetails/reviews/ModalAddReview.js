@@ -21,7 +21,7 @@ const ModalAddReview = ({onGradeChange, onCommentChange, onSubmit, isOpen, close
                     </TEModalHeader>
 
                     <TEModalBody>
-                        <form >
+                        <form>
                             <label>
                                 Ocena:
                                 <div id="radio-container" className="flex flex-row justify-center">

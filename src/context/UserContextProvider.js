@@ -2,7 +2,8 @@ import {createContext, useContext, useState} from "react";
 import {useCookie} from "../hooks/useCookie";
 import {CUSTOMER_ID, JWT_TOKEN, REFRESH_TOKEN} from "../constants/Constant";
 import {useLocalStorage} from "../hooks/useLocalStorage";
-import {ApiCustomer, useApiCustomer} from "../api/ApiCustomer";
+import {ApiCustomer, useApiUser} from "../api/ApiCustomer";
+import {useApiAuth} from "../api/ApiAuth";
 
 const UserContext = createContext()
 export const useUserContext = () => {
@@ -11,7 +12,7 @@ export const useUserContext = () => {
 
 export const UserProvider = ({children}) => {
     const [user, setUser] = useState(null)
-    const {logOut, refreshToken} = useApiCustomer()
+    const {logoutUser} = useApiAuth()
     const {setCookie, removeCookie} = useCookie(JWT_TOKEN, null)
     const {
         storedLocalStorage, setLocalStorage,
@@ -26,7 +27,7 @@ export const UserProvider = ({children}) => {
     }
 
     const logout = async () => {
-        await logOut()
+        await logoutUser()
         removeCookie(JWT_TOKEN)
         removeLocalStorage(REFRESH_TOKEN)
         removeLocalStorage(CUSTOMER_ID)

@@ -2,8 +2,8 @@ import axios from "axios";
 import qs from 'qs';
 import {SERVER_URL} from "../constants/RoutePaths";
 
-export class ApiRestaurant {
-    static getRestaurantDetailsById = (id) => {
+export const useApiRestaurant = () => {
+    const getDetailedRestaurantById = (id) => {
         return axios.get(SERVER_URL + `api/v1/restaurants/${id}`)
             .then(response => {
                 if (response.status !== 200) {
@@ -17,10 +17,10 @@ export class ApiRestaurant {
             })
     }
 
-    static getRestaurantsByUserId = (id) => {
+    const getRestaurantByUserId = (id) => {
         return axios.get(SERVER_URL + "api/v1/restaurants", {
             params: {
-                    customerId: id
+                customerId: id
             }
         })
             .then(response => {
@@ -35,7 +35,7 @@ export class ApiRestaurant {
             })
     }
 
-    static getAllRestaurants = (page, size, sort) => {
+    const getAllRestaurant = (page, size, sort) => {
         return axios.get(SERVER_URL + 'api/v1/restaurants', {
             params: {
                 page: page,
@@ -55,7 +55,7 @@ export class ApiRestaurant {
             })
     }
 
-    static getFilteredRestaurants = (data) => {
+    const getFilteredRestaurant = (data) => {
         return axios.get(SERVER_URL + 'api/v1/restaurants/filtered', {
             params:
                 {
@@ -82,4 +82,6 @@ export class ApiRestaurant {
                 throw error
             })
     }
+
+    return {getAllRestaurant, getRestaurantByUserId, getFilteredRestaurant, getDetailedRestaurantById}
 }

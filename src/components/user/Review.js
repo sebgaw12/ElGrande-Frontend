@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "./Review.css"
-import {ApiReview} from "../../api/ApiReview";
+import {ApiReview, useApiReview} from "../../api/ApiReview";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useToggle} from "../../hooks/useToggle";
 
@@ -8,16 +8,17 @@ const ReviewItem = () => {
     const {user} = useUserContext();
     const [reviews, setReviews] = useState([])
     const {isOpen, toggle} = useToggle()
+    const {getByUserId, deleteById} = useApiReview()
 
     useEffect(() => {
-        ApiReview.getReviewsByUserId(user)
+        getByUserId(user)
             .then(response => {
                 setReviews(response)
             })
     }, []);
 
     const handleDeleteReview = (e) => {
-        ApiReview.deleteReview(e.target.data.id);
+        deleteById(e.target.data.id);
     }
 
     return (

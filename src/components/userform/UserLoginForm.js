@@ -3,13 +3,14 @@ import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLi
 import Divider from "../restaurantform/elements/form/Divider";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useApiCustomer} from "../../api/ApiCustomer";
+import {useApiUser} from "../../api/ApiCustomer";
 import {toast} from "react-toastify";
 import {MAIN_PAGE} from "../../constants/RoutePaths";
 import {useUserContext} from "../../context/UserContextProvider";
+import {useApiAuth} from "../../api/ApiAuth";
 
 const UserLoginForm = () => {
-    const {logIn} = useApiCustomer()
+    const {loginUser} = useApiAuth()
     const [userCredentials, setUserCredentials] = useState(
         {
             email: "",
@@ -20,7 +21,7 @@ const UserLoginForm = () => {
     const {login} = useUserContext()
 
     const onLoginClicked = () => {
-        logIn(userCredentials).then(response => {
+        loginUser(userCredentials).then(response => {
             login(response)
             navigate(MAIN_PAGE)
             toast.success('Zalogowano poprawnie!', {

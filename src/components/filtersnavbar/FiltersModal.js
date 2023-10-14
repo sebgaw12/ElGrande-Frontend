@@ -18,7 +18,7 @@ import {
     TEModalHeader,
     TERipple
 } from "tw-elements-react";
-import {ApiRestaurant} from "../../api/ApiRestaurant";
+import {useApiRestaurant} from "../../api/ApiRestaurant";
 import {useToggle} from "../../hooks/useToggle";
 
 
@@ -27,6 +27,7 @@ export default function FiltersModal() {
     const {isOpen, toggle} = useToggle();
     const sortTypes = ["DESC", "ASC"];
     const sortTypesAsText = ["oceny malejąco", "oceny rosnąco"];
+    const {getFilteredRestaurant} = useApiRestaurant()
 
     const [sortType, setSortType] = useState(sortTypes[0]);
 
@@ -58,7 +59,7 @@ export default function FiltersModal() {
         e.preventDefault();
 
         console.log("SENDING DATA: ", formData);
-        ApiRestaurant.getFilteredRestaurants(formData).then((restaurants) => {
+        getFilteredRestaurant(formData).then((restaurants) => {
             console.log("RESPONSE: ", restaurants);
         });
 
