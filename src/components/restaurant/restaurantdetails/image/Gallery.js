@@ -46,7 +46,7 @@ const Gallery = () => {
                     </div>
                 ))}
             </div>
-            
+
             <ModalForImages closeModal={closeModal}
                             showPrevImage={showPrevImage}
                             showNextImage={showNextImage}

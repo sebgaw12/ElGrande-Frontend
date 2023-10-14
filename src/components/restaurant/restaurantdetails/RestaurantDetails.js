@@ -1,12 +1,10 @@
-import {useContext, useEffect, useState} from "react";
+import {useState} from "react";
 import Address from "./Address";
 import BusinessHour from "./BusinessHour";
 import Reviews from "./reviews/Reviews";
 import Details from "./Details";
 import Menus from "./menu/Menus";
-import ImageComponent from "./image/ImageComponent";
 import {ADDRESS, DETAILS, MENU, OPENING_HOURS, REVIEWS} from "../../../constants/RestaurantDetailsTabs";
-import {RestaurantContext} from "../../../context/RestaurantContextProvider";
 import Gallery from "./image/Gallery";
 
 const RestaurantDetails = ({onToggle, averageGrade}) => {

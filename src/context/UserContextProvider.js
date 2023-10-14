@@ -4,8 +4,7 @@ import {JSESSIONID, JWT_TOKEN, LOGGED_IN} from "../constants/constant";
 
 const defaultUserContext = {
     currentUser: null,
-    userModifier: (user) => {
-    },
+    userModifier: () => {},
 };
 export const UserContext = createContext(defaultUserContext)
 export const UserContextProvider = ({children}) => {
