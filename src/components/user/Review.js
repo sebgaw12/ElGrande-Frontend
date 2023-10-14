@@ -8,17 +8,17 @@ const ReviewItem = () => {
     const {user} = useUserContext();
     const [reviews, setReviews] = useState([])
     const {isOpen, toggle} = useToggle()
-    const {getByUserId, deleteById} = useApiReview()
+    const {getReviewByUserId, deleteReviewById} = useApiReview()
 
     useEffect(() => {
-        getByUserId(user)
+        getReviewByUserId(user)
             .then(response => {
                 setReviews(response)
             })
     }, []);
 
     const handleDeleteReview = (e) => {
-        deleteById(e.target.data.id);
+        deleteReviewById(e.target.data.id);
     }
 
     return (

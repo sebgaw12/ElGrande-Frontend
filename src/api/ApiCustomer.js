@@ -44,7 +44,7 @@ export const useApiUser = () => {
             })
     }
 
-    const deleteUser = (id) => {
+    const deleteUserById = (id) => {
         return axios.delete(SERVER_URL + `api/v1/customers/${id}`)
             .then(response => {
                 if (response.status !== 204) {
@@ -58,5 +58,5 @@ export const useApiUser = () => {
             })
     }
 
-    return {getUserById, deleteUser, editUser}
+    return {getUserById, deleteUserById, editUser}
 }

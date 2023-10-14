@@ -8,10 +8,10 @@ const RestaurantItem = () => {
     const {user} = useUserContext();
     const [restaurants, setRestaurants] = useState([])
     const {isOpen, toggle} = useToggle()
-    const {getByUserId} = useApiRestaurant()
+    const {getRestaurantByUserId} = useApiRestaurant()
 
     useEffect(() => {
-        getByUserId(user)
+        getRestaurantByUserId(user)
             .then(response => {
                 setRestaurants(response)
             })

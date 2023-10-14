@@ -8,7 +8,7 @@ import ReviewItem from "./Review";
 
 const UserDetails = () => {
     const {user, logout} = useUserContext();
-    const {getCustomerById, deleteCustomer, editCustomer} = useApiUser();
+    const {getUserById, deleteUserById, editUser} = useApiUser();
     const [userDetails, setUserDetails] = useState({
         name: "",
         surname: "",
@@ -20,7 +20,7 @@ const UserDetails = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getCustomerById(user)
+        getUserById(user)
             .then(response => {
                 setUserDetails({
                     name: response.name,
@@ -42,13 +42,13 @@ const UserDetails = () => {
 
     const handleSaveChanges = () => {
         setIsEditing(false);
-        editCustomer(userDetails, user)
+        editUser(userDetails, user)
     }
 
     const handleDeleteProfile = () => {
         const confirmation = window.confirm("Are you sure you want to delete the profile??");
         if (confirmation) {
-            deleteCustomer(user)
+            deleteUserById(user)
                 .then(() => {
                     logout()
                     navigate('/main-page')
