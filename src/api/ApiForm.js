@@ -4,14 +4,14 @@ import {SERVER_URL} from "../constants/RoutePaths";
 
 export const useApiForm = () => {
     const postRestaurant = (data) => {
-        return axios.post(SERVER_URL + 'api/v1/forms/restaurant', {
-            data: JSON.stringify(data)
-        }, {
-            headers: {
-                'Content-Type': "application/json"
-            },
-            withCredentials: true
-        })
+        return axios.post(SERVER_URL + 'api/v1/forms/restaurant',
+            JSON.stringify(data)
+            , {
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                withCredentials: true
+            })
             .then(response => {
                 if (response.status !== 201) {
                     throw new Error("Network response was not created")

@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import LandingPage from "../components/landingpage/LandingPage";
 import MainPage from "../components/mainpage/MainPage";
 import Error from "../components/error/ErrorPage";
-import RestaurantRegisterForm from "../components/restaurantform/RestaurantRegisterForm";
+import Form from "../components/restaurantform/Form";
 import {ProtectedRoute} from "../authentication/ProtectedRoute";
 import {LOGIN_URL, MAIN_PAGE, PROFILE_URL, RESTAURANT, SIGNUP_URL} from "../constants/RoutePaths";
 import UserLogin from "../components/userform/UserLogin";
@@ -39,7 +39,7 @@ const Routing = () => {
                 }/>
                 <Route path={RESTAURANT} element={
                     <ProtectedRoute>
-                        <RestaurantRegisterForm/>
+                        <Form/>
                     </ProtectedRoute>
                 }/>
                 <Route path={PROFILE_URL} element={
