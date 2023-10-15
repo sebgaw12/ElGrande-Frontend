@@ -1,8 +1,7 @@
 import {useNavigate} from "react-router-dom";
-import {JWT_TOKEN, LOGGED_IN} from "../../constants/Constant";
 import {toast} from "react-toastify";
-import React, {useCallback, useContext} from "react";
-import {UserContext, useUserContext} from "../../context/UserContextProvider";
+import React from "react";
+import {useUserContext} from "../../context/UserContextProvider";
 
 const UserLogout = () => {
 

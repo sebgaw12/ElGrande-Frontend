@@ -5,6 +5,8 @@ import {useApiUser} from "../../api/ApiCustomer";
 import {useUserContext} from "../../context/UserContextProvider";
 import RestaurantItem from "./Restaurant";
 import ReviewItem from "./Review";
+import {useUpdate} from "../../hooks/useUpdate";
+import {useToggle} from "../../hooks/useToggle";
 
 const UserDetails = () => {
     const {user, logout} = useUserContext();
@@ -16,8 +18,9 @@ const UserDetails = () => {
         submissionTime: null,
         ownership: false
     });
-    const [isEditing, setIsEditing] = useState(false);
+    const {isOpen, toggle} = useToggle()
     const navigate = useNavigate()
+    const {updateDataObject} = useUpdate(userDetails, setUserDetails)
 
     useEffect(() => {
         getUserById(user)
@@ -32,17 +35,9 @@ const UserDetails = () => {
             })
     }, []);
 
-    const handleOnChange = (e) => {
-        e.preventDefault()
-        setUserDetails({
-            ...userDetails,
-            [e.target.name]: e.target.value
-        })
-    }
-
     const handleSaveChanges = () => {
-        setIsEditing(false);
         editUser(userDetails, user)
+        toggle()
     }
 
     const handleDeleteProfile = () => {
@@ -60,12 +55,12 @@ const UserDetails = () => {
         <div id="profile">
             <div id="details">
                 <h1 id="details-header">Profile</h1>
-                {isEditing ? (
+                {isOpen ? (
                     <div>
                         <label className="details-text">Name:</label>
-                        <input name="name" value={userDetails.name} onChange={handleOnChange}/>
+                        <input name="name" value={userDetails.name} onChange={updateDataObject}/>
                         <label className="details-text">Surname:</label>
-                        <input name="name" value={userDetails.surname} onChange={handleOnChange}/>
+                        <input name="name" value={userDetails.surname} onChange={updateDataObject}/>
                         <button className="edit-button" onClick={handleSaveChanges}>Save changes</button>
                     </div>
                 ) : (
@@ -75,7 +70,7 @@ const UserDetails = () => {
                         <span className="details-text">Email: {userDetails.email}</span>
                         <span className="details-text">Created: {userDetails.submissionTime}</span>
                         <span className="details-text">Ownership: {userDetails.ownership}</span>
-                        <button className="edit-button" onClick={() => setIsEditing(true)}>Edit data</button>
+                        <button className="edit-button" onClick={handleSaveChanges}>Edit data</button>
                         <button className="delete-button" onClick={handleDeleteProfile}>Delete profile</button>
                     </div>
                 )}

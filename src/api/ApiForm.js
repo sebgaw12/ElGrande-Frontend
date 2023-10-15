@@ -5,8 +5,7 @@ import {SERVER_URL} from "../constants/RoutePaths";
 export const useApiForm = () => {
     const postRestaurant = (data) => {
         return axios.post(SERVER_URL + 'api/v1/forms/restaurant',
-            JSON.stringify(data)
-            , {
+            JSON.stringify(data), {
                 headers: {
                     'Content-Type': "application/json"
                 },

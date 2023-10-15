@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import "./Review.css"
 import {useUserContext} from "../../context/UserContextProvider";
-import {ApiRestaurant, useApiRestaurant} from "../../api/ApiRestaurant";
+import {useApiRestaurant} from "../../api/ApiRestaurant";
 import {useToggle} from "../../hooks/useToggle";
 
 const RestaurantItem = () => {

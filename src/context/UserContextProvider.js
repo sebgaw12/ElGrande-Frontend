@@ -1,8 +1,7 @@
 import {createContext, useContext, useState} from "react";
 import {useCookie} from "../hooks/useCookie";
-import {CUSTOMER_ID, JWT_TOKEN, REFRESH_TOKEN} from "../constants/Constant";
+import {CUSTOMER_ID, JWT_TOKEN, REFRESH_TOKEN} from "../constants/UserCredentials";
 import {useLocalStorage} from "../hooks/useLocalStorage";
-import {ApiCustomer, useApiUser} from "../api/ApiCustomer";
 import {useApiAuth} from "../api/ApiAuth";
 
 const UserContext = createContext()

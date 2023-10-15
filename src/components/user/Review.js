@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import "./Review.css"
-import {ApiReview, useApiReview} from "../../api/ApiReview";
+import {useApiReview} from "../../api/ApiReview";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useToggle} from "../../hooks/useToggle";
 
@@ -32,7 +32,9 @@ const ReviewItem = () => {
                 <div id="reviews-list">
                     {reviews.map((review, index) => (
                         <div key={review.id} className="review-item">
-                            <button data-id={review.id} className="delete-button" onClick={handleDeleteReview}>Delete review</button>
+                            <button data-id={review.id} className="delete-button" onClick={handleDeleteReview}>Delete
+                                review
+                            </button>
                             <p className="review-title">Grade: {review.grade}</p>
                             <p className="review-text">Comment: {review.comment}</p>
                         </div>

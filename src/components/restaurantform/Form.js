@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {Link} from 'react-router-dom';
 import IconArrowTurnLeft from './elements/icons/IconArrowTurnLeft';
 import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
@@ -35,7 +35,19 @@ function Form() {
         longitude: 1.5
     })
 
-    const [businessHour, setBusinessHour] = useState([])
+    const initBusinessHour = []
+
+    for (let i = 0; i < AMOUNT_OF_DAYS; i++) {
+        initBusinessHour.push({
+                dayOfWeek: i + 1,
+                openingHour: '08:00',
+                closingHour: '16:00'
+            }
+        )
+    }
+
+
+    const [businessHour, setBusinessHour] = useState(initBusinessHour)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -48,16 +60,6 @@ function Form() {
         }
         postRestaurant(updatedData)
     };
-
-    useEffect(() => {
-        for (let i = 0; i < AMOUNT_OF_DAYS; i++) {
-            businessHour.push({
-                dayOfWeek: i + 1,
-                openingHour: '08:00',
-                closingHour: '16:00'
-            })
-        }
-    }, []);
 
     return (
         <section className="h-screen">

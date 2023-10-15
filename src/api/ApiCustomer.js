@@ -1,7 +1,5 @@
 import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
-import {useLocalStorage} from "../hooks/useLocalStorage";
-import {REFRESH_TOKEN} from "../constants/Constant";
 
 export const useApiUser = () => {
 
@@ -23,15 +21,13 @@ export const useApiUser = () => {
 
 
     const editUser = (data, customerId) => {
-        return axios.put(SERVER_URL + `api/v1/customers/${customerId}`, {
-            name: data.name,
-            surname: data.surname
-        }, {
-            headers: {
-                'Content-Type': "application/json"
-            },
-            withCredentials: true
-        })
+        return axios.put(SERVER_URL + `api/v1/customers/${customerId}`,
+            JSON.stringify(data), {
+                headers: {
+                    'Content-Type': "application/json"
+                },
+                withCredentials: true
+            })
             .then(response => {
                 if (response.status !== 201) {
                     throw new Error("Network response was not created")

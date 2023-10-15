@@ -3,11 +3,11 @@ import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLi
 import Divider from "../restaurantform/elements/form/Divider";
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {useApiUser} from "../../api/ApiCustomer";
 import {toast} from "react-toastify";
 import {MAIN_PAGE} from "../../constants/RoutePaths";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useApiAuth} from "../../api/ApiAuth";
+import {useUpdate} from "../../hooks/useUpdate";
 
 const UserLoginForm = () => {
     const {loginUser} = useApiAuth()
@@ -15,10 +15,10 @@ const UserLoginForm = () => {
         {
             email: "",
             password: ""
-        }
-    )
+        })
     const navigate = useNavigate()
     const {login} = useUserContext()
+    const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
 
     const onLoginClicked = () => {
         loginUser(userCredentials).then(response => {
@@ -35,13 +35,6 @@ const UserLoginForm = () => {
         })
     }
 
-    const onCredentialsChange = (e) => {
-        setUserCredentials({
-            ...userCredentials,
-            [e.target.name]: e.target.value
-        })
-    }
-
     return (
         <div className="md:w-8/12 lg:ml-6 lg:w-5/12">
             <TEInput
@@ -51,7 +44,7 @@ const UserLoginForm = () => {
                 className="mb-6"
                 size="lg"
                 name="email"
-                onChange={(e) => onCredentialsChange(e)}
+                onChange={updateDataObject}
             ></TEInput>
             <TEInput
                 type="password"
@@ -60,7 +53,7 @@ const UserLoginForm = () => {
                 className="mb-6"
                 size="lg"
                 name="password"
-                onChange={(e) => onCredentialsChange(e)}
+                onChange={updateDataObject}
             ></TEInput>
             <div className="mb-6 flex items-center justify-between">
                 <ForgotPasswordLink/>

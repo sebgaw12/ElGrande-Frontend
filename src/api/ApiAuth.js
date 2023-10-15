@@ -1,7 +1,7 @@
 import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
 import {useLocalStorage} from "../hooks/useLocalStorage";
-import {REFRESH_TOKEN} from "../constants/Constant";
+import {REFRESH_TOKEN} from "../constants/UserCredentials";
 
 export const useApiAuth = () => {
     const {getLocalStorage, setLocalStorage} = useLocalStorage(REFRESH_TOKEN, "")
@@ -10,8 +10,7 @@ export const useApiAuth = () => {
         return axios.post(SERVER_URL + "api/v1/auths/jwt/logout", {}, {
             headers: {
                 "Content-Type": "application/json"
-            },
-            withCredentials: true
+            }, withCredentials: true
         })
             .then(response => {
                 if (response.status !== 204) {
@@ -25,11 +24,8 @@ export const useApiAuth = () => {
     }
 
     const loginUser = (data) => {
-        return axios.post(SERVER_URL + "api/v1/auths/jwt/login", {
-                email: data.email,
-                password: data.password
-            },
-            {
+        return axios.post(SERVER_URL + "api/v1/auths/jwt/login",
+            JSON.stringify(data), {
                 headers: {
                     'Content-Type': "application/json"
                 }
@@ -47,16 +43,12 @@ export const useApiAuth = () => {
     }
 
     const signupUser = (data) => {
-        return axios.post(SERVER_URL + "api/v1/auths/jwt/signup", {
-            name: data.name,
-            surname: data.surname,
-            email: data.email,
-            password: data.password
-        }, {
-            headers: {
-                'Content-Type': "application/json"
-            }
-        })
+        return axios.post(SERVER_URL + "api/v1/auths/jwt/signup",
+            JSON.stringify(data), {
+                headers: {
+                    'Content-Type': "application/json"
+                }
+            })
             .then(response => {
                 if (response.status !== 201) {
                     throw new Error("Network response was not created")
@@ -70,7 +62,6 @@ export const useApiAuth = () => {
     }
 
     const refreshToken = () => {
-        console.log(getLocalStorage())
         return axios.post(SERVER_URL + "api/v1/auths/jwt/refresh", {
             token: getLocalStorage()
         }, {
@@ -82,7 +73,6 @@ export const useApiAuth = () => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")
                 }
-                console.log(response)
                 setLocalStorage(response.data.refreshToken)
             })
             .catch(error => {

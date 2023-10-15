@@ -1,9 +1,8 @@
-import React, {useContext, useEffect} from 'react';
-import {UserContext, useUserContext} from "../../context/UserContextProvider";
+import React from 'react';
+import {useUserContext} from "../../context/UserContextProvider";
 import UserHeader from "./userheader/UserHeader";
 import DefaultHeader from "./defaultheader/DefaultHeader";
 import {Link} from "react-router-dom";
-import {LOGGED_IN} from "../../constants/Constant";
 
 const Header = () => {
     const {user} = useUserContext()
