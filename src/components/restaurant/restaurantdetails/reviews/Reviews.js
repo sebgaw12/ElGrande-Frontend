@@ -13,7 +13,7 @@ const Reviews = () => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [grade, setGrade] = useState(1)
     const [comment, setComment] = useState('')
-    const {getReviewByRestaurantId, postReview} = useApiReview()
+    const {getAllReviewByRestaurantId, postReview} = useApiReview()
 
     const {user} = useUserContext()
     const {openRestaurant, updateOpenRestaurant} = useContext(RestaurantContext)
@@ -39,7 +39,8 @@ const Reviews = () => {
         event.preventDefault()
 
         try {
-            await postReview({restaurantId, user, comment, grade})
+            const customerId = user
+            await postReview({restaurantId, customerId, comment, grade})
 
             toast.success('Ocena dodana poprawnie', {
                 position: 'top-center',
@@ -57,7 +58,7 @@ const Reviews = () => {
     }
 
     const getReviews = () => {
-        getReviewByRestaurantId(restaurantId).then(response => setReviews(response))
+        getAllReviewByRestaurantId(restaurantId).then(response => setReviews(response))
     }
 
     useEffect(() => {

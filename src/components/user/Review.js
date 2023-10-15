@@ -18,7 +18,7 @@ const ReviewItem = () => {
     }, []);
 
     const handleDeleteReview = (e) => {
-        deleteReviewById(e.target.data.id);
+        deleteReviewById(e.target.dataset.id);
     }
 
     return (
@@ -31,7 +31,7 @@ const ReviewItem = () => {
             {isOpen && (
                 <div id="reviews-list">
                     {reviews.map((review, index) => (
-                        <div className="review-item">
+                        <div key={review.id} className="review-item">
                             <button data-id={review.id} className="delete-button" onClick={handleDeleteReview}>Delete review</button>
                             <p className="review-title">Grade: {review.grade}</p>
                             <p className="review-text">Comment: {review.comment}</p>

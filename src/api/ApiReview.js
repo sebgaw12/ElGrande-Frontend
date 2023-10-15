@@ -3,7 +3,7 @@ import {SERVER_URL} from "../constants/RoutePaths";
 
 
 export const useApiReview = () => {
-    const getReviewByRestaurantId = (id) => {
+    const getAllReviewByRestaurantId = (id) => {
         return axios.get(SERVER_URL + 'api/v1/reviews/details', {
             params: {
                 restaurantId: id
@@ -41,16 +41,13 @@ export const useApiReview = () => {
     }
 
     const postReview = (data) => {
-        return axios.post(SERVER_URL + "api/v1/reviews", {
-            restaurantId: data.restaurantId,
-            customerId: data.customerId,
-            comment: data.comment,
-            grade: data.grade
-        }, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+        return axios.post(SERVER_URL + "api/v1/reviews",
+            JSON.stringify(data), {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            })
             .then(response => {
                 if (response.status !== 201) {
                     throw new Error("Network response was not created")
@@ -64,7 +61,9 @@ export const useApiReview = () => {
     }
 
     const deleteReviewById = (reviewId) => {
-        return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`)
+        return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`, {
+            withCredentials: true
+        })
             .then(response => {
                 if (response.status !== 204) {
                     throw new Error("Network response was not no content");
@@ -76,5 +75,5 @@ export const useApiReview = () => {
                 throw error;
             });
     }
-    return {deleteReviewById, postReview, getReviewByRestaurantId, getReviewByUserId}
+    return {deleteReviewById, postReview, getAllReviewByRestaurantId, getReviewByUserId}
 }
