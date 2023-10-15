@@ -1,22 +1,33 @@
 import React, {useState} from "react";
-import RatingStar from './RatingStar';
-import Dropdown, {useSelectedElement} from './Dropdown';
+import RatingStar from '../star/RatingStar';
+import Dropdown from './Dropdown';
 import {
-    styleModalHeader, styleOpenModalButton, styleModalCancelButton,
-    styleModalSaveButton, filterLogo
-} from './FiltersModalStyles';
+    filterLogo,
+    styleModalCancelButton,
+    styleModalHeader,
+    styleModalSaveButton,
+    styleOpenModalButton
+} from './FiltersModal.style';
 import {
-    TERipple, TEModal, TEModalDialog, TEModalContent, TEModalHeader,
-    TEModalBody, TEModalFooter, TEInput
+    TEInput,
+    TEModal,
+    TEModalBody,
+    TEModalContent,
+    TEModalDialog,
+    TEModalFooter,
+    TEModalHeader,
+    TERipple
 } from "tw-elements-react";
-import {ApiRestaurant} from "../../api/ApiRestaurant";
+import {useApiRestaurant} from "../../api/ApiRestaurant";
+import {useToggle} from "../../hooks/useToggle";
 
 
 export default function FiltersModal() {
 
-    const [showModal, setShowModal] = useState(false);
+    const {isOpen, toggle} = useToggle();
     const sortTypes = ["DESC", "ASC"];
     const sortTypesAsText = ["oceny malejąco", "oceny rosnąco"];
+    const {getFilteredRestaurant} = useApiRestaurant()
 
     const [sortType, setSortType] = useState(sortTypes[0]);
 
@@ -48,11 +59,11 @@ export default function FiltersModal() {
         e.preventDefault();
 
         console.log("SENDING DATA: ", formData);
-        ApiRestaurant.getFilteredRestaurants(formData).then((restaurants) => {
+        getFilteredRestaurant(formData).then((restaurants) => {
             console.log("RESPONSE: ", restaurants);
         });
 
-        setShowModal(false);
+        toggle();
     };
 
     return (
@@ -61,7 +72,7 @@ export default function FiltersModal() {
                 <button
                     type="button"
                     className={styleOpenModalButton}
-                    onClick={() => setShowModal(true)}
+                    onClick={() => toggle()}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +91,7 @@ export default function FiltersModal() {
                 </button>
             </TERipple>
 
-            <TEModal show={showModal} setShow={setShowModal}>
+            <TEModal show={isOpen} setShow={toggle}>
                 <TEModalDialog>
                     <TEModalContent>
                         <TEModalHeader>
@@ -132,7 +143,7 @@ export default function FiltersModal() {
                                 <button
                                     type="button"
                                     className={styleModalCancelButton}
-                                    onClick={() => setShowModal(false)}
+                                    onClick={() => toggle()}
                                 >
                                     Anuluj
                                 </button>

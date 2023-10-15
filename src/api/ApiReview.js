@@ -1,8 +1,9 @@
 import axios from "axios";
-import {SERVER_URL} from "../constants/constant";
+import {SERVER_URL} from "../constants/RoutePaths";
 
-export class ApiReview {
-    static getReviewByRestaurantId = (id) => {
+
+export const useApiReview = () => {
+    const getAllReviewByRestaurantId = (id) => {
         return axios.get(SERVER_URL + 'api/v1/reviews/details', {
             params: {
                 restaurantId: id
@@ -20,11 +21,13 @@ export class ApiReview {
             })
     }
 
-    static getReviewsByUserId = (id) => {
-        return axios
-            .get(SERVER_URL + 'api/v1/reviews', {
+    const getReviewByUserId = (id) => {
+        return axios.get(SERVER_URL + 'api/v1/reviews', {
+            params: {
                 customerId: id
-            })
+            },
+            withCredentials: true
+        })
             .then(response => {
                 if (response.status !== 200) {
                     throw new Error("Network response was not ok")
@@ -37,17 +40,14 @@ export class ApiReview {
             })
     }
 
-    static postReview = (data) => {
-        return axios.post(SERVER_URL + "api/v1/reviews", {
-            restaurantId: data.restaurantId,
-            customerId: data.customerId,
-            comment: data.comment,
-            grade: data.grade
-        }, {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+    const postReview = (data) => {
+        return axios.post(SERVER_URL + "api/v1/reviews",
+            JSON.stringify(data), {
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                withCredentials: true
+            })
             .then(response => {
                 if (response.status !== 201) {
                     throw new Error("Network response was not created")
@@ -60,8 +60,10 @@ export class ApiReview {
             })
     }
 
-    static deleteReview = (reviewId) => {
-        return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`)
+    const deleteReviewById = (reviewId) => {
+        return axios.delete(SERVER_URL + `api/v1/reviews/${reviewId}`, {
+            withCredentials: true
+        })
             .then(response => {
                 if (response.status !== 204) {
                     throw new Error("Network response was not no content");
@@ -73,5 +75,5 @@ export class ApiReview {
                 throw error;
             });
     }
-
+    return {deleteReviewById, postReview, getAllReviewByRestaurantId, getReviewByUserId}
 }

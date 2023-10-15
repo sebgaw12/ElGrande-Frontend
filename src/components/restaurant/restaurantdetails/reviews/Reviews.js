@@ -1,28 +1,31 @@
 import React, {useContext, useEffect, useState} from "react";
-
 import Review from "./Review";
-import {ApiReview} from "../../../../api/ApiReview";
+import {useApiReview} from "../../../../api/ApiReview";
 import {toast} from "react-toastify";
-import {JWT_TOKEN} from "../../../../constants/constant";
-import {useNavigate} from "react-router-dom";
 import ModalAddReview from "./ModalAddReview";
-import {UserContext} from "../../../../context/UserContextProvider";
+import {useUserContext} from "../../../../context/UserContextProvider";
+import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
 
-const Reviews = (props) => {
+
+const Reviews = () => {
 
     const [reviews, setReviews] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [grade, setGrade] = useState(1)
     const [comment, setComment] = useState('')
-    const {currentUser, isLoggedIn} = useContext(UserContext)
+    const {getAllReviewByRestaurantId, postReview} = useApiReview()
 
-    const handleGradeChange = (event) => setGrade(parseInt(event.target.value, 10))
+    const {user} = useUserContext()
+    const {openRestaurant, updateOpenRestaurant} = useContext(RestaurantContext)
+    const restaurantId = openRestaurant.id
+
+    const handleGradeChange = (newGrade) => setGrade(newGrade)
     const handleCommentChange = (event) => setComment(event.target.value)
     const openModal = () => setIsModalOpen(true)
     const closeModal = () => setIsModalOpen(false)
 
     const handleLoggedInUser = () => {
-        if (isLoggedIn) {
+        if (user) {
             openModal()
         } else {
             closeModal()
@@ -36,14 +39,16 @@ const Reviews = (props) => {
         event.preventDefault()
 
         try {
-            const restaurantId = props.id
-            const customerId = currentUser.customerId
-
-            await ApiReview.postReview({restaurantId, customerId, comment, grade})
+            const customerId = user
+            await postReview({restaurantId, customerId, comment, grade})
 
             toast.success('Ocena dodana poprawnie', {
                 position: 'top-center',
             })
+            getReviews()
+            updateOpenRestaurant(restaurantId)
+
+            // ApiRestaurant.getRestaurantDetailsById(restaurantId).then(response => setRestaurantDetails(response))
         } catch (err) {
             toast.error(`Wystąpił błąd podczas dodawania oceny, ${err.message}`, {
                 position: 'top-center'
@@ -52,12 +57,17 @@ const Reviews = (props) => {
         closeModal()
     }
 
+    const getReviews = () => {
+        getAllReviewByRestaurantId(restaurantId).then(response => setReviews(response))
+    }
+
     useEffect(() => {
-        ApiReview.getReviewByRestaurantId(props.id).then(response => setReviews(response))
-    }, []);
+        getReviews()
+    }, [restaurantId]);
 
     return (
         <div>
+            <button className="border-2 border-black p-2" onClick={handleLoggedInUser}>Dodaj ocenę</button>
             <div>
                 {reviews.length === 0 ? (
                     <div>Brak ocen</div>
@@ -65,7 +75,6 @@ const Reviews = (props) => {
                     reviews.map((item, index) => <Review key={index} review={item}/>)
                 )}
             </div>
-            <button className="border-2 border-black p-2" onClick={handleLoggedInUser}>Dodaj ocenę</button>
 
             <ModalAddReview
                 onSubmit={handleAddReview}

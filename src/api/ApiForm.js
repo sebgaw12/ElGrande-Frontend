@@ -1,14 +1,16 @@
 import axios from "axios";
-import {SERVER_URL} from "../constants/constant";
+import {SERVER_URL} from "../constants/RoutePaths";
 
-export class ApiForm {
-    static postNewRestaurant = (data) => {
-        return axios.post(SERVER_URL + 'api/v1/form', {
+
+export const useApiForm = () => {
+    const postRestaurant = (data) => {
+        return axios.post(SERVER_URL + 'api/v1/forms/restaurant', {
             data: JSON.stringify(data)
         }, {
             headers: {
                 'Content-Type': "application/json"
-            }
+            },
+            withCredentials: true
         })
             .then(response => {
                 if (response.status !== 201) {
@@ -21,4 +23,6 @@ export class ApiForm {
                 throw error
             })
     }
+
+    return {postRestaurant}
 }

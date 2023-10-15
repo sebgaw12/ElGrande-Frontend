@@ -1,73 +1,58 @@
-import React, {useContext, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./UserDetails.css";
-import {ApiReview} from "../../api/ApiReview";
 import {useNavigate} from "react-router-dom";
-import {ApiRestaurant} from "../../api/ApiRestaurant";
-import {ApiCustomer} from "../../api/ApiCustomer";
-import ReviewItem from "./Review";
+import {useApiUser} from "../../api/ApiCustomer";
+import {useUserContext} from "../../context/UserContextProvider";
 import RestaurantItem from "./Restaurant";
-import {JWT_TOKEN, LOGGED_IN} from "../../constants/constant";
-import {UserContext, UserContextProvider} from "../../context/UserContextProvider";
+import ReviewItem from "./Review";
 
 const UserDetails = () => {
-    const [areCommentsVisible, setAreCommentsVisible] = useState(false);
-    const [areRestaurantsVisible, setAreRestaurantsVisible] = useState(false)
-    const [reviews, setReviews] = useState([]);
-    const [restaurants, setRestaurants] = useState([])
+    const {user, logout} = useUserContext();
+    const {getUserById, deleteUserById, editUser} = useApiUser();
+    const [userDetails, setUserDetails] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        submissionTime: null,
+        ownership: false
+    });
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate()
-    const {currentUser, userModifier} = useContext(UserContext)
 
-    const fetchReviews = () => {
-        ApiReview.getReviewsByUserId(currentUser.customerId)
-            .then(data => {
-                setReviews(data);
+    useEffect(() => {
+        getUserById(user)
+            .then(response => {
+                setUserDetails({
+                    name: response.name,
+                    surname: response.surname,
+                    email: response.email,
+                    submissionTime: response.submissionTime,
+                    ownership: response.ownership ? "Yes" : "No"
+                })
             })
-    };
+    }, []);
 
-    const fetchRestaurants = () => {
-        ApiRestaurant.getRestaurantsByUserId(currentUser.customerId)
-            .then(data => {
-                setRestaurants(data)
-            })
-    }
-
-    const toggleCommentsVisibility = () => {
-        if (!areCommentsVisible) {
-            fetchReviews();
-        }
-        setAreCommentsVisible(!areCommentsVisible);
-    };
-
-
-    const toggleRestaurantsVisibility = () => {
-        if (!areRestaurantsVisible) {
-            fetchRestaurants()
-        }
-        setAreRestaurantsVisible(!areRestaurantsVisible)
-    }
-
-    const handleEditName = (e) => {
+    const handleOnChange = (e) => {
         e.preventDefault()
-        userModifier({
-            ...currentUser,
-            ["name"]: e.target.value
+        setUserDetails({
+            ...userDetails,
+            [e.target.name]: e.target.value
         })
     }
 
-    const handleEditSave = () => {
+    const handleSaveChanges = () => {
         setIsEditing(false);
-        ApiCustomer.editCustomer(currentUser)
+        editUser(userDetails, user)
     }
 
     const handleDeleteProfile = () => {
         const confirmation = window.confirm("Are you sure you want to delete the profile??");
         if (confirmation) {
-            localStorage.removeItem(LOGGED_IN)
-            document.cookie = JWT_TOKEN + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-            ApiCustomer.deleteCustomer(currentUser.customerId)
-            navigate('/main-page')
+            deleteUserById(user)
+                .then(() => {
+                    logout()
+                    navigate('/main-page')
+                })
         }
     }
 
@@ -77,50 +62,26 @@ const UserDetails = () => {
                 <h1 id="details-header">Profile</h1>
                 {isEditing ? (
                     <div>
-                        <label className="details-text">Customer Name:</label>
-                        <input value={currentUser != null ? currentUser.name : null} onChange={handleEditName}/>
-                        {/*<label className="details-text">Email:</label>*/}
-                        {/*<input value={currentUser != null ? currentUser.email : null}/>*/}
-                        <button className="edit-button" onClick={handleEditSave}>Save data</button>
+                        <label className="details-text">Name:</label>
+                        <input name="name" value={userDetails.name} onChange={handleOnChange}/>
+                        <label className="details-text">Surname:</label>
+                        <input name="name" value={userDetails.surname} onChange={handleOnChange}/>
+                        <button className="edit-button" onClick={handleSaveChanges}>Save changes</button>
                     </div>
                 ) : (
                     <div>
-                        <span className="details-text">Customer: {currentUser != null ? currentUser.name : null}</span>
-                        <span className="details-text">email: {currentUser != null ? currentUser.email : null}</span>
+                        <span className="details-text">Name: {userDetails.name}</span>
+                        <span className="details-text">Surname: {userDetails.surname}</span>
+                        <span className="details-text">Email: {userDetails.email}</span>
+                        <span className="details-text">Created: {userDetails.submissionTime}</span>
+                        <span className="details-text">Ownership: {userDetails.ownership}</span>
                         <button className="edit-button" onClick={() => setIsEditing(true)}>Edit data</button>
                         <button className="delete-button" onClick={handleDeleteProfile}>Delete profile</button>
                     </div>
                 )}
             </div>
-            <div id="comments">
-                <div>
-                    <button className="show-button" onClick={toggleCommentsVisibility}>
-                        {areCommentsVisible ? "Hide comments" : "Show comments"}
-                    </button>
-                </div>
-                {areCommentsVisible && (
-                    <div id="reviews-list">
-                        {reviews.map((review, index) => (
-                            <ReviewItem key={index} review={review}/>
-                        ))}
-                    </div>
-                )}
-
-            </div>
-            <div className="restaurants">
-                <div>
-                    <button className="show-button" onClick={toggleRestaurantsVisibility}>
-                        {areRestaurantsVisible ? "Hide restaurants" : "Show restaurants"}
-                    </button>
-                </div>
-                {areRestaurantsVisible && (
-                    <div className="restaurant-list">
-                        {restaurants.map((restaurant, index) => (
-                            <RestaurantItem key={index} restaurant={restaurant}/>
-                        ))}
-                    </div>
-                )}
-            </div>
+            <ReviewItem/>
+            <RestaurantItem/>
         </div>
     )
         ;

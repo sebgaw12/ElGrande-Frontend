@@ -1,8 +1,9 @@
 import axios from "axios";
-import {SERVER_URL} from "../constants/constant";
+import {SERVER_URL} from "../constants/RoutePaths";
 
-export class ApiIngredient {
-    static getIngredients = () => {
+
+export const useApiIngredient = () => {
+    const getAllIngredients = () => {
         return axios.get(SERVER_URL + "api/v1/ingredients")
             .then(response => {
                 if (response.status !== 200) {
@@ -15,4 +16,6 @@ export class ApiIngredient {
                 throw error
             })
     }
+
+    return {getAllIngredients}
 }

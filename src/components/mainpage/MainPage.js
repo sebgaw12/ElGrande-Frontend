@@ -5,16 +5,10 @@ import mapPlaceholder from "../../images/map_placeholder.jpg"
 import {useContext, useEffect} from "react";
 import {UserContext} from "../../context/UserContextProvider";
 import {ApiCustomer} from "../../api/ApiCustomer";
-import {JWT_TOKEN, LOGGED_IN} from "../../constants/constant";
+import {JWT_TOKEN, LOGGED_IN} from "../../constants/Constant";
 
 
 const MainPage = () => {
-    const {currentUser, userModifier, loginModifier, getUser} = useContext(UserContext)
-
-    useEffect(() => {
-        getUser()
-    }, []);
-
     return (
         <div className={"overflow-hidden"}>
             <Header/>

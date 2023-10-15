@@ -1,22 +1,26 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import Restaurant from "./Restaurant";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {ApiRestaurant} from "../../api/ApiRestaurant";
+import {useApiRestaurant} from "../../api/ApiRestaurant";
 import FiltersHeader from "../filtersnavbar/FiltersHeader";
+import {RestaurantContext} from "../../context/RestaurantContextProvider";
+import Loader from "./Loader";
 
 const AllRestaurants = () => {
 
     const [data, setData] = useState([]);
-    const [openRestaurantId, setOpenRestaurantId] = useState(null);
     const [page, setPage] = useState(0)
     const [sort, setSort] = useState("name")
     const [size, setSize] = useState(10)
     const [more, setMore] = useState(true)
+    const {getAllRestaurant} = useApiRestaurant()
 
     const prevScrollY = useRef(0)
 
+    const {openRestaurant, handleRestaurantClick} = useContext(RestaurantContext)
+
     useEffect(() => {
-        ApiRestaurant.getAllRestaurants(page, size, sort).then(response => {
+        getAllRestaurant(page, size, sort).then(response => {
             if (page === 0) {
                 setData(response)
             } else {
@@ -26,8 +30,8 @@ const AllRestaurants = () => {
                 setMore(false)
             }
         })
-    }, [page, size, sort])
 
+    }, [page, size, sort])
 
 
     useEffect(() => {
@@ -44,24 +48,20 @@ const AllRestaurants = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 
-    const handleRestaurantClick = (restaurantId) => {
-        setOpenRestaurantId((prevId) => (prevId === restaurantId ? null : restaurantId))
-    }
-
     return (
-        <div className="">
+        <div>
             <FiltersHeader/>
             <div className="overflow-y-auto flex flex-col bg-gray-200 h-[84vh] min-w-[50vw]">
                 <InfiniteScroll next={() => setPage(page + 1)}
                                 hasMore={more}
-                                loader={<div>Ładowanie...</div>}
+                                loader={<Loader/>}
                                 dataLength={data.length}
                                 scrollableTarget="scrollableDiv">
                     {data.map((item, index) => <Restaurant
                         key={index}
                         restaurant={item}
-                        isOpen={openRestaurantId === item.id}
-                        onToggle={() => handleRestaurantClick(item.id)}/>
+                        isOpen={openRestaurant && openRestaurant.id === item.id}
+                        onToggle={() => handleRestaurantClick(item)}/>
                     )}
                 </InfiniteScroll>
             </div>
