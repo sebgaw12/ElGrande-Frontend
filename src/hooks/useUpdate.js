@@ -30,10 +30,12 @@ export const useUpdate = (data, dataUpdateFunction) => {
      */
     const updateDataList = (e) => {
         const updatedData = [...data]
+
         updatedData[e.target.dataset.index] = {
             ...updatedData[e.target.dataset.index],
             [e.target.name]: e.target.value
         }
+
         dataUpdateFunction(updatedData)
     }
 

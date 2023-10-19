@@ -1,6 +1,6 @@
 import React, {useState, createContext, useContext} from 'react';
 import ButtonArrow from './ButtonArrow';
-import {styleReviewDropdownButton, styleReviewDropdownList} from './ReviewDropdownStyles';
+import {styleReviewDropdownButton, styleReviewDropdownList} from './ReviewDropdown.styles';
 
 const DropdownContext = createContext(null);
 

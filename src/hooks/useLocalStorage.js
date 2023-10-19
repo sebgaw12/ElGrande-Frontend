@@ -53,14 +53,5 @@ export const useLocalStorage = (key, initValue) => {
         localStorage.setItem(key, JSON.stringify(value))
     }
 
-    /**
-     * Gets item from local storage based on a key
-     *
-     * @returns {any}
-     */
-    const getLocalStorage = () => {
-        return JSON.parse(localStorage.getItem(key))
-    }
-
-    return {storedLocalStorage, setLocalStorage, removeLocalStorage, createLocalStorage, getLocalStorage}
+    return {storedLocalStorage, setLocalStorage, removeLocalStorage, createLocalStorage}
 }

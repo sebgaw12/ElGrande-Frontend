@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import "./UserDetails.css";
 import {useNavigate} from "react-router-dom";
-import {useApiUser} from "../../api/ApiCustomer";
 import {useUserContext} from "../../context/UserContextProvider";
-import RestaurantItem from "./Restaurant";
-import ReviewItem from "./Review";
+import RestaurantItem from "./RestaurantList";
+import ReviewItem from "./ReviewList";
 import {useUpdate} from "../../hooks/useUpdate";
 import {useToggle} from "../../hooks/useToggle";
+import {useApi} from "../../hooks/useApi";
 
 const UserDetails = () => {
     const {user, logout} = useUserContext();
-    const {getUserById, deleteUserById, editUser} = useApiUser();
+    const {get, put, remove} = useApi();
     const [userDetails, setUserDetails] = useState({
-        name: "",
-        surname: "",
-        email: "",
+        name: undefined,
+        surname: undefined,
+        email: undefined,
         submissionTime: null,
         ownership: false
     });
@@ -23,27 +23,22 @@ const UserDetails = () => {
     const {updateDataObject} = useUpdate(userDetails, setUserDetails)
 
     useEffect(() => {
-        getUserById(user)
-            .then(response => {
-                setUserDetails({
-                    name: response.name,
-                    surname: response.surname,
-                    email: response.email,
-                    submissionTime: response.submissionTime,
-                    ownership: response.ownership ? "Yes" : "No"
-                })
-            })
+        get("api/v1/customers/" + user + "/details", {})
+            .then(response => setUserDetails(response))
     }, []);
 
     const handleSaveChanges = () => {
-        editUser(userDetails, user)
+        put("api/v1/customers/" + user, {
+            name: userDetails.name,
+            surname: userDetails.surname
+        })
         toggle()
     }
 
     const handleDeleteProfile = () => {
         const confirmation = window.confirm("Are you sure you want to delete the profile??");
         if (confirmation) {
-            deleteUserById(user)
+            remove("api/v1/customers/" + user)
                 .then(() => {
                     logout()
                     navigate('/main-page')
@@ -60,7 +55,7 @@ const UserDetails = () => {
                         <label className="details-text">Name:</label>
                         <input name="name" value={userDetails.name} onChange={updateDataObject}/>
                         <label className="details-text">Surname:</label>
-                        <input name="name" value={userDetails.surname} onChange={updateDataObject}/>
+                        <input name="surname" value={userDetails.surname} onChange={updateDataObject}/>
                         <button className="edit-button" onClick={handleSaveChanges}>Save changes</button>
                     </div>
                 ) : (
@@ -70,7 +65,7 @@ const UserDetails = () => {
                         <span className="details-text">Email: {userDetails.email}</span>
                         <span className="details-text">Created: {userDetails.submissionTime}</span>
                         <span className="details-text">Ownership: {userDetails.ownership}</span>
-                        <button className="edit-button" onClick={handleSaveChanges}>Edit data</button>
+                        <button className="edit-button" onClick={toggle}>Edit data</button>
                         <button className="delete-button" onClick={handleDeleteProfile}>Delete profile</button>
                     </div>
                 )}

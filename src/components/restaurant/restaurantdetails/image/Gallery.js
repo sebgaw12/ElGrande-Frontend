@@ -5,22 +5,13 @@ import mockPhoto4 from "../../../../images/mock-photo4.jpg";
 import mockPhoto5 from "../../../../images/mock-photo5.jpg";
 import {useState} from "react";
 import ModalForImages from "./ModalForImages";
+import {useToggle} from "../../../../hooks/useToggle";
 
 const Gallery = () => {
-
     const images = [mockPhoto1, mockPhoto2, mockPhoto3, mockPhoto4, mockPhoto5]
 
-    const [modalOpen, setModalOpen] = useState(false)
+    const {isOpen, toggle} = useToggle()
     const [currentIndex, setCurrentIndex] = useState(0)
-
-    const openModal = (index) => {
-        setCurrentIndex(index)
-        setModalOpen(true)
-    }
-
-    const closeModal = () => {
-        setModalOpen(false)
-    }
 
     const showNextImage = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -38,7 +29,7 @@ const Gallery = () => {
                 {images.map((image, index) => (
                     <div key={index}
                          className="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 p-2 cursor-pointer"
-                         onClick={() => openModal(index)}
+                         onClick={toggle}
                     >
                         <img src={image}
                              alt={`Image ${index + 1}`}
@@ -47,12 +38,12 @@ const Gallery = () => {
                 ))}
             </div>
 
-            <ModalForImages closeModal={closeModal}
+            <ModalForImages closeModal={toggle}
                             showPrevImage={showPrevImage}
                             showNextImage={showNextImage}
                             currentIndex={currentIndex}
                             images={images}
-                            modalOpen={modalOpen}/>
+                            modalOpen={isOpen}/>
 
         </div>
     )

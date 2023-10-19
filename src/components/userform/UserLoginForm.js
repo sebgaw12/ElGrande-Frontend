@@ -1,38 +1,40 @@
 import {TEInput} from "tw-elements-react";
 import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLink";
 import Divider from "../restaurantform/elements/form/Divider";
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, {useReducer, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
-import {MAIN_PAGE} from "../../constants/RoutePaths";
+import {SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
 import {useUserContext} from "../../context/UserContextProvider";
-import {useApiAuth} from "../../api/ApiAuth";
 import {useUpdate} from "../../hooks/useUpdate";
+import GoogleIcon from "../restaurantform/elements/social/GoogleIcon";
+import {useApi} from "../../hooks/useApi";
 
 const UserLoginForm = () => {
-    const {loginUser} = useApiAuth()
     const [userCredentials, setUserCredentials] = useState(
         {
             email: "",
             password: ""
         })
-    const navigate = useNavigate()
-    const {login} = useUserContext()
     const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
-
+    const navigate = useNavigate()
+    const {post} = useApi()
+    const {login} = useUserContext()
     const onLoginClicked = () => {
-        loginUser(userCredentials).then(response => {
-            login(response)
-            navigate(MAIN_PAGE)
-            toast.success('Zalogowano poprawnie!', {
-                position: "top-center"
+        post("api/v1/auths/jwt/login", userCredentials)
+            .then(response => {
+                login(response)
+                navigate("/")
+                toast.success('Zalogowano poprawnie!', {
+                    position: "top-center"
+                })
             })
-        }).catch((error) => {
-            console.error(error)
-            toast.error('Podałeś niepoprawne dane, spróbuj ponownie', {
-                position: "top-center"
+            .catch((error) => {
+                console.error(error)
+                toast.error('Podałeś niepoprawne dane, spróbuj ponownie', {
+                    position: "top-center"
+                })
             })
-        })
     }
 
     return (
@@ -62,10 +64,10 @@ const UserLoginForm = () => {
                 Sign in
             </button>
             <Divider text={'OR'}/>
-            {/* todo: dont use google login*/}
-            {/*<Link to={SERVER_URL_GOOGLE}>*/}
-            {/*    <GoogleIcon/>*/}
-            {/*</Link>*/}
+
+            <Link to={SERVER_URL_GOOGLE}>
+                <GoogleIcon/>
+            </Link>
         </div>
     )
 }

@@ -3,13 +3,14 @@ import {Link, useNavigate} from 'react-router-dom';
 import {TEInput, TERipple} from "tw-elements-react";
 import {StyleLongButton} from "../../styles/styles";
 import Divider from "../restaurantform/elements/form/Divider";
-import {LOGIN_URL} from "../../constants/RoutePaths";
+import {LOGIN_URL, SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
 import {toast} from "react-toastify";
-import {useApiAuth} from "../../api/ApiAuth";
 import {useUpdate} from "../../hooks/useUpdate";
+import {useApi} from "../../hooks/useApi";
+import GoogleIcon from "../restaurantform/elements/social/GoogleIcon";
 
 const UserRegisterForm = () => {
-    const {signupUser} = useApiAuth()
+    const {post} = useApi()
     const [userCredentials, setUserCredentials] = useState({
         name: "",
         surname: "",
@@ -24,7 +25,7 @@ const UserRegisterForm = () => {
         e.preventDefault()
 
         if (userCredentials.password === userCredentials.passwordRepeat) {
-            signupUser(userCredentials)
+            post("api/v1/auths/jwt/signup", userCredentials)
                 .then(() => {
                     navigate(LOGIN_URL)
                 })
@@ -103,10 +104,9 @@ const UserRegisterForm = () => {
                 </TERipple>
                 {/* <!-- Divider --> */}
                 <Divider/>
-                {/* todo: dont use google login*/}
-                {/*<Link to={SERVER_URL_GOOGLE}>*/}
-                {/*    <GoogleIcon/>*/}
-                {/*</Link>*/}
+                <Link to={SERVER_URL_GOOGLE}>
+                    <GoogleIcon/>
+                </Link>
             </form>
         </div>
     );

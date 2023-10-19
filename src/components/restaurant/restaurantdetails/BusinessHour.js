@@ -1,16 +1,18 @@
 import {useContext, useEffect, useState} from "react";
 import {RestaurantContext} from "../../../context/RestaurantContextProvider";
-import {useApiBusinessHour} from "../../../api/ApiBusinessHour";
+import {useApi} from "../../../hooks/useApi";
 
-const BusinessHour = () => {
+const BusinessHour = ({restaurant}) => {
     const [availableHours, setAvailableHours] = useState([])
-    const {openRestaurant} = useContext(RestaurantContext)
-    const restaurantId = openRestaurant.id
-    const {getAllBusinessHourByRestaurantId} = useApiBusinessHour()
+    const {get} = useApi()
+
+    // const {openRestaurant} = useContext(RestaurantContext)
+    // const restaurantId = openRestaurant.id
 
     useEffect(() => {
-        getAllBusinessHourByRestaurantId(restaurantId).then(response => setAvailableHours(response))
-    }, [restaurantId]);
+        get("api/v1/business-hours", {restaurantId: restaurant.id})
+            .then(response => setAvailableHours(response))
+    }, []);
 
     const formatTime = (time) => {
         const DECIMAL_SYSTEM = 10

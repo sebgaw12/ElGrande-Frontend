@@ -13,11 +13,10 @@ import UserDetails from "../components/user/UserDetails";
 import {useEffect} from "react";
 
 const Routing = () => {
-    const {user, authenticate} = useUserContext()
+    const {authenticate} = useUserContext()
+
     useEffect(() => {
-        if (!user) {
-            authenticate()
-        }
+        authenticate()
     }, []);
 
     return (

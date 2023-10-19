@@ -6,11 +6,11 @@ import RestaurantForm from './subcomponents/RestaurantForm';
 import AddressForm from './subcomponents/AddressForm';
 import BusinessHourForm from './subcomponents/BusinessHourForm';
 import ImageForm from './subcomponents/ImageForm';
-import {useApiForm} from "../../api/ApiForm";
+import {useApi} from "../../hooks/useApi";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);
-    const {postRestaurant} = useApiForm()
+    const {post} = useApi()
     const AMOUNT_OF_DAYS = 7
 
     const [restaurant, setRestaurant] = useState({
@@ -58,7 +58,7 @@ function Form() {
             businessHour: businessHour,
             address: address
         }
-        postRestaurant(updatedData)
+        post("api/v1/forms/restaurant", updatedData)
     };
 
     return (
