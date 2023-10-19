@@ -17,8 +17,8 @@ const MapComponent = () => {
 
     const [viewPort, setViewPort] = useState({
         // coordinates of Warsaw
-        latitude: latitude,
-        longitude: longitude,
+        latitude: 52.248871,
+        longitude: 21.013103,
         zoom: 10
     })
 
