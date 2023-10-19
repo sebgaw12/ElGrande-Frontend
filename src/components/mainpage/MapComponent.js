@@ -7,13 +7,6 @@ import useGeolocation from "./useGeolocation";
 const MapComponent = () => {
 
     const {REACT_APP_MAP_API_KEY, REACT_APP_MAP_STYLE} = process.env
-    const {
-        loading,
-        error,
-        data: {latitude, longitude}
-    } = useGeolocation({enableHighAccuracy: true})
-
-    console.log(latitude, longitude);
 
     const [viewPort, setViewPort] = useState({
         // coordinates of Warsaw
