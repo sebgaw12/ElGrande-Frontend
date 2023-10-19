@@ -2,6 +2,7 @@ import Footer from "../footer/Footer";
 import AllRestaurants from "../restaurant/AllRestaurants";
 import Header from "../header/Header";
 import MapComponent from "./MapComponent";
+import GeolocationComponent from "./GeolocationComponent";
 
 const MainPage = () => {
 
@@ -10,8 +11,8 @@ const MainPage = () => {
             <Header/>
             <main className="flex">
                 <AllRestaurants/>
-                {/*<img className={"w-1/2 border-gray-400 h-[90vh]"} alt="map" src={mapPlaceholder}/>*/}
                 <MapComponent/>
+                {/*<GeolocationComponent/>*/}
             </main>
             <Footer/>
         </div>
