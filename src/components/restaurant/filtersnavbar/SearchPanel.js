@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {useUpdate} from "../../../hooks/useUpdate";
 
-function SearchPanel({filterRestaurants, formData}) {
-    const [restaurantName, setRestaurantName] = useState()
+function SearchPanel({filterRestaurants}) {
+    const [restaurantName, setRestaurantName] = useState({
+        name: ''
+    })
     const {updateDataObject} = useUpdate(restaurantName, setRestaurantName)
     const handleSearch = () => {
-        filterRestaurants({name: restaurantName})
+        filterRestaurants(restaurantName)
     }
 
     return (
@@ -18,6 +20,7 @@ function SearchPanel({filterRestaurants, formData}) {
                         placeholder="Restaurant Name"
                         aria-label="Search"
                         aria-describedby="button-addon3"
+                        name={"name"}
                         onChange={updateDataObject}
                     />
 

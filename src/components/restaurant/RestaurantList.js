@@ -7,7 +7,6 @@ import Loader from "./Loader";
 import {useApi} from "../../hooks/useApi";
 
 const RestaurantList = () => {
-    // todo fix infinity scroll
     const [restaurants, setRestaurants] = useState([]);
     const [pageable, setPageable] = useState({
         page: 0,
@@ -34,18 +33,19 @@ const RestaurantList = () => {
 
     return (
         <div>
-            <FiltersHeader restaurants={restaurants}/>
+            <FiltersHeader setRestaurants={setRestaurants}/>
             <div className="overflow-y-auto flex flex-col bg-gray-200 h-[84vh] min-w-[50vw]">
-                <InfiniteScroll
-                    dataLength={restaurants.length}
-                    next={fetchRestaurants}
-                    hasMore={true}
-                    loader={<Loader/>}>
+                {/*todo: fix infinity scroll + handler when no result instead of loading*/}
+                {/*<InfiniteScroll*/}
+                {/*    dataLength={restaurants.length}*/}
+                {/*    next={fetchRestaurants}*/}
+                {/*    hasMore={true}*/}
+                {/*    loader={<Loader/>}>*/}
                     {restaurants.map((restaurant, index) => <Restaurant
                         key={index}
                         restaurant={restaurant}/>
                     )}
-                </InfiniteScroll>
+                {/*</InfiniteScroll>*/}
             </div>
         </div>
     )

@@ -6,6 +6,7 @@
  * @returns {{updateDataObject: updateDataObject, updateDataList: updateDataList}}
  */
 export const useUpdate = (data, dataUpdateFunction) => {
+
     /**
      * This function uses
      *

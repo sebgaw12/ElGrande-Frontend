@@ -12,8 +12,12 @@ import qs from "qs";
 export const useApi = () => {
     const {storedLocalStorage, setLocalStorage} = useLocalStorage(REFRESH_TOKEN, '')
     const {setCookie} = useCookie(JWT_TOKEN, '')
-    const axiosInstance = axios.create({
-        withCredentials: true
+    const axiosInstance = axios.create()
+    // todo {jwt-decode library} to make 2 request instead of 3 by checking expiration time of a token
+    axiosInstance.interceptors.request.use(config => {
+        config.baseURL = SERVER_URL
+        config.withCredentials = true
+        return config
     })
 
     axiosInstance.interceptors.response.use(response => {
@@ -44,7 +48,7 @@ export const useApi = () => {
      * @returns {Promise<axios.AxiosResponse<any>>}
      */
     const get = (urlEndpoint, params) => {
-        return axiosInstance.get(SERVER_URL + urlEndpoint, {
+        return axiosInstance.get(urlEndpoint, {
             params: params,
             paramsSerializer: params => {
                 return qs.stringify(params)
@@ -68,7 +72,7 @@ export const useApi = () => {
      * @returns {Promise<axios.AxiosResponse<any>>}
      */
     const post = (urlEndpoint, data) => {
-        return axiosInstance.post(SERVER_URL + urlEndpoint,
+        return axiosInstance.post(urlEndpoint,
             JSON.stringify(data), {
                 headers: {
                     "Content-Type": "application/json"
@@ -92,7 +96,7 @@ export const useApi = () => {
      * @returns {Promise<axios.AxiosResponse<any>>}
      */
     const put = (urlEndpoint, data) => {
-        return axiosInstance.put(SERVER_URL + urlEndpoint,
+        return axiosInstance.put(urlEndpoint,
             JSON.stringify(data), {
                 headers: {
                     "Content-Type": "application/json"
@@ -115,7 +119,7 @@ export const useApi = () => {
      * @returns {Promise<axios.AxiosResponse<any>>}
      */
     const remove = (urlEndpoint) => {
-        return axiosInstance.delete(SERVER_URL + urlEndpoint)
+        return axiosInstance.delete(urlEndpoint)
             .then(response => {
                 return response
             })

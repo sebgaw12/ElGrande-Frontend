@@ -17,32 +17,34 @@ import {
     TERipple
 } from "tw-elements-react";
 import {useToggle} from "../../../hooks/useToggle";
-import {useApi} from "../../../hooks/useApi";
 import {useUpdate} from "../../../hooks/useUpdate";
 
 
 export default function FiltersModal({filterRestaurants}) {
     // todo: Handle List of Inputs
-    const [formData, setFormData] = useState( {
+    const [formData, setFormData] = useState({
         name: [],
-        city: '',
+        city: undefined,
         category: [],
         dishName: []
     })
     const {updateDataObject} = useUpdate(formData, setFormData)
     const {isOpen, toggle} = useToggle();
 
+    const addToList = (e) => {
+    }
+
     // const handleInputChange = (e) => {
-        // const {name, value} = e.target;
-        //
-        // setFormData((prevData) => ({
-        //     ...prevData,
-        //     [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
-        // }));
-        //
-        // if (e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category')) {
-        //     setFormData({...formData, [name]: []});
-        // }
+    // const {name, value} = e.target;
+    //
+    // setFormData((prevData) => ({
+    //     ...prevData,
+    //     [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
+    // }));
+    //
+    // if (e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category')) {
+    //     setFormData({...formData, [name]: []});
+    // }
     // };
 
     const handleSubmit = (e) => {

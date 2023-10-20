@@ -1,7 +1,7 @@
 import {TEInput} from "tw-elements-react";
 import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLink";
 import Divider from "../restaurantform/elements/form/Divider";
-import React, {useReducer, useState} from "react";
+import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import {SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
