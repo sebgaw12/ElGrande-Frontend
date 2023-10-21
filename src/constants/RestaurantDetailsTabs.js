@@ -1,0 +1,5 @@
+export const DETAILS = 'details'
+export const ADDRESS = 'address'
+export const REVIEWS = 'reviews'
+export const MENU = 'menu'
+export const OPENING_HOURS = 'openingHours'

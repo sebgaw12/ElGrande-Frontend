@@ -1,16 +1,21 @@
-import {useEffect, useState} from "react";
-import {ApiAddress} from "../../../api/ApiAddress";
+import {useContext, useEffect, useState} from "react";
+import {RestaurantContext} from "../../../context/RestaurantContextProvider";
+import {useApi} from "../../../hooks/useApi";
 
-const Address = (props) => {
-
+const Address = ({restaurant}) => {
     const [addressDetails, setAddressDetails] = useState({})
+    const {get} = useApi()
+
+    // const {openRestaurant} = useContext(RestaurantContext)
+    // const restaurantId = openRestaurant.id
 
     useEffect(() => {
-        ApiAddress.getAddressByRestaurantId(props.id).then(response => setAddressDetails(response))
-    }, [props.id]);
+        get("api/v1/addresses", {restaurantId: restaurant.id})
+            .then(response => {setAddressDetails(response)})
+    }, []);
 
     return (
-        <div>
+        <div className="text-2xl">
             <div>Adres</div>
             <div>Państwo: {addressDetails.country}</div>
             <div>Miasto: {addressDetails.city}</div>

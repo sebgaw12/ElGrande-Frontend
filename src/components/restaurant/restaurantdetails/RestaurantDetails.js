@@ -1,63 +1,77 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Address from "./Address";
 import BusinessHour from "./BusinessHour";
-import Reviews from "./reviews/Reviews";
+import ReviewList from "./reviews/ReviewList";
 import Details from "./Details";
-import {ApiRestaurant} from "../../../api/ApiRestaurant";
-import Menus from "./menu/Menus";
+import MenuList from "./menu/MenuList";
+import {ADDRESS, DETAILS, MENU, OPENING_HOURS, REVIEWS} from "../../../constants/RestaurantDetailsTabs";
+import ImageComponent from "./image/ImageComponent";
 
-const RestaurantDetails = (props) => {
-
-    const DETAILS = 'details'
-    const ADDRESS = 'address'
-    const REVIEWS = 'reviews'
-    const MENU = 'menu'
-    const OPENING_HOURS = 'openingHours'
-
-    const [restaurantDetails, setRestaurantDetails] = useState({})
+const RestaurantDetails = ({toggle, restaurant}) => {
     const [activeComponent, setActiveComponent] = useState(DETAILS)
+    const buttonStyle = `bg-white text-blue-500 hover:bg-blue-700 
+                                hover:text-white font-bold py-2 px-4 rounded-lg m-2`
 
-    const {id} = props
-
-    useEffect(() => {
-        ApiRestaurant.getRestaurantDetailsById(props.id).then(response => setRestaurantDetails(response))
-    }, [id]);
-
+// todo change request for restaurant details to response average grade
     const renderActiveComponent = () => {
         switch (activeComponent) {
             case DETAILS:
-                return <Details id={restaurantDetails.id} data={restaurantDetails}/>
+                return <Details restaurant={restaurant}/>
             case ADDRESS:
-                return <Address id={restaurantDetails.id}/>
+                return <Address restaurant={restaurant}/>
             case MENU:
-                return <Menus id={restaurantDetails.id}/>
+                return <MenuList restaurant={restaurant}/>
             case REVIEWS:
-                return <Reviews id={restaurantDetails.id}/>
+                return <ReviewList restaurant={restaurant}/>
             case OPENING_HOURS:
-                return <BusinessHour id={restaurantDetails.id}/>
+                return <BusinessHour restaurant={restaurant}/>
             default:
-                return <Details id={restaurantDetails.id}/>
+                return <Details restaurant={restaurant}/>
         }
     }
 
     return (
         <div className="flex flex-col gap-4 justify-center w-full">
             <div className="col-span-2 m-0 flex justify-center">
-                <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(ADDRESS)}>Adres
+
+                <button className={buttonStyle}
+                        onClick={() => setActiveComponent(ADDRESS)}>
+                    Adres
                 </button>
-                <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(MENU)}>Menu</button>
-                <button className="m-2 p-1 border-black border-2" onClick={() => setActiveComponent(REVIEWS)}>Opinie
+
+                <button className={buttonStyle}
+                        onClick={() => setActiveComponent(MENU)}>
+                    Menu
                 </button>
-                <button className="m-2 p-1 border-black border-2"
-                        onClick={() => setActiveComponent(OPENING_HOURS)}>Godziny otwarcia
+
+                <button className={buttonStyle}
+                        onClick={() => setActiveComponent(REVIEWS)}>
+                    Opinie
                 </button>
-                <button className="m-2 p-1 border-black border-2"
-                        onClick={() => setActiveComponent(DETAILS)}>Szczegóły
+
+                <button className={buttonStyle}
+                        onClick={() => setActiveComponent(OPENING_HOURS)}>
+                    Godziny otwarcia
+                </button>
+
+                <button className={buttonStyle}
+                        onClick={() => setActiveComponent(DETAILS)}>
+                    Szczegóły
+                </button>
+
+                <button onClick={toggle}
+                        className={buttonStyle}
+                >Ukryj
                 </button>
             </div>
-            <div className="row-span-2 col-span-2">
-                {renderActiveComponent()}
+            <div className="flex">
+                <div className="w-1/2 h-auto">
+                    <ImageComponent/>
+                    {/*<Gallery/>*/}
+                </div>
+                <div className="ml-4 w-1/2 kalam">{renderActiveComponent()}</div>
             </div>
+
         </div>
     )
 }
