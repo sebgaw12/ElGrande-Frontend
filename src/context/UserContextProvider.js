@@ -24,6 +24,13 @@ export const UserProvider = ({children}) => {
         setUser(userData.customerId)
     }
 
+    const removeUserCredentialsFromStorage = () => {
+        removeCookie(JWT_TOKEN)
+        removeLocalStorage(REFRESH_TOKEN)
+        removeLocalStorage(CUSTOMER_ID)
+        setUser(null)
+    }
+
     const logout = () => {
         post("api/v1/auths/jwt/logout")
             .then(() => {
@@ -49,7 +56,7 @@ export const UserProvider = ({children}) => {
     }
 
     return (
-        <UserContext.Provider value={{user, login, logout, authenticate}}>
+        <UserContext.Provider value={{user, login, logout, authenticate, removeUserCredentialsFromStorage}}>
             {children}
         </UserContext.Provider>
     )

@@ -7,9 +7,10 @@ import ReviewItem from "./ReviewList";
 import {useUpdate} from "../../hooks/useUpdate";
 import {useToggle} from "../../hooks/useToggle";
 import {useApi} from "../../hooks/useApi";
+import {toast} from "react-toastify";
 
 const UserDetails = () => {
-    const {user, logout} = useUserContext();
+    const {user, removeUserCredentialsFromStorage} = useUserContext();
     const {get, put, remove} = useApi();
     const [userDetails, setUserDetails] = useState({
         name: undefined,
@@ -31,6 +32,10 @@ const UserDetails = () => {
         put("api/v1/customers/" + user, {
             name: userDetails.name,
             surname: userDetails.surname
+        }).then(() => {
+            toast.success('Zapisano zmiany!', {
+                position: "top-center"
+            })
         })
         toggle()
     }
@@ -40,7 +45,7 @@ const UserDetails = () => {
         if (confirmation) {
             remove("api/v1/customers/" + user)
                 .then(() => {
-                    logout()
+                    removeUserCredentialsFromStorage()
                     navigate('/main-page')
                 })
         }
