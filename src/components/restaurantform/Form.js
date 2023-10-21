@@ -2,15 +2,16 @@ import React, {useState} from "react";
 import {Link} from 'react-router-dom';
 import IconArrowTurnLeft from './elements/icons/IconArrowTurnLeft';
 import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
-import RestaurantRegisterBasics from './subcomponents/RestaurantRegisterBasics';
-import RestaurantRegisterAddress from './subcomponents/RestaurantRegisterAddress';
-import RestaurantRegisterBusinessHours from './subcomponents/RestaurantRegisterBusinessHours';
-import RestaurantRegisterImages from './subcomponents/RestaurantRegisterImages';
-import {useApiForm} from "../../api/ApiForm";
+import RestaurantForm from './subcomponents/RestaurantForm';
+import AddressForm from './subcomponents/AddressForm';
+import BusinessHourForm from './subcomponents/BusinessHourForm';
+import ImageForm from './subcomponents/ImageForm';
+import {useApi} from "../../hooks/useApi";
 
-function RestaurantRegisterForm() {
+function Form() {
     const [currentPage, setCurrentPage] = useState(1);
-    const {postRestaurant} = useApiForm()
+    const {post} = useApi()
+    const AMOUNT_OF_DAYS = 7
 
     const [restaurant, setRestaurant] = useState({
         name: '',
@@ -34,15 +35,19 @@ function RestaurantRegisterForm() {
         longitude: 1.5
     })
 
-    const [businessHour, setBusinessHour] = useState([])
+    const initBusinessHour = []
 
-    const updateData = (updateFunction) => (e) => {
-        updateFunction((prevData) => ({
-            ...prevData,
-            [e.target.name]: e.target.value
-        }))
+    for (let i = 0; i < AMOUNT_OF_DAYS; i++) {
+        initBusinessHour.push({
+                dayOfWeek: i + 1,
+                openingHour: '08:00',
+                closingHour: '16:00'
+            }
+        )
     }
 
+
+    const [businessHour, setBusinessHour] = useState(initBusinessHour)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -53,11 +58,8 @@ function RestaurantRegisterForm() {
             businessHour: businessHour,
             address: address
         }
-        console.log(updatedData)
-        postRestaurant(updatedData)
-
+        post("api/v1/forms/restaurant", updatedData)
     };
-
 
     return (
         <section className="h-screen">
@@ -70,14 +72,14 @@ function RestaurantRegisterForm() {
 
                 <form onSubmit={handleSubmit} className="container grid grid-cols-1">
                     {currentPage === 1 && (
-                        <RestaurantRegisterBasics formData={restaurant}
-                                                  onChange={updateData}/>)}
+                        <RestaurantForm data={restaurant}
+                                        setDataFunction={setRestaurant}/>)}
                     {currentPage === 2 && (
-                        <RestaurantRegisterAddress formData={address} onChange={updateData}/>)}
+                        <AddressForm data={address} setDataFunction={setAddress}/>)}
                     {currentPage === 3 && (
-                        <RestaurantRegisterBusinessHours formData={businessHour}
-                                                         onChange={updateData}/>)}
-                    {currentPage === 4 && (<RestaurantRegisterImages/>)}
+                        <BusinessHourForm data={businessHour}
+                                          setDataFunction={setBusinessHour}/>)}
+                    {currentPage === 4 && (<ImageForm/>)}
                     {currentPage === 4 && (<button className={StyleNormalButton}>Send data</button>)}
                 </form>
 
@@ -95,10 +97,9 @@ function RestaurantRegisterForm() {
                         </button>)
                     }
                 </div>
-
             </div>
         </section>
     );
 }
 
-export default RestaurantRegisterForm;
+export default Form;

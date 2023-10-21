@@ -1,5 +1,4 @@
 import React, {createContext, useCallback, useState} from "react";
-import {useApiRestaurant} from "../api/ApiRestaurant";
 
 export const RestaurantContext = createContext({
     openRestaurant: {},
@@ -12,13 +11,13 @@ export const RestaurantContext = createContext({
 export const RestaurantContextProvider = ({children}) => {
 
     const [openRestaurant, setOpenRestaurant] = useState({})
-    const {getDetailedRestaurantById} = useApiRestaurant()
+    // const {getDetailedRestaurantById} = useApiRestaurant()
 
     const updateOpenRestaurant = useCallback((restaurantId) => {
-        getDetailedRestaurantById(restaurantId)
-            .then((details) => {
-                setOpenRestaurant(details)
-            })
+        // getDetailedRestaurantById(restaurantId)
+        //     .then((details) => {
+        //         setOpenRestaurant(details)
+        //     })
     }, [])
 
     const handleRestaurantClick = (restaurant) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function RestaurantRegisterImages({ formData, onChange })
+function ImageForm({ formData, onChange })
 {
     return(
         <div className="flex items-center justify-center w-full">
@@ -18,4 +18,4 @@ function RestaurantRegisterImages({ formData, onChange })
     );
 }
 
-export default RestaurantRegisterImages;
+export default ImageForm;

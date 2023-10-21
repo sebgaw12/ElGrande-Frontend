@@ -1,14 +1,13 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Address from "./Address";
 import BusinessHour from "./BusinessHour";
-import Reviews from "./reviews/Reviews";
+import ReviewList from "./reviews/ReviewList";
 import Details from "./Details";
-import Menus from "./menu/Menus";
+import MenuList from "./menu/MenuList";
 import {ADDRESS, DETAILS, MENU, OPENING_HOURS, REVIEWS} from "../../../constants/RestaurantDetailsTabs";
-import Gallery from "./image/Gallery";
 import ImageComponent from "./image/ImageComponent";
 
-const RestaurantDetails = ({onToggle, averageGrade}) => {
+const RestaurantDetails = ({toggle, restaurant}) => {
     const [activeComponent, setActiveComponent] = useState(DETAILS)
     const buttonStyle = `bg-white text-blue-500 hover:bg-blue-700 
                                 hover:text-white font-bold py-2 px-4 rounded-lg m-2`
@@ -17,17 +16,17 @@ const RestaurantDetails = ({onToggle, averageGrade}) => {
     const renderActiveComponent = () => {
         switch (activeComponent) {
             case DETAILS:
-                return <Details averageGrade={averageGrade}/>
+                return <Details restaurant={restaurant}/>
             case ADDRESS:
-                return <Address/>
+                return <Address restaurant={restaurant}/>
             case MENU:
-                return <Menus/>
+                return <MenuList restaurant={restaurant}/>
             case REVIEWS:
-                return <Reviews/>
+                return <ReviewList restaurant={restaurant}/>
             case OPENING_HOURS:
-                return <BusinessHour/>
+                return <BusinessHour restaurant={restaurant}/>
             default:
-                return <Details averageGrade={averageGrade}/>
+                return <Details restaurant={restaurant}/>
         }
     }
 
@@ -60,7 +59,7 @@ const RestaurantDetails = ({onToggle, averageGrade}) => {
                     Szczegóły
                 </button>
 
-                <button onClick={onToggle}
+                <button onClick={toggle}
                         className={buttonStyle}
                 >Ukryj
                 </button>

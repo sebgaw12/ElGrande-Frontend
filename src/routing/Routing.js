@@ -2,23 +2,21 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import LandingPage from "../components/landingpage/LandingPage";
 import MainPage from "../components/mainpage/MainPage";
 import Error from "../components/error/ErrorPage";
-import RestaurantRegisterForm from "../components/restaurantform/RestaurantRegisterForm";
+import Form from "../components/restaurantform/Form";
 import {ProtectedRoute} from "../authentication/ProtectedRoute";
 import {LOGIN_URL, MAIN_PAGE, PROFILE_URL, RESTAURANT, SIGNUP_URL} from "../constants/RoutePaths";
 import UserLogin from "../components/userform/UserLogin";
 import {useUserContext} from "../context/UserContextProvider";
-import {useEffect} from "react";
 import {UnauthorizedRoute} from "../authentication/UnauthorizedRoute";
 import UserRegister from "../components/userform/UserRegister";
 import UserDetails from "../components/user/UserDetails";
+import {useEffect} from "react";
 
 const Routing = () => {
-    const {user, authenticate} = useUserContext()
+    const {authenticate} = useUserContext()
 
     useEffect(() => {
-        if (!user) {
-            authenticate()
-        }
+        authenticate()
     }, []);
 
     return (
@@ -39,7 +37,7 @@ const Routing = () => {
                 }/>
                 <Route path={RESTAURANT} element={
                     <ProtectedRoute>
-                        <RestaurantRegisterForm/>
+                        <Form/>
                     </ProtectedRoute>
                 }/>
                 <Route path={PROFILE_URL} element={

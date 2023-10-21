@@ -1,6 +1,8 @@
 import React from 'react';
+import {useUpdate} from "../../../hooks/useUpdate";
 
-function RestaurantRegisterAddress({ formData, onChange }) {
+function AddressForm({data, setDataFunction}) {
+    const {updateDataObject} = useUpdate(data, setDataFunction)
 
     return (
         <>
@@ -9,50 +11,50 @@ function RestaurantRegisterAddress({ formData, onChange }) {
                 type='string'
                 name='country'
                 placeholder='Country'
-                onChange={onChange}
-                value={formData.country}
+                onChange={updateDataObject}
+                value={data.country}
             />
             <input
                 className="mb-4"
                 type='string'
                 name='city'
                 placeholder='City'
-                onChange={onChange}
-                value={formData.city}
+                onChange={updateDataObject}
+                value={data.city}
             />
             <input
                 className="mb-4"
                 type='string'
                 name='postalCode'
                 placeholder='Postal Code'
-                onChange={onChange}
-                value={formData.postalCode}
+                onChange={updateDataObject}
+                value={data.postalCode}
             />
             <input
                 className="mb-4"
                 type='string'
                 name='street'
                 placeholder='Street'
-                onChange={onChange}
-                value={formData.street}
+                onChange={updateDataObject}
+                value={data.street}
             />
             <input
                 className="mb-4"
                 type='string'
                 name='streetNumber'
                 placeholder='Street Number'
-                onChange={onChange}
-                value={formData.streetNumber}
+                onChange={updateDataObject}
+                value={data.streetNumber}
             />
             <textarea
                 className="mb-4"
                 name='additionalDetails'
                 placeholder='Additional Details'
-                onChange={onChange}
-                value={formData.additionalDetails}
+                onChange={updateDataObject}
+                value={data.additionalDetails}
             />
         </>
     );
 }
 
-export default RestaurantRegisterAddress;
+export default AddressForm;

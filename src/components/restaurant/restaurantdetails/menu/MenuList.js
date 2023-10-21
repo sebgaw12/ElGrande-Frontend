@@ -1,19 +1,20 @@
 import {useContext, useEffect, useState} from "react";
 import Menu from "./Menu";
-import {useApiDish} from "../../../../api/ApiDish";
 import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
+import {useApi} from "../../../../hooks/useApi";
 
 
-const Menus = () => {
+const MenuList = ({restaurant}) => {
 
     const [menu, setMenu] = useState([])
-    const {getDishByRestaurantId} = useApiDish()
-    const {openRestaurant} = useContext(RestaurantContext)
-    const restaurantId = openRestaurant.id
+    const {get} = useApi()
+    // const {openRestaurant} = useContext(RestaurantContext)
+    // const restaurantId = openRestaurant.id
 
     useEffect(() => {
-        getDishByRestaurantId(restaurantId).then(response => setMenu(response))
-    }, [restaurantId]);
+        get("api/v1/dishes", {restaurantId: restaurant.id})
+            .then(response => setMenu(response))
+    }, []);
 
     return (
         <>
@@ -26,4 +27,4 @@ const Menus = () => {
     )
 }
 
-export default Menus
+export default MenuList

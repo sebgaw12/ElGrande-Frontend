@@ -1,13 +1,11 @@
 import React, {useState} from "react";
-import RatingStar from '../star/RatingStar';
-import Dropdown from './Dropdown';
 import {
     filterLogo,
     styleModalCancelButton,
     styleModalHeader,
     styleModalSaveButton,
     styleOpenModalButton
-} from './FiltersModal.style';
+} from './FiltersModal.styles';
 import {
     TEInput,
     TEModal,
@@ -18,51 +16,40 @@ import {
     TEModalHeader,
     TERipple
 } from "tw-elements-react";
-import {useApiRestaurant} from "../../api/ApiRestaurant";
-import {useToggle} from "../../hooks/useToggle";
+import {useToggle} from "../../../hooks/useToggle";
+import {useUpdate} from "../../../hooks/useUpdate";
 
 
-export default function FiltersModal() {
-
-    const {isOpen, toggle} = useToggle();
-    const sortTypes = ["DESC", "ASC"];
-    const sortTypesAsText = ["oceny malejąco", "oceny rosnąco"];
-    const {getFilteredRestaurant} = useApiRestaurant()
-
-    const [sortType, setSortType] = useState(sortTypes[0]);
-
+export default function FiltersModal({filterRestaurants}) {
+    // todo: Handle List of Inputs
     const [formData, setFormData] = useState({
+        name: [],
         city: undefined,
         category: [],
-        dishName: [],
-        reviewMin: undefined,
-        reviewMax: undefined,
-        reviewSort: "ASC",
-    });
+        dishName: []
+    })
+    const {updateDataObject} = useUpdate(formData, setFormData)
+    const {isOpen, toggle} = useToggle();
 
-    const handleInputChange = (e) => {
-        const {name, value} = e.target;
+    const addToList = (e) => {
+    }
 
-
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
-        }));
-
-        if (e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category')) {
-            setFormData({...formData, [name]: []});
-        }
-
-    };
+    // const handleInputChange = (e) => {
+    // const {name, value} = e.target;
+    //
+    // setFormData((prevData) => ({
+    //     ...prevData,
+    //     [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
+    // }));
+    //
+    // if (e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category')) {
+    //     setFormData({...formData, [name]: []});
+    // }
+    // };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-
-        console.log("SENDING DATA: ", formData);
-        getFilteredRestaurant(formData).then((restaurants) => {
-            console.log("RESPONSE: ", restaurants);
-        });
-
+        e.preventDefault()
+        filterRestaurants(formData)
         toggle();
     };
 
@@ -72,7 +59,7 @@ export default function FiltersModal() {
                 <button
                     type="button"
                     className={styleOpenModalButton}
-                    onClick={() => toggle()}
+                    onClick={toggle}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -101,13 +88,22 @@ export default function FiltersModal() {
                         </TEModalHeader>
 
                         <TEModalBody>
+                            <label htmlFor="modal-input-name">Nazwa: </label>
+                            <TEInput
+                                id="modal-input-city"
+                                placeholder="Nazwa"
+                                name="name"
+                                value={formData.name}
+                                onChange={updateDataObject}
+                            />
+
                             <label htmlFor="modal-input-city">Miasto: </label>
                             <TEInput
                                 id="modal-input-city"
                                 placeholder="Warszawa"
                                 name="city"
                                 value={formData.city}
-                                onChange={handleInputChange}
+                                onChange={updateDataObject}
                             />
 
                             <label htmlFor="modal-input-category">Kategoria: </label>
@@ -115,8 +111,8 @@ export default function FiltersModal() {
                                 id="modal-input-category"
                                 placeholder="bar mleczny"
                                 name="category"
-                                value={formData.category.join(",")}
-                                onChange={handleInputChange}
+                                value={formData.category}
+                                onChange={updateDataObject}
                             />
 
                             <label htmlFor="modal-input-dish">Potrawa: </label>
@@ -124,17 +120,8 @@ export default function FiltersModal() {
                                 id="modal-input-dish"
                                 placeholder="frytki i cola"
                                 name="dishName"
-                                value={formData.dishName.join(",")}
-                                onChange={handleInputChange}
-                            />
-
-                            <RatingStar className="mb-4 mt-4" initialValue={1} labelText="Min. rating: "/>
-                            <RatingStar initialValue={5} labelText="Max. rating: "/>
-
-                            <Dropdown
-                                className="m-2"
-                                title="Sortuj"
-                                elements={sortTypesAsText}
+                                value={formData.dishName}
+                                onChange={updateDataObject}
                             />
 
                         </TEModalBody>
@@ -143,7 +130,7 @@ export default function FiltersModal() {
                                 <button
                                     type="button"
                                     className={styleModalCancelButton}
-                                    onClick={() => toggle()}
+                                    onClick={toggle}
                                 >
                                     Anuluj
                                 </button>

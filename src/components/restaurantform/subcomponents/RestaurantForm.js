@@ -1,8 +1,9 @@
-// BasicDataForm.jsx
-import React, {useState} from 'react';
+import React from 'react';
+import {useUpdate} from "../../../hooks/useUpdate";
 
-function RestaurantRegisterBasics({ formData, onChange })
-{
+function RestaurantForm({data, setDataFunction}) {
+    const {updateDataObject} = useUpdate(data, setDataFunction)
+
     return (
         <>
             <input
@@ -10,42 +11,42 @@ function RestaurantRegisterBasics({ formData, onChange })
                 type='text'
                 name='name'
                 placeholder='name'
-                onChange={onChange}
-                value={formData.name}
+                onChange={updateDataObject}
+                value={data.name}
             />
             <textarea
                 className="mb-4"
                 name='description'
                 placeholder='description'
-                onChange={onChange}
-                value={formData.description}
+                onChange={updateDataObject}
+                value={data.description}
             />
             <input
                 className="mb-4"
                 type='text'
                 name='website'
                 placeholder='website'
-                onChange={onChange}
-                value={formData.website}
+                onChange={updateDataObject}
+                value={data.website}
             />
             <input
                 className="mb-4"
                 type='tel'
                 name='contactNumber'
                 placeholder='Contact Number'
-                onChange={onChange}
-                value={formData.contactNumber}
+                onChange={updateDataObject}
+                value={data.contactNumber}
             />
             <input
                 className="mb-4"
                 type='email'
                 name='contactEmail'
                 placeholder='Contact Email'
-                onChange={onChange}
-                value={formData.contactEmail}
+                onChange={updateDataObject}
+                value={data.contactEmail}
             />
         </>
     );
 }
 
-export default RestaurantRegisterBasics;
+export default RestaurantForm;

@@ -1,19 +1,16 @@
 import RestaurantDetails from "./restaurantdetails/RestaurantDetails";
+import {useToggle} from "../../hooks/useToggle";
 
-const Restaurant = (props) => {
-
+const Restaurant = ({restaurant}) => {
     const shadowOutside = 'shadow-md shadow-gray-500'
     const shadowInside = 'shadow-inner shadow-gray-500'
 
-    const {isOpen, restaurant, onToggle} = props
+    const {isOpen, toggle} = useToggle()
 
     const displayRestaurantDetails = () => {
         return (
             <>
-                <RestaurantDetails id={restaurant.id}
-                                   onToggle={onToggle}
-                                   averageGrade={restaurant.averageGrade != null
-                                       ? restaurant.averageGrade.toFixed(1) : 'Brak oceny'}/>
+                <RestaurantDetails toggle={toggle} restaurant={restaurant}/>
             </>
         )
     }
@@ -21,7 +18,7 @@ const Restaurant = (props) => {
     const hideRestaurantDetails = () => {
         return (
             <div className="flex flex-row justify-around"
-                 onClick={onToggle}>
+                 onClick={toggle}>
                 <div className="p-2">{restaurant != null ? restaurant.name : null}</div>
                 <div className="p-2">{restaurant != null && restaurant.averageGrade != null
                     ? restaurant.averageGrade.toFixed(1) : 'Brak oceny'}</div>
