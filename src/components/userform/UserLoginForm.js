@@ -18,23 +18,10 @@ const UserLoginForm = () => {
         })
     const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
     const navigate = useNavigate()
-    const {post} = useApi()
     const {login} = useUserContext()
     const onLoginClicked = () => {
-        post("api/v1/auths/jwt/login", userCredentials)
-            .then(response => {
-                login(response)
-                navigate("/")
-                toast.success('Zalogowano poprawnie!', {
-                    position: "top-center"
-                })
-            })
-            .catch((error) => {
-                console.error(error)
-                toast.error('Podałeś niepoprawne dane, spróbuj ponownie', {
-                    position: "top-center"
-                })
-            })
+        login(userCredentials)
+        navigate("/")
     }
 
     return (

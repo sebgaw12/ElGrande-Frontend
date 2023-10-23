@@ -2,40 +2,51 @@ import axios from "axios";
 import {SERVER_URL} from "../constants/RoutePaths";
 import {useLocalStorage} from "./useLocalStorage";
 import {JWT_TOKEN, REFRESH_TOKEN} from "../constants/UserCredentials";
-import {useCookie} from "./useCookie";
 import qs from "qs";
+import {useJwtDecode} from "./useJwtDecode";
 
 /**
- * Hooks for with interceptors that returns a {response.data} from axios library
+ * Hooks with interceptors that returns a {response.data} from axios library
  * @returns {{post: (function(*, *): Promise<axios.AxiosResponse<any>>), get: (function(*, *): Promise<axios.AxiosResponse<any>>), remove: (function(*): Promise<axios.AxiosResponse<any>>), put: (function(*, *): Promise<axios.AxiosResponse<any>>)}}
  */
 export const useApi = () => {
-    const {storedLocalStorage, setLocalStorage} = useLocalStorage(REFRESH_TOKEN, '')
-    const {setCookie} = useCookie(JWT_TOKEN, '')
+    const {getLocalStorage: getRefreshToken, setLocalStorage: setRefreshToken} = useLocalStorage(REFRESH_TOKEN, '')
+    const {getLocalStorage: getJwtToken, setLocalStorage: setJwtToken} = useLocalStorage(JWT_TOKEN, '')
+    const {hasTokenExpired} = useJwtDecode()
+
     const axiosInstance = axios.create()
-    // todo {jwt-decode library} to make 2 request instead of 3 by checking expiration time of a token
-    axiosInstance.interceptors.request.use(config => {
+
+    axiosInstance.interceptors.request.use(async config => {
         config.baseURL = SERVER_URL
+        config.headers.Authorization = getJwtToken()
+        config.headers["Content-Type"] = "application/json"
         config.withCredentials = true
+
+        if (hasTokenExpired(getJwtToken())) {
+            await axios.post(SERVER_URL + "api/v1/auths/jwt/refresh", {
+                token: getRefreshToken()
+            }, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": getJwtToken()
+                }
+            })
+                .then(response => {
+                    setRefreshToken(response.data.refreshToken)
+                    setJwtToken(response.data.type + " " + response.data.accessToken)
+
+                    config.headers.Authorization = getJwtToken()
+                })
+                .catch(error => {
+                    console.error("Error fetching data from refreshing token endpoint: " + error)
+                })
+        }
         return config
     })
 
     axiosInstance.interceptors.response.use(response => {
         return response.data
     }, error => {
-        const {config, response} = error;
-
-        if (response.status === 401) {
-            return post("api/v1/auths/jwt/refresh", {token: storedLocalStorage})
-                .then(response => {
-                    setLocalStorage(response.refreshToken)
-                    setCookie(response.accessToken)
-                    return axiosInstance(config)
-                })
-                .catch(error => {
-                    console.error("Error fetching data from refreshing token endpoint: " + error)
-                })
-        }
         return Promise.reject(error)
     })
 
@@ -49,8 +60,7 @@ export const useApi = () => {
      */
     const get = (urlEndpoint, params) => {
         return axiosInstance.get(urlEndpoint, {
-            params: params,
-            paramsSerializer: params => {
+            params: params, paramsSerializer: params => {
                 return qs.stringify(params)
             }
         })
@@ -72,12 +82,7 @@ export const useApi = () => {
      * @returns {Promise<axios.AxiosResponse<any>>}
      */
     const post = (urlEndpoint, data) => {
-        return axiosInstance.post(urlEndpoint,
-            JSON.stringify(data), {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+        return axiosInstance.post(urlEndpoint, JSON.stringify(data))
             .then(response => {
                 return response
             })
@@ -96,12 +101,7 @@ export const useApi = () => {
      * @returns {Promise<axios.AxiosResponse<any>>}
      */
     const put = (urlEndpoint, data) => {
-        return axiosInstance.put(urlEndpoint,
-            JSON.stringify(data), {
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+        return axiosInstance.put(urlEndpoint, JSON.stringify(data))
             .then(response => {
                 return response
             })

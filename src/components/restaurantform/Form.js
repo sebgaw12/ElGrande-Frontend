@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import IconArrowTurnLeft from './elements/icons/IconArrowTurnLeft';
 import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
 import RestaurantForm from './subcomponents/RestaurantForm';
@@ -11,6 +11,7 @@ import {useApi} from "../../hooks/useApi";
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);
     const {post} = useApi()
+    const navigate = useNavigate()
     const AMOUNT_OF_DAYS = 7
 
     const [restaurant, setRestaurant] = useState({
@@ -59,6 +60,9 @@ function Form() {
             address: address
         }
         post("api/v1/forms/restaurant", updatedData)
+            .then(() => {
+                navigate("/main-page")
+            })
     };
 
     return (
