@@ -1,7 +1,8 @@
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import 'mapbox-gl/dist/mapbox-gl.css'
 import {GeolocateControl, Map, Marker, NavigationControl, Popup, ScaleControl} from "react-map-gl"
 import pin from "./pin.png"
+import {useApi} from "../../hooks/useApi";
 
 const MapComponent = () => {
 
@@ -15,28 +16,29 @@ const MapComponent = () => {
     })
 
     const [popUpInfo, setPopUpInfo] = useState(null)
+    const [places, setPlaces] = useState([])
+    const {get} = useApi()
 
-    const places = [{
-        latitude: 52.248871,
-        longitude: 21.013103,
-        info: "new information"
-    }, {
-        latitude: 52.231923,
-        longitude: 21.006726,
-        info: "new information2"
-    }, {
-        latitude: 52.239145,
-        longitude: 21.046087,
-        info: "new information3"
-    }, {
-        latitude: 52.214225,
-        longitude: 21.035417,
-        info: "new information4"
-    }, {
-        latitude: 52.249947,
-        longitude: 21.013049,
-        info: "new information5"
-    }]
+    useEffect(() => {
+        get("api/v1/locations", null)
+            .then((resp) => {
+                console.log('response from api');
+                console.log(resp)
+                const newPlaces = resp.map((item) => ({
+                    latitude: item.latitude,
+                    longitude: item.longitude,
+                    restaurants: [{
+                        name: item.restaurants[0].name,
+                        description: item.restaurants[0].description,
+                        website: item.restaurants[0].website
+                    }]
+                }))
+                setPlaces(newPlaces)
+            })
+            .catch((error) => {
+                console.error("An error occurred:", error);
+            })
+    }, []);
 
     const pins = useMemo(
         () => places.map((place, index) => (
@@ -51,7 +53,7 @@ const MapComponent = () => {
                 }}>
                 <img src={pin} alt="pin"/>
             </Marker>
-        )), []
+        )), [places]
     )
 
     return (
@@ -78,7 +80,7 @@ const MapComponent = () => {
                         latitude={popUpInfo.latitude}
                         onClose={() => setPopUpInfo(null)}>
                         <div>
-                            {popUpInfo.info}
+                            {popUpInfo.restaurants[0].name}
                         </div>
                     </Popup>
                 )}
@@ -87,5 +89,5 @@ const MapComponent = () => {
         </div>
     )
 }
-
+// todo clear magic numbers
 export default MapComponent

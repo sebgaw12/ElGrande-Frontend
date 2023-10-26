@@ -42,7 +42,7 @@ export const useMapbox = () => {
             latitude: resp.features[0].center[1],
             longitude: resp.features[0].center[0]
         }
-
+//todo clear magic numbers, write javadocs
         /**
          *
          * */
