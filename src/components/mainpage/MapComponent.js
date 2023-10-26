@@ -2,7 +2,6 @@ import React, {useMemo, useState} from "react";
 import 'mapbox-gl/dist/mapbox-gl.css'
 import {GeolocateControl, Map, Marker, NavigationControl, Popup, ScaleControl} from "react-map-gl"
 import pin from "./pin.png"
-import useGeolocation from "./useGeolocation";
 
 const MapComponent = () => {
 
