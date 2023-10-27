@@ -9,10 +9,10 @@ const MapComponent = () => {
     const {REACT_APP_MAP_API_KEY, REACT_APP_MAP_STYLE} = process.env
 
     const [viewPort, setViewPort] = useState({
-        // coordinates of Warsaw
-        latitude: 52.248871,
-        longitude: 21.013103,
-        zoom: 10
+        // coordinates of center of Poland
+        latitude: 52.088787,
+        longitude: 19.4002665,
+        zoom: 6
     })
 
     const [popUpInfo, setPopUpInfo] = useState(null)
