@@ -41,6 +41,7 @@ export const useApi = () => {
                     console.error("Error fetching data from refreshing token endpoint: " + error)
                 })
         }
+
         return config
     })
 

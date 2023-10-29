@@ -43,13 +43,6 @@ export const UserProvider = ({children}) => {
             })
     }
 
-    // const removeUserCredentialsFromStorage = () => {
-    //     removeJwtToken(JWT_TOKEN)
-    //     removeRefreshToken(REFRESH_TOKEN)
-    //     removeCustomerId(CUSTOMER_ID)
-    //     setUser(null)
-    // }
-
     const logout = () => {
         post("api/v1/auths/jwt/logout")
             .then(() => {
