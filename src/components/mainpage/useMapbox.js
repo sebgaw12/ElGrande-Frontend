@@ -26,6 +26,13 @@ export const useMapbox = () => {
             })
     }
 
+    /**
+     * Converts address data from a Mapbox API response into structured address and coordinates.
+     * Response returns array of addresses sorted by relevance.
+     *
+     * @param {object} address - The address data used as input for the conversion.
+     * @returns {object} An object containing structured address and coordinates.
+     */
     const setAddressFromMapApi = async (address) => {
         const resp = await getFullAddressFromResponse(address)
         const responseAddress = resp.features[0].place_name
@@ -38,14 +45,19 @@ export const useMapbox = () => {
             country: /,([^,]+)$/
         }
 
+        /**
+         * center[1] and center[0] represents indexes for the latitude and longitude in response
+         * @type {{latitude: number, longitude: number}}
+         */
         const newCoordinates = {
             latitude: resp.features[0].center[1],
             longitude: resp.features[0].center[0]
         }
-//todo clear magic numbers, write javadocs
+
         /**
-         *
-         * */
+         * Match function returns array containing the results of that search. Indexes are best matches for searching.
+         * @type {{country: string, city: string, streetNumber: string, street: string, postalCode: string, additionalDetails: (string|null)}}
+         */
         const newAddress = {
             country: responseAddress.match(regex.country)[1].trim(),
             city: responseAddress.match(regex.city)[2],

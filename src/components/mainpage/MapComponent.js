@@ -22,18 +22,13 @@ const MapComponent = () => {
     useEffect(() => {
         get("api/v1/locations", null)
             .then((resp) => {
-                console.log('response from api');
-                console.log(resp)
                 const newPlaces = resp.map((item) => ({
                     latitude: item.latitude,
                     longitude: item.longitude,
-                    restaurants: [{
-                        name: item.restaurants[0].name,
-                        description: item.restaurants[0].description,
-                        website: item.restaurants[0].website
-                    }]
+                    restaurants: item.restaurants
                 }))
                 setPlaces(newPlaces)
+                console.log(newPlaces);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
@@ -79,9 +74,14 @@ const MapComponent = () => {
                         longitude={popUpInfo.longitude}
                         latitude={popUpInfo.latitude}
                         onClose={() => setPopUpInfo(null)}>
-                        <div>
-                            {popUpInfo.restaurants[0].name}
-                        </div>
+                        {popUpInfo.restaurants.map((restaurant, index) => (
+                            <div key={index}>
+                                <p>{restaurant.name}</p>
+                                <p>{restaurant.description}</p>
+                                <p>{restaurant.contactNumber}</p>
+                                <hr/>
+                            </div>
+                        ))}
                     </Popup>
                 )}
 
@@ -89,5 +89,4 @@ const MapComponent = () => {
         </div>
     )
 }
-// todo clear magic numbers
 export default MapComponent
