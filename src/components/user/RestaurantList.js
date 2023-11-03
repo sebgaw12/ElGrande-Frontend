@@ -1,30 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import "./Review.css"
-import {useUserContext} from "../../context/UserContextProvider";
-import {useToggle} from "../../hooks/useToggle";
-import {useApi} from "../../hooks/useApi";
 
-const RestaurantItem = () => {
-    const {user} = useUserContext();
-    const [restaurants, setRestaurants] = useState([])
-    const {isOpen, toggle} = useToggle()
-    const {get} = useApi();
-
-    const handleShowRestaurant = () => {
-        get("api/v1/restaurants", {customerId: user})
-            .then(response => setRestaurants(response))
-        toggle()
-    }
-
+const RestaurantItem = ({isRestaurantOpen, restaurants}) => {
 
     return (
         <div className="restaurants">
-            <div>
-                <button className="show-button" onClick={handleShowRestaurant}>
-                    {isOpen ? "Hide restaurants" : "Show restaurants"}
-                </button>
-            </div>
-            {isOpen && (
+            {isRestaurantOpen && (
                 <div className="restaurant-list">
                     {restaurants.map((restaurant) =>
                         <div className="restaurant-item">
