@@ -22,9 +22,7 @@ const MapComponent = () => {
     useEffect(() => {
         get("api/v1/locations", null)
             .then((resp) => {
-                console.log('response from api');
-                console.log(resp)
-                const newPlaces = resp.map((item) => ({
+                const newPlaces = resp.map((item) =>     ({
                     latitude: item.latitude,
                     longitude: item.longitude,
                     restaurants: [{
@@ -40,8 +38,7 @@ const MapComponent = () => {
             })
     }, []);
 
-    const pins = useMemo(
-        () => places.map((place, index) => (
+    const pins = useMemo(() => places.map((place, index) => (
             <Marker
                 key={`marker-${index}`}
                 longitude={place.longitude}

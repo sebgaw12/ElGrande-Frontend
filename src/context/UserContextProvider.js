@@ -16,11 +16,11 @@ export const UserProvider = ({children}) => {
         removeLocalStorage: removeCustomerId
     } = useLocalStorage(CUSTOMER_ID, '')
     const {
-        storedItem: jwtToken, setLocalStorage: setJwtToken,
+        setLocalStorage: setJwtToken,
         removeLocalStorage: removeJwtToken
     } = useLocalStorage(JWT_TOKEN, '')
     const {
-        storedItem: refreshToken, setLocalStorage: setRefreshToken,
+        setLocalStorage: setRefreshToken,
         removeLocalStorage: removeRefreshToken
     } = useLocalStorage(REFRESH_TOKEN, '')
 

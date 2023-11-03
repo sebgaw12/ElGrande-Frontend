@@ -8,9 +8,12 @@ import BusinessHourForm from './subcomponents/BusinessHourForm';
 import ImageForm from './subcomponents/ImageForm';
 import {useApi} from "../../hooks/useApi";
 import {useMapbox} from "../mainpage/useMapbox";
+import {useLocalStorage} from "../../hooks/useLocalStorage";
+import {CUSTOMER_ID} from "../../constants/UserCredentials";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);
+    const {getLocalStorage} = useLocalStorage(CUSTOMER_ID, '')
     const {post} = useApi()
     const navigate = useNavigate()
     const AMOUNT_OF_DAYS = 7
@@ -55,7 +58,8 @@ function Form() {
             restaurant: restaurant,
             location: newCoordinates,
             businessHour: businessHour,
-            address: newAddress
+            address: newAddress,
+            customerId: getLocalStorage()
         }
         post("api/v1/forms/restaurant", updatedData)
             .then(() => {
