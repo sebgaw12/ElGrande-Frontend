@@ -1,5 +1,4 @@
 #profile {
-    background-color: #e0ffcd;
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -14,17 +13,23 @@
     min-height: 15vh;
     width: 30vw;
     min-width: 40vh;
-    margin-bottom: 2vh;
+    margin: 0 0 2vh 2vh;
 }
 
 #details-header {
-    font-size: 3vh;
-    margin-left: 1vw;
-    margin-top: 1vh;
+    font-size: 5vh;
+    margin: 1vh 0 0 1vw;
+}
+
+.details {
+    background-color: #c1c0b9;
+    border: solid black 0.2vh;
+    border-radius: 1vh;
+    margin: 0 2vh 2vh;
 }
 
 .details-text {
-    font-size: 1.5vh;
+    font-size: 3vh;
     margin-left: 1.5vw;
 }
 
@@ -38,8 +43,7 @@
     height: 5vh;
     width: 15vw;
     min-width: 25vh;
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    margin: 2vh 0 2vh;
     transition: 1s;
 }
 
@@ -51,11 +55,14 @@
 
 
 .edit-button{
+    height: 5vh;
+    width: 8vw;
     background-color: #a2c11c;
+    padding: 0.25rem;
     text-align: center;
     border: solid black;
     border-radius: 5px;
-    margin: 5px 5px 5px 5px;
+    margin: 5px;
     transition: 1s;
 }
 
@@ -66,7 +73,10 @@
 }
 
 .delete-button {
-    margin-top: 5px;
+    height: 5vh;
+    width: 8vw;
+    margin: 5px;
+    padding: 0.25rem;
     border: solid black 2px;
     border-radius: 4px;
     background-color: #d63447;

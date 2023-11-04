@@ -51,7 +51,8 @@ export const RestaurantContextProvider = ({children}) => {
             restaurants,
             handleRestaurantClick,
             openedRestaurantId,
-            updateOpenRestaurant
+            updateOpenRestaurant,
+            setRestaurants
         }}>
             {children}
         </RestaurantContext.Provider>

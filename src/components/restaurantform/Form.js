@@ -7,9 +7,9 @@ import AddressForm from './subcomponents/AddressForm';
 import BusinessHourForm from './subcomponents/BusinessHourForm';
 import ImageForm from './subcomponents/ImageForm';
 import {useApi} from "../../hooks/useApi";
-import {useMapbox} from "../mainpage/useMapbox";
 import {useLocalStorage} from "../../hooks/useLocalStorage";
 import {CUSTOMER_ID} from "../../constants/UserCredentials";
+import {useMapbox} from "../../hooks/useMapbox";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);

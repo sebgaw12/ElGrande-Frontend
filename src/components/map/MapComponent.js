@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from "react";
 import 'mapbox-gl/dist/mapbox-gl.css'
 import {GeolocateControl, Map, Marker, NavigationControl, Popup, ScaleControl} from "react-map-gl"
-import pin from "./pin.png"
+import pin from "../../images/pin.png"
 import {useApi} from "../../hooks/useApi";
 
 const MapComponent = () => {
@@ -28,7 +28,6 @@ const MapComponent = () => {
                     restaurants: item.restaurants
                 }))
                 setPlaces(newPlaces)
-                console.log(newPlaces);
             })
             .catch((error) => {
                 console.error("An error occurred:", error);
