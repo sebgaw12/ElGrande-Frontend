@@ -1,35 +1,59 @@
-import React, {createContext, useCallback, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
+import {useApi} from "../hooks/useApi";
 
-export const RestaurantContext = createContext({
-    openRestaurant: {},
-    handleRestaurantClick: () => {
-    },
-    updateOpenRestaurant: () => {
-    }
-})
+const RestaurantContext = createContext()
+
+export const useRestaurantContext = () => {
+    return useContext(RestaurantContext)
+}
 
 export const RestaurantContextProvider = ({children}) => {
+    const [restaurants, setRestaurants] = useState([])
+    const [pageable, setPageable] = useState({
+        page: 0,
+        sort: '',
+        size: 15
+    })
+    const [openedRestaurantId, setOpenedRestaurantId] = useState(null)
+    const {get} = useApi()
 
-    const [openRestaurant, setOpenRestaurant] = useState({})
-    // const {getDetailedRestaurantById} = useApiRestaurant()
+    const getRestaurants = () => {
+        get("api/v1/restaurants", pageable)
+            .then(response => {
+                setRestaurants([...restaurants, ...response])
+                setPageable({
+                    ...pageable,
+                    ['page']: pageable.page + 1
+                })
+            })
+    }
 
-    const updateOpenRestaurant = useCallback((restaurantId) => {
-        // getDetailedRestaurantById(restaurantId)
-        //     .then((details) => {
-        //         setOpenRestaurant(details)
-        //     })
-    }, [])
+    const updateOpenRestaurant = (restaurantId) => {
+        get("api/v1/restaurants/" + restaurantId)
+            .then(response => {
+                const updatedRestaurants = restaurants.map(restaurant => {
+                    if (restaurant.id === response.id) {
+                        return {...restaurant, ...response}
+                    }
+                    return restaurant
+                })
+                setRestaurants(updatedRestaurants)
+            })
+    }
 
-    const handleRestaurantClick = (restaurant) => {
-        if (!openRestaurant) {
-            setOpenRestaurant(restaurant)
-            return
-        }
-        setOpenRestaurant(openRestaurant.id === restaurant.id ? null : restaurant)
+    const handleRestaurantClick = (restaurantId) => {
+        setOpenedRestaurantId(openedRestaurantId === restaurantId ? null : restaurantId)
     }
 
     return (
-        <RestaurantContext.Provider value={{openRestaurant, handleRestaurantClick, updateOpenRestaurant}}>
+        <RestaurantContext.Provider value={{
+            getRestaurants,
+            restaurants,
+            handleRestaurantClick,
+            openedRestaurantId,
+            updateOpenRestaurant,
+            setRestaurants
+        }}>
             {children}
         </RestaurantContext.Provider>
     )

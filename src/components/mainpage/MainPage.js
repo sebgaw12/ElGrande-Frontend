@@ -1,8 +1,8 @@
 import Footer from "../footer/Footer";
 import RestaurantList from "../restaurant/RestaurantList";
 import Header from "../header/Header";
-import MapComponent from "./MapComponent";
-import GeolocationComponent from "./GeolocationComponent";
+import MapComponent from "../map/MapComponent";
+import GeolocationComponent from "../map/GeolocationComponent";
 
 const MainPage = () => {
 

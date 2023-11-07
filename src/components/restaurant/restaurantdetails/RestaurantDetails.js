@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Address from "./Address";
 import BusinessHour from "./BusinessHour";
 import ReviewList from "./reviews/ReviewList";
@@ -6,13 +6,17 @@ import Details from "./Details";
 import MenuList from "./menu/MenuList";
 import {ADDRESS, DETAILS, MENU, OPENING_HOURS, REVIEWS} from "../../../constants/RestaurantDetailsTabs";
 import ImageComponent from "./image/ImageComponent";
+import {useRestaurantContext} from "../../../context/RestaurantContextProvider";
 
-const RestaurantDetails = ({toggle, restaurant}) => {
+const RestaurantDetails = ({setIsOpen, restaurant}) => {
+    const {openedRestaurantId, handleRestaurantClick} = useRestaurantContext()
     const [activeComponent, setActiveComponent] = useState(DETAILS)
     const buttonStyle = `bg-white text-blue-500 hover:bg-blue-700 
                                 hover:text-white font-bold py-2 px-4 rounded-lg m-2`
 
-// todo change request for restaurant details to response average grade
+    useEffect(() => {
+        setIsOpen(openedRestaurantId === restaurant.id)
+    }, [openedRestaurantId]);
     const renderActiveComponent = () => {
         switch (activeComponent) {
             case DETAILS:
@@ -59,7 +63,10 @@ const RestaurantDetails = ({toggle, restaurant}) => {
                     Szczegóły
                 </button>
 
-                <button onClick={toggle}
+                <button onClick={() => {
+                    setIsOpen(false)
+                    handleRestaurantClick(restaurant.id)
+                }}
                         className={buttonStyle}
                 >Ukryj
                 </button>

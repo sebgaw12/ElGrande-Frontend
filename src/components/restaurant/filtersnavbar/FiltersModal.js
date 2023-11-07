@@ -31,8 +31,6 @@ export default function FiltersModal({filterRestaurants}) {
     const {updateDataObject} = useUpdate(formData, setFormData)
     const {isOpen, toggle} = useToggle();
 
-    const addToList = (e) => {
-    }
 
     // const handleInputChange = (e) => {
     // const {name, value} = e.target;

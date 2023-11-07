@@ -8,7 +8,7 @@ import {useState} from "react";
  * @returns {{setLocalStorage: setLocalStorage, storedLocalStorage: (any), getLocalStorage: (function(): any), removeLocalStorage: removeLocalStorage, createLocalStorage: createLocalStorage}}
  */
 export const useLocalStorage = (key, initValue) => {
-    const [storedLocalStorage, setStoredLocalStorage] = useState(() => {
+    const [storedItem, setStoredItem] = useState(() => {
         try {
             const item = localStorage.getItem(key)
             return item ? JSON.parse(item) : initValue;
@@ -25,8 +25,8 @@ export const useLocalStorage = (key, initValue) => {
      */
     const setLocalStorage = (value) => {
         try {
-            const valueToStore = value instanceof Function ? value(storedLocalStorage) : value
-            setStoredLocalStorage(valueToStore)
+            const valueToStore = value instanceof Function ? value(storedItem) : value
+            setStoredItem(valueToStore)
             localStorage.setItem(key, JSON.stringify(valueToStore))
         } catch (error) {
             console.error(error)
@@ -44,14 +44,15 @@ export const useLocalStorage = (key, initValue) => {
     }
 
     /**
-     * Sets new item to local storage
+     * Gets item from local storage, it was made because changing value of it
+     * doesn't update it globally
      *
-     * @param key - name of a new item in local storage
-     * @param value - value of that item
+     * @return {String} - Value from local storage
      */
-    const createLocalStorage = (key, value) => {
-        localStorage.setItem(key, JSON.stringify(value))
+    const getLocalStorage = () => {
+        return JSON.parse(localStorage.getItem(key))
     }
 
-    return {storedLocalStorage, setLocalStorage, removeLocalStorage, createLocalStorage}
+
+    return {storedItem, setLocalStorage, removeLocalStorage, getLocalStorage}
 }

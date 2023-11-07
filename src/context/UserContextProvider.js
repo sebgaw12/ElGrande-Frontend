@@ -1,8 +1,8 @@
 import {createContext, useContext, useState} from "react";
-import {useCookie} from "../hooks/useCookie";
 import {CUSTOMER_ID, JWT_TOKEN, REFRESH_TOKEN} from "../constants/UserCredentials";
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import {useApi} from "../hooks/useApi";
+import {toast} from "react-toastify";
 
 const UserContext = createContext()
 export const useUserContext = () => {
@@ -11,43 +11,46 @@ export const useUserContext = () => {
 export const UserProvider = ({children}) => {
     const [user, setUser] = useState(null)
     const {post, get} = useApi()
-    const {storedCookie, setCookie, removeCookie} = useCookie(JWT_TOKEN, '')
     const {
-        storedLocalStorage, setLocalStorage,
-        removeLocalStorage, createLocalStorage
+        storedItem: customerId, setLocalStorage: setCustomerId,
+        removeLocalStorage: removeCustomerId
     } = useLocalStorage(CUSTOMER_ID, '')
+    const {
+        setLocalStorage: setJwtToken,
+        removeLocalStorage: removeJwtToken
+    } = useLocalStorage(JWT_TOKEN, '')
+    const {
+        setLocalStorage: setRefreshToken,
+        removeLocalStorage: removeRefreshToken
+    } = useLocalStorage(REFRESH_TOKEN, '')
 
-    const login = (userData) => {
-        setCookie(userData.token)
-        setLocalStorage(userData.customerId)
-        createLocalStorage(REFRESH_TOKEN, userData.refreshToken)
-        setUser(userData.customerId)
-    }
-
-    const removeUserCredentialsFromStorage = () => {
-        removeCookie(JWT_TOKEN)
-        removeLocalStorage(REFRESH_TOKEN)
-        removeLocalStorage(CUSTOMER_ID)
-        setUser(null)
+    const login = (userCredentials) => {
+        post("api/v1/auths/jwt/login", userCredentials)
+            .then(response => {
+                setUserCredentials(response)
+            })
+            .catch((error) => {
+                console.error(error)
+                toast.error('Podałeś niepoprawne dane, spróbuj ponownie', {
+                    position: "top-center"
+                })
+            })
     }
 
     const logout = () => {
         post("api/v1/auths/jwt/logout")
             .then(() => {
-                removeCookie(JWT_TOKEN)
-                removeLocalStorage(REFRESH_TOKEN)
-                removeLocalStorage(CUSTOMER_ID)
-                setUser(null)
+                removeUserCredentials()
             })
     }
 
     const authenticate = () => {
-        if (storedLocalStorage) {
-            setUser(storedLocalStorage)
-        } else if (!storedCookie) {
+        if (customerId) {
+            setUser(customerId)
+        } else if (!customerId) {
             get("api/v1/auths/oauth2")
                 .then(response => {
-                    login(response)
+                    setUserCredentials(response)
                 })
                 .catch(() => {
                     console.error("OAuth2 authentication failed")
@@ -55,8 +58,29 @@ export const UserProvider = ({children}) => {
         }
     }
 
+    const setUserCredentials = (response) => {
+        setJwtToken(response.type + " " + response.accessToken)
+        setCustomerId(response.customerId)
+        setRefreshToken(response.refreshToken)
+        setUser(response.customerId)
+        toast.success('Zalogowano poprawnie!', {
+            position: "top-center"
+        })
+    }
+
+    const removeUserCredentials = () => {
+        removeJwtToken(JWT_TOKEN)
+        removeRefreshToken(REFRESH_TOKEN)
+        removeCustomerId(CUSTOMER_ID)
+        setUser(null)
+        toast.success('Wylogowano poprawnie', {
+            position: "top-center"
+        })
+    }
+
+
     return (
-        <UserContext.Provider value={{user, login, logout, authenticate, removeUserCredentialsFromStorage}}>
+        <UserContext.Provider value={{user, login, logout, authenticate, removeUserCredentials}}>
             {children}
         </UserContext.Provider>
     )

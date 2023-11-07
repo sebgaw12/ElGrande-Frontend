@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import IconArrowTurnLeft from './elements/icons/IconArrowTurnLeft';
 import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
 import RestaurantForm from './subcomponents/RestaurantForm';
@@ -7,10 +7,15 @@ import AddressForm from './subcomponents/AddressForm';
 import BusinessHourForm from './subcomponents/BusinessHourForm';
 import ImageForm from './subcomponents/ImageForm';
 import {useApi} from "../../hooks/useApi";
+import {useLocalStorage} from "../../hooks/useLocalStorage";
+import {CUSTOMER_ID} from "../../constants/UserCredentials";
+import {useMapbox} from "../../hooks/useMapbox";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);
+    const {getLocalStorage} = useLocalStorage(CUSTOMER_ID, '')
     const {post} = useApi()
+    const navigate = useNavigate()
     const AMOUNT_OF_DAYS = 7
 
     const [restaurant, setRestaurant] = useState({
@@ -30,11 +35,6 @@ function Form() {
         additionalDetails: ''
     })
 
-    const [location, setLocation] = useState({
-        latitude: 1.5,
-        longitude: 1.5
-    })
-
     const initBusinessHour = []
 
     for (let i = 0; i < AMOUNT_OF_DAYS; i++) {
@@ -46,20 +46,27 @@ function Form() {
         )
     }
 
-
     const [businessHour, setBusinessHour] = useState(initBusinessHour)
+    const {setAddressFromMapApi} = useMapbox()
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        const {newCoordinates, newAddress} = await setAddressFromMapApi(address)
+
         const updatedData = {
             restaurant: restaurant,
-            location: location,
+            location: newCoordinates,
             businessHour: businessHour,
-            address: address
+            address: newAddress,
+            customerId: getLocalStorage()
         }
         post("api/v1/forms/restaurant", updatedData)
+            .then(() => {
+                navigate("/main-page")
+            })
     };
+
 
     return (
         <section className="h-screen">

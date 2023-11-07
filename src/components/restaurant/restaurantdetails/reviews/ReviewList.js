@@ -4,7 +4,7 @@ import ModalAddReview from "./ModalAddReview";
 import {useUserContext} from "../../../../context/UserContextProvider";
 import {useApi} from "../../../../hooks/useApi";
 import {useToggle} from "../../../../hooks/useToggle";
-import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
+import {RestaurantContext, useRestaurantContext} from "../../../../context/RestaurantContextProvider";
 
 
 const ReviewList = ({restaurant}) => {
@@ -69,7 +69,7 @@ const ReviewList = ({restaurant}) => {
     const {user} = useUserContext()
     const {get, post} = useApi()
     const {isOpen, toggle} = useToggle()
-    // const {openRestaurant, updateOpenRestaurant} = useContext(RestaurantContext)
+    const {updateOpenRestaurant} = useRestaurantContext()
 
     useEffect(() => {
         get("api/v1/reviews/details", {restaurantId: restaurant.id})
@@ -77,7 +77,6 @@ const ReviewList = ({restaurant}) => {
     }, []);
 
     const handleAddReview = (newReview) => {
-        // todo: fix it in backend to return user
         post("api/v1/reviews", {
             comment: newReview.comment,
             grade: newReview.grade,
@@ -85,8 +84,8 @@ const ReviewList = ({restaurant}) => {
             restaurantId: restaurant.id
         })
             .then(response => {
-                console.log(response)
                 setReviews([...reviews, response])
+                updateOpenRestaurant(restaurant.id)
             })
     }
 

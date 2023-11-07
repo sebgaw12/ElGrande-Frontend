@@ -9,12 +9,12 @@ function App() {
 
     return (
         <div className="App bg-[rgb(255,245,0)] bg-custom-gradient">
-            {/*<RestaurantContextProvider>*/}
+            <RestaurantContextProvider>
                 <UserProvider>
                     <Routing/>
                     <ToastContainer/>
                 </UserProvider>
-            {/*</RestaurantContextProvider>*/}
+            </RestaurantContextProvider>
         </div>
     );
 }

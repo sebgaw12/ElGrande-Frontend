@@ -2,8 +2,10 @@ import React, {useState} from 'react';
 import SearchPanel from './SearchPanel';
 import FiltersPanel from './FiltersPanel';
 import {useApi} from "../../../hooks/useApi";
+import {useRestaurantContext} from "../../../context/RestaurantContextProvider";
 
-function FiltersHeader({setRestaurants}) {
+function FiltersHeader() {
+    const {setRestaurants} = useRestaurantContext();
     const {get} = useApi()
 
     const filterRestaurants = (formData) => {
