@@ -12,7 +12,7 @@ import defaultPerson from "../../images/default_person.png";
 import ReviewRestaurantContainer from "./ReviewRestaurantContainer";
 
 const UserContainer = () => {
-    const {user, removeUserCredentialsFromStorage} = useUserContext();
+    const {user, removeUserCredentials} = useUserContext();
     const {get, put, remove} = useApi();
     const [userDetails, setUserDetails] = useState({
         name: undefined,
@@ -47,7 +47,7 @@ const UserContainer = () => {
         if (confirmation) {
             remove("api/v1/customers/" + user)
                 .then(() => {
-                    removeUserCredentialsFromStorage()
+                    removeUserCredentials()
                     navigate('/main-page')
                 })
         }
