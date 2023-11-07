@@ -1,22 +1,17 @@
 import React, {useState} from 'react';
 import {
+    Hamburger,
+    LeftPanel,
+    Menu,
+    MidPanel,
     NavbarContainer,
-    NavbarLeft,
     NavbarLogo,
-    NavbarMid,
-    NavbarRight,
-    NavbarMenu,
-    NavbarHamburger,
-    NavbarOverlay,
+    Overlay,
     OverlayItems,
-    OverlaySvg,
-} from './Navbar.style';
+    RightPanel
+} from './Navbar.styles';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-    faAddressCard,
-    faRightFromBracket,
-    faCirclePlus,
-} from '@fortawesome/free-solid-svg-icons';
+import {faAddressCard, faCirclePlus, faRightFromBracket,} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
     const [isMenuActive, setIsMenuActive] = useState(false);
@@ -25,49 +20,43 @@ const Navbar = () => {
 
     return (
         <NavbarContainer>
-            <NavbarLeft>
+            <LeftPanel>
                 <NavbarLogo></NavbarLogo>
-            </NavbarLeft>
+            </LeftPanel>
 
-            <NavbarMid></NavbarMid>
+            <MidPanel></MidPanel>
 
-            <NavbarRight>
-                <NavbarMenu className={isMenuActive ? 'active' : ''}>
+            <RightPanel>
+                <Menu className={isMenuActive ? 'active' : ''}>
 
-                    <NavbarHamburger className={isMenuActive ? 'active' : ''} onClick={toggleMenu}>
+                    <Hamburger className={isMenuActive ? 'active' : ''} onClick={toggleMenu}>
                         <span></span>
                         <span></span>
                         <span></span>
-                    </NavbarHamburger>
+                    </Hamburger>
 
-                    <NavbarOverlay>
+                    <Overlay>
                         <OverlayItems>
 
                             <span>
-                                <OverlaySvg>
                                     <FontAwesomeIcon icon={faCirclePlus}/>
-                                </OverlaySvg>
                                 ADD PLACE
                             </span>
 
                             <span>
-                                <OverlaySvg>
                                   <FontAwesomeIcon icon={faAddressCard}/>
-                                </OverlaySvg>
                                 PROFILE
                             </span>
 
                             <span>
-                                <OverlaySvg>
                                   <FontAwesomeIcon icon={faRightFromBracket}/>
-                                </OverlaySvg>
                                 LOGOUT
                               </span>
                         </OverlayItems>
-                    </NavbarOverlay>
+                    </Overlay>
 
-                </NavbarMenu>
-            </NavbarRight>
+                </Menu>
+            </RightPanel>
         </NavbarContainer>
     );
 };

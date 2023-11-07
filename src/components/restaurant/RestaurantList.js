@@ -14,6 +14,7 @@ const RestaurantList = () => {
     return (
         <div>
             <FiltersHeader/>
+            {/*<div className="overflow-y-auto flex flex-col bg-gray-200 h-[84vh] min-w-[50vw]">*/}
             <div>
                 {/*todo: fix infinity scroll + handler when no result instead of loading*/}
                 {/*<InfiniteScroll*/}

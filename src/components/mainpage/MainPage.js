@@ -3,33 +3,36 @@ import RestaurantList from "../restaurant/RestaurantList";
 import Header from "../header/Header";
 import MapComponent from "../map/MapComponent";
 import GeolocationComponent from "../map/GeolocationComponent";
-import {Container, LeftPanel, Link, Nav, NavContainer, RightPanel, RootContainer} from "./MainPage.style";
+import {LeftPanel, MainPageContainer, Nav, RightPanel, StyleFooter} from "./MainPage.styles";
 import Navbar from "../navbar/Navbar";
+import {GlobalStyle} from "../../styles/global.styles";
 
 const MainPage = () => {
 
     return (
-        <RootContainer>
-            <Container>
+        <GlobalStyle>
+            <MainPageContainer>
 
                 <Nav>
-                    <NavContainer>
+                    <div className="nav-content">
                         <Navbar/>
-                    </NavContainer>
+                    </div>
                 </Nav>
 
                 <LeftPanel>
-                    <RestaurantList />
+                    <RestaurantList/>
                 </LeftPanel>
 
                 <RightPanel>
-                    <MapComponent />
+                    <MapComponent/>
                 </RightPanel>
 
-                <Footer>Footer</Footer>
+                <StyleFooter>
+                    <Footer/>
+                </StyleFooter>
 
-            </Container>
-        </RootContainer>
+            </MainPageContainer>
+        </GlobalStyle>
     )
 }
 

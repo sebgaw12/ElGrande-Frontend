@@ -12,6 +12,7 @@ function LandingPage() {
         }, 3000)
     }, [navigate]);
 
+    // todo setTimeout for loading app
     return (
         <LandingPageContainer>
             <Logo></Logo>

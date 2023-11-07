@@ -1,30 +1,10 @@
-import styled, { keyframes } from 'styled-components';
-import logo from "../../images/food-spot-circle-borderless.png"
-
-const overlayAnimation = keyframes`
-  0% {
-    opacity: 0;
-    width: 0;
-  }
-  100% {
-    opacity: 1;
-    width: 98%;
-  }
-`;
-
-const iKeyAnimation = keyframes`
-  0% {
-    transform: translateY(200%);
-  }
-  100% {
-    transform: translateY(0);
-  }
-`;
+import styled from "styled-components";
+import logo from "../../images/food-spot-circle-borderless.png";
 
 export const NavbarContainer = styled.div`
   display: flex;
   background-color: #61dafb;
-  justify-content: flex-start;
+  justify-content: left;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -32,16 +12,16 @@ export const NavbarContainer = styled.div`
   height: 100%;
 `;
 
-export const NavbarLeft = styled.div`
+export const LeftPanel = styled.div`
   width: 40%;
   background: #ffffff;
 `;
 
-export const NavbarMid = styled.div`
+export const MidPanel = styled.div`
   width: 20%;
 `;
 
-export const NavbarRight = styled.div`
+export const RightPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -50,7 +30,7 @@ export const NavbarRight = styled.div`
   background-color: #eef1fc;
 `;
 
-export const NavbarMenu = styled.div`
+export const Menu = styled.div`
   margin-right: 2rem;
   position: relative;
   width: 70px;
@@ -73,7 +53,7 @@ export const NavbarMenu = styled.div`
   }
 `;
 
-export const NavbarOverlay = styled.div`
+export const Overlay = styled.div`
   opacity: 0;
   width: 98%;
   height: 80%;
@@ -98,29 +78,23 @@ export const OverlayItems = styled.div`
   font-size: 10px;
   overflow: hidden;
 
-  &:nth-child(1),
-  &:nth-child(2),
-  &:nth-child(3) {
+  svg {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: translateY(0);
+
+    &:hover {
+      background: #edeef2;
+      border-radius: 5px;
+      box-shadow: -1px -1px 2px #ffffff, inset 3px 3px 4px #f7ff3f3, 3px 3px 4px rgba(221, 210, 212, 0.8745098039), 2px 2px 4px #dadbe4;
+    }
   }
 `;
 
-export const OverlaySvg = styled.svg`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: translateY(0);
-
-  &:hover {
-    background: #edeef2;
-    border-radius: 5px;
-    box-shadow: -1px -1px 2px #ffffff, inset 3px 3px 4px #f7ff3f3, 3px 3px 4px rgba(221, 210, 212, 0.8745098039), 2px 2px 4px #dadbe4;
-  }
-`;
-
-export const NavbarHamburger = styled.div`
+export const Hamburger = styled.div`
   margin: 0 5px 0 0;
   width: 60px;
   height: 50px;
@@ -132,7 +106,7 @@ export const NavbarHamburger = styled.div`
   justify-content: space-evenly;
   z-index: 2;
 
-  & span {
+  span {
     width: 60%;
     height: 6px;
     background: #ff7b00;
@@ -141,20 +115,24 @@ export const NavbarHamburger = styled.div`
     transition: 0.3s ease;
   }
 
-  &:hover span {
-    transform: translateX(5px);
+  &:hover {
+    span {
+      transform: translateX(5px);
+    }
   }
 
-  &:active span:nth-child(1) {
-    transform: rotateZ(45deg) translateY(10px) translateX(10px);
-  }
+  &.active {
+    span:nth-child(1) {
+      transform: rotateZ(45deg) translateY(10px) translateX(10px);
+    }
 
-  &:active span:nth-child(2) {
-    opacity: 0;
-  }
+    span:nth-child(2) {
+      opacity: 0;
+    }
 
-  &:active span:nth-child(3) {
-    transform: rotateZ(-45deg) translateY(-10px) translateX(10px);
+    span:nth-child(3) {
+      transform: rotateZ(-45deg) translateY(-10px) translateX(10px);
+    }
   }
 `;
 
