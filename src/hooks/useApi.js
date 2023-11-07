@@ -67,7 +67,7 @@ export const useApi = () => {
     const get = (urlEndpoint, params) => {
         return axiosInstance.get(urlEndpoint, {
             params: params, paramsSerializer: params => {
-                return qs.stringify(params)
+                return qs.stringify(params, {arrayFormat: "comma"})
             }
         })
             .then(response => {
