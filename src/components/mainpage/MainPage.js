@@ -10,7 +10,7 @@ import {GlobalStyle} from "../../styles/global.styles";
 const MainPage = () => {
 
     return (
-        <GlobalStyle>
+        // <GlobalStyle>
             <MainPageContainer>
 
                 <Nav>
@@ -32,7 +32,7 @@ const MainPage = () => {
                 </StyleFooter>
 
             </MainPageContainer>
-        </GlobalStyle>
+        // </GlobalStyle>
     )
 }
 

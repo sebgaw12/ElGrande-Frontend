@@ -9,14 +9,14 @@ import {GlobalStyle} from "./styles/global.styles";
 function App() {
 
     return (
-        // <GlobalStyle>
+        <GlobalStyle>
             <RestaurantContextProvider>
                 <UserProvider>
                     <Routing/>
                     <ToastContainer/>
                 </UserProvider>
             </RestaurantContextProvider>
-        // </GlobalStyle>
+        </GlobalStyle>
     );
 }
 
