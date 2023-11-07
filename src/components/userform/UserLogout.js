@@ -12,9 +12,6 @@ const UserLogout = () => {
         try {
             logout()
             navigate('/main-page')
-            toast.success('Wylogowano poprawnie', {
-                position: "top-center"
-            })
         } catch (error) {
             toast.error('Wystąpił błąd podczas wylogowywania', {
                 position: "top-center"

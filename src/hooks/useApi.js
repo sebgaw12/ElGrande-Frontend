@@ -7,7 +7,12 @@ import {useJwtDecode} from "./useJwtDecode";
 
 /**
  * Hooks with interceptors that returns a {response.data} from axios library
- * @returns {{post: (function(*, *): Promise<axios.AxiosResponse<any>>), get: (function(*, *): Promise<axios.AxiosResponse<any>>), remove: (function(*): Promise<axios.AxiosResponse<any>>), put: (function(*, *): Promise<axios.AxiosResponse<any>>)}}
+ * @returns {{
+ * post: (function(*, *): Promise<axios.AxiosResponse<any>>),
+ * get: (function(*, *): Promise<axios.AxiosResponse<any>>),
+ * remove: (function(*): Promise<axios.AxiosResponse<any>>),
+ * put: (function(*, *): Promise<axios.AxiosResponse<any>>)
+ * }}
  */
 export const useApi = () => {
     const {getLocalStorage: getRefreshToken, setLocalStorage: setRefreshToken} = useLocalStorage(REFRESH_TOKEN, '')
