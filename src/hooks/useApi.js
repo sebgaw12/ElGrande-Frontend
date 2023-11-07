@@ -67,6 +67,7 @@ export const useApi = () => {
     const get = (urlEndpoint, params) => {
         return axiosInstance.get(urlEndpoint, {
             params: params, paramsSerializer: params => {
+                //TODO: fix list of parameters
                 return qs.stringify(params)
             }
         })
