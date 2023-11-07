@@ -50,7 +50,7 @@ const MapComponent = () => {
     )
 
     return (
-        <div style={{width: "100vw", height: "90vh"}}>
+        <div style={{width: "50vw", height: "90vh"}}>
             <Map
                 {...viewPort}
                 onMove={event => setViewPort(event.viewState)}
