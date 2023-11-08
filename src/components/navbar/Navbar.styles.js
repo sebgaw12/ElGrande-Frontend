@@ -89,7 +89,11 @@ export const OverlayItems = styled.div`
     &:hover {
       background: #edeef2;
       border-radius: 5px;
-      box-shadow: -1px -1px 2px #ffffff, inset 3px 3px 4px #f7ff3f3, 3px 3px 4px rgba(221, 210, 212, 0.8745098039), 2px 2px 4px #dadbe4;
+      box-shadow: 
+            -1px -1px 2px #ffffff, 
+            inset 3px 3px 4px #f7ff3f3, 
+            3px 3px 4px rgba(221, 210, 212, 0.8745098039), 
+            2px 2px 4px #dadbe4;
     }
   }
 `;

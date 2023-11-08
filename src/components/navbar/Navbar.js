@@ -38,23 +38,23 @@ const Navbar = () => {
                     <Overlay>
                         <OverlayItems>
 
-                            {/*<span>*/}
-                            {/*        <FontAwesomeIcon icon={faCirclePlus}/>*/}
-                            {/*    ADD PLACE*/}
-                            {/*</span>*/}
+                            <span>
+                                    <FontAwesomeIcon icon={faCirclePlus}/>
+                                ADD PLACE
+                            </span>
 
-                            {/*<span>*/}
-                            {/*      <FontAwesomeIcon icon={faAddressCard}/>*/}
-                            {/*    PROFILE*/}
-                            {/*</span>*/}
+                            <span>
+                                  <FontAwesomeIcon icon={faAddressCard}/>
+                                PROFILE
+                            </span>
 
-                            {/*<span>*/}
-                            {/*      <FontAwesomeIcon icon={faRightFromBracket}/>*/}
-                            {/*    LOGOUT*/}
-                            {/*  </span>*/}
-                            <span>coś tam</span>
-                            <span>coś tam</span>
-                            <span>coś tam</span>
+                            <span>
+                                  <FontAwesomeIcon icon={faRightFromBracket}/>
+                                LOGOUT
+                              </span>
+                            {/*<span>coś tam</span>*/}
+                            {/*<span>coś tam</span>*/}
+                            {/*<span>coś tam</span>*/}
                         </OverlayItems>
                     </Overlay>
 
