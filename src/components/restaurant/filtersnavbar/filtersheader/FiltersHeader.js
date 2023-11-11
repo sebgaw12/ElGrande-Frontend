@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import SearchPanel from './SearchPanel';
-import FiltersPanel from './FiltersPanel';
-import {useApi} from "../../../hooks/useApi";
-import {useRestaurantContext} from "../../../context/RestaurantContextProvider";
+import SearchPanel from '../searchpanel/SearchPanel';
+import FiltersPanel from '../FiltersPanel';
+import {useApi} from "../../../../hooks/useApi";
+import {useRestaurantContext} from "../../../../context/RestaurantContextProvider";
+import {FilterContainer} from "./FiltersHeader.styles";
 
 function FiltersHeader() {
     const {setRestaurants} = useRestaurantContext();
@@ -17,10 +18,10 @@ function FiltersHeader() {
 
     return (
         <>
-            <div className="flex items-left h-[6vh]">
+            <FilterContainer>
                 <SearchPanel filterRestaurants={filterRestaurants}/>
                 <FiltersPanel filterRestaurants={filterRestaurants}/>
-            </div>
+            </FilterContainer>
         </>
     );
 }
