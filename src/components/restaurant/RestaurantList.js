@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import Restaurant from "./Restaurant";
-import FiltersHeader from "./filtersnavbar/FiltersHeader";
+import FiltersHeader from "./filtersnavbar/filtersheader/FiltersHeader";
 import {useRestaurantContext} from "../../context/RestaurantContextProvider";
 
 const RestaurantList = () => {

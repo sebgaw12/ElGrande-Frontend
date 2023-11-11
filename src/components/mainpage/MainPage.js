@@ -15,20 +15,27 @@ const MainPage = () => {
 
     return (
             <MainPageContainer>
+
                 <NavbarStyle>
                     <Navbar/>
                 </NavbarStyle>
+
                 <ContentContainer>
+
                     <RestaurantListStyle>
                         <RestaurantList/>
                     </RestaurantListStyle>
+
                     <MapComponentStyle>
                         <MapComponent/>
                     </MapComponentStyle>
+
                 </ContentContainer>
+
                 <FooterStyle>
                     <Footer/>
                 </FooterStyle>
+
             </MainPageContainer>
 
     )
