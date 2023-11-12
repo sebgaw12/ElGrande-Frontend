@@ -21,14 +21,12 @@ import {useUpdate} from "../../../hooks/useUpdate";
 
 
 export default function FiltersModal({filterRestaurants}) {
-    // todo: Handle List of Inputs
     const [formData, setFormData] = useState({
         name: [],
         city: [],
         category: [],
         dishName: []
     });
-    const {updateDataObject} = useUpdate(formData, setFormData)
     const {isOpen, toggle} = useToggle();
 
     const Tag = ({ value, onRemove }) => (
@@ -66,24 +64,9 @@ export default function FiltersModal({filterRestaurants}) {
         }));
     };
 
-
-    // const handleInputChange = (e) => {
-    // const {name, value} = e.target;
-    //
-    // setFormData((prevData) => ({
-    //     ...prevData,
-    //     [name]: name === "category" || name === "dishName" ? value.split(",") : undefined,
-    // }));
-    //
-    // if (e.target.value.length === 0 && (e.target.name === 'dishName' || e.target.name === 'category')) {
-    //     setFormData({...formData, [name]: []});
-    // }
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault()
         filterRestaurants(formData)
-        console.log(formData)
         toggle();
     };
 

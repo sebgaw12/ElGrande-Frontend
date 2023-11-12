@@ -10,6 +10,7 @@ import UserDetailsForm from "./UserDetailsForm";
 import UserDetails from "./UserDetails";
 import defaultPerson from "../../images/default_person.png";
 import ReviewRestaurantContainer from "./ReviewRestaurantContainer";
+import UserOwnershipForm from "./UserOwnershipForm";
 
 const UserContainer = () => {
     const {user, removeUserCredentials} = useUserContext();
@@ -19,9 +20,10 @@ const UserContainer = () => {
         surname: undefined,
         email: undefined,
         submissionTime: null,
-        ownership: false
+        ownershipId: null
     });
-    const {isOpen, toggle} = useToggle()
+    const {isOpen: isUserDetailsFormOpen, toggle: setUserDetailsFormOpen} = useToggle()
+    const {isOpen: isOwnershipFormOpen, toggle: setOwnershipFormOpen} = useToggle()
     const navigate = useNavigate()
     const {updateDataObject} = useUpdate(userDetails, setUserDetails)
 
@@ -39,7 +41,7 @@ const UserContainer = () => {
                 position: "top-center"
             })
         })
-        toggle()
+        setUserDetailsFormOpen()
     }
 
     const handleDeleteProfile = () => {
@@ -60,23 +62,30 @@ const UserContainer = () => {
                     <img alt="person" src={defaultPerson}/>
                     <h1 id="details-header" className="p-4">{userDetails.name} {userDetails.surname}</h1>
                 </div>
-                {isOpen ? (
+                {isUserDetailsFormOpen ? (
                     <UserDetailsForm
                         userDetails={userDetails}
                         updateDataObject={updateDataObject}
-                        handleSaveChanges={handleSaveChanges}
-                        toggle={toggle}
+                        toggle={setUserDetailsFormOpen}
+                    />
+                ) : isOwnershipFormOpen ? (
+                    <UserOwnershipForm
+                        isOpen={isOwnershipFormOpen}
+                        toggle={setOwnershipFormOpen}
+                        userDetails={userDetails}
                     />
                 ) : (
                     <UserDetails
                         userDetails={userDetails}
-                        toggle={toggle}
+                        handleSaveChanges={handleSaveChanges}
+                        toggleDetailsForm={setUserDetailsFormOpen}
+                        toggleOwnershipForm={setOwnershipFormOpen}
                         handleDeleteProfile={handleDeleteProfile}
                     />
                 )}
             </div>
             <div className="md:col-span-2">
-                <ReviewRestaurantContainer/>
+                <ReviewRestaurantContainer userDetails={userDetails}/>
             </div>
         </div>
     )

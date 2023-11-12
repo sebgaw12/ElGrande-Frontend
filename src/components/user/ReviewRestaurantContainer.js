@@ -4,13 +4,15 @@ import React, {useState} from "react";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useToggle} from "../../hooks/useToggle";
 import {useApi} from "../../hooks/useApi";
+import OwnedRestaurantItem from "./OwnedRestaurantItem";
 
-const ReviewRestaurantContainer = () => {
+const ReviewRestaurantContainer = ({userDetails}) => {
 
     const {user} = useUserContext()
 
     const {isOpen: isRestaurantOpen, toggle: toggleRestaurants} = useToggle()
     const {isOpen: isReviewOpen, toggle: toggleReview} = useToggle()
+    const {isOpen: isOwnedRestaurantOpen, toggle: toggleOwnedRestaurant} = useToggle()
 
     const [reviews, setReviews] = useState([])
     const [restaurants, setRestaurants] = useState([])
@@ -29,6 +31,8 @@ const ReviewRestaurantContainer = () => {
                 toggleReview()
                 if (isRestaurantOpen) {
                     toggleRestaurants()
+                } else if (isOwnedRestaurantOpen) {
+                    toggleOwnedRestaurant()
                 }
             })
     }
@@ -40,9 +44,25 @@ const ReviewRestaurantContainer = () => {
                 toggleRestaurants()
                 if (isReviewOpen) {
                     toggleReview()
+                } else if (isOwnedRestaurantOpen) {
+                    toggleOwnedRestaurant()
                 }
             })
     }
+
+    const handleShowOwnedRestaurant = () => {
+        get("api/v1/restaurants", {ownershipId: userDetails.ownershipId})
+            .then(response => {
+                setRestaurants(response)
+                toggleOwnedRestaurant()
+                if (isReviewOpen) {
+                    toggleReview()
+                } else if (isRestaurantOpen) {
+                    toggleRestaurants()
+                }
+            })
+    }
+
     return (
         <div className="flex flex-col details">
             <div className="flex-row">
@@ -52,10 +72,14 @@ const ReviewRestaurantContainer = () => {
                 <button className="show-button" onClick={handleShowRestaurant}>
                     {isRestaurantOpen ? "Hide restaurants" : "Show restaurants"}
                 </button>
+                <button className="show-button" onClick={handleShowOwnedRestaurant}>
+                    {isOwnedRestaurantOpen ? "Hide owned restaurants" : "Show owned restaurants"}
+                </button>
             </div>
             <div>
                 <ReviewItem reviews={reviews} handleDeleteReview={handleDeleteReview} isReviewOpen={isReviewOpen}/>
                 <RestaurantItem isRestaurantOpen={isRestaurantOpen} restaurants={restaurants}/>
+                <OwnedRestaurantItem isOwnedRestaurantOpen={isOwnedRestaurantOpen} restaurants={restaurants}/>
             </div>
         </div>
     )
