@@ -3,12 +3,10 @@ import ForgotPasswordLink from "../restaurantform/elements/form/ForgotPasswordLi
 import Divider from "../restaurantform/elements/form/Divider";
 import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
-import {toast} from "react-toastify";
-import {SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
+import {MAIN_PAGE, SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useUpdate} from "../../hooks/useUpdate";
 import GoogleIcon from "../restaurantform/elements/social/GoogleIcon";
-import {useApi} from "../../hooks/useApi";
 
 const UserLoginForm = () => {
     const [userCredentials, setUserCredentials] = useState(
@@ -21,7 +19,7 @@ const UserLoginForm = () => {
     const {login} = useUserContext()
     const onLoginClicked = () => {
         login(userCredentials)
-        navigate("/")
+        navigate(MAIN_PAGE)
     }
 
     return (
