@@ -1,32 +1,29 @@
-import React from "react";
-import {Link} from 'react-router-dom';
+import React, {useEffect} from "react";
 import FoodSpotLogo from "../restaurantform/elements/graphics/FoodSpotLogo";
-import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
-import {StyleRoundedBlueButton} from '../../styles/styles';
 import UserLoginForm from "./UserLoginForm";
+import {Link, useParams} from "react-router-dom";
 
 function UserLogin() {
+    const {endpoint} = useParams()
+
+    useEffect(() => {
+        console.log(endpoint)
+    }, []);
+
     return (
-        <section className="h-screen">
-            <div className="container h-full px-6 py-24">
-                <Link to={"/"}>
-                    <button className={StyleRoundedBlueButton}>
-                        <IconArrowTurnLeft/>
-                    </button>
+        <div className="container h-screen m-auto">
+            <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
+
+                {/* <!-- Left column container with background--> */}
+                <Link to={"/"} className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
+                    <FoodSpotLogo/>
                 </Link>
-                <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
 
-                    {/* <!-- Left column container with background--> */}
-                    <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                        <FoodSpotLogo/>
-                    </div>
-
-                    {/* <!-- Right column container with form --> */}
-                    <UserLoginForm />
-                </div>
+                {/* <!-- Right column container with form --> */}
+                <UserLoginForm/>
             </div>
-        </section>
-    );
+        </div>
+    )
 }
 
 export default UserLogin;

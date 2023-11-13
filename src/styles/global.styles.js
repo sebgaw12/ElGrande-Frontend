@@ -3,11 +3,12 @@ import styled from "styled-components";
 const white = `#FFFFFF`
 const greyLight = `#E4EBF5`
 const greyLight2 = `#c8d0e7`
+const greyLight3 = `#bec8e4`
 const primary = `#6d5dfc`
 const greyDark = `#9baacf`
 
 const innerShadow = `
-    inset .2rem .2rem .5rem ${greyLight}, 
+    inset .2rem .2rem .5rem ${greyLight2}, 
     inset -.2rem -.2rem .5rem ${white}`
 
 const shadow =`
@@ -43,10 +44,35 @@ export const PrimaryBtn = styled.button`
   }
 
   &:active {
-    box-shadow: ${innerShadow};
+    box-shadow: ${innerShadow};  
   }
 
   p {
     font-size: 1.6em;
+  }
+`;
+
+export const PrimaryInput = styled.input`
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+  width: 20.4rem;
+  height: 4rem;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.4rem;
+  padding-left: 1.4rem;
+  margin-bottom: 1rem;
+  box-shadow: ${innerShadow};
+  background: none;
+  font-family: inherit;
+  color: ${greyDark};
+
+  &::placeholder {
+    color: ${greyLight3};
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: ${shadow};
   }
 `;
