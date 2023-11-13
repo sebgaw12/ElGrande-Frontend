@@ -35,7 +35,7 @@ const Navbar = () => {
                         <span></span>
                     </Hamburger>
 
-                    <Overlay>
+                    <Overlay className={isMenuActive ? 'active' : ''}>
                         <OverlayItems>
 
                             <span>

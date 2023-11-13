@@ -60,11 +60,17 @@ export const Overlay = styled.div`
   position: absolute;
   background: #edeef2;
   top: 50%;
-  left: -100%;
+  right: 100%;
   min-width: 250px;
   transform: translate(-50%, -50%);
   border-radius: 60px;
   box-shadow: inset 6px 6px 9px #d0d0da, inset -6px -6px 9px #ffffff, 1px 1px 4px rgba(219, 221, 224, 0.5019607843);
+  
+  &.active {
+    opacity: 50;
+    transition: 5s;
+    right: -50%;
+  }
 `;
 
 export const OverlayItems = styled.div`
