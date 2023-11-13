@@ -25,6 +25,7 @@ const Routing = () => {
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="*" element={<Error/>}/>
                 <Route path={MAIN_PAGE} element={<MainPage/>}/>
+                {/*<Route path="test" element={<TestComponent/>}/>*/}
                 <Route path={LOGIN_URL} element={
                     <UnauthorizedRoute>
                         <UserLogin/>
