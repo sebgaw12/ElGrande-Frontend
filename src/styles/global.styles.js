@@ -68,7 +68,11 @@ export const PrimaryInput = styled.input`
   color: ${greyDark};
 
   &::placeholder {
-    color: ${greyLight3};
+    color: ${greyDark};
+  }
+  
+  &:-webkit-autofill {
+    -webkit-text-fill-color: ${greyDark}
   }
 
   &:focus {
