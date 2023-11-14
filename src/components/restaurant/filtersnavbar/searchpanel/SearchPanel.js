@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {CrossButtonImage, PrimaryBtn, PrimaryInput} from "../../../../styles/global.styles";
 import {
+    ClearFilterButton,
     filterLogo,
     FilterTag,
     SearchPanelButton,
@@ -35,6 +36,15 @@ function SearchPanel({filterRestaurants}) {
             <CrossButtonImage onClick={onRemove}>x</CrossButtonImage>
         </FilterTag>
     );
+
+    const clearFilters = () => {
+        setFormData({
+            name: [],
+            city: [],
+            category: [],
+            dishName: []
+        })
+    }
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
@@ -75,6 +85,9 @@ function SearchPanel({filterRestaurants}) {
             <SearchPanelButton onClick={handleSearch}>
                 Search
             </SearchPanelButton>
+            <ClearFilterButton onClick={clearFilters}>
+                Clear Filters
+            </ClearFilterButton>
             <PrimaryModal isOpen={isFilterOpen} onClose={toggleFilter}>
                 <PrimaryInput name={"name"} placeholder={"Name"} onKeyPress={handleKeyPress}></PrimaryInput>
                 <TagsContainer>

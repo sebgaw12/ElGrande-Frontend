@@ -6,6 +6,7 @@ const greyLight2 = `#c8d0e7`
 const greyLight3 = `#bec8e4`
 const primary = `#6d5dfc`
 const greyDark = `#9baacf`
+const lightRed = `#fd4848`
 
 const innerShadow = `
     inset .2rem .2rem .5rem ${greyLight2}, 
@@ -72,6 +73,36 @@ export const SearchPanelButton = styled.button `
   &:active {
     box-shadow: ${innerShadow};
     background-color: #1da1f2;
+  }
+
+  p {
+    font-size: 1.6em;
+  }
+`
+
+export const ClearFilterButton = styled.button `
+  width: 5em;
+  height: 3rem;
+  border-radius: 1em;
+  box-shadow: ${shadow};
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: .3s ease;
+  grid-column: 1 / 2;
+  grid-row: 5 / 6;
+  color: ${greyDark};
+  margin-left: 10px ;
+
+  &:hover {
+    color: ${lightRed}
+  }
+
+  &:active {
+    box-shadow: ${innerShadow};
+    background-color: red;
   }
 
   p {

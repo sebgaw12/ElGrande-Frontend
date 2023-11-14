@@ -38,7 +38,7 @@ export const Menu = styled.div`
   align-items: flex-end;
   justify-content: space-evenly;
   cursor: pointer;
-  z-index: 999;
+  z-index: 2;
   transition: 0.5s ease-out;
 
   &.active {
