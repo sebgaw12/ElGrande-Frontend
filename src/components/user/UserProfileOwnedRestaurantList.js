@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useToggle} from "../../hooks/useToggle";
-import RestaurantEditModal from "./RestaurantEditModal";
 import {
     ContributionItem,
     ContributionText,
@@ -8,9 +7,8 @@ import {
     InfoButton,
     UserProfileText
 } from "./UserProfile.styles";
-import {PrimaryBtn, PrimaryInput} from "../../styles/global.styles";
+import {PrimaryInput} from "../../styles/global.styles";
 import PrimaryModal from "../globalcomponents/PrimaryModal";
-import {SubmitFormButton} from "../userform/UserForm.styles";
 import {useApi} from "../../hooks/useApi";
 import {useUpdate} from "../../hooks/useUpdate";
 import {toast} from "react-toastify";
