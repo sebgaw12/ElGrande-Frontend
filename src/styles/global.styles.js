@@ -80,3 +80,6 @@ export const PrimaryInput = styled.input`
     box-shadow: ${shadow};
   }
 `;
+
+export const PrimaryText = styled.p `
+`

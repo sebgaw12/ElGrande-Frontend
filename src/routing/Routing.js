@@ -9,7 +9,7 @@ import UserLogin from "../components/userform/UserLogin";
 import {useUserContext} from "../context/UserContextProvider";
 import {UnauthorizedRoute} from "../authentication/UnauthorizedRoute";
 import UserRegister from "../components/userform/UserRegister";
-import UserContainer from "../components/user/UserContainer";
+import UserProfileContainer from "../components/user/UserProfileContainer";
 import {useEffect} from "react";
 
 const Routing = () => {
@@ -42,7 +42,7 @@ const Routing = () => {
                 }/>
                 <Route path={PROFILE_URL} element={
                     <ProtectedRoute>
-                        <UserContainer/>
+                        <UserProfileContainer/>
                     </ProtectedRoute>
                 }/>
             </Routes>

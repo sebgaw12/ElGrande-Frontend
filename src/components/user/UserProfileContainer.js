@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import "./UserContainer.css";
 import {useNavigate} from "react-router-dom";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useUpdate} from "../../hooks/useUpdate";
@@ -8,11 +7,11 @@ import {useApi} from "../../hooks/useApi";
 import {toast} from "react-toastify";
 import UserDetailsForm from "./UserDetailsForm";
 import UserDetails from "./UserDetails";
-import defaultPerson from "../../images/default_person.png";
-import ReviewRestaurantContainer from "./ReviewRestaurantContainer";
+import UserContributeDetails from "./UserContributeDetails";
 import UserOwnershipForm from "./UserOwnershipForm";
+import {UserProfileGrid} from "./UserProfile.styles";
 
-const UserContainer = () => {
+const UserProfileContainer = () => {
     const {user, removeUserCredentials} = useUserContext();
     const {get, put, remove} = useApi();
     const [userDetails, setUserDetails] = useState({
@@ -56,39 +55,31 @@ const UserContainer = () => {
     }
 
     return (
-        <div id="profile" className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div id="details" className="md:col-span-1">
-                <div className="flex flex-row m-3">
-                    <img alt="person" src={defaultPerson}/>
-                    <h1 id="details-header" className="p-4">{userDetails.name} {userDetails.surname}</h1>
-                </div>
-                {isUserDetailsFormOpen ? (
-                    <UserDetailsForm
-                        userDetails={userDetails}
-                        updateDataObject={updateDataObject}
-                        toggle={setUserDetailsFormOpen}
-                    />
-                ) : isOwnershipFormOpen ? (
-                    <UserOwnershipForm
-                        isOpen={isOwnershipFormOpen}
-                        toggle={setOwnershipFormOpen}
-                        userDetails={userDetails}
-                    />
-                ) : (
-                    <UserDetails
-                        userDetails={userDetails}
-                        handleSaveChanges={handleSaveChanges}
-                        toggleDetailsForm={setUserDetailsFormOpen}
-                        toggleOwnershipForm={setOwnershipFormOpen}
-                        handleDeleteProfile={handleDeleteProfile}
-                    />
-                )}
-            </div>
-            <div className="md:col-span-2">
-                <ReviewRestaurantContainer userDetails={userDetails}/>
-            </div>
-        </div>
+        <UserProfileGrid>
+            {isUserDetailsFormOpen ? (
+                <UserDetailsForm
+                    userDetails={userDetails}
+                    updateDataObject={updateDataObject}
+                    toggle={setUserDetailsFormOpen}
+                />
+            ) : isOwnershipFormOpen ? (
+                <UserOwnershipForm
+                    isOpen={isOwnershipFormOpen}
+                    toggle={setOwnershipFormOpen}
+                    userDetails={userDetails}
+                />
+            ) : (
+                <UserDetails
+                    userDetails={userDetails}
+                    handleSaveChanges={handleSaveChanges}
+                    toggleDetailsForm={setUserDetailsFormOpen}
+                    toggleOwnershipForm={setOwnershipFormOpen}
+                    handleDeleteProfile={handleDeleteProfile}
+                />
+            )}
+            <UserContributeDetails userDetails={userDetails}/>
+        </UserProfileGrid>
     )
 }
 
-export default UserContainer;
+export default UserProfileContainer;

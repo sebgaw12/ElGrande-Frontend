@@ -5,8 +5,17 @@ import {useUserContext} from "../../context/UserContextProvider";
 import {useToggle} from "../../hooks/useToggle";
 import {useApi} from "../../hooks/useApi";
 import OwnedRestaurantItem from "./OwnedRestaurantItem";
+import {
+    ContributeContentList,
+    InfoButton,
+    OwnedRestaurantGridPlace,
+    RestaurantGridPlace,
+    ReviewButton,
+    ReviewGridPlace,
+    UserContributePanel
+} from "./UserProfile.styles";
 
-const ReviewRestaurantContainer = ({userDetails}) => {
+const UserContributeDetails = ({userDetails}) => {
 
     const {user} = useUserContext()
 
@@ -64,25 +73,31 @@ const ReviewRestaurantContainer = ({userDetails}) => {
     }
 
     return (
-        <div className="flex flex-col details">
-            <div className="flex-row">
-                <button className="show-button" onClick={handleShowReview}>
+        <UserContributePanel>
+            <ReviewGridPlace>
+                <InfoButton onClick={handleShowReview}>
                     {isReviewOpen ? "Hide comments" : "Show comments"}
-                </button>
-                <button className="show-button" onClick={handleShowRestaurant}>
+                </InfoButton>
+            </ReviewGridPlace>
+            <RestaurantGridPlace>
+                <InfoButton onClick={handleShowRestaurant}>
                     {isRestaurantOpen ? "Hide restaurants" : "Show restaurants"}
-                </button>
-                <button className="show-button" onClick={handleShowOwnedRestaurant}>
+                </InfoButton>
+            </RestaurantGridPlace>
+            <OwnedRestaurantGridPlace onClick={handleShowOwnedRestaurant}>
+                <InfoButton>
                     {isOwnedRestaurantOpen ? "Hide owned restaurants" : "Show owned restaurants"}
-                </button>
-            </div>
-            <div>
-                <ReviewItem reviews={reviews} handleDeleteReview={handleDeleteReview} isReviewOpen={isReviewOpen}/>
-                <RestaurantItem isRestaurantOpen={isRestaurantOpen} restaurants={restaurants}/>
-                <OwnedRestaurantItem isOwnedRestaurantOpen={isOwnedRestaurantOpen} restaurants={restaurants}/>
-            </div>
-        </div>
+                </InfoButton>
+            </OwnedRestaurantGridPlace>
+
+            <ContributeContentList>
+            </ContributeContentList>
+        </UserContributePanel>
+
+//         <ReviewItem reviews={reviews} handleDeleteReview={handleDeleteReview} isReviewOpen={isReviewOpen}/>
+//         <RestaurantItem isRestaurantOpen={isRestaurantOpen} restaurants={restaurants}/>
+//         <OwnedRestaurantItem isOwnedRestaurantOpen={isOwnedRestaurantOpen} restaurants={restaurants}/>
     )
 }
 
-export default ReviewRestaurantContainer
+export default UserContributeDetails

@@ -1,5 +1,4 @@
 import React from 'react';
-import "./Review.css"
 
 const ReviewItem = ({handleDeleteReview, isReviewOpen, reviews}) => {
     return (

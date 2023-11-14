@@ -1,5 +1,4 @@
 import React from "react";
-import "./UserContainer.css";
 
 const UserDetailsForm = ({userDetails, handleSaveChanges, toggle, updateDataObject}) => {
     return (

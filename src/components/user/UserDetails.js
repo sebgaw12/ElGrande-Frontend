@@ -1,22 +1,32 @@
 import React from "react";
+import {
+    DangerButton,
+    EditButton,
+    InfoButton,
+    UserCredentialsPanel, UserImage,
+    UserProfileDetails,
+    UserContributePanel
+} from "./UserProfile.styles";
+import defaultPerson from "../../images/default_person.png";
+import {PrimaryText} from "../../styles/global.styles";
 
 const UserDetails = ({userDetails, handleDeleteProfile, toggleOwnershipForm, toggleDetailsForm}) => {
     return (
-        <div className="flex flex-col">
-            <span className="details-text">Email: {userDetails.email}</span>
-            <span className="details-text">Created: {userDetails.submissionTime}</span>
-            {userDetails.ownershipId ? (
-                <span className="details-text">Ownership: Yes</span>
-            ) : (
-                <></>
-            )}
-
-            <div className="flex flex-row justify-center mt-3">
-                <button className="edit-button" onClick={toggleDetailsForm}>Edit data</button>
-                <button className="delete-button" onClick={handleDeleteProfile}>Delete profile</button>
-                <button className="edit-button" onClick={toggleOwnershipForm}>Become an Owner</button>
-            </div>
-        </div>
+        <UserProfileDetails>
+            <UserImage alt="person" src={defaultPerson}/>
+            <UserCredentialsPanel>
+                <PrimaryText>Name: {userDetails.name} </PrimaryText>
+                <PrimaryText>Surname: {userDetails.surname}</PrimaryText>
+                <PrimaryText>Email: {userDetails.email}</PrimaryText>
+                <PrimaryText>Created at: {userDetails.submissionTime}</PrimaryText>
+                {userDetails.ownershipId && (
+                    <PrimaryText className="details-text">Ownership: Yes</PrimaryText>
+                )}
+            </UserCredentialsPanel>
+            <EditButton onClick={toggleDetailsForm}>Edit data</EditButton>
+            <DangerButton onClick={handleDeleteProfile}>Delete profile</DangerButton>
+            <InfoButton onClick={toggleOwnershipForm}>Become an Owner</InfoButton>
+        </UserProfileDetails>
     )
 }
 
