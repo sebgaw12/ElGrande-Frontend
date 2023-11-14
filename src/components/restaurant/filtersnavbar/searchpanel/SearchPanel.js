@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
-import {useUpdate} from "../../../../hooks/useUpdate";
-import {PrimaryBtn, PrimaryInput} from "../../../../styles/global.styles";
-import {filterLogo, SearchPanelButton, SearchPanelContainer, SearchPanelInput} from "./SearchPanel.styles";
+import {CrossButtonImage, PrimaryBtn, PrimaryInput} from "../../../../styles/global.styles";
+import {
+    filterLogo,
+    FilterTag,
+    SearchPanelButton,
+    SearchPanelContainer,
+    SearchPanelInput,
+    TagsContainer, TagText
+} from "./SearchPanel.styles";
 import {useToggle} from "../../../../hooks/useToggle";
 import PrimaryModal from "../../../globalcomponents/PrimaryModal";
 
@@ -14,22 +20,20 @@ function SearchPanel({filterRestaurants}) {
         category: [],
         dishName: []
     });
-    const {updateDataObject} = useUpdate(formData, setFormData)
     const handleSearch = () => {
         filterRestaurants(formData)
     }
 
     const handleFilterSearch = () => {
-        console.log(formData)
         toggleFilter()
         filterRestaurants(formData)
     }
 
     const Tag = ({value, onRemove}) => (
-        <div style={{border: '1px solid black', padding: '5px', display: 'inline-block', margin: '5px'}}>
+        <FilterTag>
             {value}
-            <button type="button" onClick={onRemove} style={{marginLeft: '10px'}}>X</button>
-        </div>
+            <CrossButtonImage onClick={onRemove}>x</CrossButtonImage>
+        </FilterTag>
     );
 
     const handleKeyPress = (e) => {
@@ -38,17 +42,13 @@ function SearchPanel({filterRestaurants}) {
             const name = e.target.name;
             const value = e.target.value.trim();
 
-            if (value) {
-                if (formData[name].includes(value)) {
-                    alert(`Tag "${value}" jest już dodany.`);
-                } else {
-                    setFormData(prevFormData => ({
-                        ...prevFormData,
-                        [name]: [...prevFormData[name], value]
-                    }));
-                }
-                e.target.value = '';
+            if (value && !formData[name].includes(value)) {
+                setFormData(prevFormData => ({
+                    ...prevFormData,
+                    [name]: [...prevFormData[name], value]
+                }));
             }
+            e.target.value = '';
         }
     };
 
@@ -77,9 +77,29 @@ function SearchPanel({filterRestaurants}) {
             </SearchPanelButton>
             <PrimaryModal isOpen={isFilterOpen} onClose={toggleFilter}>
                 <PrimaryInput name={"name"} placeholder={"Name"} onKeyPress={handleKeyPress}></PrimaryInput>
+                <TagsContainer>
+                    {formData.name.map((name, index) =>
+                        <Tag key={index} value={name} onRemove={() => removeTag("name", name)}></Tag>
+                    )}
+                </TagsContainer>
                 <PrimaryInput name={"city"} placeholder={"City"} onKeyPress={handleKeyPress}></PrimaryInput>
+                <TagsContainer>
+                    {formData.city.map((city, index) =>
+                        <Tag key={index} value={city} onRemove={() => removeTag("city", city)}></Tag>
+                    )}
+                </TagsContainer>
                 <PrimaryInput name={"category"} placeholder={"Category"} onKeyPress={handleKeyPress}></PrimaryInput>
+                <TagsContainer>
+                    {formData.category.map((category, index) =>
+                        <Tag key={index} value={category} onRemove={() => removeTag("category", category)}></Tag>
+                    )}
+                </TagsContainer>
                 <PrimaryInput name={"dishName"} placeholder={"Dish"} onKeyPress={handleKeyPress}></PrimaryInput>
+                <TagsContainer>
+                    {formData.dishName.map((dishName, index) =>
+                        <Tag key={index} value={dishName} onRemove={() => removeTag("dishName", dishName)}></Tag>
+                    )}
+                </TagsContainer>
                 <PrimaryBtn onClick={handleFilterSearch}>Search</PrimaryBtn>
             </PrimaryModal>
         </SearchPanelContainer>

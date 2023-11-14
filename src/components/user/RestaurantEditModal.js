@@ -1,5 +1,3 @@
-import {TEInput, TEModal, TEModalBody, TEModalContent, TEModalFooter, TEModalHeader, TERipple} from "tw-elements-react";
-import {styleModalHeader, styleModalSaveButton} from "../restaurant/filtersnavbar/FiltersModal.styles";
 import React, {useEffect, useState} from "react";
 import {useUpdate} from "../../hooks/useUpdate";
 
@@ -16,36 +14,38 @@ const RestaurantEditModal = ({isOpen, toggle, restaurant}) => {
     }
 
     return (
-        <TEModal show={isOpen} setShow={toggle}>
-            <TEModalContent>
-                <TEModalHeader>
-                    <h5 className={styleModalHeader}>
-                        Edit Restaurant
-                    </h5>
-                </TEModalHeader>
-
-                <TEModalBody>
-                    <label>Name: {editedRestaurant.name}</label>
-                    <TEInput
-                        onChange={updateDataObject}
-                    >
-
-                    </TEInput>
-
-                </TEModalBody>
-                <TEModalFooter>
-                    <TERipple rippleCentered="light">
-                        <button
-                            type={"submit"}
-                            className={styleModalSaveButton}
-                            onClick={handleEditRestaurant}
-                        >
-                            Save Changes
-                        </button>
-                    </TERipple>
-                </TEModalFooter>
-            </TEModalContent>
-        </TEModal>
+        <>
+        </>
+        // <TEModal show={isOpen} setShow={toggle}>
+        //     <TEModalContent>
+        //         <TEModalHeader>
+        //             <h5 className={styleModalHeader}>
+        //                 Edit Restaurant
+        //             </h5>
+        //         </TEModalHeader>
+        //
+        //         <TEModalBody>
+        //             <label>Name: {editedRestaurant.name}</label>
+        //             <TEInput
+        //                 onChange={updateDataObject}
+        //             >
+        //
+        //             </TEInput>
+        //
+        //         </TEModalBody>
+        //         <TEModalFooter>
+        //             <TERipple rippleCentered="light">
+        //                 <button
+        //                     type={"submit"}
+        //                     className={styleModalSaveButton}
+        //                     onClick={handleEditRestaurant}
+        //                 >
+        //                     Save Changes
+        //                 </button>
+        //             </TERipple>
+        //         </TEModalFooter>
+        //     </TEModalContent>
+        // </TEModal>
     )
 }
 

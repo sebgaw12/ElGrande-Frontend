@@ -82,15 +82,15 @@ export const PrimaryInput = styled.input`
 `;
 
 export const CrossButtonImage = styled.button `
-  padding-right: 20px;
-  padding-bottom: 6px;
-  font-size: 26px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 16px;
   color: #f31818;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.5s ease-in-out;
 
   &:hover {
-    transform: scale(1.25);
+    transform: scale(1.5);
   }
 
   &:active {
