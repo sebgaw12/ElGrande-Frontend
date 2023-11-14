@@ -1,11 +1,9 @@
-import {TEModal, TEModalBody, TEModalContent, TEModalFooter, TEModalHeader, TERipple} from "tw-elements-react";
-import {styleModalHeader, styleModalSaveButton} from "../restaurant/filtersnavbar/FiltersModal.styles";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useUpdate} from "../../hooks/useUpdate";
 import {useApi} from "../../hooks/useApi";
 import {useUserContext} from "../../context/UserContextProvider";
 import PrimaryModal from "../globalcomponents/PrimaryModal";
-import {PrimaryBtn, PrimaryInput} from "../../styles/global.styles";
+import {PrimaryInput} from "../../styles/global.styles";
 import {
     EditButton,
     InfoButton,
