@@ -5,11 +5,11 @@ import {useUpdate} from "../../hooks/useUpdate";
 import {useToggle} from "../../hooks/useToggle";
 import {useApi} from "../../hooks/useApi";
 import {toast} from "react-toastify";
-import UserDetailsForm from "./UserDetailsForm";
 import UserDetails from "./UserDetails";
 import UserContributeDetails from "./UserContributeDetails";
-import UserOwnershipForm from "./UserOwnershipForm";
-import {UserProfileGrid} from "./UserProfile.styles";
+import {UserProfileGrid, UserProfileHeader} from "./UserProfile.styles";
+import Header from "../header/Header";
+import UserHeader from "../header/userheader/UserHeader";
 
 const UserProfileContainer = () => {
     const {user, removeUserCredentials} = useUserContext();
@@ -56,27 +56,10 @@ const UserProfileContainer = () => {
 
     return (
         <UserProfileGrid>
-            {isUserDetailsFormOpen ? (
-                <UserDetailsForm
-                    userDetails={userDetails}
-                    updateDataObject={updateDataObject}
-                    toggle={setUserDetailsFormOpen}
-                />
-            ) : isOwnershipFormOpen ? (
-                <UserOwnershipForm
-                    isOpen={isOwnershipFormOpen}
-                    toggle={setOwnershipFormOpen}
-                    userDetails={userDetails}
-                />
-            ) : (
-                <UserDetails
-                    userDetails={userDetails}
-                    handleSaveChanges={handleSaveChanges}
-                    toggleDetailsForm={setUserDetailsFormOpen}
-                    toggleOwnershipForm={setOwnershipFormOpen}
-                    handleDeleteProfile={handleDeleteProfile}
-                />
-            )}
+            <UserProfileHeader>
+                <Header/>
+            </UserProfileHeader>
+            <UserDetails userDetails={userDetails} toggleOwnershipForm={setOwnershipFormOpen}/>
             <UserContributeDetails userDetails={userDetails}/>
         </UserProfileGrid>
     )

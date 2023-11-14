@@ -20,8 +20,8 @@ export const GlobalStyle = styled.div`
   padding: 0;
   box-sizing: border-box;
   justify-content: center;
-  font-family: "Inter", sans-serif;
-  background-color: #E4EBF5;
+  !important font-family: "Inter", sans-serif;
+  background-color: ${greyLight};
 `;
 
 export const PrimaryBtn = styled.button`
@@ -81,5 +81,19 @@ export const PrimaryInput = styled.input`
   }
 `;
 
-export const PrimaryText = styled.p `
+export const CrossButtonImage = styled.button `
+  padding-right: 20px;
+  padding-bottom: 6px;
+  font-size: 26px;
+  color: #f31818;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.25);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
 `

@@ -1,19 +1,17 @@
-import ReviewItem from "./ReviewList";
-import RestaurantItem from "./RestaurantList";
 import React, {useState} from "react";
 import {useUserContext} from "../../context/UserContextProvider";
 import {useToggle} from "../../hooks/useToggle";
 import {useApi} from "../../hooks/useApi";
-import OwnedRestaurantItem from "./OwnedRestaurantItem";
 import {
     ContributeContentList,
-    InfoButton,
+    InfoButton, InfoButtonClicked,
     OwnedRestaurantGridPlace,
     RestaurantGridPlace,
-    ReviewButton,
     ReviewGridPlace,
     UserContributePanel
 } from "./UserProfile.styles";
+import UserProfileReviewList from "./UserProfileReviewList";
+import UserProfileRestaurantList from "./UserProfileRestaurantList";
 
 const UserContributeDetails = ({userDetails}) => {
 
@@ -28,9 +26,9 @@ const UserContributeDetails = ({userDetails}) => {
 
     const {get, remove} = useApi()
 
-    const handleDeleteReview = (e) => {
-        setReviews(reviews.filter(review => review.id !== e.target.dataset.id))
-        remove("api/v1/reviews/" + e.target.dataset.id)
+    const handleDeleteReview = (reviewId) => {
+        setReviews(reviews.filter(review => review.id !== reviewId))
+        remove("api/v1/reviews/" + reviewId)
     }
 
     const handleShowReview = () => {
@@ -75,28 +73,39 @@ const UserContributeDetails = ({userDetails}) => {
     return (
         <UserContributePanel>
             <ReviewGridPlace>
-                <InfoButton onClick={handleShowReview}>
-                    {isReviewOpen ? "Hide comments" : "Show comments"}
-                </InfoButton>
+                {isReviewOpen ? (
+                    <InfoButtonClicked onClick={handleShowReview}>Hide comments</InfoButtonClicked>
+                ) : (
+                    <InfoButton onClick={handleShowReview}>Show comments</InfoButton>
+                )}
             </ReviewGridPlace>
             <RestaurantGridPlace>
-                <InfoButton onClick={handleShowRestaurant}>
-                    {isRestaurantOpen ? "Hide restaurants" : "Show restaurants"}
-                </InfoButton>
+                {isRestaurantOpen ? (
+                    <InfoButtonClicked onClick={handleShowRestaurant}>Hide restaurants</InfoButtonClicked>
+                ) : (
+                    <InfoButton onClick={handleShowRestaurant}>Show restaurants</InfoButton>
+                )}
             </RestaurantGridPlace>
-            <OwnedRestaurantGridPlace onClick={handleShowOwnedRestaurant}>
-                <InfoButton>
-                    {isOwnedRestaurantOpen ? "Hide owned restaurants" : "Show owned restaurants"}
-                </InfoButton>
+            <OwnedRestaurantGridPlace>
+                {isOwnedRestaurantOpen ? (
+                    <InfoButtonClicked onClick={handleShowOwnedRestaurant}>Hide owned restaurants</InfoButtonClicked>
+                ) : (
+                    <InfoButton onClick={handleShowOwnedRestaurant}>Show owned restaurants</InfoButton>
+                )}
             </OwnedRestaurantGridPlace>
 
             <ContributeContentList>
+                {isReviewOpen && (
+                    <UserProfileReviewList reviews={reviews} handleDeleteReview={handleDeleteReview}/>
+                )}
+                {isRestaurantOpen && (
+                    <UserProfileRestaurantList restaurants={restaurants}/>
+                )}
+                {isOwnedRestaurantOpen && (
+                    <UserProfileRestaurantList restaurants={restaurants}/>
+                )}
             </ContributeContentList>
         </UserContributePanel>
-
-//         <ReviewItem reviews={reviews} handleDeleteReview={handleDeleteReview} isReviewOpen={isReviewOpen}/>
-//         <RestaurantItem isRestaurantOpen={isRestaurantOpen} restaurants={restaurants}/>
-//         <OwnedRestaurantItem isOwnedRestaurantOpen={isOwnedRestaurantOpen} restaurants={restaurants}/>
     )
 }
 

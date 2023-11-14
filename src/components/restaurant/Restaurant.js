@@ -12,9 +12,7 @@ const Restaurant = ({restaurant}) => {
 
     const displayRestaurantDetails = () => {
         return (
-            <>
-                <RestaurantDetails setIsOpen={setIsOpen} restaurant={restaurant}/>
-            </>
+            <RestaurantDetails setIsOpen={setIsOpen} restaurant={restaurant}/>
         )
     }
 
