@@ -16,11 +16,9 @@ const UserLogin = () => {
             password: ""
         })
     const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
-    const navigate = useNavigate()
     const {login} = useUserContext()
     const onLoginClicked = () => {
         login(userCredentials)
-        navigate(MAIN_PAGE)
     }
     return (
         <UserPage>

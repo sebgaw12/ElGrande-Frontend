@@ -3,6 +3,7 @@ import {CUSTOMER_ID, JWT_TOKEN, REFRESH_TOKEN} from "../constants/UserCredential
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import {useApi} from "../hooks/useApi";
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const UserContext = createContext()
 export const useUserContext = () => {
@@ -28,6 +29,7 @@ export const UserProvider = ({children}) => {
         post("api/v1/auths/jwt/login", userCredentials)
             .then(response => {
                 setUserCredentials(response)
+                window.location.href = "/"
             })
             .catch((error) => {
                 console.error(error)

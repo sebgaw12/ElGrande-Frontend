@@ -139,7 +139,7 @@ export const UserProfileGrid = styled.div`
 
 export const UserProfileDetails = styled.div`
   margin: 5vh 0 0 5vh;
-  height: 85vh;
+  height: 81vh;
   width: 28vw;
   border-radius: 1em;
   box-shadow: ${shadow};
@@ -153,7 +153,7 @@ export const UserContributePanel = styled.div`
   grid-template-rows: 0.1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 5vh 0 0 5vh;
-  height: 85vh;
+  height: 81vh;
   width: 64vw;
   border-radius: 1em;
   box-shadow: ${shadow};
@@ -223,5 +223,30 @@ export const UserProfileHeader = styled.div `
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
-  
+`
+
+export const EditOwnedRestaurantButton = styled.button `
+  padding: 0 5px 0 5px;
+  height: 2em;
+  border-radius: 1em;
+  box-shadow: ${shadow};
+  cursor: pointer;
+  transition: .3s ease;
+  margin-right: 10px;
+  grid-column: 1 / 2;
+  grid-row: 5 / 6;
+  color: ${greyDark};
+
+  &:hover {
+    color: ${white};
+    background-color: #1da1f2;
+  }
+
+  &:active {
+    box-shadow: ${innerShadow};
+  }
+
+  p {
+    font-size: 1.6em;
+  }
 `

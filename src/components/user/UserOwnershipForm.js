@@ -51,7 +51,7 @@ const UserOwnershipForm = ({isOpen, toggle, userDetails}) => {
 
     return (
         <PrimaryModal isOpen={isOpen} onClose={toggle}>
-            <PrimaryInput onChange={updateDataObject} placeholder={"Restaurant Name"}></PrimaryInput>
+            <PrimaryInput name={"name"} onChange={updateDataObject} placeholder={"Restaurant Name"}></PrimaryInput>
             <RestaurantListContainer>
                 {restaurants.map((restaurant) => {
                         if (!selectedRestaurants.has(restaurant.id)) {

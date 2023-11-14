@@ -12,6 +12,7 @@ import {
 } from "./UserProfile.styles";
 import UserProfileReviewList from "./UserProfileReviewList";
 import UserProfileRestaurantList from "./UserProfileRestaurantList";
+import UserProfileOwnedRestaurantList from "./UserProfileOwnedRestaurantList";
 
 const UserContributeDetails = ({userDetails}) => {
 
@@ -102,7 +103,7 @@ const UserContributeDetails = ({userDetails}) => {
                     <UserProfileRestaurantList restaurants={restaurants}/>
                 )}
                 {isOwnedRestaurantOpen && (
-                    <UserProfileRestaurantList restaurants={restaurants}/>
+                    <UserProfileOwnedRestaurantList restaurants={restaurants}/>
                 )}
             </ContributeContentList>
         </UserContributePanel>
