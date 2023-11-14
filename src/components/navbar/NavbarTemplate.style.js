@@ -3,31 +3,25 @@ import logo from "../../images/food-spot-circle-borderless.png";
 
 export const NavbarContainer = styled.div`
   display: flex;
-  background-color: #61dafb;
+  background-color: #c8d0e7;
   justify-content: left;
-  margin: 0;
-  padding: 0;
+  padding: 5px;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  height: 10vh;
 `;
 
 export const LeftPanel = styled.div`
-  width: 40%;
-  background: #ffffff;
+  width: 50%;
 `;
 
-export const MidPanel = styled.div`
-  width: 20%;
-`;
 
 export const RightPanel = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 40%;
+  width: 50%;
   box-sizing: border-box;
-  background-color: #eef1fc;
 `;
 
 export const Menu = styled.div`
@@ -167,6 +161,7 @@ export const NavbarLogo = styled.div`
   width: 5rem;
   height: 5rem;
   margin-left: 1rem;
+  cursor: pointer;
   background-image: url(${logo});
   background-repeat: no-repeat;
   background-size: cover;

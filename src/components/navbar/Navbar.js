@@ -3,7 +3,6 @@ import {
     Hamburger,
     LeftPanel,
     Menu,
-    MidPanel,
     NavbarContainer,
     NavbarLogo,
     Overlay,
@@ -13,6 +12,7 @@ import {
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faAddressCard, faCirclePlus, faRightFromBracket,} from '@fortawesome/free-solid-svg-icons';
 import {useUserContext} from "../../context/UserContextProvider";
+import {Link} from "react-router-dom";
 
 const Navbar = () => {
     const [isMenuActive, setIsMenuActive] = useState(false);
@@ -23,11 +23,10 @@ const Navbar = () => {
     return (
         <NavbarContainer>
             <LeftPanel>
-                <NavbarLogo></NavbarLogo>
+                <Link to={"/main-page"}>
+                    <NavbarLogo/>
+                </Link>
             </LeftPanel>
-
-            <MidPanel></MidPanel>
-
             <RightPanel>
                 <Menu className={isMenuActive ? 'active' : ''}>
 
@@ -70,10 +69,6 @@ const Navbar = () => {
                                     <span></span>
                                 </>
                             )}
-
-                            {/*<span>coś tam</span>*/}
-                            {/*<span>coś tam</span>*/}
-                            {/*<span>coś tam</span>*/}
                         </OverlayItems>
                     </Overlay>
 

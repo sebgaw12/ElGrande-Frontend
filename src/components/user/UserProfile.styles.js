@@ -81,8 +81,8 @@ export const InfoButtonClicked = styled.button`
   transition: .3s ease;
   grid-column: 1 / 2;
   grid-row: 5 / 6;
-  color: black;
   margin-bottom: 10px;
+  color: black;
   background-color: #93ff1d;
 `
 

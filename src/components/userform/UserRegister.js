@@ -6,7 +6,7 @@ import {LOGIN_URL, SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
 import {toast} from "react-toastify";
 import {GoogleButton, RedirectText, SubmitFormButton, UserForm, UserPage} from "./UserForm.styles";
 import {PrimaryBtn, PrimaryInput} from "../../styles/global.styles";
-import Divider from "../restaurantform/elements/form/Divider";
+import Divider from "../globalcomponents/Divider";
 import FoodSpotLogo from "../../styles/FoodSpotLogo";
 import BackButton from "../globalcomponents/BackButton";
 

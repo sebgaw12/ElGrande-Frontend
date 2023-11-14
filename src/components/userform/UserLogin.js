@@ -5,7 +5,7 @@ import BackButton from "../globalcomponents/BackButton";
 import {PrimaryBtn, PrimaryInput} from "../../styles/global.styles";
 import {Link, useNavigate} from "react-router-dom";
 import {MAIN_PAGE, SERVER_URL_GOOGLE, SIGNUP_URL} from "../../constants/RoutePaths";
-import Divider from "../restaurantform/elements/form/Divider";
+import Divider from "../globalcomponents/Divider";
 import {useUpdate} from "../../hooks/useUpdate";
 import {useUserContext} from "../../context/UserContextProvider";
 
