@@ -10,9 +10,10 @@ import {
     OverlayItems,
     RightPanel
 } from './NavbarTemplate.style';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAddressCard, faCirclePlus, faRightFromBracket,} from '@fortawesome/free-solid-svg-icons';
 import {useUserContext} from "../../context/UserContextProvider";
+import UserNavbar from "./UserNavbar";
+import DefaultNavbar from "./DefaultNavbar";
+import logo2 from "../../images/food-spot-transparent-with-name.png";
 
 const Navbar = () => {
     const [isMenuActive, setIsMenuActive] = useState(false);
@@ -23,7 +24,7 @@ const Navbar = () => {
     return (
         <NavbarContainer>
             <LeftPanel>
-                <NavbarLogo></NavbarLogo>
+                <NavbarLogo src={logo2}/>
             </LeftPanel>
 
             <MidPanel></MidPanel>
@@ -40,40 +41,10 @@ const Navbar = () => {
                     <Overlay className={isMenuActive ? 'active' : ''}>
                         <OverlayItems>
                             {user ? (
-                                <>
-                                    <span>
-                                        <FontAwesomeIcon icon={faCirclePlus}/>
-                                        ADD PLACE
-                                    </span>
-
-                                    <span>
-                                        <FontAwesomeIcon icon={faAddressCard}/>
-                                        PROFILE
-                                    </span>
-
-                                    <span>
-                                      <FontAwesomeIcon icon={faRightFromBracket}/>
-                                        LOGOUT
-                                    </span>
-                                </>
+                                <UserNavbar/>
                             ) : (
-                                <>
-                                    <span>
-                                        <FontAwesomeIcon icon={faCirclePlus}/>
-                                        LOG IN
-                                    </span>
-
-                                    <span>
-                                        <FontAwesomeIcon icon={faAddressCard}/>
-                                        SIGN IN
-                                    </span>
-                                    <span></span>
-                                </>
+                                <DefaultNavbar/>
                             )}
-
-                            {/*<span>coś tam</span>*/}
-                            {/*<span>coś tam</span>*/}
-                            {/*<span>coś tam</span>*/}
                         </OverlayItems>
                     </Overlay>
 

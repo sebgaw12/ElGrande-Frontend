@@ -29,4 +29,8 @@ export const MapComponentStyle = styled.div`
 
 export const FooterStyle = styled.div`
   height: 100%;
+  
+  @media (max-width: 768px) {
+    background-color: #0e7537;
+  }
 `;
