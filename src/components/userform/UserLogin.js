@@ -1,28 +1,43 @@
-import React, {useEffect} from "react";
-import FoodSpotLogo from "../restaurantform/elements/graphics/FoodSpotLogo";
-import UserLoginForm from "./UserLoginForm";
-import {Link, useParams} from "react-router-dom";
+import React, {useState} from "react";
+import FoodSpotLogo from "../../styles/FoodSpotLogo";
+import {GoogleButton, RedirectText, SubmitFormButton, UserForm, UserPage} from "./UserForm.styles";
+import BackButton from "../globalcomponents/BackButton";
+import {PrimaryInput} from "../../styles/global.styles";
+import {Link} from "react-router-dom";
+import {SERVER_URL_GOOGLE, SIGNUP_URL} from "../../constants/RoutePaths";
+import Divider from "../globalcomponents/Divider";
+import {useUpdate} from "../../hooks/useUpdate";
+import {useUserContext} from "../../context/UserContextProvider";
 
-function UserLogin() {
-    const {endpoint} = useParams()
-
-    useEffect(() => {
-        console.log(endpoint)
-    }, []);
-
+const UserLogin = () => {
+    const [userCredentials, setUserCredentials] = useState(
+        {
+            email: "",
+            password: ""
+        })
+    const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
+    const {login} = useUserContext()
+    const onLoginClicked = () => {
+        login(userCredentials)
+    }
     return (
-        <div className="container h-screen m-auto">
-            <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-
-                {/* <!-- Left column container with background--> */}
-                <Link to={"/"} className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                    <FoodSpotLogo/>
+        <UserPage>
+            <FoodSpotLogo/>
+            <UserForm>
+                <BackButton/>
+                <PrimaryInput type={"text"} name={"email"} placeholder={"E-mail"} onChange={updateDataObject}/>
+                <PrimaryInput type={"password"} name={"password"} placeholder={"Password"} onChange={updateDataObject}/>
+                <SubmitFormButton onClick={onLoginClicked}>Log In</SubmitFormButton>
+                Still not a user?
+                <Link to={SIGNUP_URL}>
+                    <RedirectText>Sign in!</RedirectText>
                 </Link>
-
-                {/* <!-- Right column container with form --> */}
-                <UserLoginForm/>
-            </div>
-        </div>
+                <Divider text={"OR"}></Divider>
+                <Link to={SERVER_URL_GOOGLE}>
+                    <GoogleButton>Continue with Google</GoogleButton>
+                </Link>
+            </UserForm>
+        </UserPage>
     )
 }
 

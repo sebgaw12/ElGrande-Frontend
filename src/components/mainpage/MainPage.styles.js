@@ -7,7 +7,7 @@ export const MainPageContainer = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  height: 100%;
+  height: 85vh;
   display: flex;
   justify-content: space-around;
 `;
@@ -29,4 +29,8 @@ export const MapComponentStyle = styled.div`
 
 export const FooterStyle = styled.div`
   height: 100%;
+  
+  @media (max-width: 768px) {
+    background-color: #0e7537;
+  }
 `;

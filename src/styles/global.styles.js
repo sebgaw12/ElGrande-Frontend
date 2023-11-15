@@ -20,8 +20,8 @@ export const GlobalStyle = styled.div`
   padding: 0;
   box-sizing: border-box;
   justify-content: center;
-  font-family: "Inter", sans-serif;
-  background-color: #E4EBF5;
+  !important font-family: "Inter", sans-serif;
+  background-color: ${greyLight};
 `;
 
 export const PrimaryBtn = styled.button`
@@ -68,7 +68,11 @@ export const PrimaryInput = styled.input`
   color: ${greyDark};
 
   &::placeholder {
-    color: ${greyLight3};
+    color: ${greyDark};
+  }
+  
+  &:-webkit-autofill {
+    -webkit-text-fill-color: ${greyDark}
   }
 
   &:focus {
@@ -76,3 +80,20 @@ export const PrimaryInput = styled.input`
     box-shadow: ${shadow};
   }
 `;
+
+export const CrossButtonImage = styled.button `
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: 16px;
+  color: #f31818;
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.5);
+  }
+
+  &:active {
+    transform: scale(1);
+  }
+`

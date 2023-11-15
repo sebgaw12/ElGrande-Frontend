@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {RestaurantContext} from "../../../context/RestaurantContextProvider";
 import {useApi} from "../../../hooks/useApi";
 
@@ -17,10 +17,10 @@ const Address = ({restaurant}) => {
     return (
         <div className="text-2xl">
             <div>Adres</div>
-            <div>Państwo: {addressDetails.country}</div>
-            <div>Miasto: {addressDetails.city}</div>
+            <div>Country: {addressDetails.country}</div>
+            <div>City: {addressDetails.city}</div>
             <div>Kod pocztowy: {addressDetails.postalCode}</div>
-            <div>Ulica: {addressDetails.street} {addressDetails.streetNumber}</div>
+            <div>Street: {addressDetails.street} {addressDetails.streetNumber}</div>
             <div>{addressDetails.additionalDetails}</div>
         </div>
     )

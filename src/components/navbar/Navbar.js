@@ -1,64 +1,63 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
-    Hamburger,
     LeftPanel,
-    Menu,
-    MidPanel,
     NavbarContainer,
+    NavbarHamburger,
+    NavbarHamburgerSpan,
     NavbarLogo,
-    Overlay,
+    NavbarMenu,
+    NavbarOverlay,
     OverlayItems,
     RightPanel
-} from './Navbar.styles';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAddressCard, faCirclePlus, faRightFromBracket,} from '@fortawesome/free-solid-svg-icons';
+} from "./Navbar.styles";
+import logo from "../../images/food-spot-transparent-with-name.png"
+import {useUserContext} from "../../context/UserContextProvider";
+import UserNavbar from "./UserNavbar";
+import DefaultNavbar from "./DefaultNavbar";
+import {Link, useNavigate} from "react-router-dom";
+import {MAIN_PAGE} from "../../constants/RoutePaths";
+
 
 const Navbar = () => {
-    const [isMenuActive, setIsMenuActive] = useState(false);
 
+    const [isMenuActive, setIsMenuActive] = useState(false);
+    const navigate = useNavigate()
+    const {user} = useUserContext()
     const toggleMenu = () => setIsMenuActive(!isMenuActive);
+
+    const handleClickIfMenuHidden = (e) => {
+        if (!isMenuActive) {
+            e.preventDefault();
+        }
+    }
+
 
     return (
         <NavbarContainer>
+
             <LeftPanel>
-                <NavbarLogo></NavbarLogo>
+                <NavbarLogo src={logo} onClick={() => navigate(MAIN_PAGE)}></NavbarLogo>
             </LeftPanel>
-
-            <MidPanel></MidPanel>
-
             <RightPanel>
-                <Menu className={isMenuActive ? 'active' : ''}>
+                <NavbarMenu isMenuActive={isMenuActive}>
+                    <NavbarHamburger isMenuActive={isMenuActive} onClick={toggleMenu}>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                    </NavbarHamburger>
 
-                    <Hamburger className={isMenuActive ? 'active' : ''} onClick={toggleMenu}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </Hamburger>
-
-                    <Overlay>
+                    <NavbarOverlay isMenuActive={isMenuActive}>
                         <OverlayItems>
-
-                            <span>
-                                    <FontAwesomeIcon icon={faCirclePlus}/>
-                                ADD PLACE
-                            </span>
-
-                            <span>
-                                  <FontAwesomeIcon icon={faAddressCard}/>
-                                PROFILE
-                            </span>
-
-                            <span>
-                                  <FontAwesomeIcon icon={faRightFromBracket}/>
-                                LOGOUT
-                              </span>
-                            {/*<span>coś tam</span>*/}
-                            {/*<span>coś tam</span>*/}
-                            {/*<span>coś tam</span>*/}
+                            {user ? (
+                                <UserNavbar isMenuActive={isMenuActive}
+                                            handleClickIfMenuHidden={handleClickIfMenuHidden}/>
+                            ) : (
+                                <DefaultNavbar handleClickIfMenuHidden={handleClickIfMenuHidden}/>
+                            )}
                         </OverlayItems>
-                    </Overlay>
 
-                </Menu>
+                    </NavbarOverlay>
+                </NavbarMenu>
             </RightPanel>
         </NavbarContainer>
     );

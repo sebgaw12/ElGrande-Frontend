@@ -1,33 +1,68 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-
-import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
-import FoodSpotLogo from '../restaurantform/elements/graphics/FoodSpotLogo';
-
-import {StyleRoundedBlueButton} from '../../styles/styles';
-import UserRegisterForm from "./UserRegisterForm";
+import React, {useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import {useApi} from "../../hooks/useApi";
+import {useUpdate} from "../../hooks/useUpdate";
+import {LOGIN_URL, SERVER_URL_GOOGLE} from "../../constants/RoutePaths";
+import {toast} from "react-toastify";
+import {GoogleButton, RedirectText, SubmitFormButton, UserForm, UserPage} from "./UserForm.styles";
+import {PrimaryInput} from "../../styles/global.styles";
+import Divider from "../globalcomponents/Divider";
+import FoodSpotLogo from "../../styles/FoodSpotLogo";
+import BackButton from "../globalcomponents/BackButton";
 
 function UserRegister() {
+    const {post} = useApi()
+    const [userCredentials, setUserCredentials] = useState({
+        name: "",
+        surname: "",
+        email: "",
+        password: "",
+        passwordRepeat: ""
+    });
+    const navigate = useNavigate();
+    const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
+
+    const onSignupClicked = (e) => {
+        e.preventDefault()
+
+        if (userCredentials.password === userCredentials.passwordRepeat) {
+            post("api/v1/auths/jwt/signup", userCredentials)
+                .then(() => {
+                    navigate(LOGIN_URL)
+                })
+                .catch(error => {
+                    toast.error(error.response.data.errorMessage, {
+                        position: "top-center"
+                    })
+                })
+        } else {
+            toast.error("Password or email not match!", {
+                position: "top-center"
+            })
+        }
+    }
+
     return (
-        <section className="h-screen">
-            <div className="container h-full px-6 py-24">
-                <Link to="/">
-                    <button className={StyleRoundedBlueButton}>
-                        <IconArrowTurnLeft/>
-                    </button>
+        <UserPage>
+            <FoodSpotLogo/>
+            <UserForm>
+                <BackButton/>
+                <PrimaryInput type={"text"} placeholder={"Name"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"text"} placeholder={"Surname"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"text"} placeholder={"E-Mail"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"text"} placeholder={"Password"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"text"} placeholder={"Repeat Password"} onChange={updateDataObject}></PrimaryInput>
+                <SubmitFormButton onClick={onSignupClicked}>Sign Up</SubmitFormButton>
+                Already have an account?
+                <Link to={LOGIN_URL}>
+                    <RedirectText>Log in!</RedirectText>
                 </Link>
-
-                <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-                    {/* <!-- Left column container with background--> */}
-                    <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                        <FoodSpotLogo/>
-                    </div>
-
-                    {/* <!-- Right column container with form --> */}
-                    <UserRegisterForm/>
-                </div>
-            </div>
-        </section>
+                <Divider text={"OR"}></Divider>
+                <Link to={SERVER_URL_GOOGLE}>
+                    <GoogleButton>Continue with Google</GoogleButton>
+                </Link>
+            </UserForm>
+        </UserPage>
     );
 }
 

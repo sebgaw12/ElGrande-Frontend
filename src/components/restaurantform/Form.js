@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Link, useNavigate} from 'react-router-dom';
-import IconArrowTurnLeft from './elements/icons/IconArrowTurnLeft';
+import IconArrowTurnLeft from '../globalcomponents/IconArrowTurnLeft';
 import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
 import RestaurantForm from './subcomponents/RestaurantForm';
 import AddressForm from './subcomponents/AddressForm';
