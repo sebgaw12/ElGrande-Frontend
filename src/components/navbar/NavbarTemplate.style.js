@@ -1,5 +1,6 @@
 import styled, {keyframes} from "styled-components";
 import logo from "../../images/food-spot-circle-borderless.png";
+import logo2 from "../../images/food-spot-transparent-with-name.png";
 
 export const NavbarContainer = styled.div`
   display: flex;
@@ -13,8 +14,8 @@ export const NavbarContainer = styled.div`
 
 export const LeftPanel = styled.div`
   width: 50%;
+  background: #ffffff;
 `;
-
 
 export const RightPanel = styled.div`
   display: flex;
@@ -155,17 +156,15 @@ export const Hamburger = styled.div`
   }
 `;
 
-export const NavbarLogo = styled.div`
+export const NavbarLogo = styled.img`
   display: flex;
   align-self: end;
-  width: 5rem;
-  height: 5rem;
+  //width: 5rem;
+  //height: 5rem;
   margin-left: 1rem;
-  cursor: pointer;
-  background-image: url(${logo});
-  background-repeat: no-repeat;
+  background: #ff7b00 no-repeat;
   background-size: cover;
-  border-radius: 50%;
+  border-radius: 10%;
   box-shadow: -2px -2px 1px #ffffff, inset 2px 2px 1.5px #f0f0f0, 2px 2px 1px #d2d4df, 4px 4px 8px 4px #dadbe4;
 
   &:hover {

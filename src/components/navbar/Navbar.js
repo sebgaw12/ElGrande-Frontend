@@ -1,78 +1,63 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
-    Hamburger,
     LeftPanel,
-    Menu,
     NavbarContainer,
+    NavbarHamburger,
+    NavbarHamburgerSpan,
     NavbarLogo,
-    Overlay,
+    NavbarMenu,
+    NavbarOverlay,
     OverlayItems,
     RightPanel
-} from './NavbarTemplate.style';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAddressCard, faCirclePlus, faRightFromBracket,} from '@fortawesome/free-solid-svg-icons';
+} from "./Navbar.styles";
+import logo from "../../images/food-spot-transparent-with-name.png"
 import {useUserContext} from "../../context/UserContextProvider";
+import UserNavbar from "./UserNavbar";
+import DefaultNavbar from "./DefaultNavbar";
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
-    const [isMenuActive, setIsMenuActive] = useState(false);
-    const {user} = useUserContext()
 
+    const [isMenuActive, setIsMenuActive] = useState(false);
+
+    const {user} = useUserContext()
     const toggleMenu = () => setIsMenuActive(!isMenuActive);
+
+    const handleClickIfMenuHidden = (e) => {
+        if (!isMenuActive) {
+            e.preventDefault();
+        }
+    }
 
     return (
         <NavbarContainer>
+
             <LeftPanel>
                 <Link to={"/main-page"}>
-                    <NavbarLogo/>
+                    <NavbarLogo src={logo}></NavbarLogo>
                 </Link>
             </LeftPanel>
             <RightPanel>
-                <Menu className={isMenuActive ? 'active' : ''}>
+                <NavbarMenu isMenuActive={isMenuActive}>
 
-                    <Hamburger className={isMenuActive ? 'active' : ''} onClick={toggleMenu}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </Hamburger>
+                    <NavbarHamburger isMenuActive={isMenuActive} onClick={toggleMenu}>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                    </NavbarHamburger>
 
-                    <Overlay className={isMenuActive ? 'active' : ''}>
+                    <NavbarOverlay isMenuActive={isMenuActive}>
                         <OverlayItems>
                             {user ? (
-                                <>
-                                    <span>
-                                        <FontAwesomeIcon icon={faCirclePlus}/>
-                                        ADD PLACE
-                                    </span>
-
-                                    <span>
-                                        <FontAwesomeIcon icon={faAddressCard}/>
-                                        PROFILE
-                                    </span>
-
-                                    <span>
-                                      <FontAwesomeIcon icon={faRightFromBracket}/>
-                                        LOGOUT
-                                    </span>
-                                </>
+                                <UserNavbar isMenuActive={isMenuActive}
+                                            handleClickIfMenuHidden={handleClickIfMenuHidden}/>
                             ) : (
-                                <>
-                                    <span>
-                                        <FontAwesomeIcon icon={faCirclePlus}/>
-                                        LOG IN
-                                    </span>
-
-                                    <span>
-                                        <FontAwesomeIcon icon={faAddressCard}/>
-                                        SIGN IN
-                                    </span>
-                                    <span></span>
-                                </>
+                                <DefaultNavbar handleClickIfMenuHidden={handleClickIfMenuHidden}/>
                             )}
                         </OverlayItems>
-                    </Overlay>
 
-                </Menu>
+                    </NavbarOverlay>
+                </NavbarMenu>
             </RightPanel>
         </NavbarContainer>
     );
