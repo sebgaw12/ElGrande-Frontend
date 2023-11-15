@@ -3,6 +3,8 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import {GeolocateControl, Map, Marker, NavigationControl, Popup, ScaleControl} from "react-map-gl"
 import pin from "../../images/pin.png"
 import {useApi} from "../../hooks/useApi";
+import {PopUpButton, PopUpContainer} from "./MapComponent.styles";
+import {PrimaryBtn} from "../../styles/global.styles";
 
 const MapComponent = () => {
 
@@ -73,12 +75,9 @@ const MapComponent = () => {
                         latitude={popUpInfo.latitude}
                         onClose={() => setPopUpInfo(null)}>
                         {popUpInfo.restaurants.map((restaurant, index) => (
-                            <div key={index}>
-                                <p>{restaurant.name}</p>
-                                <p>{restaurant.description}</p>
-                                <p>{restaurant.contactNumber}</p>
-                                <hr/>
-                            </div>
+                            <PopUpContainer key={index}>
+                                <PopUpButton>{restaurant.name}</PopUpButton>
+                            </PopUpContainer>
                         ))}
                     </Popup>
                 )}

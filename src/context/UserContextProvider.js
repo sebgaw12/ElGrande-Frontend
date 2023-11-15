@@ -3,6 +3,7 @@ import {CUSTOMER_ID, JWT_TOKEN, REFRESH_TOKEN} from "../constants/UserCredential
 import {useLocalStorage} from "../hooks/useLocalStorage";
 import {useApi} from "../hooks/useApi";
 import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const UserContext = createContext()
 export const useUserContext = () => {
@@ -27,13 +28,8 @@ export const UserProvider = ({children}) => {
     const login = (userCredentials) => {
         post("api/v1/auths/jwt/login", userCredentials)
             .then(response => {
-                setJwtToken(response.type + " " + response.accessToken)
-                setCustomerId(response.customerId)
-                setRefreshToken(response.refreshToken)
-                setUser(response.customerId)
-                toast.success('Zalogowano poprawnie!', {
-                    position: "top-center"
-                })
+                setUserCredentials(response)
+                window.location.href = "/"
             })
             .catch((error) => {
                 console.error(error)
@@ -46,10 +42,7 @@ export const UserProvider = ({children}) => {
     const logout = () => {
         post("api/v1/auths/jwt/logout")
             .then(() => {
-                removeJwtToken(JWT_TOKEN)
-                removeRefreshToken(REFRESH_TOKEN)
-                removeCustomerId(CUSTOMER_ID)
-                setUser(null)
+                removeUserCredentials()
             })
     }
 
@@ -59,7 +52,7 @@ export const UserProvider = ({children}) => {
         } else if (!customerId) {
             get("api/v1/auths/oauth2")
                 .then(response => {
-                    login(response)
+                    setUserCredentials(response)
                 })
                 .catch(() => {
                     console.error("OAuth2 authentication failed")
@@ -67,8 +60,29 @@ export const UserProvider = ({children}) => {
         }
     }
 
+    const setUserCredentials = (response) => {
+        setJwtToken(response.type + " " + response.accessToken)
+        setCustomerId(response.customerId)
+        setRefreshToken(response.refreshToken)
+        setUser(response.customerId)
+        toast.success('Zalogowano poprawnie!', {
+            position: "top-center"
+        })
+    }
+
+    const removeUserCredentials = () => {
+        removeJwtToken(JWT_TOKEN)
+        removeRefreshToken(REFRESH_TOKEN)
+        removeCustomerId(CUSTOMER_ID)
+        setUser(null)
+        toast.success('Wylogowano poprawnie', {
+            position: "top-center"
+        })
+    }
+
+
     return (
-        <UserContext.Provider value={{user, login, logout, authenticate}}>
+        <UserContext.Provider value={{user, login, logout, authenticate, removeUserCredentials}}>
             {children}
         </UserContext.Provider>
     )
