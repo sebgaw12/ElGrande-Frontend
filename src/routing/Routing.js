@@ -36,9 +36,9 @@ const Routing = () => {
                     </UnauthorizedRoute>
                 }/>
                 <Route path={RESTAURANT} element={
-                    <ProtectedRoute>
+
                         <Form/>
-                    </ProtectedRoute>
+
                 }/>
                 <Route path={PROFILE_URL} element={
                     <ProtectedRoute>
