@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Review from "./Review";
 import ModalAddReview from "./ModalAddReview";
 import {useUserContext} from "../../../../context/UserContextProvider";
@@ -92,13 +92,13 @@ const ReviewList = ({restaurant}) => {
     return (
         <div>
             {user ? (
-                <button className="border-2 border-black p-2" onClick={toggle}>Dodaj ocenę</button>
+                <button className="border-2 border-black p-2" onClick={toggle}>Add review</button>
             ) : (
                 <></>
             )}
             <div>
                 {reviews.length === 0 ? (
-                    <div>Brak ocen</div>
+                    <div>No reviews yet</div>
                 ) : (
                     reviews.map((item, index) => <Review key={index} review={item}/>)
                 )}

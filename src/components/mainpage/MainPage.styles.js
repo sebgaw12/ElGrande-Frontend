@@ -7,7 +7,7 @@ export const MainPageContainer = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  height: 85vh;
+  height: 100%;
   display: flex;
   justify-content: space-around;
 `;

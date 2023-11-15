@@ -40,7 +40,7 @@ const RestaurantDetails = ({setIsOpen, restaurant}) => {
 
                 <button className={buttonStyle}
                         onClick={() => setActiveComponent(ADDRESS)}>
-                    Adres
+                    Address
                 </button>
 
                 <button className={buttonStyle}
@@ -50,17 +50,17 @@ const RestaurantDetails = ({setIsOpen, restaurant}) => {
 
                 <button className={buttonStyle}
                         onClick={() => setActiveComponent(REVIEWS)}>
-                    Opinie
+                    Reviews
                 </button>
 
                 <button className={buttonStyle}
                         onClick={() => setActiveComponent(OPENING_HOURS)}>
-                    Godziny otwarcia
+                    Opening hours
                 </button>
 
                 <button className={buttonStyle}
                         onClick={() => setActiveComponent(DETAILS)}>
-                    Szczegóły
+                    Details
                 </button>
 
                 <button onClick={() => {
@@ -68,7 +68,7 @@ const RestaurantDetails = ({setIsOpen, restaurant}) => {
                     handleRestaurantClick(restaurant.id)
                 }}
                         className={buttonStyle}
-                >Ukryj
+                >Hide
                 </button>
             </div>
             <div className="flex">
