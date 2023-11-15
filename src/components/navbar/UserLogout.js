@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import {NavbarOverlaySpan} from "./Navbar.styles";
+import {MAIN_PAGE} from "../../constants/RoutePaths";
 
 const UserLogout = ({isMenuActive}) => {
 
@@ -14,12 +15,12 @@ const UserLogout = ({isMenuActive}) => {
     const handleLogout = () => {
         try {
             logout()
-            navigate('/main-page')
-            toast.success('Wylogowano poprawnie', {
+            navigate(MAIN_PAGE)
+            toast.success('Logout correctly', {
                 position: "top-center"
             })
         } catch (error) {
-            toast.error('Wystąpił błąd podczas wylogowywania', {
+            toast.error(`There's error occurred`, {
                 position: "top-center"
             })
         }

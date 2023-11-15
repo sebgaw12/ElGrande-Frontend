@@ -14,12 +14,14 @@ import logo from "../../images/food-spot-transparent-with-name.png"
 import {useUserContext} from "../../context/UserContextProvider";
 import UserNavbar from "./UserNavbar";
 import DefaultNavbar from "./DefaultNavbar";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {MAIN_PAGE} from "../../constants/RoutePaths";
+
 
 const Navbar = () => {
 
     const [isMenuActive, setIsMenuActive] = useState(false);
-
+    const navigate = useNavigate()
     const {user} = useUserContext()
     const toggleMenu = () => setIsMenuActive(!isMenuActive);
 
@@ -29,17 +31,15 @@ const Navbar = () => {
         }
     }
 
+
     return (
         <NavbarContainer>
 
             <LeftPanel>
-                <Link to={"/main-page"}>
-                    <NavbarLogo src={logo}></NavbarLogo>
-                </Link>
+                <NavbarLogo src={logo} onClick={() => navigate(MAIN_PAGE)}></NavbarLogo>
             </LeftPanel>
             <RightPanel>
                 <NavbarMenu isMenuActive={isMenuActive}>
-
                     <NavbarHamburger isMenuActive={isMenuActive} onClick={toggleMenu}>
                         <NavbarHamburgerSpan></NavbarHamburgerSpan>
                         <NavbarHamburgerSpan></NavbarHamburgerSpan>

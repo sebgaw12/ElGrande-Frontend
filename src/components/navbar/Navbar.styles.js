@@ -8,12 +8,12 @@ export const NavbarContainer = styled.div`
   padding: 0;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
+  height: 10vh;
 `;
 
 export const LeftPanel = styled.div`
   width: 50%;
-  background: #ffffff;
+  background: #eef1fc;
 `;
 
 export const RightPanel = styled.div`
@@ -159,6 +159,8 @@ export const NavbarHamburgerSpan= styled.span`
 
 export const NavbarLogo = styled.img`
   display: flex;
+  cursor: pointer;
+  height: 100%;
   align-self: end;
   margin-left: 1rem;
   background: #ff7b00 no-repeat;

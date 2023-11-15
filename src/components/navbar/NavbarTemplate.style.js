@@ -4,12 +4,13 @@ import logo2 from "../../images/food-spot-transparent-with-name.png";
 
 export const NavbarContainer = styled.div`
   display: flex;
-  background-color: #c8d0e7;
+  background-color: #61dafb;
   justify-content: left;
-  padding: 5px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   width: 100%;
-  height: 10vh;
+  height: 100%;
 `;
 
 export const LeftPanel = styled.div`
@@ -23,6 +24,7 @@ export const RightPanel = styled.div`
   justify-content: flex-end;
   width: 50%;
   box-sizing: border-box;
+  background-color: #eef1fc;
 `;
 
 export const Menu = styled.div`
@@ -39,7 +41,7 @@ export const Menu = styled.div`
   align-items: flex-end;
   justify-content: space-evenly;
   cursor: pointer;
-  z-index: 2;
+  z-index: 999;
   transition: 0.5s ease-out;
 
   &.active {
