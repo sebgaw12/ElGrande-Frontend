@@ -4,8 +4,9 @@ import {toast} from "react-toastify";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import {NavbarOverlaySpan} from "./Navbar.styles";
 
-const UserLogout = () => {
+const UserLogout = ({isMenuActive}) => {
 
     const navigate = useNavigate()
     const {logout} = useUserContext()
@@ -26,10 +27,12 @@ const UserLogout = () => {
 
     return (
         <>
-            <span onClick={handleLogout}>
+            <NavbarOverlaySpan onClick={(e) => {
+                isMenuActive ? handleLogout() : e.preventDefault()
+            }}>
                 <FontAwesomeIcon icon={faRightFromBracket}/>
                 LOGOUT
-            </span>
+            </NavbarOverlaySpan>
         </>
     )
 

@@ -1,54 +1,60 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {
-    Hamburger,
     LeftPanel,
-    Menu,
-    MidPanel,
     NavbarContainer,
+    NavbarHamburger,
+    NavbarHamburgerSpan,
     NavbarLogo,
-    Overlay,
+    NavbarMenu,
+    NavbarOverlay,
     OverlayItems,
     RightPanel
-} from './NavbarTemplate.style';
+} from "./Navbar.styles";
+import logo from "../../images/food-spot-transparent-with-name.png"
 import {useUserContext} from "../../context/UserContextProvider";
 import UserNavbar from "./UserNavbar";
 import DefaultNavbar from "./DefaultNavbar";
-import logo2 from "../../images/food-spot-transparent-with-name.png";
 
 const Navbar = () => {
-    const [isMenuActive, setIsMenuActive] = useState(false);
-    const {user} = useUserContext()
 
+    const [isMenuActive, setIsMenuActive] = useState(false);
+
+    const {user} = useUserContext()
     const toggleMenu = () => setIsMenuActive(!isMenuActive);
+
+    const handleClickIfMenuHidden = (e) => {
+        if (!isMenuActive) {
+            e.preventDefault();
+        }
+    }
 
     return (
         <NavbarContainer>
+
             <LeftPanel>
-                <NavbarLogo src={logo2}/>
+                <NavbarLogo src={logo}></NavbarLogo>
             </LeftPanel>
 
-            <MidPanel></MidPanel>
-
             <RightPanel>
-                <Menu className={isMenuActive ? 'active' : ''}>
+                <NavbarMenu isMenuActive={isMenuActive}>
 
-                    <Hamburger className={isMenuActive ? 'active' : ''} onClick={toggleMenu}>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </Hamburger>
+                    <NavbarHamburger isMenuActive={isMenuActive} onClick={toggleMenu}>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                        <NavbarHamburgerSpan></NavbarHamburgerSpan>
+                    </NavbarHamburger>
 
-                    <Overlay className={isMenuActive ? 'active' : ''}>
+                    <NavbarOverlay isMenuActive={isMenuActive}>
                         <OverlayItems>
                             {user ? (
-                                <UserNavbar/>
+                                <UserNavbar isMenuActive={isMenuActive} handleClickIfMenuHidden={handleClickIfMenuHidden}/>
                             ) : (
-                                <DefaultNavbar/>
+                                <DefaultNavbar isMenuActive={isMenuActive} handleClickIfMenuHidden={handleClickIfMenuHidden}/>
                             )}
                         </OverlayItems>
-                    </Overlay>
 
-                </Menu>
+                    </NavbarOverlay>
+                </NavbarMenu>
             </RightPanel>
         </NavbarContainer>
     );

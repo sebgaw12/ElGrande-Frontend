@@ -3,21 +3,25 @@ import {faFileSignature, faKey} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import {LOGIN_URL, SIGNUP_URL} from "../../constants/RoutePaths";
 import {Link} from "react-router-dom";
+import {NavbarOverlaySpan} from "./Navbar.styles";
 
-const DefaultNavbar = () => {
+const DefaultNavbar = ({isMenuActive, handleClickIfMenuHidden}) => {
+
+
+
     return (
         <>
             <Link to={SIGNUP_URL}>
-                <span>
+                <NavbarOverlaySpan onClick={handleClickIfMenuHidden}>
                     <FontAwesomeIcon icon={faKey}/>
                     LOG IN
-                </span>
+                </NavbarOverlaySpan>
             </Link>
             <Link to={LOGIN_URL}>
-                <span>
+                <NavbarOverlaySpan onClick={handleClickIfMenuHidden}>
                     <FontAwesomeIcon icon={faFileSignature}/>
                     SIGN IN
-                </span>
+                </NavbarOverlaySpan>
             </Link>
             <span></span>
         </>
