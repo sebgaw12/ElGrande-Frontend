@@ -49,7 +49,7 @@ const Navbar = () => {
                             {user ? (
                                 <UserNavbar isMenuActive={isMenuActive} handleClickIfMenuHidden={handleClickIfMenuHidden}/>
                             ) : (
-                                <DefaultNavbar isMenuActive={isMenuActive} handleClickIfMenuHidden={handleClickIfMenuHidden}/>
+                                <DefaultNavbar handleClickIfMenuHidden={handleClickIfMenuHidden}/>
                             )}
                         </OverlayItems>
 

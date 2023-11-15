@@ -22,7 +22,7 @@ const UserNavbar = ({isMenuActive, handleClickIfMenuHidden}) => {
                 </NavbarOverlaySpan>
             </Link>
 
-            <UserLogout/>
+            <UserLogout isMenuActive={isMenuActive}/>
         </>
     )
 }

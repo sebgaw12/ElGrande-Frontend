@@ -5,9 +5,7 @@ import {LOGIN_URL, SIGNUP_URL} from "../../constants/RoutePaths";
 import {Link} from "react-router-dom";
 import {NavbarOverlaySpan} from "./Navbar.styles";
 
-const DefaultNavbar = ({isMenuActive, handleClickIfMenuHidden}) => {
-
-
+const DefaultNavbar = ({handleClickIfMenuHidden}) => {
 
     return (
         <>
