@@ -9,13 +9,13 @@ const DefaultNavbar = ({handleClickIfMenuHidden}) => {
 
     return (
         <>
-            <Link to={SIGNUP_URL}>
+            <Link to={LOGIN_URL}>
                 <NavbarOverlaySpan onClick={handleClickIfMenuHidden}>
                     <FontAwesomeIcon icon={faKey}/>
                     LOG IN
                 </NavbarOverlaySpan>
             </Link>
-            <Link to={LOGIN_URL}>
+            <Link to={SIGNUP_URL}>
                 <NavbarOverlaySpan onClick={handleClickIfMenuHidden}>
                     <FontAwesomeIcon icon={faFileSignature}/>
                     SIGN IN

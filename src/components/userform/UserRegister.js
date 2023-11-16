@@ -46,12 +46,12 @@ function UserRegister() {
         <UserPage>
             <FoodSpotLogo/>
             <UserForm>
-                <BackButton/>
-                <PrimaryInput type={"text"} placeholder={"Name"} onChange={updateDataObject}></PrimaryInput>
-                <PrimaryInput type={"text"} placeholder={"Surname"} onChange={updateDataObject}></PrimaryInput>
-                <PrimaryInput type={"text"} placeholder={"E-Mail"} onChange={updateDataObject}></PrimaryInput>
-                <PrimaryInput type={"text"} placeholder={"Password"} onChange={updateDataObject}></PrimaryInput>
-                <PrimaryInput type={"text"} placeholder={"Repeat Password"} onChange={updateDataObject}></PrimaryInput>
+                <BackButton handleClick={() => navigate("/")}/>
+                <PrimaryInput type={"text"} name={"name"} placeholder={"Name"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"text"} name={"surname"} placeholder={"Surname"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"email"} name={"email"} placeholder={"E-Mail"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"password"} name={"password"} placeholder={"Password"} onChange={updateDataObject}></PrimaryInput>
+                <PrimaryInput type={"password"} name={"passwordRepeat"} placeholder={"Repeat Password"} onChange={updateDataObject}></PrimaryInput>
                 <SubmitFormButton onClick={onSignupClicked}>Sign Up</SubmitFormButton>
                 Already have an account?
                 <Link to={LOGIN_URL}>

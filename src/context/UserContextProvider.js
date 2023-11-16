@@ -75,9 +75,6 @@ export const UserProvider = ({children}) => {
         removeRefreshToken(REFRESH_TOKEN)
         removeCustomerId(CUSTOMER_ID)
         setUser(null)
-        toast.success('Wylogowano poprawnie', {
-            position: "top-center"
-        })
     }
 
 
