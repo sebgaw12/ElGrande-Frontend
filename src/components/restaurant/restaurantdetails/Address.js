@@ -12,11 +12,11 @@ const Address = ({restaurant}) => {
     }, []);
 
     return (
-        <div className="text-2xl">
-            <div>Adres</div>
+        <div className="text-2xl text-center">
+            <div>Address</div>
             <div>Country: {addressDetails.country}</div>
             <div>City: {addressDetails.city}</div>
-            <div>Kod pocztowy: {addressDetails.postalCode}</div>
+            <div>Postal Code: {addressDetails.postalCode}</div>
             <div>Street: {addressDetails.street} {addressDetails.streetNumber}</div>
             <div>{addressDetails.additionalDetails}</div>
         </div>

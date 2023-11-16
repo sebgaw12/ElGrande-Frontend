@@ -89,12 +89,19 @@ const UserContributeDetails = ({userDetails}) => {
             </RestaurantGridPlace>
             <OwnedRestaurantGridPlace>
                 {isOwnedRestaurantOpen ? (
-                    <InfoButtonClicked onClick={handleShowOwnedRestaurant}>Hide owned restaurants</InfoButtonClicked>
+                    <InfoButtonClicked onClick={handleShowOwnedRestaurant}>Hide owned
+                        restaurants</InfoButtonClicked>
                 ) : (
-                    <InfoButton onClick={handleShowOwnedRestaurant}>Show owned restaurants</InfoButton>
+                    <>
+                        {userDetails.ownershipId ? (
+                            <InfoButton onClick={handleShowOwnedRestaurant}>Show owned restaurants</InfoButton>
+                        ) : (
+                            <InfoButton onClick={handleShowOwnedRestaurant} disabled>Show owned
+                                restaurants</InfoButton>
+                        )}
+                    </>
                 )}
             </OwnedRestaurantGridPlace>
-
             <ContributeContentList>
                 {isReviewOpen && (
                     <UserProfileReviewList reviews={reviews} handleDeleteReview={handleDeleteReview}/>

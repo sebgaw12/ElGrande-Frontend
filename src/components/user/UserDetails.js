@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     DangerButton,
     EditButton,
@@ -13,12 +13,41 @@ import {PrimaryInput} from "../../styles/global.styles";
 import {useToggle} from "../../hooks/useToggle";
 import PrimaryModal from "../globalcomponents/PrimaryModal";
 import UserOwnershipForm from "./UserOwnershipForm";
+import {useUpdate} from "../../hooks/useUpdate";
+import {useApi} from "../../hooks/useApi";
+import {useUserContext} from "../../context/UserContextProvider";
+import {toast} from "react-toastify";
+import {useNavigate} from "react-router-dom";
 
 const UserDetails = ({userDetails}) => {
-
+    const {user, removeUserCredentials} = useUserContext()
     const {isOpen: isEditing, toggle: toggleEdit} = useToggle()
     const {isOpen: isDeleting, toggle: toggleDelete} = useToggle()
     const {isOpen: isOwnershipFormOpen, toggle: toggleOwnershipForm} = useToggle()
+    const [userEditData, setUserEditData] = useState({
+        name: userDetails.name,
+        surname: userDetails.surname
+    })
+    const {updateDataObject} = useUpdate(userEditData, setUserEditData)
+    const {put, remove} = useApi()
+    const navigate = useNavigate()
+
+    const handleEditUser = () => {
+        put("api/v1/customers/" + user, userEditData)
+            .then(() => {
+                toast.success("Data changed successfully", {position: "top-center"})
+            })
+        toggleEdit()
+    }
+
+    const handleDeleteUser = () => {
+        remove("api/v1/customers/" + user)
+            .then(() => {
+                toast.success("User deleted successfully", {position: "top-center"})
+                removeUserCredentials()
+                navigate("/")
+            })
+    }
 
     return (
         <UserProfileDetails>
@@ -38,17 +67,19 @@ const UserDetails = ({userDetails}) => {
             {isEditing && (
                 <PrimaryModal isOpen={isEditing} onClose={toggleEdit}>
                     <UserProfileText>Name </UserProfileText>
-                    <PrimaryInput placeholder={userDetails.name}></PrimaryInput>
+                    <PrimaryInput name={"name"} onChange={updateDataObject}
+                                  placeholder={userEditData.name}></PrimaryInput>
                     <UserProfileText>Surname </UserProfileText>
-                    <PrimaryInput placeholder={userDetails.surname}></PrimaryInput>
-                    <InfoButton>Save</InfoButton>
+                    <PrimaryInput name={"surname"} onChange={updateDataObject}
+                                  placeholder={userEditData.surname}></PrimaryInput>
+                    <InfoButton onClick={handleEditUser}>Save</InfoButton>
                 </PrimaryModal>
             )}
             {isDeleting && (
                 <PrimaryModal isOpen={isDeleting} onClose={toggleDelete}>
                     <UserProfileText>Are you sure you want to delete this account?</UserProfileText>
                     <UserProfileText>This action is permanent and you won't be able to restore it</UserProfileText>
-                    <DangerButton>YES</DangerButton>
+                    <DangerButton onClick={handleDeleteUser}>YES</DangerButton>
                 </PrimaryModal>
             )}
             {isOwnershipFormOpen && (

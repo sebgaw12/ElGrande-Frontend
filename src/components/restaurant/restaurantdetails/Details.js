@@ -8,7 +8,7 @@ const Details = ({restaurant}) => {
                 <p>{restaurant.averageGrade}</p>
                 <GradeStars grade={restaurant.averageGrade}/>
             </div>
-            <div className="flex flex-row text-xl">
+            <div className="flex flex-col text-xl">
                 <div>{restaurant.contactEmail}</div>
                 <div>{restaurant.contactNumber}</div>
 
