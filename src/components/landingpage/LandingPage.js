@@ -9,13 +9,12 @@ function LandingPage() {
     useEffect(() => {
         setTimeout(() => {
             navigate(MAIN_PAGE)
-        }, 3000)
+        }, 2000)
     }, [navigate]);
 
-    // todo setTimeout for loading app
     return (
         <LandingPageContainer>
-            <Logo></Logo>
+            <Logo/>
         </LandingPageContainer>
     );
 }

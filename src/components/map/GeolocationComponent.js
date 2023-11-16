@@ -5,7 +5,6 @@ export default function GeolocationComponent() {
     const options = {
         enableHighAccuracy: true
     }
-    // todo get higher accuracy or use different hook
     const {
         loading,
         error,
