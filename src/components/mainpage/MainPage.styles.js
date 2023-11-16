@@ -19,6 +19,7 @@ export const RestaurantListStyle = styled.div`
   height: 100%;
   width: 50%;
   align-self: center;
+  overflow: auto;
 `;
 
 export const MapComponentStyle = styled.div`
