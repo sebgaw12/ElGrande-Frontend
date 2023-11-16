@@ -56,7 +56,7 @@ const ModalAddReview = ({
                                 </div>
                             </label>
                             <label>
-                                Comment: (there's {MAX_CHARACTER_COUNT - review.comment.length} characters)
+                                Comment: (There's {MAX_CHARACTER_COUNT - review.comment.length} characters left)
                                 <div className="text-center">
                                     <textarea
                                         id="comment"
