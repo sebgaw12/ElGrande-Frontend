@@ -15,8 +15,14 @@ export const RestaurantContainer = styled.div`
 `;
 
 export const RestaurantDetailsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  margin-left: 3%;
+  margin-top: 1%;
+  grid-template-columns: 1fr 1fr 1fr 0.1fr;
+  justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;
+
+export const MainPageRestaurantListContainer = styled.div `
+`

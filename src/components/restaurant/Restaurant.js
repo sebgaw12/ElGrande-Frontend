@@ -22,9 +22,9 @@ const Restaurant = ({restaurant}) => {
                      handleRestaurantClick(restaurant.id)
                  }}>
                 <div>{restaurant != null ? restaurant.name : null}</div>
-                <div>{restaurant != null && restaurant.averageGrade != null
-                    ? restaurant.averageGrade.toFixed(1) : 'Brak oceny'}</div>
-                <div>kategorie lokalu</div>
+                <div>Grade: {restaurant != null && restaurant.averageGrade != null
+                    ? restaurant.averageGrade.toFixed(1) : 'Not Rated Yet'}</div>
+                <div>Category:</div>
                 <span>&#9660;</span>
             </RestaurantDetailsContainer>
         )
