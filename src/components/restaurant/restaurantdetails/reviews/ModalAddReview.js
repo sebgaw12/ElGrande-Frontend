@@ -41,7 +41,7 @@ const ModalAddReview = ({
                 <TEModalContent>
 
                     <TEModalHeader>
-                        <h3 className="flex justify-between items-center">Podziel się opinią o tym miejscu</h3>
+                        <h3 className="flex justify-between items-center">Share your opinion about place</h3>
                         <button className={`close-button ${buttonStyleClose}`} onClick={toggle}>Zamknij</button>
                     </TEModalHeader>
 
@@ -56,7 +56,7 @@ const ModalAddReview = ({
                                 </div>
                             </label>
                             <label>
-                                Komentarz: (pozostało {MAX_CHARACTER_COUNT - review.comment.length} znaków)
+                                Comment: (There's {MAX_CHARACTER_COUNT - review.comment.length} characters left)
                                 <div className="text-center">
                                     <textarea
                                         id="comment"
@@ -77,7 +77,7 @@ const ModalAddReview = ({
                             <button
                                 type="submit"
                                 className={buttonStyle}
-                                onClick={handleSubmit}>Dodaj
+                                onClick={handleSubmit}>Add
                             </button>
                         </div>
                     </TEModalFooter>

@@ -9,7 +9,7 @@ import UserLogin from "../components/userform/UserLogin";
 import {useUserContext} from "../context/UserContextProvider";
 import {UnauthorizedRoute} from "../authentication/UnauthorizedRoute";
 import UserRegister from "../components/userform/UserRegister";
-import UserContainer from "../components/user/UserContainer";
+import UserProfileContainer from "../components/user/UserProfileContainer";
 import {useEffect} from "react";
 
 const Routing = () => {
@@ -25,6 +25,7 @@ const Routing = () => {
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="*" element={<Error/>}/>
                 <Route path={MAIN_PAGE} element={<MainPage/>}/>
+                {/*<Route path="test" element={<TestComponent/>}/>*/}
                 <Route path={LOGIN_URL} element={
                     <UnauthorizedRoute>
                         <UserLogin/>
@@ -42,7 +43,7 @@ const Routing = () => {
                 }/>
                 <Route path={PROFILE_URL} element={
                     <ProtectedRoute>
-                        <UserContainer/>
+                        <UserProfileContainer/>
                     </ProtectedRoute>
                 }/>
             </Routes>

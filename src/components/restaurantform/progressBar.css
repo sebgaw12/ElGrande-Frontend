@@ -1,0 +1,17 @@
+.progress-bar-container {
+    margin-top: 1rem;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    box-shadow: inset 5px 5px 10px #bebebe,
+    inset -5px -5px 10px #ffffff;
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #4dabf7;
+    border-radius: 10px;
+    transition: width 0.3s ease-in-out;
+}

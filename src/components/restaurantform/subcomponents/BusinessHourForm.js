@@ -1,5 +1,6 @@
 import React from 'react';
 import {useUpdate} from "../../../hooks/useUpdate";
+import {DaySchedule} from "../form.styles";
 
 function BusinessHourForm({data, setDataFunction}) {
     const {updateDataList} = useUpdate(data, setDataFunction)
@@ -14,34 +15,16 @@ function BusinessHourForm({data, setDataFunction}) {
     }
 
     return (
-        <>
+        <div>
             {data.map((bh, index) => (
-                <div key={bh.dayOfWeek} className="container grid grid-cols-3">
-                    <span>{DAY_OF_WEEKS[index + 1]}</span>
-                    <div className="mb1">
-                        <label htmlFor="monday-open">Open: </label>
-                        <input
-                            type="time"
-                            data-index={index}
-                            id="monday-open"
-                            name="openingHour"
-                            defaultValue="08:00"
-                            onChange={updateDataList}
-                            required/>
-                    </div>
-                    <div className="mb1">
-                        <label htmlFor="monday-close">Close: </label>
-                        <input type="time"
-                               data-index={index}
-                               id="monday-close"
-                               name="closingHour"
-                               defaultValue="16:00"
-                               onChange={updateDataList}
-                               required/>
-                    </div>
-                </div>
+                <DaySchedule
+                    key={bh.dayOfWeek}
+                    dayOfWeek={DAY_OF_WEEKS[index + 1]}
+                    index={index}
+                    updateDataList={updateDataList}
+                />
             ))}
-        </>
+        </div>
     );
 }
 

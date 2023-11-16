@@ -28,6 +28,7 @@ export const UserProvider = ({children}) => {
         post("api/v1/auths/jwt/login", userCredentials)
             .then(response => {
                 setUserCredentials(response)
+                window.location.href = "/"
             })
             .catch((error) => {
                 console.error(error)
@@ -73,9 +74,6 @@ export const UserProvider = ({children}) => {
         removeRefreshToken(REFRESH_TOKEN)
         removeCustomerId(CUSTOMER_ID)
         setUser(null)
-        toast.success('Wylogowano poprawnie', {
-            position: "top-center"
-        })
     }
 
 

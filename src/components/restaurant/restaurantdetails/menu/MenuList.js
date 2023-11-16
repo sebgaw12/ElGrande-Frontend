@@ -1,6 +1,5 @@
-import {useContext, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import Menu from "./Menu";
-import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
 import {useApi} from "../../../../hooks/useApi";
 
 
@@ -19,7 +18,7 @@ const MenuList = ({restaurant}) => {
     return (
         <>
             {menu.length === 0 ? (
-                <div>Brak dodanych dań</div>
+                <div>Menu not added yet</div>
             ) : (
                 menu.map((profile, index) => <Menu key={index} menu={profile}/>)
             )}

@@ -1,13 +1,9 @@
-import {useContext, useEffect, useState} from "react";
-import {RestaurantContext} from "../../../context/RestaurantContextProvider";
+import {useEffect, useState} from "react";
 import {useApi} from "../../../hooks/useApi";
 
 const BusinessHour = ({restaurant}) => {
     const [availableHours, setAvailableHours] = useState([])
     const {get} = useApi()
-
-    // const {openRestaurant} = useContext(RestaurantContext)
-    // const restaurantId = openRestaurant.id
 
     useEffect(() => {
         get("api/v1/business-hours", {restaurantId: restaurant.id})
@@ -31,13 +27,13 @@ const BusinessHour = ({restaurant}) => {
     }
 
     const weekdays = {
-        1: 'Poniedziałek',
-        2: 'Wtorek',
-        3: 'Środa',
-        4: 'Czwartek',
-        5: 'Piątek',
-        6: 'Sobota',
-        7: 'Niedziela'
+        1: 'Monday   ',
+        2: 'Tuesday   ',
+        3: 'Wednesday   ',
+        4: 'Thursday   ',
+        5: 'Friday   ',
+        6: 'Saturday   ',
+        7: 'Sunday   '
     }
     const setWeekday = (numberOfDay) => {
         return weekdays[numberOfDay]
@@ -51,12 +47,12 @@ const BusinessHour = ({restaurant}) => {
                 {daysOfWeek.map(day => (
                     <li key={day}>
                         {availableHours.some((item) => item.dayOfWeek === day) ? (
-                            <div className="p-2">
-                                <div>{setWeekday(day)}</div>
-                                <div>Godzina
-                                    otwarcia: {formatTime(availableHours.find((item) => item.dayOfWeek === day).openingHour)}</div>
-                                <div>Godzina
-                                    zamknięcia: {formatTime(availableHours.find((item) => item.dayOfWeek === day).closingHour)}</div>
+                            <div className="p-2 text-2xl">
+                                <div>{setWeekday(day)}
+                                    {formatTime(availableHours.find((item) => item.dayOfWeek === day).openingHour)} -
+                                    {formatTime(availableHours.find((item) => item.dayOfWeek === day).closingHour)}</div>
+                                {/*<div>Opening hour: {formatTime(availableHours.find((item) => item.dayOfWeek === day).openingHour)}</div>*/}
+                                {/*<div>Closing hour: {formatTime(availableHours.find((item) => item.dayOfWeek === day).closingHour)}</div>*/}
                             </div>
                         ) : (
                             <div className="p-2">

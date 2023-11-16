@@ -1,32 +1,45 @@
-import React from "react";
-import {Link} from 'react-router-dom';
-import FoodSpotLogo from "../restaurantform/elements/graphics/FoodSpotLogo";
-import IconArrowTurnLeft from '../restaurantform/elements/icons/IconArrowTurnLeft';
-import {StyleRoundedBlueButton} from '../../styles/styles';
-import UserLoginForm from "./UserLoginForm";
+import React, {useState} from "react";
+import FoodSpotLogo from "../../styles/FoodSpotLogo";
+import {GoogleButton, RedirectText, SubmitFormButton, UserForm, UserPage} from "./UserForm.styles";
+import BackButton from "../globalcomponents/BackButton";
+import {PrimaryInput} from "../../styles/global.styles";
+import {Link, useNavigate} from "react-router-dom";
+import {SERVER_URL_GOOGLE, SIGNUP_URL} from "../../constants/RoutePaths";
+import Divider from "../globalcomponents/Divider";
+import {useUpdate} from "../../hooks/useUpdate";
+import {useUserContext} from "../../context/UserContextProvider";
 
-function UserLogin() {
+const UserLogin = () => {
+    const [userCredentials, setUserCredentials] = useState(
+        {
+            email: "",
+            password: ""
+        })
+    const {updateDataObject} = useUpdate(userCredentials, setUserCredentials)
+    const {login} = useUserContext()
+    const navigate = useNavigate()
+    const onLoginClicked = () => {
+        login(userCredentials)
+    }
     return (
-        <section className="h-screen">
-            <div className="container h-full px-6 py-24">
-                <Link to={"/"}>
-                    <button className={StyleRoundedBlueButton}>
-                        <IconArrowTurnLeft/>
-                    </button>
+        <UserPage>
+            <FoodSpotLogo/>
+            <UserForm>
+                <BackButton handleClick={() => navigate("/")}/>
+                <PrimaryInput type={"text"} name={"email"} placeholder={"E-mail"} onChange={updateDataObject}/>
+                <PrimaryInput type={"password"} name={"password"} placeholder={"Password"} onChange={updateDataObject}/>
+                <SubmitFormButton onClick={onLoginClicked}>Log In</SubmitFormButton>
+                Still not a user?
+                <Link to={SIGNUP_URL}>
+                    <RedirectText>Sign in!</RedirectText>
                 </Link>
-                <div className="g-6 flex h-full flex-wrap items-center justify-center lg:justify-between">
-
-                    {/* <!-- Left column container with background--> */}
-                    <div className="mb-12 md:mb-0 md:w-8/12 lg:w-6/12">
-                        <FoodSpotLogo/>
-                    </div>
-
-                    {/* <!-- Right column container with form --> */}
-                    <UserLoginForm />
-                </div>
-            </div>
-        </section>
-    );
+                <Divider text={"OR"}></Divider>
+                <Link to={SERVER_URL_GOOGLE}>
+                    <GoogleButton>Continue with Google</GoogleButton>
+                </Link>
+            </UserForm>
+        </UserPage>
+    )
 }
 
 export default UserLogin;
