@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import {Link, useNavigate} from 'react-router-dom';
-import IconArrowTurnLeft from '../globalcomponents/IconArrowTurnLeft';
-import {StyleNormalButton, StyleRoundedBlueButton} from '../../styles/styles';
+import {useNavigate} from 'react-router-dom';
 import RestaurantForm from './subcomponents/RestaurantForm';
 import AddressForm from './subcomponents/AddressForm';
 import BusinessHourForm from './subcomponents/BusinessHourForm';
@@ -11,9 +9,8 @@ import {useLocalStorage} from "../../hooks/useLocalStorage";
 import {CUSTOMER_ID} from "../../constants/UserCredentials";
 import {useMapbox} from "../../hooks/useMapbox";
 import "./progressBar.css"
-import {ButtonContainer, FormBtn, FormStyle, RestaurantFormSite} from "./form.styles";
+import {ButtonContainer, FormBtn, FormStyle} from "./form.styles";
 import BackButton from "../globalcomponents/BackButton";
-import {MAIN_PAGE} from "../../constants/RoutePaths";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);

@@ -2,7 +2,7 @@ import React from 'react';
 import SearchPanel from '../searchpanel/SearchPanel';
 import {useApi} from "../../../../hooks/useApi";
 import {useRestaurantContext} from "../../../../context/RestaurantContextProvider";
-import {FilterContainer, FiltersModal} from "./FiltersHeader.styles";
+import {FilterContainer} from "./FiltersHeader.styles";
 
 function FiltersHeader() {
     const {setRestaurants} = useRestaurantContext();

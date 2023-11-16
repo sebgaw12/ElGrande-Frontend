@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const white = `#FFFFFF`
-const greyLight = `#E4EBF5`
 const greyLight2 = `#c8d0e7`
 const greyLight3 = `#bec8e4`
 const primary = `#6d5dfc`

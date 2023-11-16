@@ -7,7 +7,7 @@ import {
     SearchPanelButton,
     SearchPanelContainer,
     SearchPanelInput,
-    TagsContainer, TagText
+    TagsContainer
 } from "./SearchPanel.styles";
 import {useToggle} from "../../../../hooks/useToggle";
 import PrimaryModal from "../../../globalcomponents/PrimaryModal";

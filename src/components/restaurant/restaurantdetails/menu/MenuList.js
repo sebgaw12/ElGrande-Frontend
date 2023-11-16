@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Menu from "./Menu";
-import {RestaurantContext} from "../../../../context/RestaurantContextProvider";
 import {useApi} from "../../../../hooks/useApi";
 
 

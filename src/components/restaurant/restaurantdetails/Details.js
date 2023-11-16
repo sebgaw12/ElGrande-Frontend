@@ -11,6 +11,7 @@ const Details = ({restaurant}) => {
             <div className="flex flex-row text-xl">
                 <div>{restaurant.contactEmail}</div>
                 <div>{restaurant.contactNumber}</div>
+
                 <div>{restaurant.website}</div>
                 <div className="w-1/2">
                     <div>{restaurant.description}</div>

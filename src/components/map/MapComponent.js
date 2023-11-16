@@ -4,7 +4,6 @@ import {GeolocateControl, Map, Marker, NavigationControl, Popup, ScaleControl} f
 import pin from "../../images/pin.png"
 import {useApi} from "../../hooks/useApi";
 import {PopUpButton, PopUpContainer} from "./MapComponent.styles";
-import {PrimaryBtn} from "../../styles/global.styles";
 
 const MapComponent = () => {
 

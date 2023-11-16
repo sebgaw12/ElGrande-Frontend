@@ -53,7 +53,6 @@ const ReviewList = ({restaurant}) => {
                 isOpen={isOpen}
                 toggle={toggle}
             />
-
         </div>
     )
 

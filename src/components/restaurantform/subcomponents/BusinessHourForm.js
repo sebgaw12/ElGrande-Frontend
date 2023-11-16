@@ -1,6 +1,6 @@
 import React from 'react';
 import {useUpdate} from "../../../hooks/useUpdate";
-import {DaySchedule, TimePicker} from "../form.styles";
+import {DaySchedule} from "../form.styles";
 
 function BusinessHourForm({data, setDataFunction}) {
     const {updateDataList} = useUpdate(data, setDataFunction)
