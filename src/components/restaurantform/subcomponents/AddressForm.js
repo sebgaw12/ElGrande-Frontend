@@ -7,12 +7,12 @@ function AddressForm({data, setDataFunction}) {
 
     return (
         <div>
-            <FormInput type={"string"} placeholder={"Country"} onChange={updateDataObject}></FormInput>
-            <FormInput type={"string"} placeholder={"City"} onChange={updateDataObject}></FormInput>
-            <FormInput type={"string"} placeholder={"Postal Code"} onChange={updateDataObject}></FormInput>
-            <FormInput type={"string"} placeholder={"Street"} onChange={updateDataObject}></FormInput>
-            <FormInput type={"string"} placeholder={"Street Number"} onChange={updateDataObject}></FormInput>
-            <FormInput type={"string"} placeholder={"Additional Details"} onChange={updateDataObject}></FormInput>
+            <FormInput type={"string"} name={"country"} placeholder={"Country"} onChange={updateDataObject}></FormInput>
+            <FormInput type={"string"} name={"city"} placeholder={"City"} onChange={updateDataObject}></FormInput>
+            <FormInput type={"string"} name={"postalCode"} placeholder={"Postal Code"} onChange={updateDataObject}></FormInput>
+            <FormInput type={"string"} name={"street"} placeholder={"Street"} onChange={updateDataObject}></FormInput>
+            <FormInput type={"string"} name={"streetNumber"} placeholder={"Street Number"} onChange={updateDataObject}></FormInput>
+            <FormInput type={"string"} name={"additionalDetails"} placeholder={"Additional Details"} onChange={updateDataObject}></FormInput>
         </div>
     );
 }

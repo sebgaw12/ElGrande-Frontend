@@ -11,7 +11,9 @@ import {useLocalStorage} from "../../hooks/useLocalStorage";
 import {CUSTOMER_ID} from "../../constants/UserCredentials";
 import {useMapbox} from "../../hooks/useMapbox";
 import "./progressBar.css"
-import {ButtonContainer, FormBtn, FormStyle} from "./form.styles";
+import {ButtonContainer, FormBtn, FormStyle, RestaurantFormSite} from "./form.styles";
+import BackButton from "../globalcomponents/BackButton";
+import {MAIN_PAGE} from "../../constants/RoutePaths";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -53,7 +55,6 @@ function Form() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const {newCoordinates, newAddress} = await setAddressFromMapApi(address)
 
         const updatedData = {
@@ -69,13 +70,13 @@ function Form() {
             })
     };
 
-    function ProgressBar({ currentPage }) {
+    function ProgressBar({currentPage}) {
         const totalSteps = 4;
         const progress = (currentPage / totalSteps) * 100;
 
         return (
             <div className="progress-bar-container">
-                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+                <div className="progress-bar" style={{width: `${progress}%`}}></div>
             </div>
         );
     }
@@ -84,26 +85,20 @@ function Form() {
     return (
         <section className="h-screen">
             <FormStyle>
-                <Link to={"/main-page"}>
-                    <button className={StyleRoundedBlueButton}>
-                        <IconArrowTurnLeft/>
-                    </button>
-                </Link>
-
-                <form onSubmit={handleSubmit} className="container grid grid-cols-1">
+                <BackButton handleClick={() => navigate("/")}/>
+                <form className="container grid grid-cols-1">
                     {currentPage === 1 && (
                         <RestaurantForm data={restaurant}
                                         setDataFunction={setRestaurant}/>)}
                     {currentPage === 2 && (
-                        <AddressForm data={address} setDataFunction={setAddress}/>)}
+                        <AddressForm data={address}
+                                     setDataFunction={setAddress}/>)}
                     {currentPage === 3 && (
                         <BusinessHourForm data={businessHour}
                                           setDataFunction={setBusinessHour}/>)}
                     {currentPage === 4 && (<ImageForm/>)}
-                    {currentPage === 4 && (<button className={StyleNormalButton}>Send data</button>)}
                 </form>
-
-                <ProgressBar currentPage={currentPage} />
+                <ProgressBar currentPage={currentPage}/>
                 <ButtonContainer>
                     {currentPage > 1 && (
                         <FormBtn onClick={() => setCurrentPage(currentPage - 1)}>
@@ -113,6 +108,11 @@ function Form() {
                     {currentPage < 4 && (
                         <FormBtn onClick={() => setCurrentPage(currentPage + 1)}>
                             <p>Next</p>
+                        </FormBtn>
+                    )}
+                    {currentPage === 4 && (
+                        <FormBtn onClick={handleSubmit}>
+                            <p>Send Form</p>
                         </FormBtn>
                     )}
                 </ButtonContainer>

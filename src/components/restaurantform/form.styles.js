@@ -11,35 +11,30 @@ const innerShadow = `
     inset .2rem .2rem .5rem ${greyLight2}, 
     inset -.2rem -.2rem .5rem ${white}`
 
-const shadow =`
+const shadow = `
     .3rem .3rem .6rem ${greyLight2}, 
     -.2rem -.2rem .5rem ${white}`
 
 export const FormStyle = styled.div`
   position: absolute;
-  top: 25%;
+  top: 10%;
   left: 20%;
-  margin: 0;
-  padding: 0;
   min-height: 30%;
   width: 60%;
   box-sizing: border-box;
   justify-content: center;
-  font-family: "Inter", sans-serif;
+  border-radius: 1em;
   background-color: #E4EBF5;
   box-shadow: ${innerShadow};
-  
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center; 
-  gap: 1em; 
+  align-items: center;
+  gap: 1em;
   margin-top: 1rem;
   margin-bottom: 1rem;
-
-
 `;
 
 export const FormBtn = styled.button`
@@ -62,7 +57,7 @@ export const FormBtn = styled.button`
   }
 
   &:active {
-    box-shadow: ${innerShadow};  
+    box-shadow: ${innerShadow};
   }
 
   p {
@@ -97,7 +92,7 @@ export const FormInput = styled.input`
 `;
 
 const TimeInput = styled.input`
-  width: 7em;
+  width: 8em;
   height: 2em;
   border-radius: 0.5em;
   justify-self: center;
@@ -109,8 +104,8 @@ const TimeInput = styled.input`
   margin: 0.5rem;
 `;
 
-export const TimePicker = ({ id, label, defaultValue, onChange, index }) => (
-    <div className="mb1">
+export const TimePicker = ({id, label, defaultValue, onChange, index}) => (
+    <div>
         <label htmlFor={id}>{label}</label>
         <TimeInput
             type="time"
@@ -125,21 +120,22 @@ export const TimePicker = ({ id, label, defaultValue, onChange, index }) => (
 );
 
 const DayContainer = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   justify-content: space-between;
-  padding: 0.5em;
+  margin-left: 15px;
+  gap: 5em;
 `;
 
 const DayName = styled.span`
   font-weight: bold;
-  width: 100px;
   display: inline-block;
-  text-align: right;
+  text-align: left;
   padding-right: 10px;
 `;
 
-export const DaySchedule = ({ dayOfWeek, index, updateDataList }) => (
+export const DaySchedule = ({dayOfWeek, index, updateDataList}) => (
     <DayContainer>
         <DayName>{dayOfWeek}</DayName>
         <TimePicker
