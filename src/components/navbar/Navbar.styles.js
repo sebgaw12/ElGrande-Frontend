@@ -163,7 +163,7 @@ export const NavbarLogo = styled.img`
   height: 100%;
   align-self: end;
   margin-left: 1rem;
-  background: #ff7b00 no-repeat;
+  background: gb(209, 213, 219) no-repeat;
   background-size: cover;
   border-radius: 10%;
   box-shadow: -2px -2px 1px #ffffff, inset 2px 2px 1.5px #f0f0f0, 2px 2px 1px #d2d4df, 4px 4px 8px 4px #dadbe4;
