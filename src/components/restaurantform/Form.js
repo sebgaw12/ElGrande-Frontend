@@ -10,6 +10,8 @@ import {useApi} from "../../hooks/useApi";
 import {useLocalStorage} from "../../hooks/useLocalStorage";
 import {CUSTOMER_ID} from "../../constants/UserCredentials";
 import {useMapbox} from "../../hooks/useMapbox";
+import "./progressBar.css"
+import {ButtonContainer, FormBtn, FormStyle} from "./form.styles";
 
 function Form() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -67,10 +69,21 @@ function Form() {
             })
     };
 
+    function ProgressBar({ currentPage }) {
+        const totalSteps = 4;
+        const progress = (currentPage / totalSteps) * 100;
+
+        return (
+            <div className="progress-bar-container">
+                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+            </div>
+        );
+    }
+
 
     return (
         <section className="h-screen">
-            <div className="g-6 flex h-full flex-col items-center justify-center lg:justify-between">
+            <FormStyle>
                 <Link to={"/main-page"}>
                     <button className={StyleRoundedBlueButton}>
                         <IconArrowTurnLeft/>
@@ -90,21 +103,20 @@ function Form() {
                     {currentPage === 4 && (<button className={StyleNormalButton}>Send data</button>)}
                 </form>
 
-
-                <div className="block space-x-2">
-                    {currentPage > 1 && (<button className={StyleNormalButton} onClick={() =>
-                        setCurrentPage(currentPage - 1)}>
-                        Previous
-                    </button>)
-                    }
-                    {currentPage < 4 &&
-                        (<button className={StyleNormalButton} onClick={() =>
-                            setCurrentPage(currentPage + 1)}>
-                            Next
-                        </button>)
-                    }
-                </div>
-            </div>
+                <ProgressBar currentPage={currentPage} />
+                <ButtonContainer>
+                    {currentPage > 1 && (
+                        <FormBtn onClick={() => setCurrentPage(currentPage - 1)}>
+                            <p>Previous</p>
+                        </FormBtn>
+                    )}
+                    {currentPage < 4 && (
+                        <FormBtn onClick={() => setCurrentPage(currentPage + 1)}>
+                            <p>Next</p>
+                        </FormBtn>
+                    )}
+                </ButtonContainer>
+            </FormStyle>
         </section>
     );
 }
